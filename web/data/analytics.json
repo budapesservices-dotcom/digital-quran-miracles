@@ -24,7 +24,9 @@
       "metadata": {
         "transliteration": "Yawm",
         "meaning_id": "Hari",
-        "meaning_note": "Day / hari; nuansa makna mengikuti konteks ayat."
+        "meaning_en": "Day",
+        "meaning_ar": "يوم",
+        "meaning_note": "Makna mengikuti konteks ayat."
       },
       "normalized_word": "يوم",
       "rank": 1,
@@ -1722,8 +1724,10 @@
       "word": "الدنيا",
       "metadata": {
         "transliteration": "Ad-Dunyā",
-        "meaning_id": "Dunia",
-        "meaning_note": "Dunia / kehidupan dunia."
+        "meaning_id": "Dunia / kehidupan dunia",
+        "meaning_en": "Worldly life",
+        "meaning_ar": "الدنيا",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
       },
       "normalized_word": "الدنيا",
       "rank": 2,
@@ -2708,7 +2712,9 @@
       "metadata": {
         "transliteration": "Al-Ākhirah",
         "meaning_id": "Akhirat",
-        "meaning_note": "Akhirat / kehidupan setelah dunia."
+        "meaning_en": "Hereafter",
+        "meaning_ar": "الآخرة",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
       },
       "normalized_word": "الاخرة",
       "rank": 3,
@@ -3386,7 +3392,9 @@
       "metadata": {
         "transliteration": "Al-Ḥayāh",
         "meaning_id": "Kehidupan",
-        "meaning_note": "Life / kehidupan."
+        "meaning_en": "Life",
+        "meaning_ar": "الحياة",
+        "meaning_note": "Makna mengikuti konteks ayat."
       },
       "normalized_word": "الحياة",
       "rank": 4,
@@ -4007,7 +4015,9 @@
       "metadata": {
         "transliteration": "Al-Layl",
         "meaning_id": "Malam",
-        "meaning_note": "Night / malam."
+        "meaning_en": "Night",
+        "meaning_ar": "الليل",
+        "meaning_note": "Makna mengikuti konteks ayat."
       },
       "normalized_word": "الليل",
       "rank": 5,
@@ -4601,8 +4611,10 @@
       "word": "اليوم",
       "metadata": {
         "transliteration": "Al-Yawm",
-        "meaning_id": "Hari ini / hari tersebut",
-        "meaning_note": "The day / today; konteks ayat menentukan nuansa."
+        "meaning_id": "Hari / hari ini",
+        "meaning_en": "The day / today",
+        "meaning_ar": "اليوم",
+        "meaning_note": "Nuansa makna mengikuti konteks ayat."
       },
       "normalized_word": "اليوم",
       "rank": 6,
@@ -5070,7 +5082,9 @@
       "metadata": {
         "transliteration": "Al-Mawt",
         "meaning_id": "Kematian",
-        "meaning_note": "Death / kematian."
+        "meaning_en": "Death",
+        "meaning_ar": "الموت",
+        "meaning_note": "Makna mengikuti konteks ayat."
       },
       "normalized_word": "الموت",
       "rank": 7,
@@ -5495,7 +5509,9 @@
       "metadata": {
         "transliteration": "An-Nahār",
         "meaning_id": "Siang",
-        "meaning_note": "Daytime / siang."
+        "meaning_en": "Daytime",
+        "meaning_ar": "النهار",
+        "meaning_note": "Makna mengikuti konteks ayat."
       },
       "normalized_word": "النهار",
       "rank": 8,

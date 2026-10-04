@@ -726,3 +726,105 @@ footer {
   direction: ltr;
   text-align: left;
 }
+
+.header-actions {
+  display: grid;
+  gap: 12px;
+  justify-items: end;
+}
+
+.language-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-control span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-select {
+  min-height: 38px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  outline: none;
+}
+
+.language-select:focus {
+  border-color: var(--gold);
+}
+
+.learn-panel {
+  margin-top: 20px;
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.learn-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fbf8f0;
+}
+
+.learn-card h3 {
+  margin: 0 0 7px;
+  color: var(--green);
+  font-size: 0.95rem;
+}
+
+.learn-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+html[dir="rtl"] .arabic-feature {
+  text-align: right;
+}
+
+html[dir="rtl"] .term-copy {
+  text-align: right;
+}
+
+html[dir="rtl"] .metric-row {
+  direction: rtl;
+}
+
+html[dir="rtl"] .evidence-ref,
+html[dir="rtl"] .evidence-index {
+  direction: rtl;
+}
+
+@media (max-width: 760px) {
+  .header-actions {
+    justify-items: start;
+    margin-top: 16px;
+  }
+
+  .language-control {
+    width: 100%;
+  }
+
+  .language-select {
+    flex: 1;
+  }
+
+  .learn-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,269 @@
+const I18N = {
+  en: {
+    language: "Language",
+    selectedObservation: "Selected Observation",
+    openQuranIndex: "Open Quran Index",
+    exploreEvidence: "Explore Evidence",
+    frequency: "Frequency",
+    surahsWithTerm: "Surahs with term",
+    digitSum: "Digit sum",
+    per1000: "Per 1,000 tokens",
+    numericalObservation: "Numerical Observation",
+    numericalDescription:
+      "Derived metrics describe the observed dataset. They do not, by themselves, establish statistical significance or a miraculous claim.",
+    surahDistribution: "Surah Distribution",
+    surahDistributionDescription:
+      "Occurrences aggregated across all 114 surahs. Select a bar to inspect evidence from that surah.",
+    interactiveD3: "Interactive D3 visualization",
+    verseEvidence: "Verse-Level Evidence",
+    verseEvidenceDescription:
+      "Every occurrence comes from the analyzed corpus and retains its surah, ayah, token position, and source verse text.",
+    allSurahs: "All surahs",
+    jumpOccurrence: "Jump to occurrence",
+    previous: "Previous",
+    next: "Next",
+    exploratoryPairs: "Exploratory Term Pairs",
+    exploratoryPairsDescription:
+      "Candidate relationships are shown as numerical observations, not predefined proof.",
+    methodology: "Methodology",
+    learnMetrics: "Learn the Metrics",
+    learnMetricsDescription:
+      "These terms describe how the dataset is being measured.",
+    metricFrequency: "Frequency",
+    metricFrequencyDesc:
+      "How many times the exact normalized token appears in the analyzed corpus.",
+    metricDigitSum: "Digit sum",
+    metricDigitSumDesc:
+      "Add the decimal digits of the frequency. Example: 217 → 2 + 1 + 7 = 10.",
+    metricParity: "Parity",
+    metricParityDesc:
+      "Whether the frequency is even or odd. 217 is odd because it cannot be divided by 2 evenly.",
+    metricPer1000: "Frequency per 1,000 tokens",
+    metricPer1000Desc:
+      "Frequency divided by total tokens, then multiplied by 1,000. It gives a normalized rate.",
+    metricVerseShare: "Share of verse total",
+    metricVerseShareDesc:
+      "The frequency expressed as a percentage of the total verse count. It is descriptive, not a proof.",
+    metricDifference: "Difference",
+    metricDifferenceDesc:
+      "For a pair, count A minus count B.",
+    metricSum: "Sum",
+    metricSumDesc:
+      "For a pair, count A plus count B.",
+    metricRatio: "Ratio",
+    metricRatioDesc:
+      "For a pair, count A divided by count B.",
+    metricSharedSurahs: "Shared surahs",
+    metricSharedSurahsDesc:
+      "How many surahs contain both terms at least once.",
+    metricJaccard: "Jaccard overlap",
+    metricJaccardDesc:
+      "Shared surahs divided by all surahs containing either term.",
+    matching: "Matching",
+    diacritics: "Diacritics removed",
+    tatweel: "Tatweel removed",
+    alif: "Alif variants normalized",
+    rootAnalysis: "Root analysis",
+    morphology: "Morphological analysis",
+    substring: "Substring matching",
+    trueValue: "Yes",
+    falseValue: "No",
+    dataStatus:
+      "Data status: observed-data presentation. Frequency and numerical observations are tied to the project corpus and documented analysis rules.",
+    searchPlaceholder:
+      "Search Arabic, Latin, or meaning…"
+  },
+
+  id: {
+    language: "Bahasa",
+    selectedObservation: "Observasi Terpilih",
+    openQuranIndex: "Buka Indeks Quran",
+    exploreEvidence: "Lihat Evidence",
+    frequency: "Frequency",
+    surahsWithTerm: "Surah yang memuat term",
+    digitSum: "Digit sum",
+    per1000: "Per 1.000 token",
+    numericalObservation: "Observasi Numerik",
+    numericalDescription:
+      "Metric turunan ini menggambarkan data yang diamati. Angka tersebut tidak dengan sendirinya membuktikan signifikansi statistik atau klaim mukjizat.",
+    surahDistribution: "Distribusi Surah",
+    surahDistributionDescription:
+      "Kemunculan digabungkan di seluruh 114 surah. Pilih batang untuk melihat evidence dari surah tersebut.",
+    interactiveD3: "Visualisasi D3 interaktif",
+    verseEvidence: "Evidence Tingkat Ayat",
+    verseEvidenceDescription:
+      "Setiap kemunculan berasal dari corpus yang dianalisis dan menyimpan surah, ayat, posisi token, dan teks ayat sumber.",
+    allSurahs: "Semua surah",
+    jumpOccurrence: "Loncat ke occurrence",
+    previous: "Sebelumnya",
+    next: "Berikutnya",
+    exploratoryPairs: "Pasangan Term Eksploratif",
+    exploratoryPairsDescription:
+      "Hubungan kandidat ditampilkan sebagai observasi numerik, bukan bukti yang sudah ditentukan sebelumnya.",
+    methodology: "Metodologi",
+    learnMetrics: "Belajar Membaca Angka",
+    learnMetricsDescription:
+      "Istilah berikut menjelaskan bagaimana dataset kita diukur.",
+    metricFrequency: "Frequency",
+    metricFrequencyDesc:
+      "Berapa kali token yang sudah dinormalisasi secara exact muncul dalam corpus yang dianalisis.",
+    metricDigitSum: "Digit sum",
+    metricDigitSumDesc:
+      "Jumlahkan digit desimal dari frequency. Contoh: 217 → 2 + 1 + 7 = 10.",
+    metricParity: "Parity",
+    metricParityDesc:
+      "Menunjukkan apakah frequency genap atau ganjil. 217 adalah ganjil karena tidak bisa dibagi 2 dengan hasil bulat.",
+    metricPer1000: "Frequency per 1.000 token",
+    metricPer1000Desc:
+      "Frequency dibagi jumlah seluruh token, lalu dikali 1.000. Ini memberi tingkat kemunculan yang dinormalisasi.",
+    metricVerseShare: "Persentase terhadap total ayat",
+    metricVerseShareDesc:
+      "Frequency dinyatakan sebagai persentase dari jumlah seluruh ayat. Ini bersifat deskriptif.",
+    metricDifference: "Difference",
+    metricDifferenceDesc:
+      "Untuk pasangan term: jumlah A dikurangi jumlah B.",
+    metricSum: "Sum",
+    metricSumDesc:
+      "Untuk pasangan term: jumlah A ditambah jumlah B.",
+    metricRatio: "Ratio",
+    metricRatioDesc:
+      "Untuk pasangan term: jumlah A dibagi jumlah B.",
+    metricSharedSurahs: "Shared surahs",
+    metricSharedSurahsDesc:
+      "Berapa surah yang memuat kedua term setidaknya satu kali.",
+    metricJaccard: "Jaccard overlap",
+    metricJaccardDesc:
+      "Jumlah surah bersama dibagi seluruh surah yang memuat salah satu term.",
+    matching: "Matching",
+    diacritics: "Diakritik dihapus",
+    tatweel: "Tatweel dihapus",
+    alif: "Varian alif dinormalisasi",
+    rootAnalysis: "Analisis akar kata",
+    morphology: "Analisis morfologi",
+    substring: "Pencocokan substring",
+    trueValue: "Ya",
+    falseValue: "Tidak",
+    dataStatus:
+      "Status data: presentasi observed-data. Frequency dan observasi numerik terikat pada corpus project dan aturan analisis yang terdokumentasi.",
+    searchPlaceholder:
+      "Cari Arab, Latin, atau makna…"
+  },
+
+  ar: {
+    language: "اللغة",
+    selectedObservation: "الملاحظة المختارة",
+    openQuranIndex: "فتح فهرس القرآن",
+    exploreEvidence: "استعراض الأدلة",
+    frequency: "التكرار",
+    surahsWithTerm: "السور التي يظهر فيها المصطلح",
+    digitSum: "مجموع الأرقام",
+    per1000: "لكل 1000 رمز",
+    numericalObservation: "الملاحظة الرقمية",
+    numericalDescription:
+      "هذه المقاييس تصف البيانات المرصودة، ولا تثبت وحدها الدلالة الإحصائية أو أي ادعاء بالمعجزة.",
+    surahDistribution: "توزيع السور",
+    surahDistributionDescription:
+      "تجميع مرات الظهور عبر السور الـ114. اختر عمودًا لفحص الدليل في تلك السورة.",
+    interactiveD3: "تصور تفاعلي باستخدام D3",
+    verseEvidence: "الأدلة على مستوى الآية",
+    verseEvidenceDescription:
+      "كل ظهور مأخوذ من corpus التحليل ويحتفظ بالسورة والآية وموضع الرمز ونص الآية المصدر.",
+    allSurahs: "جميع السور",
+    jumpOccurrence: "الانتقال إلى الظهور",
+    previous: "السابق",
+    next: "التالي",
+    exploratoryPairs: "الأزواج الاستكشافية",
+    exploratoryPairsDescription:
+      "تُعرض العلاقات المرشحة كملاحظات رقمية، وليست إثباتًا محددًا مسبقًا.",
+    methodology: "المنهجية",
+    learnMetrics: "تعلّم قراءة المقاييس",
+    learnMetricsDescription:
+      "هذه المصطلحات تشرح كيفية قياس مجموعة البيانات.",
+    metricFrequency: "التكرار",
+    metricFrequencyDesc:
+      "عدد مرات ظهور الرمز المطبع المطابق تمامًا في corpus الذي تم تحليله.",
+    metricDigitSum: "مجموع الأرقام",
+    metricDigitSumDesc:
+      "اجمع أرقام التكرار العشرية. مثال: 217 ← 2 + 1 + 7 = 10.",
+    metricParity: "زوجي / فردي",
+    metricParityDesc:
+      "يوضح ما إذا كان التكرار زوجيًا أم فرديًا.",
+    metricPer1000: "التكرار لكل 1000 رمز",
+    metricPer1000Desc:
+      "التكرار مقسومًا على إجمالي الرموز ثم مضروبًا في 1000.",
+    metricVerseShare: "النسبة من إجمالي الآيات",
+    metricVerseShareDesc:
+      "التكرار كنسبة مئوية من إجمالي عدد الآيات. وهذا وصف للبيانات.",
+    metricDifference: "الفرق",
+    metricDifferenceDesc:
+      "في الزوج: عدد A ناقص عدد B.",
+    metricSum: "المجموع",
+    metricSumDesc:
+      "في الزوج: عدد A زائد عدد B.",
+    metricRatio: "النسبة",
+    metricRatioDesc:
+      "في الزوج: عدد A مقسومًا على عدد B.",
+    metricSharedSurahs: "السور المشتركة",
+    metricSharedSurahsDesc:
+      "عدد السور التي يظهر فيها المصطلحان مرة واحدة على الأقل.",
+    metricJaccard: "تداخل Jaccard",
+    metricJaccardDesc:
+      "السور المشتركة مقسومة على جميع السور التي يظهر فيها أي من المصطلحين.",
+    matching: "طريقة المطابقة",
+    diacritics: "إزالة الحركات",
+    tatweel: "إزالة التطويل",
+    alif: "تطبيع أشكال الألف",
+    rootAnalysis: "تحليل الجذر",
+    morphology: "التحليل الصرفي",
+    substring: "مطابقة السلسلة الجزئية",
+    trueValue: "نعم",
+    falseValue: "لا",
+    dataStatus:
+      "حالة البيانات: عرض للبيانات المرصودة. التكرارات والملاحظات الرقمية مرتبطة بمجموعة البيانات وقواعد التحليل الموثقة.",
+    searchPlaceholder:
+      "ابحث بالعربية أو النقل الصوتي أو المعنى…"
+  }
+};
+
+function detectInitialLanguage() {
+  const saved = localStorage.getItem(
+    "dqm-language"
+  );
+
+  if (saved && I18N[saved]) {
+    return saved;
+  }
+
+  const browser =
+    navigator.language?.toLowerCase() || "en";
+
+  if (browser.startsWith("id")) {
+    return "id";
+  }
+
+  if (browser.startsWith("ar")) {
+    return "ar";
+  }
+
+  return "en";
+}
+
+function setLanguage(language) {
+  if (!I18N[language]) {
+    language = "en";
+  }
+
+  localStorage.setItem(
+    "dqm-language",
+    language
+  );
+
+  document.documentElement.lang = language;
+
+  document.documentElement.dir =
+    language === "ar"
+      ? "rtl"
+      : "ltr";
+
+  return I18N[language];
+}

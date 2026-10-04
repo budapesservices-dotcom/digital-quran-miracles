@@ -21,7 +21,7 @@
     <header class="topbar">
       <div class="brand">
         <div>
-          <p class="kicker">Digital Quran Miracles</p>
+          <p class="kicker" id="brand-kicker">Digital Quran Miracles</p>
           <h1 class="title">Mathematical Exploration</h1>
 
           <p class="subtitle">
@@ -57,7 +57,10 @@
 
         <section class="hero">
 
-          <div class="eyebrow">
+          <div
+            id="feature-eyebrow"
+            class="eyebrow"
+          >
             Selected Observation
           </div>
 
@@ -83,6 +86,7 @@
           <div class="actions">
 
             <a
+              id="open-quran"
               class="action primary"
               href="https://www.readquranforpeace.net/quran"
               target="_blank"
@@ -92,6 +96,7 @@
             </a>
 
             <a
+              id="explore-evidence"
               class="action"
               href="#evidence"
             >
@@ -107,12 +112,12 @@
         <div class="grid">
 
           <section class="panel">
-            <h2>Numerical Observation</h2>
+            <h2 id="numerical-title">
+              Numerical Observation
+            </h2>
 
-            <p>
-              Derived metrics describe the observed dataset. They do not,
-              by themselves, establish statistical significance or a
-              miraculous claim.
+            <p id="numerical-description">
+              Derived metrics describe the observed dataset.
             </p>
 
             <div
@@ -123,11 +128,12 @@
 
           <section class="panel">
 
-            <h2>Surah Distribution</h2>
+            <h2 id="distribution-title">
+              Surah Distribution
+            </h2>
 
-            <p>
+            <p id="distribution-description">
               Occurrences aggregated across all 114 surahs.
-              Select a bar to inspect evidence from that surah.
             </p>
 
             <div class="distribution">
@@ -184,7 +190,7 @@
           <div class="evidence-toolbar">
 
             <label class="toolbar-field">
-              <span>Surah</span>
+              <span id="surah-label">Surah</span>
 
               <select
                 id="surah-filter"
@@ -253,9 +259,28 @@
 
         </section>
 
+        <section class="panel learn-panel">
+
+          <h2 id="learn-title">
+            Learn the Metrics
+          </h2>
+
+          <p id="learn-description">
+            These terms describe how the dataset is being measured.
+          </p>
+
+          <div
+            id="learn-metrics"
+            class="learn-grid"
+          ></div>
+
+        </section>
+
         <section class="panel methodology">
 
-          <h2>Methodology</h2>
+          <h2 id="methodology-title">
+            Methodology
+          </h2>
 
           <div class="method-box">
 
