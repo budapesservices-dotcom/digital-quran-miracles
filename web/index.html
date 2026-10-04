@@ -1,58 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" dir="ltr">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
+
   <meta
     name="description"
-    content="An evidence-linked exploration of Quranic word frequencies and numerical observations."
+    content="Evidence-linked exploration of Quranic word frequencies and numerical observations."
   >
-  <title>Digital Quran Miracles — Mathematical Exploration</title>
+
+  <title>
+    Digital Quran Miracles — Mathematical Exploration
+  </title>
+
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./d3-chart.css">
 </head>
 
 <body>
+
   <div class="shell">
 
     <header class="topbar">
+
       <div class="brand">
+
         <div>
-          <p class="kicker" id="brand-kicker">Digital Quran Miracles</p>
-          <h1 class="title">Mathematical Exploration</h1>
 
-          <p class="subtitle">
-            Explore observed frequency patterns in the Quran and follow
-            each result back to verse-level evidence and methodology.
+          <p
+            class="kicker"
+            id="brand-kicker"
+          >
+            DIGITAL QURAN MIRACLES
           </p>
+
+          <h1
+            class="title"
+            id="page-title"
+          >
+            Eksplorasi Matematis
+          </h1>
+
+          <p
+            class="subtitle"
+            id="page-subtitle"
+          >
+            Jelajahi pola frekuensi yang diamati dalam Al-Qur'an
+            dan telusuri setiap hasil kembali ke evidence ayat
+            dan metodologi.
+          </p>
+
         </div>
 
-        <div class="header-actions"><label class="language-control"><span id="language-label">Language</span><select id="language-select" class="language-select" aria-label="Language"><option value="id">Bahasa Indonesia</option><option value="en">English</option><option value="ar">العربية</option></select></label>
-<div id="corpus-badge" class="corpus-badge">
-          Loading corpus…
+        <div class="header-actions">
+
+          <label class="language-control">
+
+            <span id="language-label">
+              Bahasa
+            </span>
+
+            <select
+              id="language-select"
+              class="language-select"
+              aria-label="Language"
+            >
+              <option value="id">
+                Bahasa Indonesia
+              </option>
+
+              <option value="en">
+                English
+              </option>
+
+              <option value="ar">
+                العربية
+              </option>
+            </select>
+
+          </label>
+
+          <div
+            id="corpus-badge"
+            class="corpus-badge"
+          >
+            Loading corpus…
+          </div>
+
         </div>
+
       </div>
+
     </header>
+
 
     <div class="workspace">
 
       <aside class="sidebar">
-        <h2>Analytical Terms</h2>
+
+        <h2 id="analytical-terms-title">
+          Istilah Analisis
+        </h2>
 
         <input
           id="term-search"
           class="search"
           type="search"
-          placeholder="Search Arabic, Latin, or Indonesian…"
+          placeholder="Cari Arab, Latin, atau makna…"
           aria-label="Search analytical terms"
           dir="auto"
+          autocomplete="off"
         >
 
-        <div id="term-list" class="term-list"></div>
+        <div
+          id="term-list"
+          class="term-list"
+        ></div>
+
       </aside>
+
 
       <main class="main">
 
@@ -62,7 +132,7 @@
             id="feature-eyebrow"
             class="eyebrow"
           >
-            Selected Observation
+            Observasi Terpilih
           </div>
 
           <div
@@ -93,7 +163,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              Open Quran Index
+              Buka Indeks Quran
             </a>
 
             <a
@@ -101,40 +171,47 @@
               class="action"
               href="#evidence"
             >
-              Explore Evidence
+              Lihat Evidence
             </a>
 
           </div>
 
-          <div id="stats" class="stats"></div>
+          <div
+            id="stats"
+            class="stats"
+          ></div>
 
         </section>
+
 
         <div class="grid">
 
           <section class="panel">
+
             <h2 id="numerical-title">
-              Numerical Observation
+              Observasi Numerik
             </h2>
 
             <p id="numerical-description">
-              Derived metrics describe the observed dataset.
+              Metric turunan menggambarkan data yang diamati.
             </p>
 
             <div
               id="numerical-metrics"
               class="metric-list"
             ></div>
+
           </section>
+
 
           <section class="panel">
 
             <h2 id="distribution-title">
-              Surah Distribution
+              Distribusi Surah
             </h2>
 
             <p id="distribution-description">
-              Occurrences aggregated across all 114 surahs.
+              Kemunculan digabungkan di seluruh 114 surah.
             </p>
 
             <div class="distribution">
@@ -150,8 +227,11 @@
                 <span>114</span>
               </div>
 
-              <div id="chart-caption" class="chart-caption">
-                Interactive D3 visualization
+              <div
+                id="chart-caption"
+                class="chart-caption"
+              >
+                Visualisasi D3 interaktif
               </div>
 
               <div
@@ -165,19 +245,24 @@
 
         </div>
 
+
         <section
           id="evidence"
           class="panel evidence-panel"
         >
 
           <div class="section-heading">
+
             <div>
-              <h2 id="evidence-title">Verse-Level Evidence</h2>
+
+              <h2 id="evidence-title">
+                Evidence Tingkat Ayat
+              </h2>
 
               <p id="evidence-description">
-                Every occurrence comes from the analyzed corpus and retains
-                its surah, ayah, token position, and source verse text.
+                Setiap kemunculan berasal dari corpus yang dianalisis.
               </p>
+
             </div>
 
             <div
@@ -186,22 +271,31 @@
             >
               —
             </div>
+
           </div>
+
 
           <div class="evidence-toolbar">
 
             <label class="toolbar-field">
-              <span id="surah-label">Surah</span>
+
+              <span id="surah-label">
+                Surah
+              </span>
 
               <select
                 id="surah-filter"
                 class="select"
-              >
-              </select>
+              ></select>
+
             </label>
 
+
             <label class="toolbar-field">
-              <span id="jump-label">Jump to occurrence</span>
+
+              <span id="jump-label">
+                Loncat ke occurrence
+              </span>
 
               <input
                 id="evidence-jump"
@@ -210,15 +304,18 @@
                 min="1"
                 value="1"
               >
+
             </label>
 
+
             <div class="evidence-controls">
+
               <button
                 id="previous-evidence"
                 class="action"
                 type="button"
               >
-                ← Previous
+                ← Sebelumnya
               </button>
 
               <button
@@ -226,16 +323,19 @@
                 class="action primary"
                 type="button"
               >
-                Next →
+                Berikutnya →
               </button>
+
             </div>
 
           </div>
+
 
           <div
             id="evidence-summary"
             class="evidence-summary"
           ></div>
+
 
           <div
             id="evidence-list"
@@ -244,13 +344,16 @@
 
         </section>
 
+
         <section class="panel">
 
-          <h2 id="pairs-title">Exploratory Term Pairs</h2>
+          <h2 id="pairs-title">
+            Pasangan Term Eksploratif
+          </h2>
 
           <p id="pairs-description">
-            Candidate relationships are shown as numerical observations,
-            not predefined proof.
+            Hubungan kandidat ditampilkan sebagai observasi numerik,
+            bukan bukti yang sudah ditentukan sebelumnya.
           </p>
 
           <div
@@ -260,14 +363,15 @@
 
         </section>
 
+
         <section class="panel learn-panel">
 
           <h2 id="learn-title">
-            Learn the Metrics
+            Belajar Membaca Angka
           </h2>
 
           <p id="learn-description">
-            These terms describe how the dataset is being measured.
+            Istilah berikut menjelaskan bagaimana dataset kita diukur.
           </p>
 
           <div
@@ -277,46 +381,61 @@
 
         </section>
 
+
         <section class="panel methodology">
 
           <h2 id="methodology-title">
-            Methodology
+            Metodologi
           </h2>
 
           <div class="method-box">
 
             <div>
-              <strong>Matching:</strong>
+              <strong id="method-matching-label">
+                Matching:
+              </strong>
               <span id="method-matching">—</span>
             </div>
 
             <div>
-              <strong>Diacritics removed:</strong>
+              <strong id="method-diacritics-label">
+                Diakritik dihapus:
+              </strong>
               <span id="method-diacritics">—</span>
             </div>
 
             <div>
-              <strong>Tatweel removed:</strong>
+              <strong id="method-tatweel-label">
+                Tatweel dihapus:
+              </strong>
               <span id="method-tatweel">—</span>
             </div>
 
             <div>
-              <strong>Alif variants normalized:</strong>
+              <strong id="method-alif-label">
+                Varian alif dinormalisasi:
+              </strong>
               <span id="method-alif">—</span>
             </div>
 
             <div>
-              <strong>Root analysis:</strong>
+              <strong id="method-root-label">
+                Analisis akar kata:
+              </strong>
               <span id="method-root">—</span>
             </div>
 
             <div>
-              <strong>Morphological analysis:</strong>
+              <strong id="method-morphology-label">
+                Analisis morfologi:
+              </strong>
               <span id="method-morphology">—</span>
             </div>
 
             <div>
-              <strong>Substring matching:</strong>
+              <strong id="method-substring-label">
+                Pencocokan substring:
+              </strong>
               <span id="method-substring">—</span>
             </div>
 
@@ -325,21 +444,25 @@
         </section>
 
       </main>
+
     </div>
 
+
     <footer>
+
       <div id="footer-text">
-        Data status: observed-data presentation. Frequency and numerical
-        observations are tied to the project corpus and documented
-        analysis rules.
+        Status data: observed-data presentation.
       </div>
+
     </footer>
 
   </div>
 
-  <script src="./vendor/d3.min.js"></script>
-  <script src="./i18n.js"></script>
-  <script src="./d3-chart.js"></script>
-  <script src="./app.js"></script>
+
+  <script src="./vendor/d3.min.js?v=2"></script>
+  <script src="./i18n.js?v=2"></script>
+  <script src="./d3-chart.js?v=2"></script>
+  <script src="./app.js?v=2"></script>
+
 </body>
 </html>

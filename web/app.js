@@ -42,24 +42,20 @@ function getSelectedTerm() {
 }
 
 function getMeaning(term) {
-  const metadata =
-    term.metadata || {};
+  const metadata = term.metadata || {};
 
-  if (state.language === "ar") {
-    return metadata.meaning_ar
-      || metadata.meaning_id
-      || "";
-  }
+  const value =
+    state.language === "ar"
+      ? metadata.meaning_ar
+      : state.language === "en"
+        ? metadata.meaning_en
+        : metadata.meaning_id;
 
-  if (state.language === "en") {
-    return metadata.meaning_en
-      || metadata.meaning_id
-      || "";
-  }
-
-  return metadata.meaning_id
+  return value
+    || metadata.meaning_id
     || metadata.meaning_en
-    || "";
+    || metadata.meaning_ar
+    || t("notAvailable");
 }
 
 function getFilteredOccurrences(term) {
@@ -97,84 +93,143 @@ function renderLanguageSelector() {
     state.language;
 }
 
-function renderStaticText() {
-  $("language-label").textContent =
-    t("language");
+function setText(id, value) {
+  const element = $(id);
 
-  $("feature-eyebrow").textContent =
-    t("selectedObservation");
-
-  $("open-quran").textContent =
-    t("openQuranIndex");
-
-  $("explore-evidence").textContent =
-    t("exploreEvidence");
-
-  $("numerical-title").textContent =
-    t("numericalObservation");
-
-  $("numerical-description").textContent =
-    t("numericalDescription");
-
-  $("distribution-title").textContent =
-    t("surahDistribution");
-
-  $("distribution-description").textContent =
-    t("surahDistributionDescription");
-
-  $("chart-caption").textContent =
-    t("interactiveD3");
-
-  $("evidence-title").textContent =
-    t("verseEvidence");
-
-  $("evidence-description").textContent =
-    t("verseEvidenceDescription");
-
-  $("surah-label").textContent =
-    t("surahDistribution");
-
-  $("jump-label").textContent =
-    t("jumpOccurrence");
-
-  $("previous-evidence").textContent =
-    `← ${t("previous")}`;
-
-  $("next-evidence").textContent =
-    `${t("next")} →`;
-
-  $("pairs-title").textContent =
-    t("exploratoryPairs");
-
-  $("pairs-description").textContent =
-    t("exploratoryPairsDescription");
-
-  $("methodology-title").textContent =
-    t("methodology");
-
-  $("learn-title").textContent =
-    t("learnMetrics");
-
-  $("learn-description").textContent =
-    t("learnMetricsDescription");
-
-  $("term-search").placeholder =
-    t("searchPlaceholder");
-
-  $("term-search").dir =
-    "auto";
-
-  const allOption =
-    $("surah-filter").querySelector(
-      'option[value="all"]'
-    );
-
-  if (allOption) {
-    allOption.textContent =
-      t("allSurahs");
+  if (element) {
+    element.textContent = value;
   }
+}
 
-  renderMethodology();
+function renderStaticText() {
+  setText(
+    "brand-kicker",
+    t("brandKicker")
+  );
+
+  setText(
+    "page-title",
+    t("pageTitle")
+  );
+
+  setText(
+    "page-subtitle",
+    t("subtitle")
+  );
+
+  setText(
+    "language-label",
+    t("language")
+  );
+
+  setText(
+    "analytical-terms-title",
+    t("analyticalTerms")
+  );
+
+  setText(
+    "feature-eyebrow",
+    t("selectedObservation")
+  );
+
+  setText(
+    "open-quran",
+    t("openQuranIndex")
+  );
+
+  setText(
+    "explore-evidence",
+    t("exploreEvidence")
+  );
+
+  setText(
+    "numerical-title",
+    t("numericalObservation")
+  );
+
+  setText(
+    "numerical-description",
+    t("numericalDescription")
+  );
+
+  setText(
+    "distribution-title",
+    t("surahDistribution")
+  );
+
+  setText(
+    "distribution-description",
+    t("surahDistributionDescription")
+  );
+
+  setText(
+    "chart-caption",
+    t("interactiveD3")
+  );
+
+  setText(
+    "evidence-title",
+    t("verseEvidence")
+  );
+
+  setText(
+    "evidence-description",
+    t("verseEvidenceDescription")
+  );
+
+  setText(
+    "surah-label",
+    t("surahDistribution")
+  );
+
+  setText(
+    "jump-label",
+    t("jumpOccurrence")
+  );
+
+  setText(
+    "previous-evidence",
+    `← ${t("previous")}`
+  );
+
+  setText(
+    "next-evidence",
+    `${t("next")} →`
+  );
+
+  setText(
+    "pairs-title",
+    t("exploratoryPairs")
+  );
+
+  setText(
+    "pairs-description",
+    t("exploratoryPairsDescription")
+  );
+
+  setText(
+    "learn-title",
+    t("learnMetrics")
+  );
+
+  setText(
+    "learn-description",
+    t("learnMetricsDescription")
+  );
+
+  setText(
+    "methodology-title",
+    t("methodology")
+  );
+
+  const search = $("term-search");
+
+  if (search) {
+    search.placeholder =
+      t("searchPlaceholder");
+
+    search.dir = "auto";
+  }
 }
 
 function renderTermList(filter = "") {
@@ -600,25 +655,13 @@ function renderEvidence(term) {
 
   $("evidence-counter")
     .textContent =
-    `${formatNumber(total)} ${
-      state.language === "ar"
-        ? "ظهور"
-        : state.language === "id"
-          ? "occurrence"
-          : "occurrences"
-    }`;
+    `${formatNumber(total)} ${t("occurrences")}`;
 
   $("evidence-summary")
     .textContent =
-    `${
-      state.language === "ar"
-        ? "عرض الظهور"
-        : state.language === "id"
-          ? "Menampilkan occurrence"
-          : "Showing occurrence"
-    } ${
+    `${t("showingOccurrence")} ${
       state.evidenceIndex + 1
-    } ${t("of") || "of"} ${total}`;
+    } ${state.language === "ar" ? "من" : "of"} ${total}`;
 
   $("evidence-jump").value =
     state.evidenceIndex + 1;
@@ -750,40 +793,84 @@ function renderMethodology() {
     state.data.method;
 
   const value = (v) =>
-    v ? t("trueValue")
-       : t("falseValue");
+    v
+      ? t("trueValue")
+      : t("falseValue");
 
-  $("method-matching")
-    .textContent =
-    method.matching;
+  setText(
+    "method-matching-label",
+    `${t("matching")}:`
+  );
 
-  $("method-diacritics")
-    .textContent =
-    value(method.diacritics_removed);
+  setText(
+    "method-diacritics-label",
+    `${t("diacritics")}:`
+  );
 
-  $("method-tatweel")
-    .textContent =
-    value(method.tatweel_removed);
+  setText(
+    "method-tatweel-label",
+    `${t("tatweel")}:`
+  );
 
-  $("method-alif")
-    .textContent =
-    value(method.alif_variants_normalized);
+  setText(
+    "method-alif-label",
+    `${t("alif")}:`
+  );
 
-  $("method-root")
-    .textContent =
-    value(method.root_analysis);
+  setText(
+    "method-root-label",
+    `${t("rootAnalysis")}:`
+  );
 
-  $("method-morphology")
-    .textContent =
-    value(method.morphological_analysis);
+  setText(
+    "method-morphology-label",
+    `${t("morphology")}:`
+  );
 
-  $("method-substring")
-    .textContent =
-    value(method.substring_matching);
+  setText(
+    "method-substring-label",
+    `${t("substring")}:`
+  );
 
-  $("footer-text")
-    .textContent =
-    t("dataStatus");
+  setText(
+    "method-matching",
+    method.matching
+  );
+
+  setText(
+    "method-diacritics",
+    value(method.diacritics_removed)
+  );
+
+  setText(
+    "method-tatweel",
+    value(method.tatweel_removed)
+  );
+
+  setText(
+    "method-alif",
+    value(method.alif_variants_normalized)
+  );
+
+  setText(
+    "method-root",
+    value(method.root_analysis)
+  );
+
+  setText(
+    "method-morphology",
+    value(method.morphological_analysis)
+  );
+
+  setText(
+    "method-substring",
+    value(method.substring_matching)
+  );
+
+  setText(
+    "footer-text",
+    t("dataStatus")
+  );
 }
 
 function renderLearnMetrics() {
