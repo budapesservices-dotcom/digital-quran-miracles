@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 PROCESSED_DIR = ROOT / "data" / "processed"
 WEB_DATA_DIR = ROOT / "web" / "data"
+METADATA_FILE = WEB_DATA_DIR / "term_metadata.json"
 
 FILES = {
     "frequency_index": "frequency_index.json",
@@ -29,6 +30,26 @@ def load_json(path: Path) -> dict:
         return json.load(file)
 
 
+def load_term_metadata() -> dict:
+    if not METADATA_FILE.exists():
+        raise FileNotFoundError(
+            f"Term metadata tidak ditemukan: {METADATA_FILE}"
+        )
+
+    with METADATA_FILE.open(
+        "r",
+        encoding="utf-8"
+    ) as file:
+        metadata = json.load(file)
+
+    if not isinstance(metadata, dict):
+        raise ValueError(
+            "Format term metadata harus berupa object."
+        )
+
+    return metadata
+
+
 def load_evidence_files(frequency_index: dict) -> dict:
     evidence = {}
 
@@ -48,6 +69,8 @@ def build_contract() -> dict:
     frequency_index = load_json(
         PROCESSED_DIR / FILES["frequency_index"]
     )
+
+    term_metadata = load_term_metadata()
 
     numerical_findings = load_json(
         PROCESSED_DIR / FILES["numerical_findings"]
@@ -123,11 +146,24 @@ def build_contract() -> dict:
         )
     }
 
+    missing_metadata = sorted(
+        frequency_words - set(term_metadata.keys())
+    )
+
+    if missing_metadata:
+        raise ValueError(
+            "Frequency terms missing metadata: "
+            + ", ".join(missing_metadata)
+        )
+
     for word, frequency in frequency_lookup.items():
 
         terms.append(
             {
                 "word": word,
+
+                "metadata":
+                    term_metadata[word],
 
                 "normalized_word":
                     frequency["normalized_word"],

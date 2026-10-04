@@ -674,3 +674,55 @@ footer {
     width: 100%;
   }
 }
+
+.term-copy {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+}
+
+.term-latin {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.term-meaning {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.25;
+}
+
+.term-button.active .term-latin,
+.term-button.active .term-meaning {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.feature-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+.feature-latin {
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.feature-meaning {
+  font-size: 0.92rem;
+}
+
+.feature-separator {
+  color: var(--gold);
+}
+
+.search::placeholder {
+  direction: ltr;
+  text-align: left;
+}

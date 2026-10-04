@@ -21,6 +21,11 @@
   "terms": [
     {
       "word": "يوم",
+      "metadata": {
+        "transliteration": "Yawm",
+        "meaning_id": "Hari",
+        "meaning_note": "Day / hari; nuansa makna mengikuti konteks ayat."
+      },
       "normalized_word": "يوم",
       "rank": 1,
       "count": 217,
@@ -1715,6 +1720,11 @@
     },
     {
       "word": "الدنيا",
+      "metadata": {
+        "transliteration": "Ad-Dunyā",
+        "meaning_id": "Dunia",
+        "meaning_note": "Dunia / kehidupan dunia."
+      },
       "normalized_word": "الدنيا",
       "rank": 2,
       "count": 115,
@@ -2695,6 +2705,11 @@
     },
     {
       "word": "الآخرة",
+      "metadata": {
+        "transliteration": "Al-Ākhirah",
+        "meaning_id": "Akhirat",
+        "meaning_note": "Akhirat / kehidupan setelah dunia."
+      },
       "normalized_word": "الاخرة",
       "rank": 3,
       "count": 71,
@@ -3368,6 +3383,11 @@
     },
     {
       "word": "الحياة",
+      "metadata": {
+        "transliteration": "Al-Ḥayāh",
+        "meaning_id": "Kehidupan",
+        "meaning_note": "Life / kehidupan."
+      },
       "normalized_word": "الحياة",
       "rank": 4,
       "count": 63,
@@ -3984,6 +4004,11 @@
     },
     {
       "word": "الليل",
+      "metadata": {
+        "transliteration": "Al-Layl",
+        "meaning_id": "Malam",
+        "meaning_note": "Night / malam."
+      },
       "normalized_word": "الليل",
       "rank": 5,
       "count": 59,
@@ -4574,6 +4599,11 @@
     },
     {
       "word": "اليوم",
+      "metadata": {
+        "transliteration": "Al-Yawm",
+        "meaning_id": "Hari ini / hari tersebut",
+        "meaning_note": "The day / today; konteks ayat menentukan nuansa."
+      },
       "normalized_word": "اليوم",
       "rank": 6,
       "count": 41,
@@ -5037,6 +5067,11 @@
     },
     {
       "word": "الموت",
+      "metadata": {
+        "transliteration": "Al-Mawt",
+        "meaning_id": "Kematian",
+        "meaning_note": "Death / kematian."
+      },
       "normalized_word": "الموت",
       "rank": 7,
       "count": 35,
@@ -5457,6 +5492,11 @@
     },
     {
       "word": "النهار",
+      "metadata": {
+        "transliteration": "An-Nahār",
+        "meaning_id": "Siang",
+        "meaning_note": "Daytime / siang."
+      },
       "normalized_word": "النهار",
       "rank": 8,
       "count": 25,

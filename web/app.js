@@ -41,27 +41,57 @@ function getFilteredOccurrences(term) {
 function renderTermList(filter = "") {
   const normalizedFilter = filter.trim();
 
-  const terms = state.data.terms.filter((term) =>
-    term.word.includes(normalizedFilter)
-  );
+  const terms = state.data.terms.filter((term) => {
+    const metadata = term.metadata || {};
 
-  $("term-list").innerHTML = terms.map((term) => `
-    <button
-      class="term-button ${
-        term.word === state.selectedWord ? "active" : ""
-      }"
-      data-word="${escapeHtml(term.word)}"
-      type="button"
-    >
-      <span class="term-word">
-        ${escapeHtml(term.word)}
-      </span>
+    const searchable = [
+      term.word,
+      metadata.transliteration || "",
+      metadata.meaning_id || "",
+    ]
+      .join(" ")
+      .toLowerCase();
 
-      <span class="term-count">
-        ${formatNumber(term.count)}
-      </span>
-    </button>
-  `).join("");
+    return searchable.includes(
+      normalizedFilter.toLowerCase()
+    );
+  });
+
+  $("term-list").innerHTML = terms.map((term) => {
+    const metadata = term.metadata || {};
+
+    return `
+      <button
+        class="term-button ${
+          term.word === state.selectedWord ? "active" : ""
+        }"
+        data-word="${escapeHtml(term.word)}"
+        type="button"
+      >
+        <span class="term-copy">
+          <span class="term-word">
+            ${escapeHtml(term.word)}
+          </span>
+
+          <span class="term-latin">
+            ${escapeHtml(
+              metadata.transliteration || ""
+            )}
+          </span>
+
+          <span class="term-meaning">
+            ${escapeHtml(
+              metadata.meaning_id || ""
+            )}
+          </span>
+        </span>
+
+        <span class="term-count">
+          ${formatNumber(term.count)}
+        </span>
+      </button>
+    `;
+  }).join("");
 
   document.querySelectorAll(".term-button").forEach((button) => {
     button.addEventListener("click", () => {
@@ -76,7 +106,28 @@ function renderTermList(filter = "") {
 function renderHero(term) {
   const firstOccurrence = term.evidence?.occurrences?.[0];
 
-  $("feature-word").textContent = term.word;
+  const metadata = term.metadata || {};
+
+  $("feature-word").textContent =
+    term.word;
+
+  $("feature-meta").innerHTML = `
+    <span class="feature-latin">
+      ${escapeHtml(
+        metadata.transliteration || ""
+      )}
+    </span>
+
+    <span class="feature-separator">
+      ·
+    </span>
+
+    <span class="feature-meaning">
+      ${escapeHtml(
+        metadata.meaning_id || ""
+      )}
+    </span>
+  `;
 
   $("feature-reference").textContent = firstOccurrence
     ? `First recorded occurrence: Surah ${firstOccurrence.surah}, Ayah ${firstOccurrence.ayah}`
