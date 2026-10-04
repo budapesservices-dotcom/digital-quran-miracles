@@ -1,0 +1,31 @@
+{
+  "dataset": "data/raw/simple-clean.json",
+  "total_chapters": 114,
+  "total_terms": 2,
+  "matching_method": "exact_normalized_token",
+  "analysis_rules": {
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "terms": [
+    {
+      "word": "يوم",
+      "normalized_word": "يوم",
+      "count": 217,
+      "evidence_file": "data/processed/frequency_يوم.json",
+      "rank": 1
+    },
+    {
+      "word": "اليوم",
+      "normalized_word": "اليوم",
+      "count": 41,
+      "evidence_file": "data/processed/frequency_اليوم.json",
+      "rank": 2
+    }
+  ]
+}
