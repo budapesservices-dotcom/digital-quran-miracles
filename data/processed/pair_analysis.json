@@ -1,0 +1,56 @@
+{
+  "title": "Exploratory Term Pair Analysis",
+  "status": "candidate_analysis",
+  "warning": "Pairs are exploratory observations. Numerical relationships do not by themselves establish significance or miraculous status.",
+  "method": "exact_normalized_token",
+  "pairs": [
+    {
+      "term_a": "يوم",
+      "term_b": "اليوم",
+      "count_a": 217,
+      "count_b": 41,
+      "derived": {
+        "difference_a_minus_b": 176,
+        "sum": 258,
+        "equal": false,
+        "ratio_a_to_b": 5.292683
+      }
+    },
+    {
+      "term_a": "الليل",
+      "term_b": "النهار",
+      "count_a": 59,
+      "count_b": 25,
+      "derived": {
+        "difference_a_minus_b": 34,
+        "sum": 84,
+        "equal": false,
+        "ratio_a_to_b": 2.36
+      }
+    },
+    {
+      "term_a": "الدنيا",
+      "term_b": "الآخرة",
+      "count_a": 115,
+      "count_b": 71,
+      "derived": {
+        "difference_a_minus_b": 44,
+        "sum": 186,
+        "equal": false,
+        "ratio_a_to_b": 1.619718
+      }
+    },
+    {
+      "term_a": "الحياة",
+      "term_b": "الموت",
+      "count_a": 63,
+      "count_b": 35,
+      "derived": {
+        "difference_a_minus_b": 28,
+        "sum": 98,
+        "equal": false,
+        "ratio_a_to_b": 1.8
+      }
+    }
+  ]
+}
