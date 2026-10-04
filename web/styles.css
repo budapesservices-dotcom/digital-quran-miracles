@@ -514,3 +514,163 @@ footer {
     grid-template-columns: repeat(38, minmax(2px, 1fr));
   }
 }
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.evidence-counter {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbf8f0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.evidence-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fbf8f0;
+}
+
+.toolbar-field {
+  display: grid;
+  gap: 6px;
+  min-width: 190px;
+}
+
+.toolbar-field span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.select,
+.number-input {
+  min-height: 40px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  outline: none;
+}
+
+.select:focus,
+.number-input:focus {
+  border-color: var(--gold);
+}
+
+.number-input {
+  width: 130px;
+}
+
+.evidence-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.evidence-summary {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.featured-evidence {
+  padding: 22px;
+}
+
+.evidence-index {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.bar-button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.bar-button .bar {
+  display: block;
+  width: 100%;
+  max-width: 14px;
+}
+
+.bar-button.selected .bar {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.bar-button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.pair-select {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.pair-select:hover .pair-word {
+  color: var(--gold);
+}
+
+.pair-word {
+  transition: color 0.16s ease;
+}
+
+@media (max-width: 760px) {
+  .section-heading {
+    display: block;
+  }
+
+  .evidence-counter {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .evidence-controls {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .evidence-controls .action {
+    flex: 1;
+  }
+
+  .toolbar-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .number-input {
+    width: 100%;
+  }
+}
