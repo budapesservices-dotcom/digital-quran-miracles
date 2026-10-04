@@ -4,6 +4,11 @@ const state = {
   evidenceIndex: 0,
   evidenceSurah: "all",
   language: detectInitialLanguage(),
+
+    translationMaps: {
+    id: new Map(),
+    en: new Map(),
+  },
 };
 
 const $ = (id) =>
@@ -56,6 +61,40 @@ function getMeaning(term) {
     || metadata.meaning_en
     || metadata.meaning_ar
     || t("notAvailable");
+}
+
+function buildTranslationMap(data) {
+  const map = new Map();
+
+  for (const surah of data || []) {
+    for (const verse of surah.verses || []) {
+      map.set(
+        `${surah.id}:${verse.id}`,
+        verse.translation || ""
+      );
+    }
+  }
+
+  return map;
+}
+
+function getVerseTranslations(surah, ayah) {
+  const key = `${surah}:${ayah}`;
+
+  return {
+    id:
+      state.translationMaps.id.get(key) || "",
+    en:
+      state.translationMaps.en.get(key) || "",
+  };
+}
+
+function getVerseLabel() {
+  return state.language === "id"
+    ? "Ayat"
+    : state.language === "ar"
+      ? "الآية"
+      : "Verse";
 }
 
 function getFilteredOccurrences(term) {
@@ -414,6 +453,163 @@ function renderTermList(filter = "") {
 }
 
 
+function renderFeatureVerse(
+  term,
+  occurrence = null
+) {
+  const reference =
+    $("feature-reference");
+
+  if (!reference) {
+    return;
+  }
+
+  let container =
+    $("feature-verse");
+
+  if (!container) {
+    container =
+      document.createElement("div");
+
+    container.id =
+      "feature-verse";
+
+    container.className =
+      "feature-verse";
+
+    reference.insertAdjacentElement(
+      "afterend",
+      container
+    );
+  }
+
+  if (!occurrence) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const translations =
+    getVerseTranslations(
+      occurrence.surah,
+      occurrence.ayah
+    );
+
+  let translationHtml = "";
+
+  if (
+    state.language === "id" &&
+    translations.id
+  ) {
+    translationHtml = `
+      <div class="feature-verse-translation-label">
+        Arti
+      </div>
+
+      <p
+        class="feature-verse-translation"
+        dir="ltr"
+      >
+        ${escapeHtml(translations.id)}
+      </p>
+
+      <div class="feature-verse-source">
+        Sumber terjemahan: QuranEnc · id-affairs
+      </div>
+    `;
+  }
+
+  if (
+    state.language === "en" &&
+    translations.en
+  ) {
+    translationHtml = `
+      <div class="feature-verse-translation-label">
+        Translation
+      </div>
+
+      <p
+        class="feature-verse-translation"
+        dir="ltr"
+      >
+        ${escapeHtml(translations.en)}
+      </p>
+
+      <div class="feature-verse-source">
+        Translation source: QuranEnc · en-saheeh
+      </div>
+    `;
+  }
+
+  if (
+    state.language === "ar" &&
+    (translations.id || translations.en)
+  ) {
+    translationHtml = `
+      <div class="feature-verse-translation-label">
+        الترجمة
+      </div>
+
+      ${
+        translations.id
+          ? `
+            <p
+              class="feature-verse-translation"
+              dir="ltr"
+            >
+              <strong>Bahasa Indonesia</strong><br>
+              ${escapeHtml(translations.id)}
+            </p>
+          `
+          : ""
+      }
+
+      ${
+        translations.en
+          ? `
+            <p
+              class="feature-verse-translation"
+              dir="ltr"
+            >
+              <strong>English</strong><br>
+              ${escapeHtml(translations.en)}
+            </p>
+          `
+          : ""
+      }
+    `;
+  }
+
+  const verseTitle =
+    state.language === "id"
+      ? "Ayat contoh"
+      : state.language === "ar"
+        ? "الآية"
+        : "Example verse";
+
+  container.innerHTML = `
+    <div class="feature-verse-heading">
+      ${verseTitle}
+    </div>
+
+    <div class="feature-verse-ref">
+      Surah ${escapeHtml(occurrence.surah)}
+      ·
+      ${getVerseLabel()}
+      ${escapeHtml(occurrence.ayah)}
+    </div>
+
+    <p
+      class="feature-verse-arabic"
+      dir="rtl"
+    >
+      ${escapeHtml(occurrence.text)}
+    </p>
+
+    ${translationHtml}
+  `;
+}
+
+
 function renderHero(term) {
   const metadata = term.metadata || {};
 
@@ -455,11 +651,16 @@ function renderHero(term) {
   `;
 
   $("feature-reference").textContent =
-    firstOccurrence
-      ? `${t("firstRecorded")}: ` +
-        `Surah ${firstOccurrence.surah}, ` +
-        `Ayah ${firstOccurrence.ayah}`
-      : "";
+  firstOccurrence
+    ? `${t("firstRecorded")}: ` +
+      `Surah ${firstOccurrence.surah}, ` +
+      `${getVerseLabel()} ${firstOccurrence.ayah}`
+    : "";
+
+renderFeatureVerse(
+  term,
+  firstOccurrence
+);
 
   $("stats").innerHTML = `
     <div class="stat">
@@ -545,9 +746,13 @@ function renderHero(term) {
         ${t("statNumberPropertyUnit")}
       </div>
 
-      <div class="stat-explanation">
+            <div class="stat-explanation">
         ${escapeHtml(
-          t("statNumberPropertyDesc")
+          state.language === "id"
+            ? `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. Ini hanya sifat matematis tambahan, bukan bukti mukjizat.`
+            : state.language === "ar"
+              ? `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.`
+              : `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. This is only an additional mathematical property, not proof of a miracle.`
         )}
       </div>
     </div>
@@ -747,7 +952,12 @@ function renderEvidence(term) {
 
   if (!total) {
 
-    $("evidence-counter")
+  renderFeatureVerse(
+    term,
+    null
+  );
+
+  $("evidence-counter")
       .textContent =
       "0 occurrences";
 
@@ -814,9 +1024,11 @@ function renderEvidence(term) {
 
         <div class="evidence-ref">
           ${
-            state.language === "ar"
-              ? `السورة ${current.surah} · الآية ${current.ayah} · الرمز ${current.token_index}`
-              : `Surah ${current.surah} · Ayah ${current.ayah} · Token ${current.token_index}`
+            state.language === "id"
+  ? `Surah ${current.surah} · Ayat ${current.ayah} · Token ${current.token_index}`
+  : state.language === "ar"
+    ? `السورة ${current.surah} · الآية ${current.ayah} · الرمز ${current.token_index}`
+    : `Surah ${current.surah} · Verse ${current.ayah} · Token ${current.token_index}`
           }
         </div>
 
@@ -1230,6 +1442,40 @@ async function loadAnalytics() {
 
     state.data =
       await response.json();
+
+          const [
+      indonesianResponse,
+      englishResponse,
+    ] = await Promise.all([
+      fetch(
+        "./data/translations/indonesian.json"
+      ),
+      fetch(
+        "./data/translations/english.json"
+      ),
+    ]);
+
+    if (!indonesianResponse.ok) {
+      throw new Error(
+        `Indonesian translation HTTP ${indonesianResponse.status}`
+      );
+    }
+
+    if (!englishResponse.ok) {
+      throw new Error(
+        `English translation HTTP ${englishResponse.status}`
+      );
+    }
+
+    state.translationMaps.id =
+      buildTranslationMap(
+        await indonesianResponse.json()
+      );
+
+    state.translationMaps.en =
+      buildTranslationMap(
+        await englishResponse.json()
+      );
 
     state.selectedWord =
       state.data.terms[0].word;

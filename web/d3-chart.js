@@ -40,7 +40,36 @@ function renderD3Distribution(term) {
   const innerHeight =
     height - margin.top - margin.bottom;
 
+      if (container._d3ResizeObserver) {
+    container._d3ResizeObserver.disconnect();
+    container._d3ResizeObserver = null;
+  }
+
   container.replaceChildren();
+    const hasOccurrences = data.some(
+    (d) => d.count > 0
+  );
+
+  if (!hasOccurrences) {
+    const emptyState = document.createElement("div");
+
+    emptyState.className = "d3-empty-state";
+    emptyState.setAttribute("role", "status");
+
+    emptyState.innerHTML = `
+      <strong>No exact matches found</strong>
+      <span>
+        This term has 0 occurrences using the current
+        exact normalized-token method.
+      </span>
+      <small>
+        No root or morphological matching is applied.
+      </small>
+    `;
+
+    container.appendChild(emptyState);
+    return;
+  }
 
   const svg = d3
     .select(container)

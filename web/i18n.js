@@ -311,11 +311,11 @@ Object.assign(I18N.id, {
   statSurahDesc:
     "Term ini ditemukan setidaknya sekali di jumlah surah tersebut dari total 114 surah.",
   statRateTitle: "Tingkat kemunculan",
-  statRateUnit: "per 1.000 token",
+  statRateUnit: "per 1.000 unit teks",
   statRateDesc:
     "Ukuran untuk melihat seberapa sering term muncul dibanding seluruh potongan teks yang dihitung.",
-  statNumberPropertyTitle: "Sifat angka",
-  statNumberPropertyUnit: "digit sum",
+  statNumberPropertyTitle: "Penjumlahan angka",
+  statNumberPropertyUnit: "hasil penjumlahan",
   statNumberPropertyDesc:
     "217 → 2 + 1 + 7 = 10. Ini hanya sifat matematis tambahan, bukan bukti mukjizat.",
   metricToken: "Token",
@@ -336,11 +336,11 @@ Object.assign(I18N.en, {
   statSurahDesc:
     "The term appears at least once in this many of the 114 surahs.",
   statRateTitle: "Occurrence rate",
-  statRateUnit: "per 1,000 tokens",
+  statRateUnit: "per 1,000 text units",
   statRateDesc:
     "A normalized way to see how often the term appears relative to the text being counted.",
-  statNumberPropertyTitle: "Number property",
-  statNumberPropertyUnit: "digit sum",
+  statNumberPropertyTitle: "Sum of digits",
+  statNumberPropertyUnit: "calculated result",
   statNumberPropertyDesc:
     "217 → 2 + 1 + 7 = 10. This is only an additional mathematical property, not proof of a miracle.",
   metricToken: "Token",
@@ -361,11 +361,11 @@ Object.assign(I18N.ar, {
   statSurahDesc:
     "ظهر المصطلح مرة واحدة على الأقل في هذا العدد من أصل 114 سورة.",
   statRateTitle: "معدل الظهور",
-  statRateUnit: "لكل 1000 رمز",
+  statRateUnit: "لكل 1000 وحدة نصية",
   statRateDesc:
     "طريقة موحدة لمعرفة مدى تكرار المصطلح بالنسبة إلى النص الذي تم عده.",
-  statNumberPropertyTitle: "خاصية الرقم",
-  statNumberPropertyUnit: "مجموع الأرقام",
+  statNumberPropertyTitle: "مجموع الأرقام",
+  statNumberPropertyUnit: "النتيجة المحسوبة",
   statNumberPropertyDesc:
     "217 ← 2 + 1 + 7 = 10. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.",
   metricToken: "الرمز",

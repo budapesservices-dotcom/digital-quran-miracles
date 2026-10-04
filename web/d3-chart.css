@@ -93,3 +93,36 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+
+.d3-empty-state {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 28px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+}
+
+.d3-empty-state strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.d3-empty-state span {
+  max-width: 520px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.d3-empty-state small {
+  max-width: 520px;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
