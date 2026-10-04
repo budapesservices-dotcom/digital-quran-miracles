@@ -5,7 +5,7 @@ const state = {
   evidenceSurah: "all",
   language: detectInitialLanguage(),
 
-    translationMaps: {
+  translationMaps: {
     id: new Map(),
     en: new Map(),
   },
@@ -39,6 +39,22 @@ function formatNumber(value) {
   ).format(value);
 }
 
+function formatDecimal(
+  value,
+  maximumFractionDigits = 2
+) {
+  return new Intl.NumberFormat(
+    state.language === "ar"
+      ? "ar-EG"
+      : state.language === "id"
+        ? "id-ID"
+        : "en-US",
+    {
+      maximumFractionDigits,
+    }
+  ).format(value);
+}
+
 function getSelectedTerm() {
   return state.data.terms.find(
     (term) =>
@@ -47,7 +63,8 @@ function getSelectedTerm() {
 }
 
 function getMeaning(term) {
-  const metadata = term.metadata || {};
+  const metadata =
+    term.metadata || {};
 
   const value =
     state.language === "ar"
@@ -78,14 +95,21 @@ function buildTranslationMap(data) {
   return map;
 }
 
-function getVerseTranslations(surah, ayah) {
-  const key = `${surah}:${ayah}`;
+function getVerseTranslations(
+  surah,
+  ayah
+) {
+  const key =
+    `${surah}:${ayah}`;
 
   return {
     id:
-      state.translationMaps.id.get(key) || "",
+      state.translationMaps.id.get(key)
+      || "",
+
     en:
-      state.translationMaps.en.get(key) || "",
+      state.translationMaps.en.get(key)
+      || "",
   };
 }
 
@@ -123,21 +147,230 @@ function renderLanguageSelector() {
   }
 
   selector.innerHTML = `
-    <option value="id">Bahasa Indonesia</option>
-    <option value="en">English</option>
-    <option value="ar">العربية</option>
+    <option value="id">
+      Bahasa Indonesia
+    </option>
+
+    <option value="en">
+      English
+    </option>
+
+    <option value="ar">
+      العربية
+    </option>
   `;
 
   selector.value =
     state.language;
 }
 
-function setText(id, value) {
-  const element = $(id);
+function setText(
+  id,
+  value
+) {
+  const element =
+    $(id);
 
   if (element) {
-    element.textContent = value;
+    element.textContent =
+      value;
   }
+}
+
+function getUxText(key) {
+  const texts = {
+    id: {
+      whatObserved:
+        "Apa yang kita amati?",
+
+      whatObservedDescription:
+        "Ringkasan hasil yang benar-benar terukur dari corpus yang dianalisis.",
+
+      quranNavigation:
+        "Navigasi Quran",
+
+      surahExplorer:
+        "Penjelajah Surah",
+
+      surahExplorerDescription:
+        "Lihat bagaimana term tersebar di 114 surah. Pilih titik untuk membuka evidence.",
+
+      surahExplorerCaption:
+        "Setiap titik mewakili satu Surah",
+
+      behindObservation:
+        "Di balik observasi",
+
+      numbersBehindObservation:
+        "Angka di balik observasi",
+
+      methodGuide:
+        "Panduan metode",
+
+      traceResult:
+        "Telusuri hasil",
+
+      exploratoryComparison:
+        "Perbandingan eksploratif",
+
+      auditTrail:
+        "Jejak audit",
+
+      surahs:
+        "surah",
+
+      openClient:
+        "Buka di Read Quran for Peace ↗",
+
+      exampleVerse:
+        "Ayat contoh",
+
+      translation:
+        "Arti",
+
+      translationSource:
+        "Sumber terjemahan: QuranEnc · id-affairs",
+
+      noEvidence:
+        "Tidak ada evidence untuk pilihan ini.",
+
+      noRecords:
+        "Tidak ada record evidence.",
+
+      allOccurrences:
+        "semua occurrence",
+    },
+
+    en: {
+      whatObserved:
+        "What did we observe?",
+
+      whatObservedDescription:
+        "A summary of the results directly measured from the analyzed corpus.",
+
+      quranNavigation:
+        "Quran navigation",
+
+      surahExplorer:
+        "Surah Explorer",
+
+      surahExplorerDescription:
+        "See how the term is distributed across 114 surahs. Select a point to inspect evidence.",
+
+      surahExplorerCaption:
+        "Each point represents one Surah",
+
+      behindObservation:
+        "Behind the observation",
+
+      numbersBehindObservation:
+        "Numbers behind the observation",
+
+      methodGuide:
+        "Method guide",
+
+      traceResult:
+        "Trace the result",
+
+      exploratoryComparison:
+        "Exploratory comparison",
+
+      auditTrail:
+        "Audit trail",
+
+      surahs:
+        "surahs",
+
+      openClient:
+        "Open in Read Quran for Peace ↗",
+
+      exampleVerse:
+        "Example verse",
+
+      translation:
+        "Translation",
+
+      translationSource:
+        "Translation source: QuranEnc · en-saheeh",
+
+      noEvidence:
+        "No evidence for this selection.",
+
+      noRecords:
+        "No evidence records available.",
+
+      allOccurrences:
+        "all occurrences",
+    },
+
+    ar: {
+      whatObserved:
+        "ما الذي لاحظناه؟",
+
+      whatObservedDescription:
+        "ملخص للنتائج المقاسة مباشرة من مجموعة البيانات التي تم تحليلها.",
+
+      quranNavigation:
+        "التنقل في القرآن",
+
+      surahExplorer:
+        "مستكشف السور",
+
+      surahExplorerDescription:
+        "شاهد كيفية توزيع المصطلح عبر 114 سورة. اختر نقطة لفحص الدليل.",
+
+      surahExplorerCaption:
+        "كل نقطة تمثل سورة واحدة",
+
+      behindObservation:
+        "خلف الملاحظة",
+
+      numbersBehindObservation:
+        "الأرقام خلف الملاحظة",
+
+      methodGuide:
+        "دليل المنهج",
+
+      traceResult:
+        "تتبع النتيجة",
+
+      exploratoryComparison:
+        "مقارنة استكشافية",
+
+      auditTrail:
+        "مسار التدقيق",
+
+      surahs:
+        "سور",
+
+      openClient:
+        "فتح في اقرأ القرآن للسلام ↗",
+
+      exampleVerse:
+        "الآية",
+
+      translation:
+        "الترجمة",
+
+      translationSource:
+        "مصادر الترجمة: QuranEnc",
+
+      noEvidence:
+        "لا توجد أدلة لهذا الاختيار.",
+
+      noRecords:
+        "لا توجد سجلات.",
+
+      allOccurrences:
+        "جميع مرات الظهور",
+    },
+  };
+
+  return (
+    texts[state.language]?.[key]
+    ?? texts.en[key]
+    ?? key
+  );
 }
 
 function renderStaticText() {
@@ -184,8 +417,58 @@ function renderStaticText() {
   );
 
   setText(
+    "observation-kicker",
+    getUxText("whatObserved")
+  );
+
+  setText(
+    "observation-title",
+    getUxText("whatObserved")
+  );
+
+  setText(
+    "observation-description",
+    getUxText(
+      "whatObservedDescription"
+    )
+  );
+
+  setText(
+    "explorer-kicker",
+    getUxText("quranNavigation")
+  );
+
+  setText(
+    "distribution-title",
+    getUxText("surahExplorer")
+  );
+
+  setText(
+    "distribution-description",
+    getUxText(
+      "surahExplorerDescription"
+    )
+  );
+
+  setText(
+    "chart-caption",
+    getUxText(
+      "surahExplorerCaption"
+    )
+  );
+
+  setText(
+    "numerical-kicker",
+    getUxText(
+      "behindObservation"
+    )
+  );
+
+  setText(
     "numerical-title",
-    t("numericalObservation")
+    getUxText(
+      "numbersBehindObservation"
+    )
   );
 
   setText(
@@ -194,18 +477,17 @@ function renderStaticText() {
   );
 
   setText(
-    "distribution-title",
-    t("surahDistribution")
+    "learn-kicker",
+    getUxText(
+      "methodGuide"
+    )
   );
 
   setText(
-    "distribution-description",
-    t("surahDistributionDescription")
-  );
-
-  setText(
-    "chart-caption",
-    t("interactiveD3")
+    "evidence-kicker",
+    getUxText(
+      "traceResult"
+    )
   );
 
   setText(
@@ -239,6 +521,13 @@ function renderStaticText() {
   );
 
   setText(
+    "pairs-kicker",
+    getUxText(
+      "exploratoryComparison"
+    )
+  );
+
+  setText(
     "pairs-title",
     t("exploratoryPairs")
   );
@@ -246,6 +535,18 @@ function renderStaticText() {
   setText(
     "pairs-description",
     t("exploratoryPairsDescription")
+  );
+
+  setText(
+    "methodology-kicker",
+    getUxText(
+      "auditTrail"
+    )
+  );
+
+  setText(
+    "methodology-title",
+    t("methodology")
   );
 
   setText(
@@ -258,29 +559,27 @@ function renderStaticText() {
     t("learnMetricsDescription")
   );
 
-  setText(
-    "methodology-title",
-    t("methodology")
-  );
-
-  const search = $("term-search");
+  const search =
+    $("term-search");
 
   if (search) {
     search.placeholder =
       t("searchPlaceholder");
 
-    search.dir = "auto";
+    search.dir =
+      "auto";
   }
 }
 
-function renderTermList(filter = "") {
+function renderTermList(
+  filter = ""
+) {
   const needle =
     filter.trim().toLowerCase();
 
   const matched =
     state.data.terms.filter(
       (term) => {
-
         const metadata =
           term.metadata || {};
 
@@ -305,11 +604,10 @@ function renderTermList(filter = "") {
     "life",
     "nature",
     "people",
-    "faith"
+    "faith",
   ];
 
   matched.sort((a, b) => {
-
     const ai =
       categoryOrder.indexOf(
         a.category
@@ -325,7 +623,9 @@ function renderTermList(filter = "") {
       -
       (bi === -1 ? 999 : bi);
 
-    if (categoryCompare !== 0) {
+    if (
+      categoryCompare !== 0
+    ) {
       return categoryCompare;
     }
 
@@ -335,7 +635,6 @@ function renderTermList(filter = "") {
   const groups = {};
 
   for (const term of matched) {
-
     const category =
       term.category
       || "uncategorized";
@@ -344,13 +643,17 @@ function renderTermList(filter = "") {
       groups[category] = [];
     }
 
-    groups[category].push(term);
+    groups[category].push(
+      term
+    );
   }
 
   let html = "";
 
-  for (const category of categoryOrder) {
-
+  for (
+    const category
+    of categoryOrder
+  ) {
     const terms =
       groups[category];
 
@@ -363,95 +666,121 @@ function renderTermList(filter = "") {
 
     html += `
       <div class="term-category-header">
+
         <span>
           ${escapeHtml(
             t(labelKey)
           )}
         </span>
 
-        <span class="term-category-count">
-          ${formatNumber(terms.length)}
+        <span
+          class="term-category-count"
+        >
+          ${formatNumber(
+            terms.length
+          )}
         </span>
+
       </div>
     `;
 
-    html += terms.map((term) => {
+    html += terms
+      .map((term) => {
+        const metadata =
+          term.metadata || {};
 
-      const metadata =
-        term.metadata || {};
+        return `
+          <button
+            class="term-button ${
+              term.word ===
+              state.selectedWord
+                ? "active"
+                : ""
+            }"
+            data-word="${escapeHtml(
+              term.word
+            )}"
+            type="button"
+          >
 
-      return `
-        <button
-          class="term-button ${
-            term.word ===
-            state.selectedWord
-              ? "active"
-              : ""
-          }"
-          data-word="${escapeHtml(
-            term.word
-          )}"
-          type="button"
-        >
+            <span class="term-copy">
 
-          <span class="term-copy">
+              <span
+                class="term-word"
+              >
+                ${escapeHtml(
+                  term.word
+                )}
+              </span>
 
-            <span class="term-word">
-              ${escapeHtml(
-                term.word
+              <span
+                class="term-latin"
+              >
+                ${escapeHtml(
+                  metadata.transliteration
+                  || ""
+                )}
+              </span>
+
+              <span
+                class="term-meaning"
+              >
+                ${escapeHtml(
+                  getMeaning(term)
+                )}
+              </span>
+
+            </span>
+
+            <span class="term-count">
+              ${formatNumber(
+                term.count
               )}
             </span>
 
-            <span class="term-latin">
-              ${escapeHtml(
-                metadata.transliteration
-                || ""
-              )}
-            </span>
-
-            <span class="term-meaning">
-              ${escapeHtml(
-                getMeaning(term)
-              )}
-            </span>
-
-          </span>
-
-          <span class="term-count">
-            ${formatNumber(
-              term.count
-            )}
-          </span>
-
-        </button>
-      `;
-    }).join("");
+          </button>
+        `;
+      })
+      .join("");
   }
 
-  $("term-list").innerHTML =
+  const list =
+    $("term-list");
+
+  if (!list) {
+    return;
+  }
+
+  list.innerHTML =
     html;
 
-  document
-    .querySelectorAll(".term-button")
+  list
+    .querySelectorAll(
+      ".term-button"
+    )
     .forEach((button) => {
-
       button.addEventListener(
         "click",
         () => {
-
           state.selectedWord =
             button.dataset.word;
 
-          state.evidenceIndex = 0;
+          state.evidenceIndex =
+            0;
+
           state.evidenceSurah =
             "all";
 
           render();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
         }
       );
     });
 }
-
 
 function renderFeatureVerse(
   term,
@@ -469,7 +798,9 @@ function renderFeatureVerse(
 
   if (!container) {
     container =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     container.id =
       "feature-verse";
@@ -484,7 +815,9 @@ function renderFeatureVerse(
   }
 
   if (!occurrence) {
-    container.innerHTML = "";
+    container.innerHTML =
+      "";
+
     return;
   }
 
@@ -494,26 +827,39 @@ function renderFeatureVerse(
       occurrence.ayah
     );
 
-  let translationHtml = "";
+  let translationHtml =
+    "";
 
   if (
     state.language === "id" &&
     translations.id
   ) {
     translationHtml = `
-      <div class="feature-verse-translation-label">
-        Arti
+      <div
+        class="feature-verse-translation-label"
+      >
+        ${getUxText(
+          "translation"
+        )}
       </div>
 
       <p
         class="feature-verse-translation"
         dir="ltr"
       >
-        ${escapeHtml(translations.id)}
+        ${escapeHtml(
+          translations.id
+        )}
       </p>
 
-      <div class="feature-verse-source">
-        Sumber terjemahan: QuranEnc · id-affairs
+      <div
+        class="feature-verse-source"
+      >
+        ${escapeHtml(
+          getUxText(
+            "translationSource"
+          )
+        )}
       </div>
     `;
   }
@@ -523,30 +869,49 @@ function renderFeatureVerse(
     translations.en
   ) {
     translationHtml = `
-      <div class="feature-verse-translation-label">
-        Translation
+      <div
+        class="feature-verse-translation-label"
+      >
+        ${getUxText(
+          "translation"
+        )}
       </div>
 
       <p
         class="feature-verse-translation"
         dir="ltr"
       >
-        ${escapeHtml(translations.en)}
+        ${escapeHtml(
+          translations.en
+        )}
       </p>
 
-      <div class="feature-verse-source">
-        Translation source: QuranEnc · en-saheeh
+      <div
+        class="feature-verse-source"
+      >
+        ${escapeHtml(
+          getUxText(
+            "translationSource"
+          )
+        )}
       </div>
     `;
   }
 
   if (
     state.language === "ar" &&
-    (translations.id || translations.en)
+    (
+      translations.id ||
+      translations.en
+    )
   ) {
     translationHtml = `
-      <div class="feature-verse-translation-label">
-        الترجمة
+      <div
+        class="feature-verse-translation-label"
+      >
+        ${getUxText(
+          "translation"
+        )}
       </div>
 
       ${
@@ -556,8 +921,13 @@ function renderFeatureVerse(
               class="feature-verse-translation"
               dir="ltr"
             >
-              <strong>Bahasa Indonesia</strong><br>
-              ${escapeHtml(translations.id)}
+              <strong>
+                Bahasa Indonesia
+              </strong>
+              <br>
+              ${escapeHtml(
+                translations.id
+              )}
             </p>
           `
           : ""
@@ -570,205 +940,300 @@ function renderFeatureVerse(
               class="feature-verse-translation"
               dir="ltr"
             >
-              <strong>English</strong><br>
-              ${escapeHtml(translations.en)}
+              <strong>
+                English
+              </strong>
+              <br>
+              ${escapeHtml(
+                translations.en
+              )}
             </p>
           `
           : ""
       }
+
+      <div
+        class="feature-verse-source"
+      >
+        ${escapeHtml(
+          getUxText(
+            "translationSource"
+          )
+        )}
+      </div>
     `;
   }
 
-  const verseTitle =
-    state.language === "id"
-      ? "Ayat contoh"
-      : state.language === "ar"
-        ? "الآية"
-        : "Example verse";
-
   container.innerHTML = `
     <div class="feature-verse-heading">
-      ${verseTitle}
+      ${escapeHtml(
+        getUxText(
+          "exampleVerse"
+        )
+      )}
     </div>
 
     <div class="feature-verse-ref">
-      Surah ${escapeHtml(occurrence.surah)}
+      Surah ${escapeHtml(
+        occurrence.surah
+      )}
+
       ·
+
       ${getVerseLabel()}
-      ${escapeHtml(occurrence.ayah)}
+
+      ${escapeHtml(
+        occurrence.ayah
+      )}
     </div>
 
     <p
       class="feature-verse-arabic"
       dir="rtl"
     >
-      ${escapeHtml(occurrence.text)}
+      ${escapeHtml(
+        occurrence.text
+      )}
     </p>
 
     ${translationHtml}
   `;
 }
 
-
 function renderHero(term) {
-  const metadata = term.metadata || {};
+  const metadata =
+    term.metadata || {};
 
   const firstOccurrence =
-    term.evidence?.occurrences?.[0];
+    term.evidence
+      ?.occurrences
+      ?. [0];
 
   const surahCount =
-    term.distribution.summary
+    term.distribution
+      .summary
       .surahs_with_occurrences;
 
-  const totalSurahs = 114;
+  const totalSurahs =
+    114;
 
   const rate =
-    term.numerical.derived_metrics
+    term.numerical
+      .derived_metrics
       .frequency_per_1000_tokens;
 
   const count =
     term.count;
 
-  $("feature-word").textContent =
+  $("feature-word")
+    .textContent =
     term.word;
 
-  $("feature-meta").innerHTML = `
-    <span class="feature-latin">
-      ${escapeHtml(
-        metadata.transliteration || ""
-      )}
-    </span>
+  $("feature-meta")
+    .innerHTML = `
+      <span
+        class="feature-latin"
+      >
+        ${escapeHtml(
+          metadata.transliteration
+          || ""
+        )}
+      </span>
 
-    <span class="feature-separator">
-      ·
-    </span>
+      <span
+        class="feature-separator"
+      >
+        ·
+      </span>
 
-    <span class="feature-meaning">
-      ${escapeHtml(
-        getMeaning(term)
-      )}
-    </span>
-  `;
+      <span
+        class="feature-meaning"
+      >
+        ${escapeHtml(
+          getMeaning(term)
+        )}
+      </span>
+    `;
 
-  $("feature-reference").textContent =
-  firstOccurrence
-    ? `${t("firstRecorded")}: ` +
-      `Surah ${firstOccurrence.surah}, ` +
-      `${getVerseLabel()} ${firstOccurrence.ayah}`
-    : "";
+  $("feature-reference")
+    .textContent =
+    firstOccurrence
+      ? `${t("firstRecorded")}: ` +
+        `Surah ${firstOccurrence.surah}, ` +
+        `${getVerseLabel()} ${firstOccurrence.ayah}`
+      : "";
 
-renderFeatureVerse(
-  term,
-  firstOccurrence
-);
+  renderFeatureVerse(
+    term,
+    firstOccurrence
+  );
 
-  $("stats").innerHTML = `
-    <div class="stat">
-      <div class="stat-label">
-        ${t("statOccurrencesTitle")}
+  const observationTerm =
+    $("observation-term");
+
+  if (
+    observationTerm
+  ) {
+    observationTerm.textContent =
+      getMeaning(term);
+  }
+
+  const stats =
+    $("stats");
+
+  if (!stats) {
+    return;
+  }
+
+  stats.innerHTML = `
+    <article
+      class="stat observation-stat"
+    >
+
+      <div
+        class="
+          stat-value
+          observation-stat-number
+        "
+      >
+        ${formatNumber(count)}×
       </div>
 
-      <div class="stat-value">
-        ${formatNumber(count)}
+      <div class="stat-label">
+        ${t(
+          "statOccurrencesTitle"
+        )}
       </div>
 
       <div class="stat-unit">
-        ${t("statOccurrencesUnit")}
-      </div>
-
-      <div class="stat-explanation">
-        ${escapeHtml(
-          t("statOccurrencesDesc")
+        ${t(
+          "statOccurrencesUnit"
         )}
       </div>
-    </div>
 
-    <div class="stat">
-      <div class="stat-label">
-        ${t("statSurahTitle")}
+      <div
+        class="stat-explanation"
+      >
+        ${escapeHtml(
+          t(
+            "statOccurrencesDesc"
+          )
+        )}
       </div>
 
-      <div class="stat-value">
-        ${formatNumber(surahCount)}
+    </article>
+
+
+    <article
+      class="stat observation-stat"
+    >
+
+      <div
+        class="
+          stat-value
+          observation-stat-number
+        "
+      >
+        ${formatNumber(
+          surahCount
+        )}
+      </div>
+
+      <div class="stat-label">
+        ${t(
+          "statSurahTitle"
+        )}
       </div>
 
       <div class="stat-unit">
         ${
           state.language === "id"
-            ? `dari ${totalSurahs} ${t("statSurahUnit")}`
+            ? `dari ${formatNumber(
+                totalSurahs
+              )} ${t(
+                "statSurahUnit"
+              )}`
             : state.language === "ar"
-              ? `من ${totalSurahs} ${t("statSurahUnit")}`
-              : `of ${totalSurahs} ${t("statSurahUnit")}`
+              ? `من ${formatNumber(
+                  totalSurahs
+                )} ${t(
+                  "statSurahUnit"
+                )}`
+              : `of ${formatNumber(
+                  totalSurahs
+                )} ${t(
+                  "statSurahUnit"
+                )}`
         }
       </div>
 
-      <div class="stat-explanation">
+      <div
+        class="stat-explanation"
+      >
         ${escapeHtml(
-          t("statSurahDesc")
+          t(
+            "statSurahDesc"
+          )
         )}
       </div>
-    </div>
 
-    <div class="stat">
-      <div class="stat-label">
-        ${t("statRateTitle")}
+    </article>
+
+
+    <article
+      class="stat observation-stat"
+    >
+
+      <div
+        class="
+          stat-value
+          observation-stat-number
+        "
+      >
+        ${formatDecimal(
+          rate,
+          2
+        )}
       </div>
 
-      <div class="stat-value">
-        ${rate}
+      <div class="stat-label">
+        ${t(
+          "statRateTitle"
+        )}
       </div>
 
       <div class="stat-unit">
-        ${t("statRateUnit")}
-      </div>
-
-      <div class="stat-explanation">
-        ${escapeHtml(
-          t("statRateDesc")
+        ${t(
+          "statRateUnit"
         )}
       </div>
-    </div>
 
-    <div class="stat stat-property">
-      <div class="stat-label">
-        ${t("statNumberPropertyTitle")}
-      </div>
-
-      <div class="stat-value compact">
-        ${formatNumber(count)}
-        <span class="arrow">→</span>
-        ${term.numerical
-          .derived_metrics
-          .digit_sum}
-      </div>
-
-      <div class="stat-unit">
-        ${t("statNumberPropertyUnit")}
-      </div>
-
-            <div class="stat-explanation">
+      <div
+        class="stat-explanation"
+      >
         ${escapeHtml(
-          state.language === "id"
-            ? `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. Ini hanya sifat matematis tambahan, bukan bukti mukjizat.`
-            : state.language === "ar"
-              ? `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.`
-              : `${formatNumber(count)} → ${String(count).split("").join(" + ")} = ${formatNumber(term.numerical.derived_metrics.digit_sum)}. This is only an additional mathematical property, not proof of a miracle.`
+          t(
+            "statRateDesc"
+          )
         )}
       </div>
-    </div>
+
+    </article>
   `;
 }
 
 
 function renderNumerical(term) {
   const metrics =
-    term.numerical.derived_metrics;
+    term.numerical?.derived_metrics || {};
 
   const rows = [
     [
       t("frequency"),
-      `${formatNumber(term.count)}`
+      formatNumber(term.count),
+      t("metricFrequencyDesc"),
     ],
+
     [
       t("metricParity"),
       metrics.parity === "odd"
@@ -785,345 +1250,767 @@ function renderNumerical(term) {
             : state.language === "id"
               ? "genap"
               : "even"
-        )
+        ),
+      t("metricParityDesc"),
     ],
+
     [
       t("digitSum"),
-      `${formatNumber(metrics.digit_sum)}`
+      formatNumber(metrics.digit_sum || 0),
+      t("metricDigitSumDesc"),
     ],
+
     [
       t("per1000"),
-      `${metrics.frequency_per_1000_tokens}`
+      String(
+        metrics.frequency_per_1000_tokens ?? 0
+      ),
+      t("metricPer1000Desc"),
     ],
+
     [
       t("metricVerseShare"),
-      `${metrics.count_as_percentage_of_verse_total}%`
-    ]
+      `${metrics.count_as_percentage_of_verse_total ?? 0}%`,
+      t("metricVerseShareDesc"),
+    ],
   ];
 
-  $("numerical-metrics").innerHTML =
-    rows.map(
-      ([name, value]) => `
-        <div class="metric-row">
-          <span class="metric-name">
-            ${escapeHtml(name)}
-          </span>
+  const list =
+    $("numerical-metrics");
 
-          <span class="metric-value">
-            ${escapeHtml(value)}
-          </span>
-        </div>
-      `
-    ).join("");
-}
+  if (!list) {
+    return;
+  }
 
+  list.innerHTML =
+    rows
+      .map(
+        ([name, value, help]) => `
+          <div class="metric-row">
 
-function renderDistribution(term) {
-  const counts =
-    term.distribution.surahs;
+            <div class="metric-name-wrap">
 
-  const max =
-    Math.max(
-      ...Object.values(counts),
-      1
-    );
+              <span class="metric-name">
+                ${escapeHtml(name)}
+              </span>
 
-  $("distribution-bars").innerHTML =
-    Object.entries(counts).map(
-      ([surah, count]) => {
+              <button
+                class="metric-info"
+                type="button"
+                aria-expanded="false"
+                aria-label="${escapeHtml(name)}"
+              >
+                i
+              </button>
 
-        const height =
-          count === 0
-            ? 2
-            : Math.max(
-                6,
-                (count / max) * 180
-              );
+            </div>
 
-        const active =
-          state.evidenceSurah ===
-          String(surah);
+            <span class="metric-value">
+              ${escapeHtml(value)}
+            </span>
 
-        return `
-          <button
-            class="bar-button ${
-              active ? "selected" : ""
-            }"
-            type="button"
-            title="Surah ${surah}: ${count}"
-            data-surah="${surah}"
-            aria-label="Surah ${surah}: ${count}"
-          >
-            <span
-              class="bar"
-              style="height:${height}px"
-            ></span>
-          </button>
-        `;
-      }
-    ).join("");
+            <div
+              class="metric-help"
+              hidden
+            >
+              ${escapeHtml(help)}
+            </div>
 
-  document
-    .querySelectorAll(".bar-button")
+          </div>
+        `
+      )
+      .join("");
+
+  list
+    .querySelectorAll(".metric-info")
     .forEach((button) => {
 
       button.addEventListener(
         "click",
         () => {
 
-          const surah =
-            button.dataset.surah;
+          const row =
+            button.closest(
+              ".metric-row"
+            );
 
-          const occurrences =
-            term.evidence.occurrences
-              .filter(
-                (item) =>
-                  String(item.surah) ===
-                  surah
-              );
+          const help =
+            row?.querySelector(
+              ".metric-help"
+            );
 
-          if (
-            !occurrences.length
-          ) {
+          if (!help) {
             return;
           }
 
-          state.evidenceSurah =
-            surah;
+          const expanded =
+            button.getAttribute(
+              "aria-expanded"
+            ) === "true";
 
-          state.evidenceIndex = 0;
+          button.setAttribute(
+            "aria-expanded",
+            String(!expanded)
+          );
 
-          renderEvidence(term);
-          renderSurahFilter(term);
-          renderD3Distribution(term);
+          help.hidden =
+            expanded;
+
+          row.classList.toggle(
+            "metric-expanded",
+            !expanded
+          );
         }
       );
     });
 }
 
+
+function renderSurahExplorerSummary(
+  term
+) {
+  const element =
+    $("surah-explorer-summary");
+
+  if (!element) {
+    return;
+  }
+
+  const summary =
+    term.distribution?.summary
+    || {};
+
+  const matched =
+    summary.surahs_with_occurrences
+    || 0;
+
+  const frequency =
+    term.count || 0;
+
+  element.innerHTML = `
+    <strong>
+      ${formatNumber(
+        matched
+      )}
+    </strong>
+
+    <span>
+      ${escapeHtml(
+        getUxText(
+          "surahs"
+        )
+      )}
+    </span>
+
+    <small>
+      ${formatNumber(
+        frequency
+      )}
+      ${escapeHtml(
+        t("occurrences")
+      )}
+    </small>
+  `;
+}
+
 function renderSurahFilter(term) {
   const counts =
-    term.distribution.surahs;
+    term.distribution?.surahs
+    || {};
+
+  const names =
+    new Map();
+
+  for (
+    const occurrence
+    of term.evidence?.occurrences || []
+  ) {
+    if (
+      !names.has(
+        String(
+          occurrence.surah
+        )
+      )
+    ) {
+      names.set(
+        String(
+          occurrence.surah
+        ),
+        occurrence.surah_name
+          || ""
+      );
+    }
+  }
 
   const options = [
-    `<option value="all">${
-      t("allSurahs")
-    }</option>`,
+    `<option value="all">
+      ${escapeHtml(
+        t("allSurahs")
+      )}
+    </option>`,
   ];
 
-  Object.entries(counts)
-    .forEach(
-      ([surah, count]) => {
-
-        if (count === 0) {
-          return;
-        }
-
-        options.push(`
-          <option
-            value="${surah}"
-            ${
-              state.evidenceSurah ===
-              surah
-                ? "selected"
-                : ""
-            }
-          >
-            ${
-              state.language === "ar"
-                ? `السورة ${surah} — ${count}`
-                : `Surah ${surah} — ${count}`
-            }
-          </option>
-        `);
+  Object.entries(
+    counts
+  ).forEach(
+    ([surah, count]) => {
+      if (count === 0) {
+        return;
       }
-    );
 
-  $("surah-filter").innerHTML =
-    options.join("");
+      const name =
+        names.get(
+          String(surah)
+        ) || "";
+
+      options.push(`
+        <option
+          value="${escapeHtml(
+            surah
+          )}"
+          ${
+            state.evidenceSurah ===
+            surah
+              ? "selected"
+              : ""
+          }
+        >
+          ${
+            state.language === "ar"
+              ? `السورة ${surah}`
+              : `Surah ${surah}`
+          }
+
+          ${
+            name
+              ? ` · ${escapeHtml(
+                  name
+                )}`
+              : ""
+          }
+
+          — ${formatNumber(
+            count
+          )}
+        </option>
+      `);
+    }
+  );
+
+  const select =
+    $("surah-filter");
+
+  if (select) {
+    select.innerHTML =
+      options.join("");
+  }
 }
 
 function renderEvidence(term) {
   const filtered =
-    getFilteredOccurrences(term);
+    getFilteredOccurrences(
+      term
+    );
 
   const total =
     filtered.length;
 
   if (!total) {
+    renderFeatureVerse(
+      term,
+      null
+    );
 
-  renderFeatureVerse(
-    term,
-    null
-  );
+    setText(
+      "evidence-counter",
+      `0 ${t(
+        "occurrences"
+      )}`
+    );
 
-  $("evidence-counter")
-      .textContent =
-      "0 occurrences";
+    setText(
+      "evidence-summary",
+      getUxText(
+        "noEvidence"
+      )
+    );
 
-    $("evidence-summary")
-      .textContent =
-      state.language === "ar"
-        ? "لا توجد أدلة لهذا الاختيار."
-        : state.language === "id"
-          ? "Tidak ada evidence untuk pilihan ini."
-          : "No evidence for this selection.";
+    const list =
+      $("evidence-list");
 
-    $("evidence-list")
-      .innerHTML = `
-        <div class="evidence-item">
-          ${
-            state.language === "ar"
-              ? "لا توجد سجلات."
-              : state.language === "id"
-                ? "Tidak ada record evidence."
-                : "No evidence records available."
-          }
+    if (list) {
+      list.innerHTML = `
+        <div
+          class="evidence-item"
+        >
+          ${escapeHtml(
+            getUxText(
+              "noRecords"
+            )
+          )}
         </div>
       `;
+    }
 
-    $("evidence-jump").value = 0;
-    $("previous-evidence").disabled = true;
-    $("next-evidence").disabled = true;
+    const jump =
+      $("evidence-jump");
+
+    if (jump) {
+      jump.value = 0;
+    }
+
+    const previous =
+      $("previous-evidence");
+
+    const next =
+      $("next-evidence");
+
+    if (previous) {
+      previous.disabled =
+        true;
+    }
+
+    if (next) {
+      next.disabled =
+        true;
+    }
 
     return;
   }
 
   if (
-    state.evidenceIndex >= total
+    state.evidenceIndex >=
+    total
   ) {
     state.evidenceIndex =
       total - 1;
   }
 
   const current =
-    filtered[state.evidenceIndex];
+    filtered[
+      state.evidenceIndex
+    ];
 
-  $("evidence-counter")
-    .textContent =
-    `${formatNumber(total)} ${t("occurrences")}`;
+  const translations =
+    getVerseTranslations(
+      current.surah,
+      current.ayah
+    );
 
-  $("evidence-summary")
-    .textContent =
-    `${t("showingOccurrence")} ${
-      state.evidenceIndex + 1
-    } ${state.language === "ar" ? "من" : "of"} ${total}`;
+  let translation = "";
 
-  $("evidence-jump").value =
-    state.evidenceIndex + 1;
+  if (
+    state.language === "id"
+  ) {
+    translation =
+      translations.id;
+  }
 
-  $("previous-evidence").disabled =
-    state.evidenceIndex === 0;
+  if (
+    state.language === "en"
+  ) {
+    translation =
+      translations.en;
+  }
 
-  $("next-evidence").disabled =
-    state.evidenceIndex === total - 1;
+  const directUrl =
+    "https://www.readquranforpeace.net/quran";
 
-  $("evidence-list")
-    .innerHTML = `
-      <article class="evidence-item featured-evidence">
+  setText(
+    "evidence-counter",
+    `${formatNumber(
+      total
+    )} ${t(
+      "occurrences"
+    )}`
+  );
 
-        <div class="evidence-ref">
-          ${
-            state.language === "id"
-  ? `Surah ${current.surah} · Ayat ${current.ayah} · Token ${current.token_index}`
-  : state.language === "ar"
-    ? `السورة ${current.surah} · الآية ${current.ayah} · الرمز ${current.token_index}`
-    : `Surah ${current.surah} · Verse ${current.ayah} · Token ${current.token_index}`
-          }
-        </div>
+  setText(
+    "evidence-summary",
+    `${t(
+      "showingOccurrence"
+    )} ${
+      formatNumber(
+        state.evidenceIndex + 1
+      )
+    } ${
+      state.language === "ar"
+        ? "من"
+        : "of"
+    } ${
+      formatNumber(
+        total
+      )
+    }`
+  );
 
-        <p class="evidence-text">
-          ${escapeHtml(current.text)}
-        </p>
+  const jump =
+    $("evidence-jump");
 
-        <div class="evidence-index">
-          ${
-            state.language === "ar"
-              ? `سجل الدليل ${state.evidenceIndex + 1} من ${total}`
-              : state.language === "id"
-                ? `Record evidence ${state.evidenceIndex + 1} dari ${total}`
-                : `Evidence record ${state.evidenceIndex + 1} of ${total}`
-          }
-        </div>
+  if (jump) {
+    jump.value =
+      state.evidenceIndex + 1;
+  }
 
-      </article>
+  const previous =
+    $("previous-evidence");
+
+  const next =
+    $("next-evidence");
+
+  if (previous) {
+    previous.disabled =
+      state.evidenceIndex === 0;
+  }
+
+  if (next) {
+    next.disabled =
+      state.evidenceIndex ===
+      total - 1;
+  }
+
+  const reference =
+    state.language === "ar"
+      ? `السورة ${current.surah} · الآية ${current.ayah} · الرمز ${current.token_index}`
+      : state.language === "id"
+        ? `Surah ${current.surah} · Ayat ${current.ayah} · Token ${current.token_index}`
+        : `Surah ${current.surah} · Verse ${current.ayah} · Token ${current.token_index}`;
+
+  let translationHtml =
+    "";
+
+  if (translation) {
+    translationHtml = `
+      <div
+        class="
+          evidence-translation-label
+        "
+      >
+        ${escapeHtml(
+          getUxText(
+            "translation"
+          )
+        )}
+      </div>
+
+      <p
+        class="evidence-translation"
+        dir="ltr"
+      >
+        ${escapeHtml(
+          translation
+        )}
+      </p>
+
+      <div
+        class="evidence-source"
+      >
+        ${escapeHtml(
+          getUxText(
+            "translationSource"
+          )
+        )}
+      </div>
     `;
+  }
+
+  if (
+    state.language === "ar" &&
+    (
+      translations.id ||
+      translations.en
+    )
+  ) {
+    translationHtml = `
+      <div
+        class="
+          evidence-translation-label
+        "
+      >
+        الترجمة
+      </div>
+
+      ${
+        translations.id
+          ? `
+            <p
+              class="evidence-translation"
+              dir="ltr"
+            >
+              <strong>
+                Bahasa Indonesia
+              </strong>
+              <br>
+              ${escapeHtml(
+                translations.id
+              )}
+            </p>
+          `
+          : ""
+      }
+
+      ${
+        translations.en
+          ? `
+            <p
+              class="evidence-translation"
+              dir="ltr"
+            >
+              <strong>
+                English
+              </strong>
+              <br>
+              ${escapeHtml(
+                translations.en
+              )}
+            </p>
+          `
+          : ""
+      }
+
+      <div
+        class="evidence-source"
+      >
+        ${escapeHtml(
+          getUxText(
+            "translationSource"
+          )
+        )}
+      </div>
+    `;
+  }
+
+  const list =
+    $("evidence-list");
+
+  if (!list) {
+    return;
+  }
+
+  list.innerHTML = `
+    <article
+      class="
+        evidence-item
+        featured-evidence
+      "
+    >
+
+      <div
+        class="evidence-ref"
+      >
+        ${escapeHtml(
+          current.surah_name
+            || `Surah ${current.surah}`
+        )}
+
+        ·
+
+        ${getVerseLabel()}
+        ${escapeHtml(
+          current.ayah
+        )}
+      </div>
+
+
+      <p
+        class="evidence-text"
+        dir="rtl"
+      >
+        ${escapeHtml(
+          current.text
+        )}
+      </p>
+
+
+      ${translationHtml}
+
+
+      <div
+        class="evidence-actions"
+      >
+
+        <a
+          class="
+            action
+            primary
+          "
+          href="${directUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${escapeHtml(
+            getUxText(
+              "openClient"
+            )
+          )}
+        </a>
+
+      </div>
+
+
+      <div
+        class="evidence-index"
+      >
+        ${
+          state.language === "ar"
+            ? `سجل الدليل ${
+                state.evidenceIndex + 1
+              } من ${total}`
+            : state.language === "id"
+              ? `Record evidence ${
+                  state.evidenceIndex + 1
+                } dari ${total}`
+              : `Evidence record ${
+                  state.evidenceIndex + 1
+                } of ${total}`
+        }
+      </div>
+
+    </article>
+  `;
 }
 
 function renderPairs() {
   const pairs =
-    state.data.pair_analysis
-      .pairs || [];
+    state.data
+      .pair_analysis
+      ?.pairs || [];
 
-  $("pair-list")
-    .innerHTML =
-    pairs.map(
-      (pair) => `
-        <article class="pair-card">
+  const list =
+    $("pair-list");
 
-          <div class="pair-words">
+  if (!list) {
+    return;
+  }
 
-            <button
-              class="pair-select"
-              type="button"
-              data-word="${escapeHtml(pair.term_a)}"
+  list.innerHTML =
+    pairs
+      .map(
+        (pair) => `
+          <article
+            class="pair-card"
+          >
+
+            <div
+              class="pair-words"
             >
-              <span class="pair-word">
-                ${escapeHtml(pair.term_a)}
-              </span>
-            </button>
 
-            <span>↔</span>
+              <button
+                class="pair-select"
+                type="button"
+                data-word="${escapeHtml(
+                  pair.term_a
+                )}"
+              >
 
-            <button
-              class="pair-select"
-              type="button"
-              data-word="${escapeHtml(pair.term_b)}"
+                <span
+                  class="pair-word"
+                >
+                  ${escapeHtml(
+                    pair.term_a
+                  )}
+                </span>
+
+              </button>
+
+              <span>↔</span>
+
+              <button
+                class="pair-select"
+                type="button"
+                data-word="${escapeHtml(
+                  pair.term_b
+                )}"
+              >
+
+                <span
+                  class="pair-word"
+                >
+                  ${escapeHtml(
+                    pair.term_b
+                  )}
+                </span>
+
+              </button>
+
+            </div>
+
+            <div
+              class="pair-data"
             >
-              <span class="pair-word">
-                ${escapeHtml(pair.term_b)}
-              </span>
-            </button>
+              ${t(
+                "frequency"
+              )}:
 
-          </div>
+              ${formatNumber(
+                pair.counts.a
+              )}
 
-          <div class="pair-data">
-            ${
-              t("frequency")
-            }:
-            ${formatNumber(pair.counts.a)}
-            vs
-            ${formatNumber(pair.counts.b)}
-            · ${t("metricDifference")}:
-            ${formatNumber(
-              pair.derived
-                .difference_a_minus_b
-            )}
-            · ${t("metricRatio")}:
-            ${pair.derived.ratio_a_to_b}
-            · ${t("metricSharedSurahs")}:
-            ${pair.distribution.shared_surahs}
-            · ${t("metricJaccard")}:
-            ${pair.distribution.jaccard_overlap}
-          </div>
+              vs
 
-        </article>
-      `
-    ).join("");
+              ${formatNumber(
+                pair.counts.b
+              )}
 
-  document
-    .querySelectorAll(".pair-select")
+              ·
+
+              ${t(
+                "metricDifference"
+              )}:
+
+              ${formatNumber(
+                pair.derived
+                  .difference_a_minus_b
+              )}
+
+              ·
+
+              ${t(
+                "metricRatio"
+              )}:
+
+              ${pair.derived.ratio_a_to_b}
+
+              ·
+
+              ${t(
+                "metricSharedSurahs"
+              )}:
+
+              ${pair.distribution
+                .shared_surahs}
+
+              ·
+
+              ${t(
+                "metricJaccard"
+              )}:
+
+              ${pair.distribution
+                .jaccard_overlap}
+            </div>
+
+          </article>
+        `
+      )
+      .join("");
+
+  list
+    .querySelectorAll(
+      ".pair-select"
+    )
     .forEach((button) => {
-
       button.addEventListener(
         "click",
         () => {
-
           state.selectedWord =
             button.dataset.word;
 
-          state.evidenceIndex = 0;
-          state.evidenceSurah = "all";
+          state.evidenceIndex =
+            0;
+
+          state.evidenceSurah =
+            "all";
 
           render();
 
@@ -1140,10 +2027,11 @@ function renderMethodology() {
   const method =
     state.data.method;
 
-  const value = (v) =>
-    v
-      ? t("trueValue")
-      : t("falseValue");
+  const value =
+    (v) =>
+      v
+        ? t("trueValue")
+        : t("falseValue");
 
   setText(
     "method-matching-label",
@@ -1187,32 +2075,44 @@ function renderMethodology() {
 
   setText(
     "method-diacritics",
-    value(method.diacritics_removed)
+    value(
+      method.diacritics_removed
+    )
   );
 
   setText(
     "method-tatweel",
-    value(method.tatweel_removed)
+    value(
+      method.tatweel_removed
+    )
   );
 
   setText(
     "method-alif",
-    value(method.alif_variants_normalized)
+    value(
+      method.alif_variants_normalized
+    )
   );
 
   setText(
     "method-root",
-    value(method.root_analysis)
+    value(
+      method.root_analysis
+    )
   );
 
   setText(
     "method-morphology",
-    value(method.morphological_analysis)
+    value(
+      method.morphological_analysis
+    )
   );
 
   setText(
     "method-substring",
-    value(method.substring_matching)
+    value(
+      method.substring_matching
+    )
   );
 
   setText(
@@ -1225,61 +2125,86 @@ function renderLearnMetrics() {
   const cards = [
     [
       t("metricFrequency"),
-      t("metricFrequencyDesc")
+      t("metricFrequencyDesc"),
     ],
+
     [
       t("metricToken"),
-      t("metricTokenDesc")
+      t("metricTokenDesc"),
     ],
+
     [
       t("metricExactMatch"),
-      t("metricExactMatchDesc")
+      t("metricExactMatchDesc"),
     ],
+
     [
       t("metricDigitSum"),
-      t("metricDigitSumDesc")
+      t("metricDigitSumDesc"),
     ],
+
     [
       t("metricParity"),
-      t("metricParityDesc")
+      t("metricParityDesc"),
     ],
+
     [
       t("metricPer1000"),
-      t("metricPer1000Desc")
+      t("metricPer1000Desc"),
     ],
+
     [
       t("metricDifference"),
-      t("metricDifferenceDesc")
+      t("metricDifferenceDesc"),
     ],
+
     [
       t("metricRatio"),
-      t("metricRatioDesc")
+      t("metricRatioDesc"),
     ],
+
     [
       t("metricSharedSurahs"),
-      t("metricSharedSurahsDesc")
+      t("metricSharedSurahsDesc"),
     ],
+
     [
       t("metricJaccard"),
-      t("metricJaccardDesc")
-    ]
+      t("metricJaccardDesc"),
+    ],
   ];
 
-  $("learn-metrics")
-    .innerHTML =
-    cards.map(
-      ([title, description]) => `
-        <article class="learn-card">
-          <h3>
-            ${escapeHtml(title)}
-          </h3>
+  const list =
+    $("learn-metrics");
 
-          <p>
-            ${escapeHtml(description)}
-          </p>
-        </article>
-      `
-    ).join("");
+  if (!list) {
+    return;
+  }
+
+  list.innerHTML =
+    cards
+      .map(
+        ([title, description]) => `
+          <article
+            class="learn-card"
+          >
+
+            <h3>
+              ${escapeHtml(
+                title
+              )}
+            </h3>
+
+            <p>
+              ${escapeHtml(
+                description
+              )}
+            </p>
+
+          </article>
+        `
+      )
+      .join("");
 }
 
 function renderD3Safe() {
@@ -1287,9 +2212,13 @@ function renderD3Safe() {
     getSelectedTerm();
 
   if (
-    window.renderD3Distribution
+    typeof window
+      .renderD3Distribution ===
+    "function"
   ) {
-    window.renderD3Distribution(term);
+    window.renderD3Distribution(
+      term
+    );
   }
 }
 
@@ -1301,70 +2230,98 @@ function render() {
   const term =
     getSelectedTerm();
 
+  if (!term) {
+    return;
+  }
+
   renderLanguageSelector();
+
   renderStaticText();
+
   renderTermList(
-    $("term-search").value
+    $("term-search")
+      ?.value || ""
   );
+
   renderHero(term);
+
   renderNumerical(term);
-  renderDistribution(term);
-  renderSurahFilter(term);
-  renderEvidence(term);
+
+  renderSurahExplorerSummary(
+    term
+  );
+
+  renderSurahFilter(
+    term
+  );
+
+  renderEvidence(
+    term
+  );
+
   renderPairs();
+
   renderMethodology();
+
   renderLearnMetrics();
+
   renderD3Safe();
 }
 
 function setupEvidenceControls() {
+  const surahFilter =
+    $("surah-filter");
 
-  $("surah-filter")
-    .addEventListener(
+  if (surahFilter) {
+    surahFilter.addEventListener(
       "change",
       (event) => {
-
         state.evidenceSurah =
           event.target.value;
 
-        state.evidenceIndex = 0;
+        state.evidenceIndex =
+          0;
 
         renderEvidence(
-          getSelectedTerm()
-        );
-
-        renderDistribution(
           getSelectedTerm()
         );
 
         renderD3Safe();
       }
     );
+  }
 
-  $("previous-evidence")
-    .addEventListener(
+  const previous =
+    $("previous-evidence");
+
+  if (previous) {
+    previous.addEventListener(
       "click",
       () => {
-
         if (
-          state.evidenceIndex <= 0
+          state.evidenceIndex <=
+          0
         ) {
           return;
         }
 
-        state.evidenceIndex -= 1;
+        state.evidenceIndex -=
+          1;
 
         renderEvidence(
           getSelectedTerm()
         );
       }
     );
+  }
 
-  $("next-evidence")
-    .addEventListener(
+  const next =
+    $("next-evidence");
+
+  if (next) {
+    next.addEventListener(
       "click",
       () => {
-
         const filtered =
           getFilteredOccurrences(
             getSelectedTerm()
@@ -1377,31 +2334,40 @@ function setupEvidenceControls() {
           return;
         }
 
-        state.evidenceIndex += 1;
+        state.evidenceIndex +=
+          1;
 
         renderEvidence(
           getSelectedTerm()
         );
       }
     );
+  }
 
-  $("evidence-jump")
-    .addEventListener(
+  const jump =
+    $("evidence-jump");
+
+  if (jump) {
+    jump.addEventListener(
       "change",
       (event) => {
-
         const filtered =
           getFilteredOccurrences(
             getSelectedTerm()
           );
 
         const requested =
-          Number(event.target.value) - 1;
+          Number(
+            event.target.value
+          ) - 1;
 
         if (
-          Number.isNaN(requested) ||
+          Number.isNaN(
+            requested
+          ) ||
           requested < 0 ||
-          requested >= filtered.length
+          requested >=
+            filtered.length
         ) {
           event.target.value =
             state.evidenceIndex + 1;
@@ -1417,11 +2383,11 @@ function setupEvidenceControls() {
         );
       }
     );
+  }
 }
 
 async function loadAnalytics() {
   try {
-
     state.language =
       setLanguage(
         state.language
@@ -1443,25 +2409,30 @@ async function loadAnalytics() {
     state.data =
       await response.json();
 
-          const [
+    const [
       indonesianResponse,
       englishResponse,
     ] = await Promise.all([
       fetch(
         "./data/translations/indonesian.json"
       ),
+
       fetch(
         "./data/translations/english.json"
       ),
     ]);
 
-    if (!indonesianResponse.ok) {
+    if (
+      !indonesianResponse.ok
+    ) {
       throw new Error(
         `Indonesian translation HTTP ${indonesianResponse.status}`
       );
     }
 
-    if (!englishResponse.ok) {
+    if (
+      !englishResponse.ok
+    ) {
       throw new Error(
         `English translation HTTP ${englishResponse.status}`
       );
@@ -1477,29 +2448,46 @@ async function loadAnalytics() {
         await englishResponse.json()
       );
 
+    if (
+      !state.data.terms?.length
+    ) {
+      throw new Error(
+        "Analytics dataset contains no terms."
+      );
+    }
+
     state.selectedWord =
       state.data.terms[0].word;
 
+    const corpus =
+      state.data.corpus;
+
     $("corpus-badge")
       .textContent =
-      `${state.data.corpus.chapters} chapters · ` +
-      `${state.data.corpus.verses} verses`;
+      `${corpus.chapters} chapters · ` +
+      `${corpus.verses} verses`;
 
-    $("term-search")
-      .addEventListener(
+    const search =
+      $("term-search");
+
+    if (search) {
+      search.addEventListener(
         "input",
         () => {
           renderTermList(
-            $("term-search").value
+            search.value
           );
         }
       );
+    }
 
-    $("language-select")
-      .addEventListener(
+    const languageSelect =
+      $("language-select");
+
+    if (languageSelect) {
+      languageSelect.addEventListener(
         "change",
         (event) => {
-
           state.language =
             setLanguage(
               event.target.value
@@ -1508,20 +2496,32 @@ async function loadAnalytics() {
           render();
         }
       );
+    }
 
     setupEvidenceControls();
+
     render();
 
   } catch (error) {
+    const badge =
+      $("corpus-badge");
 
-    $("corpus-badge")
-      .textContent =
-      "Data unavailable";
+    if (badge) {
+      badge.textContent =
+        "Data unavailable";
+    }
 
-    document
-      .querySelector(".main")
-      .innerHTML = `
-        <section class="panel">
+    const main =
+      document.querySelector(
+        ".main"
+      );
+
+    if (main) {
+      main.innerHTML = `
+        <section
+          class="panel"
+        >
+
           <h2>
             Unable to load analytical data.
           </h2>
@@ -1531,10 +2531,14 @@ async function loadAnalytics() {
               error.message
             )}
           </p>
+
         </section>
       `;
+    }
 
-    console.error(error);
+    console.error(
+      error
+    );
   }
 }
 

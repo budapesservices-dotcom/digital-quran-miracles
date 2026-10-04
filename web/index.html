@@ -126,324 +126,395 @@
 
       <main class="main">
 
-        <section class="hero">
+  <section class="hero">
 
-          <div
-            id="feature-eyebrow"
-            class="eyebrow"
-          >
-            Observasi Terpilih
-          </div>
+    <div
+      id="feature-eyebrow"
+      class="eyebrow"
+    >
+      Observasi Terpilih
+    </div>
 
-          <div
-            id="feature-word"
-            class="arabic-feature"
-          >
-            …
-          </div>
+    <div
+      id="feature-word"
+      class="arabic-feature"
+    >
+      …
+    </div>
 
-          <div
-            id="feature-meta"
-            class="feature-meta"
-          ></div>
+    <div
+      id="feature-meta"
+      class="feature-meta"
+    ></div>
 
-          <div
-            id="feature-reference"
-            class="reference"
-          >
-            Loading…
-          </div>
+    <div
+      id="feature-reference"
+      class="reference"
+    >
+      Loading…
+    </div>
 
-          <div class="actions">
+    <div class="actions">
 
-            <a
-              id="open-quran"
-              class="action primary"
-              href="https://www.readquranforpeace.net/quran"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Buka Indeks Quran
-            </a>
+      <a
+        id="open-quran"
+        class="action primary"
+        href="https://www.readquranforpeace.net/quran"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Buka Quran
+      </a>
 
-            <a
-              id="explore-evidence"
-              class="action"
-              href="#evidence"
-            >
-              Lihat Evidence
-            </a>
+      <a
+        id="explore-evidence"
+        class="action"
+        href="#evidence"
+      >
+        Lihat Evidence
+      </a>
 
-          </div>
+    </div>
 
-          <div
-            id="stats"
-            class="stats"
-          ></div>
-
-        </section>
+  </section>
 
 
-        <div class="grid">
+  <section
+    class="observation-panel"
+    aria-labelledby="observation-title"
+  >
 
-          <section class="panel">
+    <div class="section-kicker">
+      <span id="observation-kicker">
+        What did we observe?
+      </span>
+    </div>
 
-            <h2 id="numerical-title">
-              Observasi Numerik
-            </h2>
+    <div class="observation-heading">
 
-            <p id="numerical-description">
-              Metric turunan menggambarkan data yang diamati.
-            </p>
+      <div>
+        <h2 id="observation-title">
+          What did we observe?
+        </h2>
 
-            <div
-              id="numerical-metrics"
-              class="metric-list"
-            ></div>
+        <p id="observation-description">
+          Ringkasan hasil yang terukur dari corpus yang dianalisis.
+        </p>
+      </div>
 
-          </section>
+      <div
+        id="observation-term"
+        class="observation-term"
+      ></div>
+
+    </div>
+
+    <div
+      id="stats"
+      class="stats"
+    ></div>
+
+  </section>
 
 
-          <section class="panel">
+  <section
+    class="panel explorer-panel"
+    aria-labelledby="distribution-title"
+  >
 
-            <h2 id="distribution-title">
-              Distribusi Surah
-            </h2>
+    <div class="explorer-heading">
 
-            <p id="distribution-description">
-              Kemunculan digabungkan di seluruh 114 surah.
-            </p>
+      <div>
 
-            <div class="distribution">
-
-              <div
-                id="distribution-bars"
-                class="distribution-wrap"
-                aria-label="Per-surah frequency distribution"
-              ></div>
-
-              <div class="distribution-scale">
-                <span>1</span>
-                <span>114</span>
-              </div>
-
-              <div
-                id="chart-caption"
-                class="chart-caption"
-              >
-                Visualisasi D3 interaktif
-              </div>
-
-              <div
-                id="d3-distribution-chart"
-                class="d3-chart"
-              ></div>
-
-            </div>
-
-          </section>
-
+        <div class="section-kicker">
+          <span id="explorer-kicker">
+            Quran navigation
+          </span>
         </div>
 
+        <h2 id="distribution-title">
+          Surah Explorer
+        </h2>
 
-        <section
-          id="evidence"
-          class="panel evidence-panel"
+        <p id="distribution-description">
+          Lihat bagaimana term tersebar di 114 surah.
+          Pilih titik untuk membuka evidence dari surah tersebut.
+        </p>
+
+      </div>
+
+      <div
+        id="surah-explorer-summary"
+        class="explorer-summary"
+      ></div>
+
+    </div>
+
+
+    <div
+      id="chart-caption"
+      class="chart-caption"
+    >
+      Setiap titik mewakili satu Surah
+    </div>
+
+
+    <div
+      id="d3-distribution-chart"
+      class="d3-chart"
+    ></div>
+
+  </section>
+
+
+  <section class="detail-grid">
+
+    <section class="panel">
+
+      <div class="section-kicker">
+        <span id="numerical-kicker">
+          Behind the observation
+        </span>
+      </div>
+
+      <h2 id="numerical-title">
+        Numbers behind the observation
+      </h2>
+
+      <p id="numerical-description">
+        Detail teknis dari hasil yang diamati.
+      </p>
+
+      <div
+        id="numerical-metrics"
+        class="metric-list"
+      ></div>
+
+    </section>
+
+
+    <section class="panel">
+
+  <div class="section-kicker">
+    <span id="numerical-kicker">
+      Behind the observation
+    </span>
+  </div>
+
+  <h2 id="numerical-title">
+    Numbers behind the observation
+  </h2>
+
+  <p id="numerical-description">
+    Detail teknis dari hasil yang diamati.
+  </p>
+
+  <div
+    id="numerical-metrics"
+    class="metric-list"
+  ></div>
+
+</section>
+
+
+  <section
+    id="evidence"
+    class="panel evidence-panel"
+  >
+
+    <div class="section-heading">
+
+      <div>
+
+        <div class="section-kicker">
+          <span id="evidence-kicker">
+            Trace the result
+          </span>
+        </div>
+
+        <h2 id="evidence-title">
+          Evidence Tingkat Ayat
+        </h2>
+
+        <p id="evidence-description">
+          Telusuri occurrence sampai ke ayat sumber.
+        </p>
+
+      </div>
+
+      <div
+        id="evidence-counter"
+        class="evidence-counter"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="evidence-toolbar">
+
+      <label class="toolbar-field">
+
+        <span id="surah-label">
+          Surah
+        </span>
+
+        <select
+          id="surah-filter"
+          class="select"
+        ></select>
+
+      </label>
+
+
+      <label class="toolbar-field">
+
+        <span id="jump-label">
+          Loncat ke occurrence
+        </span>
+
+        <input
+          id="evidence-jump"
+          class="number-input"
+          type="number"
+          min="1"
+          value="1"
         >
 
-          <div class="section-heading">
-
-            <div>
-
-              <h2 id="evidence-title">
-                Evidence Tingkat Ayat
-              </h2>
-
-              <p id="evidence-description">
-                Setiap kemunculan berasal dari corpus yang dianalisis.
-              </p>
-
-            </div>
-
-            <div
-              id="evidence-counter"
-              class="evidence-counter"
-            >
-              —
-            </div>
-
-          </div>
+      </label>
 
 
-          <div class="evidence-toolbar">
+      <div class="evidence-controls">
 
-            <label class="toolbar-field">
+        <button
+          id="previous-evidence"
+          class="action"
+          type="button"
+        >
+          ← Sebelumnya
+        </button>
 
-              <span id="surah-label">
-                Surah
-              </span>
+        <button
+          id="next-evidence"
+          class="action primary"
+          type="button"
+        >
+          Berikutnya →
+        </button>
 
-              <select
-                id="surah-filter"
-                class="select"
-              ></select>
+      </div>
 
-            </label>
-
-
-            <label class="toolbar-field">
-
-              <span id="jump-label">
-                Loncat ke occurrence
-              </span>
-
-              <input
-                id="evidence-jump"
-                class="number-input"
-                type="number"
-                min="1"
-                value="1"
-              >
-
-            </label>
+    </div>
 
 
-            <div class="evidence-controls">
-
-              <button
-                id="previous-evidence"
-                class="action"
-                type="button"
-              >
-                ← Sebelumnya
-              </button>
-
-              <button
-                id="next-evidence"
-                class="action primary"
-                type="button"
-              >
-                Berikutnya →
-              </button>
-
-            </div>
-
-          </div>
+    <div
+      id="evidence-summary"
+      class="evidence-summary"
+    ></div>
 
 
-          <div
-            id="evidence-summary"
-            class="evidence-summary"
-          ></div>
+    <div
+      id="evidence-list"
+      class="evidence-list"
+    ></div>
+
+  </section>
 
 
-          <div
-            id="evidence-list"
-            class="evidence-list"
-          ></div>
+  <section class="panel">
 
-        </section>
+    <div class="section-kicker">
+      <span id="pairs-kicker">
+        Exploratory comparison
+      </span>
+    </div>
 
+    <h2 id="pairs-title">
+      Pasangan Term Eksploratif
+    </h2>
 
-        <section class="panel">
+    <p id="pairs-description">
+      Hubungan kandidat ditampilkan sebagai observasi numerik,
+      bukan bukti yang sudah ditentukan sebelumnya.
+    </p>
 
-          <h2 id="pairs-title">
-            Pasangan Term Eksploratif
-          </h2>
+    <div
+      id="pair-list"
+      class="pairs"
+    ></div>
 
-          <p id="pairs-description">
-            Hubungan kandidat ditampilkan sebagai observasi numerik,
-            bukan bukti yang sudah ditentukan sebelumnya.
-          </p>
-
-          <div
-            id="pair-list"
-            class="pairs"
-          ></div>
-
-        </section>
+  </section>
 
 
-        <section class="panel learn-panel">
+  <section class="panel methodology">
 
-          <h2 id="learn-title">
-            Belajar Membaca Angka
-          </h2>
+    <div class="section-kicker">
+      <span id="methodology-kicker">
+        Audit trail
+      </span>
+    </div>
 
-          <p id="learn-description">
-            Istilah berikut menjelaskan bagaimana dataset kita diukur.
-          </p>
+    <h2 id="methodology-title">
+      Metodologi
+    </h2>
 
-          <div
-            id="learn-metrics"
-            class="learn-grid"
-          ></div>
+    <div class="method-box">
 
-        </section>
+      <div>
+        <strong id="method-matching-label">
+          Matching:
+        </strong>
+        <span id="method-matching">—</span>
+      </div>
 
+      <div>
+        <strong id="method-diacritics-label">
+          Diakritik dihapus:
+        </strong>
+        <span id="method-diacritics">—</span>
+      </div>
 
-        <section class="panel methodology">
+      <div>
+        <strong id="method-tatweel-label">
+          Tatweel dihapus:
+        </strong>
+        <span id="method-tatweel">—</span>
+      </div>
 
-          <h2 id="methodology-title">
-            Metodologi
-          </h2>
+      <div>
+        <strong id="method-alif-label">
+          Varian alif dinormalisasi:
+        </strong>
+        <span id="method-alif">—</span>
+      </div>
 
-          <div class="method-box">
+      <div>
+        <strong id="method-root-label">
+          Analisis akar kata:
+        </strong>
+        <span id="method-root">—</span>
+      </div>
 
-            <div>
-              <strong id="method-matching-label">
-                Matching:
-              </strong>
-              <span id="method-matching">—</span>
-            </div>
+      <div>
+        <strong id="method-morphology-label">
+          Analisis morfologi:
+        </strong>
+        <span id="method-morphology">—</span>
+      </div>
 
-            <div>
-              <strong id="method-diacritics-label">
-                Diakritik dihapus:
-              </strong>
-              <span id="method-diacritics">—</span>
-            </div>
+      <div>
+        <strong id="method-substring-label">
+          Pencocokan substring:
+        </strong>
+        <span id="method-substring">—</span>
+      </div>
 
-            <div>
-              <strong id="method-tatweel-label">
-                Tatweel dihapus:
-              </strong>
-              <span id="method-tatweel">—</span>
-            </div>
+    </div>
 
-            <div>
-              <strong id="method-alif-label">
-                Varian alif dinormalisasi:
-              </strong>
-              <span id="method-alif">—</span>
-            </div>
+  </section>
 
-            <div>
-              <strong id="method-root-label">
-                Analisis akar kata:
-              </strong>
-              <span id="method-root">—</span>
-            </div>
-
-            <div>
-              <strong id="method-morphology-label">
-                Analisis morfologi:
-              </strong>
-              <span id="method-morphology">—</span>
-            </div>
-
-            <div>
-              <strong id="method-substring-label">
-                Pencocokan substring:
-              </strong>
-              <span id="method-substring">—</span>
-            </div>
-
-          </div>
-
-        </section>
-
-      </main>
+</main>
 
     </div>
 

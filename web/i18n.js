@@ -323,7 +323,24 @@ Object.assign(I18N.id, {
     "Potongan teks yang dihitung komputer setelah aturan pemrosesan diterapkan.",
   metricExactMatch: "Exact match",
   metricExactMatchDesc:
-    "Komputer hanya menghitung token yang sama persis setelah normalisasi; bagian dari kata lain tidak otomatis ikut dihitung."
+    "Komputer hanya menghitung token yang sama persis setelah normalisasi; bagian dari kata lain tidak otomatis ikut dihitung.",
+    whatObserved: "Apa yang kita amati?",
+  whatObservedDescription:
+    "Ringkasan hasil yang benar-benar terukur dari corpus yang dianalisis.",
+  quranNavigation: "Navigasi Quran",
+  surahExplorer: "Penjelajah Surah",
+  surahExplorerDescription:
+    "Lihat bagaimana term tersebar di 114 surah. Pilih titik untuk membuka evidence.",
+  surahExplorerCaption:
+    "Setiap titik mewakili satu Surah",
+  behindObservation: "Di balik observasi",
+  numbersBehindObservation:
+    "Angka di balik observasi",
+  methodGuide: "Panduan metode",
+  traceResult: "Telusuri hasil",
+  exploratoryComparison: "Perbandingan eksploratif",
+  auditTrail: "Jejak audit",
+  surahs: "surah"
 });
 
 Object.assign(I18N.en, {
@@ -348,7 +365,24 @@ Object.assign(I18N.en, {
     "A piece of text counted by the computer after the processing rules are applied.",
   metricExactMatch: "Exact match",
   metricExactMatchDesc:
-    "The computer counts only an exact normalized token; a token containing the same letters is not automatically included."
+    "The computer counts only an exact normalized token; a token containing the same letters is not automatically included.",
+    whatObserved: "What did we observe?",
+  whatObservedDescription:
+    "A summary of the results directly measured from the analyzed corpus.",
+  quranNavigation: "Quran navigation",
+  surahExplorer: "Surah Explorer",
+  surahExplorerDescription:
+    "See how the term is distributed across 114 surahs. Select a point to inspect evidence.",
+  surahExplorerCaption:
+    "Each point represents one Surah",
+  behindObservation: "Behind the observation",
+  numbersBehindObservation:
+    "Numbers behind the observation",
+  methodGuide: "Method guide",
+  traceResult: "Trace the result",
+  exploratoryComparison: "Exploratory comparison",
+  auditTrail: "Audit trail",
+  surahs: "surahs"
 });
 
 Object.assign(I18N.ar, {
@@ -373,7 +407,24 @@ Object.assign(I18N.ar, {
     "جزء من النص يقوم الكمبيوتر بعدّه بعد تطبيق قواعد المعالجة.",
   metricExactMatch: "مطابقة تامة",
   metricExactMatchDesc:
-    "يقوم الكمبيوتر بعدّ الرمز المطبع المطابق تمامًا؛ ولا يتم احتساب كلمة أخرى لمجرد احتوائها على الحروف نفسها."
+    "يقوم الكمبيوتر بعدّ الرمز المطبع المطابق تمامًا؛ ولا يتم احتساب كلمة أخرى لمجرد احتوائها على الحروف نفسها.",
+    whatObserved: "ما الذي لاحظناه؟",
+  whatObservedDescription:
+    "ملخص للنتائج المقاسة مباشرة من مجموعة البيانات التي تم تحليلها.",
+  quranNavigation: "التنقل في القرآن",
+  surahExplorer: "مستكشف السور",
+  surahExplorerDescription:
+    "شاهد كيفية توزيع المصطلح عبر 114 سورة. اختر نقطة لفحص الدليل.",
+  surahExplorerCaption:
+    "كل نقطة تمثل سورة واحدة",
+  behindObservation: "خلف الملاحظة",
+  numbersBehindObservation:
+    "الأرقام خلف الملاحظة",
+  methodGuide: "دليل المنهج",
+  traceResult: "تتبع النتيجة",
+  exploratoryComparison: "مقارنة استكشافية",
+  auditTrail: "مسار التدقيق",
+  surahs: "سور"
 });
 
 Object.assign(I18N.id, {
