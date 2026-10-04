@@ -50,8 +50,8 @@
         "ratio_a_to_b": 2.36
       },
       "distribution": {
-        "shared_surahs": null,
-        "jaccard_overlap": null
+        "shared_surahs": 17,
+        "jaccard_overlap": 0.5
       },
       "evidence": {
         "term_a_file": "data/processed/frequency_الليل.json",
@@ -78,8 +78,8 @@
         "ratio_a_to_b": 1.619718
       },
       "distribution": {
-        "shared_surahs": null,
-        "jaccard_overlap": null
+        "shared_surahs": 27,
+        "jaccard_overlap": 0.5625
       },
       "evidence": {
         "term_a_file": "data/processed/frequency_الدنيا.json",
@@ -106,8 +106,8 @@
         "ratio_a_to_b": 1.8
       },
       "distribution": {
-        "shared_surahs": null,
-        "jaccard_overlap": null
+        "shared_surahs": 11,
+        "jaccard_overlap": 0.25
       },
       "evidence": {
         "term_a_file": "data/processed/frequency_الحياة.json",
