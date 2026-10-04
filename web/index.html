@@ -6,20 +6,187 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
-  <title>Digital Quran Miracles</title>
+  <meta
+    name="description"
+    content="An evidence-linked exploration of Quranic word frequencies and numerical observations."
+  >
+  <title>Digital Quran Miracles — Mathematical Exploration</title>
+  <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-  <main>
-    <h1>Digital Quran Miracles</h1>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div>
+          <p class="kicker">Digital Quran Miracles</p>
+          <h1 class="title">Mathematical Exploration</h1>
+          <p class="subtitle">
+            Explore observed frequency patterns in the Quran and follow
+            each result back to verse-level evidence and methodology.
+          </p>
+        </div>
 
-    <p id="status">
-      Loading analytical data...
-    </p>
+        <div id="corpus-badge" class="corpus-badge">
+          Loading corpus…
+        </div>
+      </div>
+    </header>
 
-    <section id="app"></section>
-  </main>
+    <div class="workspace">
+      <aside class="sidebar">
+        <h2>Analytical Terms</h2>
 
-  <script src="app.js"></script>
+        <input
+          id="term-search"
+          class="search"
+          type="search"
+          placeholder="Search Arabic term…"
+          aria-label="Search analytical terms"
+          dir="rtl"
+        >
+
+        <div id="term-list" class="term-list"></div>
+      </aside>
+
+      <main class="main">
+        <section class="hero">
+          <div class="eyebrow">Selected Observation</div>
+
+          <div id="feature-word" class="arabic-feature">
+            …
+          </div>
+
+          <div id="feature-reference" class="reference">
+            Loading…
+          </div>
+
+          <div class="actions">
+            <a
+              class="action primary"
+              href="https://www.readquranforpeace.net/quran"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open Quran Index
+            </a>
+
+            <a
+              class="action"
+              href="#evidence"
+            >
+              View Evidence
+            </a>
+          </div>
+
+          <div id="stats" class="stats"></div>
+        </section>
+
+        <div class="grid">
+          <section class="panel">
+            <h2>Numerical Observation</h2>
+            <p>
+              Derived metrics describe the observed dataset. They do not,
+              by themselves, establish statistical significance or a
+              miraculous claim.
+            </p>
+
+            <div id="numerical-metrics" class="metric-list"></div>
+          </section>
+
+          <section class="panel">
+            <h2>Surah Distribution</h2>
+            <p>
+              Occurrences aggregated across all 114 surahs.
+            </p>
+
+            <div class="distribution">
+              <div
+                id="distribution-bars"
+                class="distribution-wrap"
+                aria-label="Per-surah frequency distribution"
+              ></div>
+
+              <div class="distribution-scale">
+                <span>1</span>
+                <span>114</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section id="evidence" class="panel" style="margin-top:20px;">
+          <h2>Verse-Level Evidence</h2>
+          <p>
+            These records are generated from the analyzed corpus and retain
+            the surah, ayah, token position, and original verse text.
+          </p>
+
+          <div id="evidence-list" class="evidence-list"></div>
+        </section>
+
+        <section class="panel" style="margin-top:20px;">
+          <h2>Exploratory Term Pairs</h2>
+          <p>
+            Candidate relationships are shown as numerical observations,
+            not predefined proof.
+          </p>
+
+          <div id="pair-list" class="pairs"></div>
+        </section>
+
+        <section class="panel methodology">
+          <h2>Methodology</h2>
+
+          <div class="method-box">
+            <div>
+              <strong>Matching:</strong>
+              <span id="method-matching">—</span>
+            </div>
+
+            <div>
+              <strong>Diacritics removed:</strong>
+              <span id="method-diacritics">—</span>
+            </div>
+
+            <div>
+              <strong>Tatweel removed:</strong>
+              <span id="method-tatweel">—</span>
+            </div>
+
+            <div>
+              <strong>Alif variants normalized:</strong>
+              <span id="method-alif">—</span>
+            </div>
+
+            <div>
+              <strong>Root analysis:</strong>
+              <span id="method-root">—</span>
+            </div>
+
+            <div>
+              <strong>Morphological analysis:</strong>
+              <span id="method-morphology">—</span>
+            </div>
+
+            <div>
+              <strong>Substring matching:</strong>
+              <span id="method-substring">—</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <div>
+        Data status: observed-data presentation. Frequency and numerical
+        observations are tied to the project corpus and documented analysis
+        rules.
+      </div>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>
