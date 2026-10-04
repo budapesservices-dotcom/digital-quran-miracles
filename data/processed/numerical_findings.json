@@ -29,6 +29,78 @@
       "evidence_file": "data/processed/frequency_يوم.json"
     },
     {
+      "word": "الدنيا",
+      "normalized_word": "الدنيا",
+      "count": 115,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 7,
+        "frequency_per_1000_tokens": 1.4697,
+        "count_as_percentage_of_verse_total": 1.8441
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_الدنيا.json"
+    },
+    {
+      "word": "الآخرة",
+      "normalized_word": "الاخرة",
+      "count": 71,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 8,
+        "frequency_per_1000_tokens": 0.9074,
+        "count_as_percentage_of_verse_total": 1.1386
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_الآخرة.json"
+    },
+    {
+      "word": "الحياة",
+      "normalized_word": "الحياة",
+      "count": 63,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 9,
+        "frequency_per_1000_tokens": 0.8051,
+        "count_as_percentage_of_verse_total": 1.0103
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_الحياة.json"
+    },
+    {
+      "word": "الليل",
+      "normalized_word": "الليل",
+      "count": 59,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 14,
+        "frequency_per_1000_tokens": 0.754,
+        "count_as_percentage_of_verse_total": 0.9461
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_الليل.json"
+    },
+    {
       "word": "اليوم",
       "normalized_word": "اليوم",
       "count": 41,
@@ -45,6 +117,42 @@
         "parity": "count modulo 2"
       },
       "evidence_file": "data/processed/frequency_اليوم.json"
+    },
+    {
+      "word": "الموت",
+      "normalized_word": "الموت",
+      "count": 35,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 8,
+        "frequency_per_1000_tokens": 0.4473,
+        "count_as_percentage_of_verse_total": 0.5613
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_الموت.json"
+    },
+    {
+      "word": "النهار",
+      "normalized_word": "النهار",
+      "count": 25,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 7,
+        "frequency_per_1000_tokens": 0.3195,
+        "count_as_percentage_of_verse_total": 0.4009
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_النهار.json"
     }
   ]
 }

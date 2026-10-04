@@ -61,6 +61,41 @@ def build_contract() -> dict:
         PROCESSED_DIR / FILES["pair_analysis"]
     )
 
+    frequency_words = {
+        item["word"]
+        for item in frequency_index.get("terms", [])
+    }
+
+    numerical_words = {
+        item["word"]
+        for item in numerical_findings.get("findings", [])
+    }
+
+    distribution_words = {
+        item["word"]
+        for item in surah_distribution.get("terms", [])
+    }
+
+    missing_numerical = sorted(
+        frequency_words - numerical_words
+    )
+
+    missing_distribution = sorted(
+        frequency_words - distribution_words
+    )
+
+    if missing_numerical:
+        raise ValueError(
+            "Frequency terms missing from numerical findings: "
+            + ", ".join(missing_numerical)
+        )
+
+    if missing_distribution:
+        raise ValueError(
+            "Frequency terms missing from surah distribution: "
+            + ", ".join(missing_distribution)
+        )
+
     evidence = load_evidence_files(
         frequency_index
     )
