@@ -1,0 +1,50 @@
+{
+  "title": "Numerical Pattern Findings",
+  "status": "observed_data_only",
+  "warning": "Derived numerical properties are descriptive observations and are not, by themselves, evidence of significance.",
+  "dataset": "data/raw/simple-clean.json",
+  "corpus": {
+    "chapters": 114,
+    "verses": 6236,
+    "tokens": 78248
+  },
+  "method": "exact_normalized_token",
+  "findings": [
+    {
+      "word": "يوم",
+      "normalized_word": "يوم",
+      "count": 217,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 10,
+        "frequency_per_1000_tokens": 2.7732,
+        "count_as_percentage_of_verse_total": 3.4798
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_يوم.json"
+    },
+    {
+      "word": "اليوم",
+      "normalized_word": "اليوم",
+      "count": 41,
+      "derived_metrics": {
+        "parity": "odd",
+        "digit_sum": 5,
+        "frequency_per_1000_tokens": 0.524,
+        "count_as_percentage_of_verse_total": 0.6575
+      },
+      "formulas": {
+        "frequency_per_1000_tokens": "count / total_tokens * 1000",
+        "count_as_percentage_of_verse_total": "count / total_verses * 100",
+        "digit_sum": "sum of decimal digits in count",
+        "parity": "count modulo 2"
+      },
+      "evidence_file": "data/processed/frequency_اليوم.json"
+    }
+  ]
+}
