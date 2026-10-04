@@ -995,3 +995,41 @@ html[data-language="ar"] .learn-card p {
     grid-template-columns: 1fr;
   }
 }
+
+.stat {
+  min-height: 210px;
+}
+
+.stat-unit {
+  margin-top: -3px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.stat-explanation {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.stat-value.compact {
+  font-size: 1.35rem;
+  white-space: nowrap;
+}
+
+.stat-property .arrow {
+  margin: 0 4px;
+  color: var(--gold);
+}
+
+.learn-card {
+  min-height: 150px;
+}
+
+@media (max-width: 760px) {
+  .stat {
+    min-height: auto;
+  }
+}

@@ -324,11 +324,23 @@ function renderTermList(filter = "") {
 }
 
 function renderHero(term) {
-  const metadata =
-    term.metadata || {};
+  const metadata = term.metadata || {};
 
   const firstOccurrence =
     term.evidence?.occurrences?.[0];
+
+  const surahCount =
+    term.distribution.summary
+      .surahs_with_occurrences;
+
+  const totalSurahs = 114;
+
+  const rate =
+    term.numerical.derived_metrics
+      .frequency_per_1000_tokens;
+
+  const count =
+    term.count;
 
   $("feature-word").textContent =
     term.word;
@@ -353,71 +365,104 @@ function renderHero(term) {
 
   $("feature-reference").textContent =
     firstOccurrence
-      ? `${
-          state.language === "ar"
-            ? "أول ظهور مسجل"
-            : state.language === "id"
-              ? "Kemunculan pertama"
-              : "First recorded occurrence"
-        }: ${
-          state.language === "ar"
-            ? `السورة ${firstOccurrence.surah}، الآية ${firstOccurrence.ayah}`
-            : `Surah ${firstOccurrence.surah}, Ayah ${firstOccurrence.ayah}`
-        }`
+      ? `${t("firstRecorded")}: ` +
+        `Surah ${firstOccurrence.surah}, ` +
+        `Ayah ${firstOccurrence.ayah}`
       : "";
 
   $("stats").innerHTML = `
     <div class="stat">
       <div class="stat-label">
-        ${t("frequency")}
+        ${t("statOccurrencesTitle")}
       </div>
 
       <div class="stat-value">
-        ${formatNumber(term.count)}
-      </div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-label">
-        ${t("surahsWithTerm")}
+        ${formatNumber(count)}
       </div>
 
-      <div class="stat-value">
-        ${formatNumber(
-          term.distribution.summary
-            .surahs_with_occurrences
+      <div class="stat-unit">
+        ${t("statOccurrencesUnit")}
+      </div>
+
+      <div class="stat-explanation">
+        ${escapeHtml(
+          t("statOccurrencesDesc")
         )}
       </div>
     </div>
 
     <div class="stat">
       <div class="stat-label">
-        ${t("digitSum")}
+        ${t("statSurahTitle")}
       </div>
 
       <div class="stat-value">
-        ${formatNumber(
-          term.numerical.derived_metrics
-            .digit_sum
-        )}
-      </div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-label">
-        ${t("per1000")}
+        ${formatNumber(surahCount)}
       </div>
 
-      <div class="stat-value">
+      <div class="stat-unit">
         ${
-          term.numerical
-            .derived_metrics
-            .frequency_per_1000_tokens
+          state.language === "id"
+            ? `dari ${totalSurahs} ${t("statSurahUnit")}`
+            : state.language === "ar"
+              ? `من ${totalSurahs} ${t("statSurahUnit")}`
+              : `of ${totalSurahs} ${t("statSurahUnit")}`
         }
+      </div>
+
+      <div class="stat-explanation">
+        ${escapeHtml(
+          t("statSurahDesc")
+        )}
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">
+        ${t("statRateTitle")}
+      </div>
+
+      <div class="stat-value">
+        ${rate}
+      </div>
+
+      <div class="stat-unit">
+        ${t("statRateUnit")}
+      </div>
+
+      <div class="stat-explanation">
+        ${escapeHtml(
+          t("statRateDesc")
+        )}
+      </div>
+    </div>
+
+    <div class="stat stat-property">
+      <div class="stat-label">
+        ${t("statNumberPropertyTitle")}
+      </div>
+
+      <div class="stat-value compact">
+        ${formatNumber(count)}
+        <span class="arrow">→</span>
+        ${term.numerical
+          .derived_metrics
+          .digit_sum}
+      </div>
+
+      <div class="stat-unit">
+        ${t("statNumberPropertyUnit")}
+      </div>
+
+      <div class="stat-explanation">
+        ${escapeHtml(
+          t("statNumberPropertyDesc")
+        )}
       </div>
     </div>
   `;
 }
+
 
 function renderNumerical(term) {
   const metrics =
@@ -426,7 +471,7 @@ function renderNumerical(term) {
   const rows = [
     [
       t("frequency"),
-      formatNumber(term.count)
+      `${formatNumber(term.count)}`
     ],
     [
       t("metricParity"),
@@ -448,17 +493,16 @@ function renderNumerical(term) {
     ],
     [
       t("digitSum"),
-      metrics.digit_sum
+      `${formatNumber(metrics.digit_sum)}`
     ],
     [
       t("per1000"),
-      metrics.frequency_per_1000_tokens
+      `${metrics.frequency_per_1000_tokens}`
     ],
     [
       t("metricVerseShare"),
-      `${metrics
-        .count_as_percentage_of_verse_total}%`
-    ],
+      `${metrics.count_as_percentage_of_verse_total}%`
+    ]
   ];
 
   $("numerical-metrics").innerHTML =
@@ -476,6 +520,7 @@ function renderNumerical(term) {
       `
     ).join("");
 }
+
 
 function renderDistribution(term) {
   const counts =
@@ -880,6 +925,14 @@ function renderLearnMetrics() {
       t("metricFrequencyDesc")
     ],
     [
+      t("metricToken"),
+      t("metricTokenDesc")
+    ],
+    [
+      t("metricExactMatch"),
+      t("metricExactMatchDesc")
+    ],
+    [
       t("metricDigitSum"),
       t("metricDigitSumDesc")
     ],
@@ -892,16 +945,8 @@ function renderLearnMetrics() {
       t("metricPer1000Desc")
     ],
     [
-      t("metricVerseShare"),
-      t("metricVerseShareDesc")
-    ],
-    [
       t("metricDifference"),
       t("metricDifferenceDesc")
-    ],
-    [
-      t("metricSum"),
-      t("metricSumDesc")
     ],
     [
       t("metricRatio"),
@@ -914,7 +959,7 @@ function renderLearnMetrics() {
     [
       t("metricJaccard"),
       t("metricJaccardDesc")
-    ],
+    ]
   ];
 
   $("learn-metrics")
@@ -922,7 +967,6 @@ function renderLearnMetrics() {
     cards.map(
       ([title, description]) => `
         <article class="learn-card">
-
           <h3>
             ${escapeHtml(title)}
           </h3>
@@ -930,7 +974,6 @@ function renderLearnMetrics() {
           <p>
             ${escapeHtml(description)}
           </p>
-
         </article>
       `
     ).join("");

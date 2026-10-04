@@ -300,3 +300,78 @@ function setLanguage(language) {
 
   return language;
 }
+
+Object.assign(I18N.id, {
+  statOccurrencesTitle: "Muncul sebanyak",
+  statOccurrencesUnit: "kali",
+  statOccurrencesDesc:
+    "Jumlah kemunculan term ini dalam seluruh corpus yang dihitung.",
+  statSurahTitle: "Tersebar di",
+  statSurahUnit: "surah",
+  statSurahDesc:
+    "Term ini ditemukan setidaknya sekali di jumlah surah tersebut dari total 114 surah.",
+  statRateTitle: "Tingkat kemunculan",
+  statRateUnit: "per 1.000 token",
+  statRateDesc:
+    "Ukuran untuk melihat seberapa sering term muncul dibanding seluruh potongan teks yang dihitung.",
+  statNumberPropertyTitle: "Sifat angka",
+  statNumberPropertyUnit: "digit sum",
+  statNumberPropertyDesc:
+    "217 → 2 + 1 + 7 = 10. Ini hanya sifat matematis tambahan, bukan bukti mukjizat.",
+  metricToken: "Token",
+  metricTokenDesc:
+    "Potongan teks yang dihitung komputer setelah aturan pemrosesan diterapkan.",
+  metricExactMatch: "Exact match",
+  metricExactMatchDesc:
+    "Komputer hanya menghitung token yang sama persis setelah normalisasi; bagian dari kata lain tidak otomatis ikut dihitung."
+});
+
+Object.assign(I18N.en, {
+  statOccurrencesTitle: "Appears",
+  statOccurrencesUnit: "times",
+  statOccurrencesDesc:
+    "The total number of times this term appears in the analyzed corpus.",
+  statSurahTitle: "Found in",
+  statSurahUnit: "surahs",
+  statSurahDesc:
+    "The term appears at least once in this many of the 114 surahs.",
+  statRateTitle: "Occurrence rate",
+  statRateUnit: "per 1,000 tokens",
+  statRateDesc:
+    "A normalized way to see how often the term appears relative to the text being counted.",
+  statNumberPropertyTitle: "Number property",
+  statNumberPropertyUnit: "digit sum",
+  statNumberPropertyDesc:
+    "217 → 2 + 1 + 7 = 10. This is only an additional mathematical property, not proof of a miracle.",
+  metricToken: "Token",
+  metricTokenDesc:
+    "A piece of text counted by the computer after the processing rules are applied.",
+  metricExactMatch: "Exact match",
+  metricExactMatchDesc:
+    "The computer counts only an exact normalized token; a token containing the same letters is not automatically included."
+});
+
+Object.assign(I18N.ar, {
+  statOccurrencesTitle: "ظهر",
+  statOccurrencesUnit: "مرة",
+  statOccurrencesDesc:
+    "عدد مرات ظهور هذا المصطلح في مجموعة البيانات التي تم تحليلها.",
+  statSurahTitle: "ظهر في",
+  statSurahUnit: "سورة",
+  statSurahDesc:
+    "ظهر المصطلح مرة واحدة على الأقل في هذا العدد من أصل 114 سورة.",
+  statRateTitle: "معدل الظهور",
+  statRateUnit: "لكل 1000 رمز",
+  statRateDesc:
+    "طريقة موحدة لمعرفة مدى تكرار المصطلح بالنسبة إلى النص الذي تم عده.",
+  statNumberPropertyTitle: "خاصية الرقم",
+  statNumberPropertyUnit: "مجموع الأرقام",
+  statNumberPropertyDesc:
+    "217 ← 2 + 1 + 7 = 10. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.",
+  metricToken: "الرمز",
+  metricTokenDesc:
+    "جزء من النص يقوم الكمبيوتر بعدّه بعد تطبيق قواعد المعالجة.",
+  metricExactMatch: "مطابقة تامة",
+  metricExactMatchDesc:
+    "يقوم الكمبيوتر بعدّ الرمز المطبع المطابق تمامًا؛ ولا يتم احتساب كلمة أخرى لمجرد احتوائها على الحروف نفسها."
+});
