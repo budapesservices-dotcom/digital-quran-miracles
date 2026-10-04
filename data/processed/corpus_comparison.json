@@ -1,0 +1,35 @@
+{
+  "analysis_method": "exact_normalized_token",
+  "corpora": [
+    {
+      "corpus": "simple-clean",
+      "file": "data/raw/simple-clean.json",
+      "chapters": 114,
+      "verses": 6236,
+      "tokens": 78248,
+      "terms": {
+        "يوم": {
+          "count": 217
+        },
+        "اليوم": {
+          "count": 41
+        }
+      }
+    },
+    {
+      "corpus": "uthmani",
+      "file": "data/raw/uthmani.json",
+      "chapters": 114,
+      "verses": 6236,
+      "tokens": 77911,
+      "terms": {
+        "يوم": {
+          "count": 217
+        },
+        "اليوم": {
+          "count": 41
+        }
+      }
+    }
+  ]
+}
