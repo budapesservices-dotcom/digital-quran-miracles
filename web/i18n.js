@@ -375,3 +375,27 @@ Object.assign(I18N.ar, {
   metricExactMatchDesc:
     "يقوم الكمبيوتر بعدّ الرمز المطبع المطابق تمامًا؛ ولا يتم احتساب كلمة أخرى لمجرد احتوائها على الحروف نفسها."
 });
+
+Object.assign(I18N.id, {
+  category_time: "Waktu",
+  category_life: "Kehidupan & Akhirat",
+  category_nature: "Alam",
+  category_people: "Manusia & Masyarakat",
+  category_faith: "Iman & Ibadah"
+});
+
+Object.assign(I18N.en, {
+  category_time: "Time",
+  category_life: "Life & Hereafter",
+  category_nature: "Nature",
+  category_people: "People & Society",
+  category_faith: "Faith & Practice"
+});
+
+Object.assign(I18N.ar, {
+  category_time: "الزمن",
+  category_life: "الحياة والآخرة",
+  category_nature: "الطبيعة",
+  category_people: "الإنسان والمجتمع",
+  category_faith: "الإيمان والعبادة"
+});

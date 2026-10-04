@@ -1,0 +1,18 @@
+{
+  "target_word": "المرأة",
+  "normalized_word": "المراة",
+  "count": 0,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": []
+}

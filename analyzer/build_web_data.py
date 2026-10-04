@@ -70,7 +70,32 @@ def build_contract() -> dict:
         PROCESSED_DIR / FILES["frequency_index"]
     )
 
-    term_metadata = load_term_metadata()
+    term_metadata = {
+        item["word"]: item.get(
+            "metadata",
+            {}
+        )
+        for item in frequency_index.get(
+            "terms",
+            []
+        )
+    }
+
+    METADATA_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    with METADATA_FILE.open(
+        "w",
+        encoding="utf-8"
+    ) as file:
+        json.dump(
+            term_metadata,
+            file,
+            ensure_ascii=False,
+            indent=2
+        )
 
     numerical_findings = load_json(
         PROCESSED_DIR / FILES["numerical_findings"]
@@ -161,6 +186,12 @@ def build_contract() -> dict:
         terms.append(
             {
                 "word": word,
+
+                "category":
+                    frequency.get(
+                        "category",
+                        "uncategorized"
+                    ),
 
                 "metadata":
                     term_metadata[word],

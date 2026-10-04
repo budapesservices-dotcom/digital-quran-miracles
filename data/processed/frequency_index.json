@@ -1,7 +1,9 @@
 {
+  "schema_version": "1.0.0",
   "dataset": "data/raw/simple-clean.json",
+  "catalog": "data/term_catalog.json",
   "total_chapters": 114,
-  "total_terms": 8,
+  "total_terms": 32,
   "matching_method": "exact_normalized_token",
   "analysis_rules": {
     "diacritics_removed": true,
@@ -14,60 +16,484 @@
   },
   "terms": [
     {
+      "word": "الأرض",
+      "normalized_word": "الارض",
+      "category": "nature",
+      "rank": 1,
+      "count": 287,
+      "metadata": {
+        "transliteration": "Al-Arḍ",
+        "meaning_id": "Bumi",
+        "meaning_en": "Earth",
+        "meaning_ar": "الأرض",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الأرض.json"
+    },
+    {
       "word": "يوم",
       "normalized_word": "يوم",
+      "category": "time",
+      "rank": 2,
       "count": 217,
-      "evidence_file": "data/processed/frequency_يوم.json",
-      "rank": 1
+      "metadata": {
+        "transliteration": "Yawm",
+        "meaning_id": "Hari",
+        "meaning_en": "Day",
+        "meaning_ar": "يوم",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+      },
+      "evidence_file": "data/processed/frequency_يوم.json"
+    },
+    {
+      "word": "الناس",
+      "normalized_word": "الناس",
+      "category": "people",
+      "rank": 3,
+      "count": 182,
+      "metadata": {
+        "transliteration": "An-Nās",
+        "meaning_id": "Manusia / manusia banyak",
+        "meaning_en": "People",
+        "meaning_ar": "الناس",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الناس.json"
     },
     {
       "word": "الدنيا",
       "normalized_word": "الدنيا",
+      "category": "life",
+      "rank": 4,
       "count": 115,
-      "evidence_file": "data/processed/frequency_الدنيا.json",
-      "rank": 2
+      "metadata": {
+        "transliteration": "Ad-Dunyā",
+        "meaning_id": "Dunia / kehidupan dunia",
+        "meaning_en": "Worldly life",
+        "meaning_ar": "الدنيا",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+      },
+      "evidence_file": "data/processed/frequency_الدنيا.json"
+    },
+    {
+      "word": "السماء",
+      "normalized_word": "السماء",
+      "category": "nature",
+      "rank": 5,
+      "count": 109,
+      "metadata": {
+        "transliteration": "As-Samāʼ",
+        "meaning_id": "Langit",
+        "meaning_en": "Sky / heaven",
+        "meaning_ar": "السماء",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_السماء.json"
+    },
+    {
+      "word": "النار",
+      "normalized_word": "النار",
+      "category": "life",
+      "rank": 6,
+      "count": 102,
+      "metadata": {
+        "transliteration": "An-Nār",
+        "meaning_id": "Api / neraka",
+        "meaning_en": "Fire / Hell",
+        "meaning_ar": "النار",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+      },
+      "evidence_file": "data/processed/frequency_النار.json"
     },
     {
       "word": "الآخرة",
       "normalized_word": "الاخرة",
+      "category": "life",
+      "rank": 7,
       "count": 71,
-      "evidence_file": "data/processed/frequency_الآخرة.json",
-      "rank": 3
+      "metadata": {
+        "transliteration": "Al-Ākhirah",
+        "meaning_id": "Akhirat",
+        "meaning_en": "Hereafter",
+        "meaning_ar": "الآخرة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الآخرة.json"
+    },
+    {
+      "word": "القيامة",
+      "normalized_word": "القيامة",
+      "category": "life",
+      "rank": 8,
+      "count": 70,
+      "metadata": {
+        "transliteration": "Al-Qiyāmah",
+        "meaning_id": "Hari Kiamat",
+        "meaning_en": "Day of Resurrection",
+        "meaning_ar": "القيامة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_القيامة.json"
     },
     {
       "word": "الحياة",
       "normalized_word": "الحياة",
+      "category": "life",
+      "rank": 9,
       "count": 63,
-      "evidence_file": "data/processed/frequency_الحياة.json",
-      "rank": 4
+      "metadata": {
+        "transliteration": "Al-Ḥayāh",
+        "meaning_id": "Kehidupan",
+        "meaning_en": "Life",
+        "meaning_ar": "الحياة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الحياة.json"
     },
     {
       "word": "الليل",
       "normalized_word": "الليل",
+      "category": "time",
+      "rank": 10,
       "count": 59,
-      "evidence_file": "data/processed/frequency_الليل.json",
-      "rank": 5
+      "metadata": {
+        "transliteration": "Al-Layl",
+        "meaning_id": "Malam",
+        "meaning_en": "Night",
+        "meaning_ar": "الليل",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الليل.json"
+    },
+    {
+      "word": "الإنسان",
+      "normalized_word": "الانسان",
+      "category": "people",
+      "rank": 11,
+      "count": 58,
+      "metadata": {
+        "transliteration": "Al-Insān",
+        "meaning_id": "Manusia",
+        "meaning_en": "Human being",
+        "meaning_ar": "الإنسان",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الإنسان.json"
+    },
+    {
+      "word": "الصلاة",
+      "normalized_word": "الصلاة",
+      "category": "faith",
+      "rank": 12,
+      "count": 58,
+      "metadata": {
+        "transliteration": "Aṣ-Ṣalāh",
+        "meaning_id": "Salat",
+        "meaning_en": "Prayer",
+        "meaning_ar": "الصلاة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الصلاة.json"
+    },
+    {
+      "word": "الجنة",
+      "normalized_word": "الجنة",
+      "category": "life",
+      "rank": 13,
+      "count": 56,
+      "metadata": {
+        "transliteration": "Al-Jannah",
+        "meaning_id": "Surga",
+        "meaning_en": "Paradise",
+        "meaning_ar": "الجنة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الجنة.json"
     },
     {
       "word": "اليوم",
       "normalized_word": "اليوم",
+      "category": "time",
+      "rank": 14,
       "count": 41,
-      "evidence_file": "data/processed/frequency_اليوم.json",
-      "rank": 6
+      "metadata": {
+        "transliteration": "Al-Yawm",
+        "meaning_id": "Hari / hari ini",
+        "meaning_en": "The day / today",
+        "meaning_ar": "اليوم",
+        "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+      },
+      "evidence_file": "data/processed/frequency_اليوم.json"
     },
     {
       "word": "الموت",
       "normalized_word": "الموت",
+      "category": "life",
+      "rank": 15,
       "count": 35,
-      "evidence_file": "data/processed/frequency_الموت.json",
-      "rank": 7
+      "metadata": {
+        "transliteration": "Al-Mawt",
+        "meaning_id": "Kematian",
+        "meaning_en": "Death",
+        "meaning_ar": "الموت",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الموت.json"
+    },
+    {
+      "word": "الزكاة",
+      "normalized_word": "الزكاة",
+      "category": "faith",
+      "rank": 16,
+      "count": 26,
+      "metadata": {
+        "transliteration": "Az-Zakāh",
+        "meaning_id": "Zakat",
+        "meaning_en": "Almsgiving",
+        "meaning_ar": "الزكاة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الزكاة.json"
     },
     {
       "word": "النهار",
       "normalized_word": "النهار",
+      "category": "time",
+      "rank": 17,
       "count": 25,
-      "evidence_file": "data/processed/frequency_النهار.json",
-      "rank": 8
+      "metadata": {
+        "transliteration": "An-Nahār",
+        "meaning_id": "Siang",
+        "meaning_en": "Daytime",
+        "meaning_ar": "النهار",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_النهار.json"
+    },
+    {
+      "word": "البحر",
+      "normalized_word": "البحر",
+      "category": "nature",
+      "rank": 18,
+      "count": 23,
+      "metadata": {
+        "transliteration": "Al-Baḥr",
+        "meaning_id": "Laut",
+        "meaning_en": "Sea",
+        "meaning_ar": "البحر",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_البحر.json"
+    },
+    {
+      "word": "الشمس",
+      "normalized_word": "الشمس",
+      "category": "nature",
+      "rank": 19,
+      "count": 20,
+      "metadata": {
+        "transliteration": "Ash-Shams",
+        "meaning_id": "Matahari",
+        "meaning_en": "Sun",
+        "meaning_ar": "الشمس",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الشمس.json"
+    },
+    {
+      "word": "الماء",
+      "normalized_word": "الماء",
+      "category": "nature",
+      "rank": 20,
+      "count": 17,
+      "metadata": {
+        "transliteration": "Al-Māʼ",
+        "meaning_id": "Air",
+        "meaning_en": "Water",
+        "meaning_ar": "الماء",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الماء.json"
+    },
+    {
+      "word": "سنة",
+      "normalized_word": "سنة",
+      "category": "time",
+      "rank": 21,
+      "count": 14,
+      "metadata": {
+        "transliteration": "Sanah",
+        "meaning_id": "Tahun",
+        "meaning_en": "Year",
+        "meaning_ar": "سنة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_سنة.json"
+    },
+    {
+      "word": "الكفر",
+      "normalized_word": "الكفر",
+      "category": "faith",
+      "rank": 22,
+      "count": 11,
+      "metadata": {
+        "transliteration": "Al-Kufr",
+        "meaning_id": "Kekufuran",
+        "meaning_en": "Disbelief",
+        "meaning_ar": "الكفر",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الكفر.json"
+    },
+    {
+      "word": "الإيمان",
+      "normalized_word": "الايمان",
+      "category": "faith",
+      "rank": 23,
+      "count": 9,
+      "metadata": {
+        "transliteration": "Al-Īmān",
+        "meaning_id": "Iman",
+        "meaning_en": "Faith",
+        "meaning_ar": "الإيمان",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الإيمان.json"
+    },
+    {
+      "word": "الريح",
+      "normalized_word": "الريح",
+      "category": "nature",
+      "rank": 24,
+      "count": 8,
+      "metadata": {
+        "transliteration": "Ar-Rīḥ",
+        "meaning_id": "Angin",
+        "meaning_en": "Wind",
+        "meaning_ar": "الريح",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الريح.json"
+    },
+    {
+      "word": "الحج",
+      "normalized_word": "الحج",
+      "category": "faith",
+      "rank": 25,
+      "count": 7,
+      "metadata": {
+        "transliteration": "Al-Ḥajj",
+        "meaning_id": "Haji",
+        "meaning_en": "Pilgrimage",
+        "meaning_ar": "الحج",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الحج.json"
+    },
+    {
+      "word": "النجوم",
+      "normalized_word": "النجوم",
+      "category": "nature",
+      "rank": 26,
+      "count": 6,
+      "metadata": {
+        "transliteration": "An-Nujūm",
+        "meaning_id": "Bintang-bintang",
+        "meaning_en": "Stars",
+        "meaning_ar": "النجوم",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_النجوم.json"
+    },
+    {
+      "word": "القمر",
+      "normalized_word": "القمر",
+      "category": "nature",
+      "rank": 27,
+      "count": 5,
+      "metadata": {
+        "transliteration": "Al-Qamar",
+        "meaning_id": "Bulan",
+        "meaning_en": "Moon",
+        "meaning_ar": "القمر",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_القمر.json"
+    },
+    {
+      "word": "شهر",
+      "normalized_word": "شهر",
+      "category": "time",
+      "rank": 28,
+      "count": 4,
+      "metadata": {
+        "transliteration": "Shahr",
+        "meaning_id": "Bulan",
+        "meaning_en": "Month",
+        "meaning_ar": "شهر",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_شهر.json"
+    },
+    {
+      "word": "الجبل",
+      "normalized_word": "الجبل",
+      "category": "nature",
+      "rank": 29,
+      "count": 2,
+      "metadata": {
+        "transliteration": "Al-Jabal",
+        "meaning_id": "Gunung",
+        "meaning_en": "Mountain",
+        "meaning_ar": "الجبل",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الجبل.json"
+    },
+    {
+      "word": "المطر",
+      "normalized_word": "المطر",
+      "category": "nature",
+      "rank": 30,
+      "count": 0,
+      "metadata": {
+        "transliteration": "Al-Maṭar",
+        "meaning_id": "Hujan",
+        "meaning_en": "Rain",
+        "meaning_ar": "المطر",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_المطر.json"
+    },
+    {
+      "word": "الرجل",
+      "normalized_word": "الرجل",
+      "category": "people",
+      "rank": 31,
+      "count": 0,
+      "metadata": {
+        "transliteration": "Ar-Rajul",
+        "meaning_id": "Laki-laki",
+        "meaning_en": "Man",
+        "meaning_ar": "الرجل",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_الرجل.json"
+    },
+    {
+      "word": "المرأة",
+      "normalized_word": "المراة",
+      "category": "people",
+      "rank": 32,
+      "count": 0,
+      "metadata": {
+        "transliteration": "Al-Marʼah",
+        "meaning_id": "Perempuan",
+        "meaning_en": "Woman",
+        "meaning_ar": "المرأة",
+        "meaning_note": "Gloss ringkas."
+      },
+      "evidence_file": "data/processed/frequency_المرأة.json"
     }
   ]
 }

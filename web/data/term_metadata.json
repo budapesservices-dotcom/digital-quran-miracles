@@ -1,10 +1,24 @@
 {
+  "الأرض": {
+    "transliteration": "Al-Arḍ",
+    "meaning_id": "Bumi",
+    "meaning_en": "Earth",
+    "meaning_ar": "الأرض",
+    "meaning_note": "Gloss ringkas."
+  },
   "يوم": {
     "transliteration": "Yawm",
     "meaning_id": "Hari",
     "meaning_en": "Day",
     "meaning_ar": "يوم",
-    "meaning_note": "Makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+  },
+  "الناس": {
+    "transliteration": "An-Nās",
+    "meaning_id": "Manusia / manusia banyak",
+    "meaning_en": "People",
+    "meaning_ar": "الناس",
+    "meaning_note": "Gloss ringkas."
   },
   "الدنيا": {
     "transliteration": "Ad-Dunyā",
@@ -13,46 +27,200 @@
     "meaning_ar": "الدنيا",
     "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
   },
+  "السماء": {
+    "transliteration": "As-Samāʼ",
+    "meaning_id": "Langit",
+    "meaning_en": "Sky / heaven",
+    "meaning_ar": "السماء",
+    "meaning_note": "Gloss ringkas."
+  },
+  "النار": {
+    "transliteration": "An-Nār",
+    "meaning_id": "Api / neraka",
+    "meaning_en": "Fire / Hell",
+    "meaning_ar": "النار",
+    "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+  },
   "الآخرة": {
     "transliteration": "Al-Ākhirah",
     "meaning_id": "Akhirat",
     "meaning_en": "Hereafter",
     "meaning_ar": "الآخرة",
-    "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
+    "meaning_note": "Gloss ringkas."
+  },
+  "القيامة": {
+    "transliteration": "Al-Qiyāmah",
+    "meaning_id": "Hari Kiamat",
+    "meaning_en": "Day of Resurrection",
+    "meaning_ar": "القيامة",
+    "meaning_note": "Gloss ringkas."
   },
   "الحياة": {
     "transliteration": "Al-Ḥayāh",
     "meaning_id": "Kehidupan",
     "meaning_en": "Life",
     "meaning_ar": "الحياة",
-    "meaning_note": "Makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas."
   },
   "الليل": {
     "transliteration": "Al-Layl",
     "meaning_id": "Malam",
     "meaning_en": "Night",
     "meaning_ar": "الليل",
-    "meaning_note": "Makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas."
+  },
+  "الإنسان": {
+    "transliteration": "Al-Insān",
+    "meaning_id": "Manusia",
+    "meaning_en": "Human being",
+    "meaning_ar": "الإنسان",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الصلاة": {
+    "transliteration": "Aṣ-Ṣalāh",
+    "meaning_id": "Salat",
+    "meaning_en": "Prayer",
+    "meaning_ar": "الصلاة",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الجنة": {
+    "transliteration": "Al-Jannah",
+    "meaning_id": "Surga",
+    "meaning_en": "Paradise",
+    "meaning_ar": "الجنة",
+    "meaning_note": "Gloss ringkas."
   },
   "اليوم": {
     "transliteration": "Al-Yawm",
     "meaning_id": "Hari / hari ini",
     "meaning_en": "The day / today",
     "meaning_ar": "اليوم",
-    "meaning_note": "Nuansa makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas; konteks ayat menentukan nuansa."
   },
   "الموت": {
     "transliteration": "Al-Mawt",
     "meaning_id": "Kematian",
     "meaning_en": "Death",
     "meaning_ar": "الموت",
-    "meaning_note": "Makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas."
+  },
+  "الزكاة": {
+    "transliteration": "Az-Zakāh",
+    "meaning_id": "Zakat",
+    "meaning_en": "Almsgiving",
+    "meaning_ar": "الزكاة",
+    "meaning_note": "Gloss ringkas."
   },
   "النهار": {
     "transliteration": "An-Nahār",
     "meaning_id": "Siang",
     "meaning_en": "Daytime",
     "meaning_ar": "النهار",
-    "meaning_note": "Makna mengikuti konteks ayat."
+    "meaning_note": "Gloss ringkas."
+  },
+  "البحر": {
+    "transliteration": "Al-Baḥr",
+    "meaning_id": "Laut",
+    "meaning_en": "Sea",
+    "meaning_ar": "البحر",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الشمس": {
+    "transliteration": "Ash-Shams",
+    "meaning_id": "Matahari",
+    "meaning_en": "Sun",
+    "meaning_ar": "الشمس",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الماء": {
+    "transliteration": "Al-Māʼ",
+    "meaning_id": "Air",
+    "meaning_en": "Water",
+    "meaning_ar": "الماء",
+    "meaning_note": "Gloss ringkas."
+  },
+  "سنة": {
+    "transliteration": "Sanah",
+    "meaning_id": "Tahun",
+    "meaning_en": "Year",
+    "meaning_ar": "سنة",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الكفر": {
+    "transliteration": "Al-Kufr",
+    "meaning_id": "Kekufuran",
+    "meaning_en": "Disbelief",
+    "meaning_ar": "الكفر",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الإيمان": {
+    "transliteration": "Al-Īmān",
+    "meaning_id": "Iman",
+    "meaning_en": "Faith",
+    "meaning_ar": "الإيمان",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الريح": {
+    "transliteration": "Ar-Rīḥ",
+    "meaning_id": "Angin",
+    "meaning_en": "Wind",
+    "meaning_ar": "الريح",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الحج": {
+    "transliteration": "Al-Ḥajj",
+    "meaning_id": "Haji",
+    "meaning_en": "Pilgrimage",
+    "meaning_ar": "الحج",
+    "meaning_note": "Gloss ringkas."
+  },
+  "النجوم": {
+    "transliteration": "An-Nujūm",
+    "meaning_id": "Bintang-bintang",
+    "meaning_en": "Stars",
+    "meaning_ar": "النجوم",
+    "meaning_note": "Gloss ringkas."
+  },
+  "القمر": {
+    "transliteration": "Al-Qamar",
+    "meaning_id": "Bulan",
+    "meaning_en": "Moon",
+    "meaning_ar": "القمر",
+    "meaning_note": "Gloss ringkas."
+  },
+  "شهر": {
+    "transliteration": "Shahr",
+    "meaning_id": "Bulan",
+    "meaning_en": "Month",
+    "meaning_ar": "شهر",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الجبل": {
+    "transliteration": "Al-Jabal",
+    "meaning_id": "Gunung",
+    "meaning_en": "Mountain",
+    "meaning_ar": "الجبل",
+    "meaning_note": "Gloss ringkas."
+  },
+  "المطر": {
+    "transliteration": "Al-Maṭar",
+    "meaning_id": "Hujan",
+    "meaning_en": "Rain",
+    "meaning_ar": "المطر",
+    "meaning_note": "Gloss ringkas."
+  },
+  "الرجل": {
+    "transliteration": "Ar-Rajul",
+    "meaning_id": "Laki-laki",
+    "meaning_en": "Man",
+    "meaning_ar": "الرجل",
+    "meaning_note": "Gloss ringkas."
+  },
+  "المرأة": {
+    "transliteration": "Al-Marʼah",
+    "meaning_id": "Perempuan",
+    "meaning_en": "Woman",
+    "meaning_ar": "المرأة",
+    "meaning_note": "Gloss ringkas."
   }
 }

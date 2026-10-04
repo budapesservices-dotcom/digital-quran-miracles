@@ -1,0 +1,33 @@
+{
+  "target_word": "الجبل",
+  "normalized_word": "الجبل",
+  "count": 2,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 7,
+      "surah_name": "Chapter 7",
+      "ayah": 143,
+      "token_index": 18,
+      "text": "ولما جاء موسى لميقاتنا وكلمه ربه قال رب أرني أنظر إليك قال لن تراني ولكن انظر إلى الجبل فإن استقر مكانه فسوف تراني فلما تجلى ربه للجبل جعله دكا وخر موسى صعقا فلما أفاق قال سبحانك تبت إليك وأنا أول المؤمنين"
+    },
+    {
+      "surah": 7,
+      "surah_name": "Chapter 7",
+      "ayah": 171,
+      "token_index": 3,
+      "text": "وإذ نتقنا الجبل فوقهم كأنه ظلة وظنوا أنه واقع بهم خذوا ما آتيناكم بقوة واذكروا ما فيه لعلكم تتقون"
+    }
+  ]
+}

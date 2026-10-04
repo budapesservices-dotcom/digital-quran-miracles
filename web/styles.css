@@ -1033,3 +1033,37 @@ html[data-language="ar"] .learn-card p {
     min-height: auto;
   }
 }
+
+.term-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 4px 4px;
+  padding: 5px 2px;
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.term-category-header:first-child {
+  margin-top: 0;
+}
+
+.term-category-count {
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0;
+}
+
+.term-button {
+  min-height: 72px;
+}
+
+@media (max-width: 760px) {
+  .term-category-header {
+    margin-top: 16px;
+  }
+}

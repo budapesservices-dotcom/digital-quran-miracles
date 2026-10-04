@@ -1,0 +1,117 @@
+{
+  "target_word": "سنة",
+  "normalized_word": "سنة",
+  "count": 14,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 2,
+      "surah_name": "Chapter 2",
+      "ayah": 96,
+      "token_index": 14,
+      "text": "ولتجدنهم أحرص الناس على حياة ومن الذين أشركوا يود أحدهم لو يعمر ألف سنة وما هو بمزحزحه من العذاب أن يعمر والله بصير بما يعملون"
+    },
+    {
+      "surah": 2,
+      "surah_name": "Chapter 2",
+      "ayah": 255,
+      "token_index": 10,
+      "text": "الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السماوات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السماوات والأرض ولا يئوده حفظهما وهو العلي العظيم"
+    },
+    {
+      "surah": 5,
+      "surah_name": "Chapter 5",
+      "ayah": 26,
+      "token_index": 6,
+      "text": "قال فإنها محرمة عليهم أربعين سنة يتيهون في الأرض فلا تأس على القوم الفاسقين"
+    },
+    {
+      "surah": 15,
+      "surah_name": "Chapter 15",
+      "ayah": 13,
+      "token_index": 6,
+      "text": "لا يؤمنون به وقد خلت سنة الأولين"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 77,
+      "token_index": 1,
+      "text": "سنة من قد أرسلنا قبلك من رسلنا ولا تجد لسنتنا تحويلا"
+    },
+    {
+      "surah": 18,
+      "surah_name": "Chapter 18",
+      "ayah": 55,
+      "token_index": 14,
+      "text": "وما منع الناس أن يؤمنوا إذ جاءهم الهدى ويستغفروا ربهم إلا أن تأتيهم سنة الأولين أو يأتيهم العذاب قبلا"
+    },
+    {
+      "surah": 22,
+      "surah_name": "Chapter 22",
+      "ayah": 47,
+      "token_index": 12,
+      "text": "ويستعجلونك بالعذاب ولن يخلف الله وعده وإن يوما عند ربك كألف سنة مما تعدون"
+    },
+    {
+      "surah": 29,
+      "surah_name": "Chapter 29",
+      "ayah": 14,
+      "token_index": 9,
+      "text": "ولقد أرسلنا نوحا إلى قومه فلبث فيهم ألف سنة إلا خمسين عاما فأخذهم الطوفان وهم ظالمون"
+    },
+    {
+      "surah": 32,
+      "surah_name": "Chapter 32",
+      "ayah": 5,
+      "token_index": 15,
+      "text": "يدبر الأمر من السماء إلى الأرض ثم يعرج إليه في يوم كان مقداره ألف سنة مما تعدون"
+    },
+    {
+      "surah": 33,
+      "surah_name": "Chapter 33",
+      "ayah": 38,
+      "token_index": 11,
+      "text": "ما كان على النبي من حرج فيما فرض الله له سنة الله في الذين خلوا من قبل وكان أمر الله قدرا مقدورا"
+    },
+    {
+      "surah": 33,
+      "surah_name": "Chapter 33",
+      "ayah": 62,
+      "token_index": 1,
+      "text": "سنة الله في الذين خلوا من قبل ولن تجد لسنة الله تبديلا"
+    },
+    {
+      "surah": 46,
+      "surah_name": "Chapter 46",
+      "ayah": 15,
+      "token_index": 20,
+      "text": "ووصينا الإنسان بوالديه إحسانا حملته أمه كرها ووضعته كرها وحمله وفصاله ثلاثون شهرا حتى إذا بلغ أشده وبلغ أربعين سنة قال رب أوزعني أن أشكر نعمتك التي أنعمت علي وعلى والدي وأن أعمل صالحا ترضاه وأصلح لي في ذريتي إني تبت إليك وإني من المسلمين"
+    },
+    {
+      "surah": 48,
+      "surah_name": "Chapter 48",
+      "ayah": 23,
+      "token_index": 1,
+      "text": "سنة الله التي قد خلت من قبل ولن تجد لسنة الله تبديلا"
+    },
+    {
+      "surah": 70,
+      "surah_name": "Chapter 70",
+      "ayah": 4,
+      "token_index": 11,
+      "text": "تعرج الملائكة والروح إليه في يوم كان مقداره خمسين ألف سنة"
+    }
+  ]
+}

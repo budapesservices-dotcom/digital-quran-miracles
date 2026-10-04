@@ -1,0 +1,47 @@
+{
+  "target_word": "شهر",
+  "normalized_word": "شهر",
+  "count": 4,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 2,
+      "surah_name": "Chapter 2",
+      "ayah": 185,
+      "token_index": 1,
+      "text": "شهر رمضان الذي أنزل فيه القرآن هدى للناس وبينات من الهدى والفرقان فمن شهد منكم الشهر فليصمه ومن كان مريضا أو على سفر فعدة من أيام أخر يريد الله بكم اليسر ولا يريد بكم العسر ولتكملوا العدة ولتكبروا الله على ما هداكم ولعلكم تشكرون"
+    },
+    {
+      "surah": 34,
+      "surah_name": "Chapter 34",
+      "ayah": 12,
+      "token_index": 4,
+      "text": "ولسليمان الريح غدوها شهر ورواحها شهر وأسلنا له عين القطر ومن الجن من يعمل بين يديه بإذن ربه ومن يزغ منهم عن أمرنا نذقه من عذاب السعير"
+    },
+    {
+      "surah": 34,
+      "surah_name": "Chapter 34",
+      "ayah": 12,
+      "token_index": 6,
+      "text": "ولسليمان الريح غدوها شهر ورواحها شهر وأسلنا له عين القطر ومن الجن من يعمل بين يديه بإذن ربه ومن يزغ منهم عن أمرنا نذقه من عذاب السعير"
+    },
+    {
+      "surah": 97,
+      "surah_name": "Chapter 97",
+      "ayah": 3,
+      "token_index": 6,
+      "text": "ليلة القدر خير من ألف شهر"
+    }
+  ]
+}

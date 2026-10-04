@@ -124,7 +124,9 @@ function renderStaticText() {
 
   setText(
     "analytical-terms-title",
-    t("analyticalTerms")
+    `${t("analyticalTerms")} (${
+      state.data?.terms?.length || 0
+    })`
   );
 
   setText(
@@ -236,7 +238,7 @@ function renderTermList(filter = "") {
   const needle =
     filter.trim().toLowerCase();
 
-  const terms =
+  const matched =
     state.data.terms.filter(
       (term) => {
 
@@ -259,8 +261,82 @@ function renderTermList(filter = "") {
       }
     );
 
-  $("term-list").innerHTML =
-    terms.map((term) => {
+  const categoryOrder = [
+    "time",
+    "life",
+    "nature",
+    "people",
+    "faith"
+  ];
+
+  matched.sort((a, b) => {
+
+    const ai =
+      categoryOrder.indexOf(
+        a.category
+      );
+
+    const bi =
+      categoryOrder.indexOf(
+        b.category
+      );
+
+    const categoryCompare =
+      (ai === -1 ? 999 : ai)
+      -
+      (bi === -1 ? 999 : bi);
+
+    if (categoryCompare !== 0) {
+      return categoryCompare;
+    }
+
+    return a.rank - b.rank;
+  });
+
+  const groups = {};
+
+  for (const term of matched) {
+
+    const category =
+      term.category
+      || "uncategorized";
+
+    if (!groups[category]) {
+      groups[category] = [];
+    }
+
+    groups[category].push(term);
+  }
+
+  let html = "";
+
+  for (const category of categoryOrder) {
+
+    const terms =
+      groups[category];
+
+    if (!terms?.length) {
+      continue;
+    }
+
+    const labelKey =
+      `category_${category}`;
+
+    html += `
+      <div class="term-category-header">
+        <span>
+          ${escapeHtml(
+            t(labelKey)
+          )}
+        </span>
+
+        <span class="term-category-count">
+          ${formatNumber(terms.length)}
+        </span>
+      </div>
+    `;
+
+    html += terms.map((term) => {
 
       const metadata =
         term.metadata || {};
@@ -273,18 +349,24 @@ function renderTermList(filter = "") {
               ? "active"
               : ""
           }"
-          data-word="${escapeHtml(term.word)}"
+          data-word="${escapeHtml(
+            term.word
+          )}"
           type="button"
         >
+
           <span class="term-copy">
 
             <span class="term-word">
-              ${escapeHtml(term.word)}
+              ${escapeHtml(
+                term.word
+              )}
             </span>
 
             <span class="term-latin">
               ${escapeHtml(
-                metadata.transliteration || ""
+                metadata.transliteration
+                || ""
               )}
             </span>
 
@@ -297,11 +379,18 @@ function renderTermList(filter = "") {
           </span>
 
           <span class="term-count">
-            ${formatNumber(term.count)}
+            ${formatNumber(
+              term.count
+            )}
           </span>
+
         </button>
       `;
     }).join("");
+  }
+
+  $("term-list").innerHTML =
+    html;
 
   document
     .querySelectorAll(".term-button")
@@ -315,13 +404,15 @@ function renderTermList(filter = "") {
             button.dataset.word;
 
           state.evidenceIndex = 0;
-          state.evidenceSurah = "all";
+          state.evidenceSurah =
+            "all";
 
           render();
         }
       );
     });
 }
+
 
 function renderHero(term) {
   const metadata = term.metadata || {};

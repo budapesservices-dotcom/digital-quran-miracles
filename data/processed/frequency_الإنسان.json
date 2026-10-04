@@ -1,0 +1,425 @@
+{
+  "target_word": "الإنسان",
+  "normalized_word": "الانسان",
+  "count": 58,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 4,
+      "surah_name": "Chapter 4",
+      "ayah": 28,
+      "token_index": 7,
+      "text": "يريد الله أن يخفف عنكم وخلق الإنسان ضعيفا"
+    },
+    {
+      "surah": 10,
+      "surah_name": "Chapter 10",
+      "ayah": 12,
+      "token_index": 3,
+      "text": "وإذا مس الإنسان الضر دعانا لجنبه أو قاعدا أو قائما فلما كشفنا عنه ضره مر كأن لم يدعنا إلى ضر مسه كذلك زين للمسرفين ما كانوا يعملون"
+    },
+    {
+      "surah": 11,
+      "surah_name": "Chapter 11",
+      "ayah": 9,
+      "token_index": 3,
+      "text": "ولئن أذقنا الإنسان منا رحمة ثم نزعناها منه إنه ليئوس كفور"
+    },
+    {
+      "surah": 14,
+      "surah_name": "Chapter 14",
+      "ayah": 34,
+      "token_index": 13,
+      "text": "وآتاكم من كل ما سألتموه وإن تعدوا نعمت الله لا تحصوها إن الإنسان لظلوم كفار"
+    },
+    {
+      "surah": 15,
+      "surah_name": "Chapter 15",
+      "ayah": 26,
+      "token_index": 3,
+      "text": "ولقد خلقنا الإنسان من صلصال من حمإ مسنون"
+    },
+    {
+      "surah": 16,
+      "surah_name": "Chapter 16",
+      "ayah": 4,
+      "token_index": 2,
+      "text": "خلق الإنسان من نطفة فإذا هو خصيم مبين"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 11,
+      "token_index": 2,
+      "text": "ويدع الإنسان بالشر دعاءه بالخير وكان الإنسان عجولا"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 11,
+      "token_index": 7,
+      "text": "ويدع الإنسان بالشر دعاءه بالخير وكان الإنسان عجولا"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 67,
+      "token_index": 17,
+      "text": "وإذا مسكم الضر في البحر ضل من تدعون إلا إياه فلما نجاكم إلى البر أعرضتم وكان الإنسان كفورا"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 83,
+      "token_index": 4,
+      "text": "وإذا أنعمنا على الإنسان أعرض ونأى بجانبه وإذا مسه الشر كان يئوسا"
+    },
+    {
+      "surah": 17,
+      "surah_name": "Chapter 17",
+      "ayah": 100,
+      "token_index": 13,
+      "text": "قل لو أنتم تملكون خزائن رحمة ربي إذا لأمسكتم خشية الإنفاق وكان الإنسان قتورا"
+    },
+    {
+      "surah": 18,
+      "surah_name": "Chapter 18",
+      "ayah": 54,
+      "token_index": 11,
+      "text": "ولقد صرفنا في هذا القرآن للناس من كل مثل وكان الإنسان أكثر شيء جدلا"
+    },
+    {
+      "surah": 19,
+      "surah_name": "Chapter 19",
+      "ayah": 66,
+      "token_index": 2,
+      "text": "ويقول الإنسان أإذا ما مت لسوف أخرج حيا"
+    },
+    {
+      "surah": 19,
+      "surah_name": "Chapter 19",
+      "ayah": 67,
+      "token_index": 3,
+      "text": "أولا يذكر الإنسان أنا خلقناه من قبل ولم يك شيئا"
+    },
+    {
+      "surah": 21,
+      "surah_name": "Chapter 21",
+      "ayah": 37,
+      "token_index": 2,
+      "text": "خلق الإنسان من عجل سأريكم آياتي فلا تستعجلون"
+    },
+    {
+      "surah": 22,
+      "surah_name": "Chapter 22",
+      "ayah": 66,
+      "token_index": 9,
+      "text": "وهو الذي أحياكم ثم يميتكم ثم يحييكم إن الإنسان لكفور"
+    },
+    {
+      "surah": 23,
+      "surah_name": "Chapter 23",
+      "ayah": 12,
+      "token_index": 3,
+      "text": "ولقد خلقنا الإنسان من سلالة من طين"
+    },
+    {
+      "surah": 29,
+      "surah_name": "Chapter 29",
+      "ayah": 8,
+      "token_index": 2,
+      "text": "ووصينا الإنسان بوالديه حسنا وإن جاهداك لتشرك بي ما ليس لك به علم فلا تطعهما إلي مرجعكم فأنبئكم بما كنتم تعملون"
+    },
+    {
+      "surah": 31,
+      "surah_name": "Chapter 31",
+      "ayah": 14,
+      "token_index": 2,
+      "text": "ووصينا الإنسان بوالديه حملته أمه وهنا على وهن وفصاله في عامين أن اشكر لي ولوالديك إلي المصير"
+    },
+    {
+      "surah": 32,
+      "surah_name": "Chapter 32",
+      "ayah": 7,
+      "token_index": 8,
+      "text": "الذي أحسن كل شيء خلقه وبدأ خلق الإنسان من طين"
+    },
+    {
+      "surah": 33,
+      "surah_name": "Chapter 33",
+      "ayah": 72,
+      "token_index": 14,
+      "text": "إنا عرضنا الأمانة على السماوات والأرض والجبال فأبين أن يحملنها وأشفقن منها وحملها الإنسان إنه كان ظلوما جهولا"
+    },
+    {
+      "surah": 36,
+      "surah_name": "Chapter 36",
+      "ayah": 77,
+      "token_index": 3,
+      "text": "أولم ير الإنسان أنا خلقناه من نطفة فإذا هو خصيم مبين"
+    },
+    {
+      "surah": 39,
+      "surah_name": "Chapter 39",
+      "ayah": 8,
+      "token_index": 3,
+      "text": "وإذا مس الإنسان ضر دعا ربه منيبا إليه ثم إذا خوله نعمة منه نسي ما كان يدعو إليه من قبل وجعل لله أندادا ليضل عن سبيله قل تمتع بكفرك قليلا إنك من أصحاب النار"
+    },
+    {
+      "surah": 39,
+      "surah_name": "Chapter 39",
+      "ayah": 49,
+      "token_index": 3,
+      "text": "فإذا مس الإنسان ضر دعانا ثم إذا خولناه نعمة منا قال إنما أوتيته على علم بل هي فتنة ولكن أكثرهم لا يعلمون"
+    },
+    {
+      "surah": 41,
+      "surah_name": "Chapter 41",
+      "ayah": 49,
+      "token_index": 3,
+      "text": "لا يسأم الإنسان من دعاء الخير وإن مسه الشر فيئوس قنوط"
+    },
+    {
+      "surah": 41,
+      "surah_name": "Chapter 41",
+      "ayah": 51,
+      "token_index": 4,
+      "text": "وإذا أنعمنا على الإنسان أعرض ونأى بجانبه وإذا مسه الشر فذو دعاء عريض"
+    },
+    {
+      "surah": 42,
+      "surah_name": "Chapter 42",
+      "ayah": 48,
+      "token_index": 14,
+      "text": "فإن أعرضوا فما أرسلناك عليهم حفيظا إن عليك إلا البلاغ وإنا إذا أذقنا الإنسان منا رحمة فرح بها وإن تصبهم سيئة بما قدمت أيديهم فإن الإنسان كفور"
+    },
+    {
+      "surah": 42,
+      "surah_name": "Chapter 42",
+      "ayah": 48,
+      "token_index": 26,
+      "text": "فإن أعرضوا فما أرسلناك عليهم حفيظا إن عليك إلا البلاغ وإنا إذا أذقنا الإنسان منا رحمة فرح بها وإن تصبهم سيئة بما قدمت أيديهم فإن الإنسان كفور"
+    },
+    {
+      "surah": 43,
+      "surah_name": "Chapter 43",
+      "ayah": 15,
+      "token_index": 7,
+      "text": "وجعلوا له من عباده جزءا إن الإنسان لكفور مبين"
+    },
+    {
+      "surah": 46,
+      "surah_name": "Chapter 46",
+      "ayah": 15,
+      "token_index": 2,
+      "text": "ووصينا الإنسان بوالديه إحسانا حملته أمه كرها ووضعته كرها وحمله وفصاله ثلاثون شهرا حتى إذا بلغ أشده وبلغ أربعين سنة قال رب أوزعني أن أشكر نعمتك التي أنعمت علي وعلى والدي وأن أعمل صالحا ترضاه وأصلح لي في ذريتي إني تبت إليك وإني من المسلمين"
+    },
+    {
+      "surah": 50,
+      "surah_name": "Chapter 50",
+      "ayah": 16,
+      "token_index": 3,
+      "text": "ولقد خلقنا الإنسان ونعلم ما توسوس به نفسه ونحن أقرب إليه من حبل الوريد"
+    },
+    {
+      "surah": 55,
+      "surah_name": "Chapter 55",
+      "ayah": 3,
+      "token_index": 2,
+      "text": "خلق الإنسان"
+    },
+    {
+      "surah": 55,
+      "surah_name": "Chapter 55",
+      "ayah": 14,
+      "token_index": 2,
+      "text": "خلق الإنسان من صلصال كالفخار"
+    },
+    {
+      "surah": 70,
+      "surah_name": "Chapter 70",
+      "ayah": 19,
+      "token_index": 2,
+      "text": "إن الإنسان خلق هلوعا"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 3,
+      "token_index": 2,
+      "text": "أيحسب الإنسان ألن نجمع عظامه"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 5,
+      "token_index": 3,
+      "text": "بل يريد الإنسان ليفجر أمامه"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 10,
+      "token_index": 2,
+      "text": "يقول الإنسان يومئذ أين المفر"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 13,
+      "token_index": 2,
+      "text": "ينبأ الإنسان يومئذ بما قدم وأخر"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 14,
+      "token_index": 2,
+      "text": "بل الإنسان على نفسه بصيرة"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 36,
+      "token_index": 2,
+      "text": "أيحسب الإنسان أن يترك سدى"
+    },
+    {
+      "surah": 76,
+      "surah_name": "Chapter 76",
+      "ayah": 1,
+      "token_index": 8,
+      "text": "بسم الله الرحمن الرحيم هل أتى على الإنسان حين من الدهر لم يكن شيئا مذكورا"
+    },
+    {
+      "surah": 76,
+      "surah_name": "Chapter 76",
+      "ayah": 2,
+      "token_index": 3,
+      "text": "إنا خلقنا الإنسان من نطفة أمشاج نبتليه فجعلناه سميعا بصيرا"
+    },
+    {
+      "surah": 79,
+      "surah_name": "Chapter 79",
+      "ayah": 35,
+      "token_index": 3,
+      "text": "يوم يتذكر الإنسان ما سعى"
+    },
+    {
+      "surah": 80,
+      "surah_name": "Chapter 80",
+      "ayah": 17,
+      "token_index": 2,
+      "text": "قتل الإنسان ما أكفره"
+    },
+    {
+      "surah": 80,
+      "surah_name": "Chapter 80",
+      "ayah": 24,
+      "token_index": 2,
+      "text": "فلينظر الإنسان إلى طعامه"
+    },
+    {
+      "surah": 82,
+      "surah_name": "Chapter 82",
+      "ayah": 6,
+      "token_index": 3,
+      "text": "يا أيها الإنسان ما غرك بربك الكريم"
+    },
+    {
+      "surah": 84,
+      "surah_name": "Chapter 84",
+      "ayah": 6,
+      "token_index": 3,
+      "text": "يا أيها الإنسان إنك كادح إلى ربك كدحا فملاقيه"
+    },
+    {
+      "surah": 86,
+      "surah_name": "Chapter 86",
+      "ayah": 5,
+      "token_index": 2,
+      "text": "فلينظر الإنسان مم خلق"
+    },
+    {
+      "surah": 89,
+      "surah_name": "Chapter 89",
+      "ayah": 15,
+      "token_index": 2,
+      "text": "فأما الإنسان إذا ما ابتلاه ربه فأكرمه ونعمه فيقول ربي أكرمن"
+    },
+    {
+      "surah": 89,
+      "surah_name": "Chapter 89",
+      "ayah": 23,
+      "token_index": 6,
+      "text": "وجيء يومئذ بجهنم يومئذ يتذكر الإنسان وأنى له الذكرى"
+    },
+    {
+      "surah": 90,
+      "surah_name": "Chapter 90",
+      "ayah": 4,
+      "token_index": 3,
+      "text": "لقد خلقنا الإنسان في كبد"
+    },
+    {
+      "surah": 95,
+      "surah_name": "Chapter 95",
+      "ayah": 4,
+      "token_index": 3,
+      "text": "لقد خلقنا الإنسان في أحسن تقويم"
+    },
+    {
+      "surah": 96,
+      "surah_name": "Chapter 96",
+      "ayah": 2,
+      "token_index": 2,
+      "text": "خلق الإنسان من علق"
+    },
+    {
+      "surah": 96,
+      "surah_name": "Chapter 96",
+      "ayah": 5,
+      "token_index": 2,
+      "text": "علم الإنسان ما لم يعلم"
+    },
+    {
+      "surah": 96,
+      "surah_name": "Chapter 96",
+      "ayah": 6,
+      "token_index": 3,
+      "text": "كلا إن الإنسان ليطغى"
+    },
+    {
+      "surah": 99,
+      "surah_name": "Chapter 99",
+      "ayah": 3,
+      "token_index": 2,
+      "text": "وقال الإنسان ما لها"
+    },
+    {
+      "surah": 100,
+      "surah_name": "Chapter 100",
+      "ayah": 6,
+      "token_index": 2,
+      "text": "إن الإنسان لربه لكنود"
+    },
+    {
+      "surah": 103,
+      "surah_name": "Chapter 103",
+      "ayah": 2,
+      "token_index": 2,
+      "text": "إن الإنسان لفي خسر"
+    }
+  ]
+}

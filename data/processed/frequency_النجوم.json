@@ -1,0 +1,61 @@
+{
+  "target_word": "النجوم",
+  "normalized_word": "النجوم",
+  "count": 6,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 6,
+      "surah_name": "Chapter 6",
+      "ayah": 97,
+      "token_index": 5,
+      "text": "وهو الذي جعل لكم النجوم لتهتدوا بها في ظلمات البر والبحر قد فصلنا الآيات لقوم يعلمون"
+    },
+    {
+      "surah": 37,
+      "surah_name": "Chapter 37",
+      "ayah": 88,
+      "token_index": 4,
+      "text": "فنظر نظرة في النجوم"
+    },
+    {
+      "surah": 52,
+      "surah_name": "Chapter 52",
+      "ayah": 49,
+      "token_index": 5,
+      "text": "ومن الليل فسبحه وإدبار النجوم"
+    },
+    {
+      "surah": 56,
+      "surah_name": "Chapter 56",
+      "ayah": 75,
+      "token_index": 4,
+      "text": "فلا أقسم بمواقع النجوم"
+    },
+    {
+      "surah": 77,
+      "surah_name": "Chapter 77",
+      "ayah": 8,
+      "token_index": 2,
+      "text": "فإذا النجوم طمست"
+    },
+    {
+      "surah": 81,
+      "surah_name": "Chapter 81",
+      "ayah": 2,
+      "token_index": 2,
+      "text": "وإذا النجوم انكدرت"
+    }
+  ]
+}

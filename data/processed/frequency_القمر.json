@@ -1,0 +1,54 @@
+{
+  "target_word": "القمر",
+  "normalized_word": "القمر",
+  "count": 5,
+  "total_verses_analyzed": 6236,
+  "total_tokens_analyzed": 78248,
+  "method": {
+    "matching": "exact_normalized_token",
+    "diacritics_removed": true,
+    "tatweel_removed": true,
+    "alif_variants_normalized": true,
+    "alif_maqsura_normalized": true,
+    "root_analysis": false,
+    "morphological_analysis": false,
+    "substring_matching": false
+  },
+  "occurrences": [
+    {
+      "surah": 6,
+      "surah_name": "Chapter 6",
+      "ayah": 77,
+      "token_index": 3,
+      "text": "فلما رأى القمر بازغا قال هذا ربي فلما أفل قال لئن لم يهدني ربي لأكونن من القوم الضالين"
+    },
+    {
+      "surah": 36,
+      "surah_name": "Chapter 36",
+      "ayah": 40,
+      "token_index": 7,
+      "text": "لا الشمس ينبغي لها أن تدرك القمر ولا الليل سابق النهار وكل في فلك يسبحون"
+    },
+    {
+      "surah": 54,
+      "surah_name": "Chapter 54",
+      "ayah": 1,
+      "token_index": 8,
+      "text": "بسم الله الرحمن الرحيم اقتربت الساعة وانشق القمر"
+    },
+    {
+      "surah": 71,
+      "surah_name": "Chapter 71",
+      "ayah": 16,
+      "token_index": 2,
+      "text": "وجعل القمر فيهن نورا وجعل الشمس سراجا"
+    },
+    {
+      "surah": 75,
+      "surah_name": "Chapter 75",
+      "ayah": 8,
+      "token_index": 2,
+      "text": "وخسف القمر"
+    }
+  ]
+}
