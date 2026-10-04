@@ -1,7 +1,7 @@
 {
   "dataset": "data/raw/simple-clean.json",
   "total_chapters": 114,
-  "total_terms": 2,
+  "total_terms": 8,
   "matching_method": "exact_normalized_token",
   "analysis_rules": {
     "diacritics_removed": true,
@@ -21,11 +21,53 @@
       "rank": 1
     },
     {
+      "word": "الدنيا",
+      "normalized_word": "الدنيا",
+      "count": 115,
+      "evidence_file": "data/processed/frequency_الدنيا.json",
+      "rank": 2
+    },
+    {
+      "word": "الآخرة",
+      "normalized_word": "الاخرة",
+      "count": 71,
+      "evidence_file": "data/processed/frequency_الآخرة.json",
+      "rank": 3
+    },
+    {
+      "word": "الحياة",
+      "normalized_word": "الحياة",
+      "count": 63,
+      "evidence_file": "data/processed/frequency_الحياة.json",
+      "rank": 4
+    },
+    {
+      "word": "الليل",
+      "normalized_word": "الليل",
+      "count": 59,
+      "evidence_file": "data/processed/frequency_الليل.json",
+      "rank": 5
+    },
+    {
       "word": "اليوم",
       "normalized_word": "اليوم",
       "count": 41,
       "evidence_file": "data/processed/frequency_اليوم.json",
-      "rank": 2
+      "rank": 6
+    },
+    {
+      "word": "الموت",
+      "normalized_word": "الموت",
+      "count": 35,
+      "evidence_file": "data/processed/frequency_الموت.json",
+      "rank": 7
+    },
+    {
+      "word": "النهار",
+      "normalized_word": "النهار",
+      "count": 25,
+      "evidence_file": "data/processed/frequency_النهار.json",
+      "rank": 8
     }
   ]
 }

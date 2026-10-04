@@ -1,55 +1,123 @@
 {
   "title": "Exploratory Term Pair Analysis",
   "status": "candidate_analysis",
-  "warning": "Pairs are exploratory observations. Numerical relationships do not by themselves establish significance or miraculous status.",
-  "method": "exact_normalized_token",
+  "warning": "These are exploratory numerical observations. A numerical relationship does not by itself establish statistical significance, causation, or miraculous status.",
+  "method": {
+    "frequency_source": "data/processed/frequency_index.json",
+    "distribution_source": "data/processed/surah_distribution.json",
+    "matching": "exact_normalized_token"
+  },
   "pairs": [
     {
       "term_a": "يوم",
       "term_b": "اليوم",
-      "count_a": 217,
-      "count_b": 41,
+      "counts": {
+        "a": 217,
+        "b": 41
+      },
       "derived": {
         "difference_a_minus_b": 176,
         "sum": 258,
         "equal": false,
         "ratio_a_to_b": 5.292683
+      },
+      "distribution": {
+        "shared_surahs": 22,
+        "jaccard_overlap": 0.314286
+      },
+      "evidence": {
+        "term_a_file": "data/processed/frequency_يوم.json",
+        "term_b_file": "data/processed/frequency_اليوم.json"
+      },
+      "formulas": {
+        "difference_a_minus_b": "count_a - count_b",
+        "sum": "count_a + count_b",
+        "ratio_a_to_b": "count_a / count_b",
+        "jaccard_overlap": "|surahs_a ∩ surahs_b| / |surahs_a ∪ surahs_b|"
       }
     },
     {
       "term_a": "الليل",
       "term_b": "النهار",
-      "count_a": 59,
-      "count_b": 25,
+      "counts": {
+        "a": 59,
+        "b": 25
+      },
       "derived": {
         "difference_a_minus_b": 34,
         "sum": 84,
         "equal": false,
         "ratio_a_to_b": 2.36
+      },
+      "distribution": {
+        "shared_surahs": null,
+        "jaccard_overlap": null
+      },
+      "evidence": {
+        "term_a_file": "data/processed/frequency_الليل.json",
+        "term_b_file": "data/processed/frequency_النهار.json"
+      },
+      "formulas": {
+        "difference_a_minus_b": "count_a - count_b",
+        "sum": "count_a + count_b",
+        "ratio_a_to_b": "count_a / count_b",
+        "jaccard_overlap": "|surahs_a ∩ surahs_b| / |surahs_a ∪ surahs_b|"
       }
     },
     {
       "term_a": "الدنيا",
       "term_b": "الآخرة",
-      "count_a": 115,
-      "count_b": 71,
+      "counts": {
+        "a": 115,
+        "b": 71
+      },
       "derived": {
         "difference_a_minus_b": 44,
         "sum": 186,
         "equal": false,
         "ratio_a_to_b": 1.619718
+      },
+      "distribution": {
+        "shared_surahs": null,
+        "jaccard_overlap": null
+      },
+      "evidence": {
+        "term_a_file": "data/processed/frequency_الدنيا.json",
+        "term_b_file": "data/processed/frequency_الآخرة.json"
+      },
+      "formulas": {
+        "difference_a_minus_b": "count_a - count_b",
+        "sum": "count_a + count_b",
+        "ratio_a_to_b": "count_a / count_b",
+        "jaccard_overlap": "|surahs_a ∩ surahs_b| / |surahs_a ∪ surahs_b|"
       }
     },
     {
       "term_a": "الحياة",
       "term_b": "الموت",
-      "count_a": 63,
-      "count_b": 35,
+      "counts": {
+        "a": 63,
+        "b": 35
+      },
       "derived": {
         "difference_a_minus_b": 28,
         "sum": 98,
         "equal": false,
         "ratio_a_to_b": 1.8
+      },
+      "distribution": {
+        "shared_surahs": null,
+        "jaccard_overlap": null
+      },
+      "evidence": {
+        "term_a_file": "data/processed/frequency_الحياة.json",
+        "term_b_file": "data/processed/frequency_الموت.json"
+      },
+      "formulas": {
+        "difference_a_minus_b": "count_a - count_b",
+        "sum": "count_a + count_b",
+        "ratio_a_to_b": "count_a / count_b",
+        "jaccard_overlap": "|surahs_a ∩ surahs_b| / |surahs_a ∪ surahs_b|"
       }
     }
   ]
