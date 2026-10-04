@@ -30,7 +30,8 @@
           </p>
         </div>
 
-        <div id="corpus-badge" class="corpus-badge">
+        <div class="header-actions"><label class="language-control"><span id="language-label">Language</span><select id="language-select" class="language-select" aria-label="Language"><option value="id">Bahasa Indonesia</option><option value="en">English</option><option value="ar">العربية</option></select></label>
+<div id="corpus-badge" class="corpus-badge">
           Loading corpus…
         </div>
       </div>
@@ -149,7 +150,7 @@
                 <span>114</span>
               </div>
 
-              <div class="chart-caption">
+              <div id="chart-caption" class="chart-caption">
                 Interactive D3 visualization
               </div>
 
@@ -171,9 +172,9 @@
 
           <div class="section-heading">
             <div>
-              <h2>Verse-Level Evidence</h2>
+              <h2 id="evidence-title">Verse-Level Evidence</h2>
 
-              <p>
+              <p id=\"evidence-description\">>
                 Every occurrence comes from the analyzed corpus and retains
                 its surah, ayah, token position, and source verse text.
               </p>
@@ -200,7 +201,7 @@
             </label>
 
             <label class="toolbar-field">
-              <span>Jump to occurrence</span>
+              <span id="jump-label">Jump to occurrence</span>
 
               <input
                 id="evidence-jump"
@@ -245,9 +246,9 @@
 
         <section class="panel">
 
-          <h2>Exploratory Term Pairs</h2>
+          <h2 id="pairs-title">Exploratory Term Pairs</h2>
 
-          <p>
+          <p id=\"pairs-description\">>
             Candidate relationships are shown as numerical observations,
             not predefined proof.
           </p>
@@ -327,7 +328,7 @@
     </div>
 
     <footer>
-      <div>
+      <div id=\"footer-text\">>
         Data status: observed-data presentation. Frequency and numerical
         observations are tied to the project corpus and documented
         analysis rules.
