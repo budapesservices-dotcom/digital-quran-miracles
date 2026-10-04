@@ -413,6 +413,7 @@ function render() {
   renderHero(term);
   renderNumerical(term);
   renderDistribution(term);
+  renderD3Distribution(term);
   renderSurahFilter(term);
   renderEvidence(term);
   renderPairs();

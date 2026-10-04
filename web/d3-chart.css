@@ -1,0 +1,95 @@
+.d3-chart {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.d3-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.d3-axis text {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
+.d3-axis path,
+.d3-axis line {
+  stroke: var(--line);
+}
+
+.d3-grid line {
+  stroke: var(--line);
+  stroke-opacity: 0.65;
+}
+
+.d3-grid path {
+  display: none;
+}
+
+.d3-series {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.72;
+}
+
+.d3-point {
+  fill: var(--panel);
+  stroke: var(--green);
+  stroke-width: 1.8;
+  transition:
+    r 0.15s ease,
+    stroke-width 0.15s ease;
+}
+
+.d3-point:hover {
+  stroke-width: 3;
+}
+
+.d3-point.selected {
+  fill: var(--gold);
+  stroke: var(--gold);
+}
+
+.d3-zero {
+  fill: var(--line);
+  stroke: transparent;
+}
+
+.d3-tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translate(12px, 12px);
+  transition: opacity 0.12s ease;
+}
+
+.d3-tooltip strong {
+  color: var(--green);
+}
+
+.chart-caption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
