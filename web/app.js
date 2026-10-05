@@ -1073,6 +1073,52 @@ function renderHero(term) {
       getMeaning(term);
   }
 
+    const observationDescription =
+    $("observation-description");
+
+  if (observationDescription) {
+    const digitSum =
+      term.numerical
+        ?.derived_metrics
+        ?.digit_sum;
+
+    const digitExpression =
+      String(count)
+        .split("")
+        .join(" + ");
+
+    observationDescription.textContent =
+      state.language === "id"
+        ? `Dalam corpus yang dianalisis, term ini muncul ${formatNumber(
+            count
+          )} kali dan ditemukan setidaknya sekali di ${formatNumber(
+            surahCount
+          )} dari ${formatNumber(
+            totalSurahs
+          )} surah. Sifat numeriknya: ${digitExpression} = ${formatNumber(
+            digitSum
+          )}.`
+        : state.language === "ar"
+          ? `في مجموعة البيانات التي تم تحليلها، ظهر هذا المصطلح ${formatNumber(
+              count
+            )} مرة وظهر في ${formatNumber(
+              surahCount
+            )} من أصل ${formatNumber(
+              totalSurahs
+            )} سورة. الخاصية الرقمية: ${digitExpression} = ${formatNumber(
+              digitSum
+            )}.`
+          : `In the analyzed corpus, this term appears ${formatNumber(
+              count
+            )} times and occurs in ${formatNumber(
+              surahCount
+            )} of ${formatNumber(
+              totalSurahs
+            )} surahs. Its numerical property is ${digitExpression} = ${formatNumber(
+              digitSum
+            )}.`;
+  }
+
   const stats =
     $("stats");
 
@@ -1918,21 +1964,24 @@ const directUrl =
       "
     >
 
-      <div
-        class="evidence-ref"
-      >
-        ${escapeHtml(
-          current.surah_name
-            || `Surah ${current.surah}`
-        )}
+      <div class="evidence-ref">
+  ${escapeHtml(
+    current.surah_name
+      || `Surah ${current.surah}`
+  )}
 
-        ·
+  ·
 
-        ${getVerseLabel()}
-        ${escapeHtml(
-          current.ayah
-        )}
-      </div>
+  ${getVerseLabel()}
+
+  ${escapeHtml(
+    current.ayah
+  )}
+</div>
+
+<div class="evidence-trace">
+  ${escapeHtml(reference)}
+</div>
 
 
       <p
