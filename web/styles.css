@@ -984,11 +984,21 @@ a {
 }
 
 .evidence-trace {
-  margin-top: 6px;
-  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  padding: 10px 13px;
+  border: 1px solid var(--green-border);
+  border-radius: 14px;
+  background: var(--green-soft);
   color: var(--muted);
   font-size: 0.68rem;
-  letter-spacing: 0.04em;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
 }
 
 .section-heading {

@@ -1328,6 +1328,14 @@ function renderEvidence(term) {
 
   const total = filtered.length;
 
+  const trace = $("evidence-trace");
+
+  if (trace) {
+    trace.textContent = t("evidenceTrace")
+      .replace("{term}", term.word)
+      .replace("{count}", formatNumber(term.count || 0));
+  }
+
   if (!total) {
     renderFeatureVerse(term, null);
 
