@@ -1995,9 +1995,7 @@ const directUrl =
 
 function renderPairs() {
   const pairs =
-    state.data
-      .pair_analysis
-      ?.pairs || [];
+    state.data.pair_analysis?.pairs || [];
 
   const list =
     $("pair-list");
@@ -2010,13 +2008,9 @@ function renderPairs() {
     pairs
       .map(
         (pair) => `
-          <article
-            class="pair-card"
-          >
+          <article class="pair-card">
 
-            <div
-              class="pair-words"
-            >
+            <div class="pair-header">
 
               <button
                 class="pair-select"
@@ -2025,18 +2019,16 @@ function renderPairs() {
                   pair.term_a
                 )}"
               >
-
-                <span
-                  class="pair-word"
-                >
+                <span class="pair-word">
                   ${escapeHtml(
                     pair.term_a
                   )}
                 </span>
-
               </button>
 
-              <span>↔</span>
+              <span class="pair-arrow">
+                ↔
+              </span>
 
               <button
                 class="pair-select"
@@ -2045,72 +2037,129 @@ function renderPairs() {
                   pair.term_b
                 )}"
               >
-
-                <span
-                  class="pair-word"
-                >
+                <span class="pair-word">
                   ${escapeHtml(
                     pair.term_b
                   )}
                 </span>
-
               </button>
 
             </div>
 
-            <div
-              class="pair-data"
-            >
-              ${t(
-                "frequency"
-              )}:
 
-              ${formatNumber(
-                pair.counts.a
-              )}
+            <div class="pair-frequency">
 
-              vs
+              <div class="pair-frequency-item">
 
-              ${formatNumber(
-                pair.counts.b
-              )}
+                <span class="pair-frequency-value">
+                  ${formatNumber(
+                    pair.counts.a
+                  )}
+                </span>
 
-              ·
+                <span class="pair-frequency-label">
+                  ${escapeHtml(
+                    pair.term_a
+                  )}
+                  · ${t("frequency")}
+                </span>
 
-              ${t(
-                "metricDifference"
-              )}:
+              </div>
 
-              ${formatNumber(
-                pair.derived
-                  .difference_a_minus_b
-              )}
 
-              ·
+              <div class="pair-frequency-divider">
+                vs
+              </div>
 
-              ${t(
-                "metricRatio"
-              )}:
 
-              ${pair.derived.ratio_a_to_b}
+              <div class="pair-frequency-item">
 
-              ·
+                <span class="pair-frequency-value">
+                  ${formatNumber(
+                    pair.counts.b
+                  )}
+                </span>
 
-              ${t(
-                "metricSharedSurahs"
-              )}:
+                <span class="pair-frequency-label">
+                  ${escapeHtml(
+                    pair.term_b
+                  )}
+                  · ${t("frequency")}
+                </span>
 
-              ${pair.distribution
-                .shared_surahs}
+              </div>
 
-              ·
+            </div>
 
-              ${t(
-                "metricJaccard"
-              )}:
 
-              ${pair.distribution
-                .jaccard_overlap}
+            <div class="pair-metrics">
+
+              <div class="pair-metric">
+
+                <span class="pair-metric-label">
+                  ${t(
+                    "metricDifference"
+                  )}
+                </span>
+
+                <strong class="pair-metric-value">
+                  ${formatNumber(
+                    pair.derived
+                      .difference_a_minus_b
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="pair-metric">
+
+                <span class="pair-metric-label">
+                  ${t(
+                    "metricRatio"
+                  )}
+                </span>
+
+                <strong class="pair-metric-value">
+                  ${pair.derived.ratio_a_to_b}
+                </strong>
+
+              </div>
+
+
+              <div class="pair-metric">
+
+                <span class="pair-metric-label">
+                  ${t(
+                    "metricSharedSurahs"
+                  )}
+                </span>
+
+                <strong class="pair-metric-value">
+                  ${formatNumber(
+                    pair.distribution
+                      .shared_surahs
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="pair-metric">
+
+                <span class="pair-metric-label">
+                  ${t(
+                    "metricJaccard"
+                  )}
+                </span>
+
+                <strong class="pair-metric-value">
+                  ${pair.distribution
+                    .jaccard_overlap}
+                </strong>
+
+              </div>
+
             </div>
 
           </article>
@@ -2118,32 +2167,39 @@ function renderPairs() {
       )
       .join("");
 
+
   list
     .querySelectorAll(
       ".pair-select"
     )
-    .forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          state.selectedWord =
-            button.dataset.word;
+    .forEach(
+      (button) => {
 
-          state.evidenceIndex =
-            0;
+        button.addEventListener(
+          "click",
+          () => {
 
-          state.evidenceSurah =
-            "all";
+            state.selectedWord =
+              button.dataset.word;
 
-          render();
+            state.evidenceIndex =
+              0;
 
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }
-      );
-    });
+            state.evidenceSurah =
+              "all";
+
+            render();
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+
+          }
+        );
+
+      }
+    );
 }
 
 function renderMethodology() {
