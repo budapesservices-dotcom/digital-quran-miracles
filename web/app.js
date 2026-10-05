@@ -499,6 +499,9 @@ function getUxText(key) {
       auditTrail:
         "Jejak audit",
 
+        methodScope:
+  "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
+
       surahs:
         "surah",
 
@@ -561,6 +564,9 @@ function getUxText(key) {
       auditTrail:
         "Audit trail",
 
+        methodScope:
+  "The current scope focuses on data-driven mathematical observations. The dataset structure and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
+
       surahs:
         "surahs",
 
@@ -622,6 +628,9 @@ function getUxText(key) {
 
       auditTrail:
         "مسار التدقيق",
+
+        methodScope:
+  "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة موضوعات مستقبلية دون تغيير أساس التنقل في القرآن.",
 
       surahs:
         "سور",
@@ -2604,6 +2613,44 @@ function renderMethodology() {
       method.substring_matching
     )
   );
+
+  const scope =
+    $("method-scope");
+
+  if (scope) {
+    const futureThemes =
+      state.language === "id"
+        ? "Tema lanjutan: komposisi cincin, sains terpilih, linguistik, peristiwa masa lalu, dan prediksi tekstual."
+        : state.language === "ar"
+          ? "الموضوعات المستقبلية: التركيب الحلقي، وموضوعات علمية مختارة، والبلاغة واللغة، والأحداث الماضية، والتنبؤات النصية."
+          : "Future themes: ring composition, selected scientific topics, linguistic brilliance, verified past events, and textual predictions.";
+
+    scope.innerHTML = `
+      <div class="method-scope-label">
+        ${escapeHtml(
+          state.language === "id"
+            ? "Ruang lingkup"
+            : state.language === "ar"
+              ? "النطاق"
+              : "Scope"
+        )}
+      </div>
+
+      <p>
+        ${escapeHtml(
+          getUxText(
+            "methodScope"
+          )
+        )}
+      </p>
+
+      <small>
+        ${escapeHtml(
+          futureThemes
+        )}
+      </small>
+    `;
+  }
 
   setText(
     "footer-text",

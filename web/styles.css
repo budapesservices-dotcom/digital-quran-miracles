@@ -1353,6 +1353,51 @@ a {
   }
 }
 
+.method-scope {
+  margin-top: 14px;
+  padding: 15px 17px;
+
+  border-left:
+    2px solid
+    var(--gold);
+
+  background:
+    var(--gold-soft);
+
+  border-radius: 0 12px 12px 0;
+}
+
+.method-scope-label {
+  margin-bottom: 5px;
+
+  color: var(--gold);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.method-scope p {
+  margin: 0;
+
+  color: var(--text-sub);
+
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.method-scope small {
+  display: block;
+  margin-top: 7px;
+
+  color: var(--muted);
+
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
 /* Kept for compatibility if the panel exists in the DOM. */
 .learn-panel {
   margin-top: 20px;
