@@ -2230,163 +2230,251 @@ function renderPairs() {
   list.innerHTML =
     pairs
       .map(
-        (pair) => `
-          <article class="pair-card">
+        (pair) => {
+          const countA =
+            Number(
+              pair.counts?.a || 0
+            );
 
-            <div class="pair-header">
+          const countB =
+            Number(
+              pair.counts?.b || 0
+            );
 
-              <button
-                class="pair-select"
-                type="button"
-                data-word="${escapeHtml(
-                  pair.term_a
-                )}"
-              >
-                <span class="pair-word">
-                  ${escapeHtml(
+          const difference =
+            Number(
+              pair.derived
+                ?.difference_a_minus_b || 0
+            );
+
+          const ratio =
+            Number(
+              pair.derived
+                ?.ratio_a_to_b || 0
+            );
+
+          const sharedSurahs =
+            Number(
+              pair.distribution
+                ?.shared_surahs || 0
+            );
+
+          const jaccard =
+            Number(
+              pair.distribution
+                ?.jaccard_overlap || 0
+            );
+
+          const jaccardPercent =
+            formatDecimal(
+              jaccard * 100,
+              1
+            );
+
+          const observation =
+            state.language === "id"
+              ? `Dalam corpus ini, ${pair.term_a} muncul ${formatNumber(
+                  countA
+                )} kali dan ${pair.term_b} ${formatNumber(
+                  countB
+                )} kali. Keduanya muncul dalam ${formatNumber(
+                  sharedSurahs
+                )} surah yang sama; overlap surah sebesar ${jaccardPercent}%.`
+              : state.language === "ar"
+                ? `في مجموعة البيانات هذه، ظهر ${pair.term_a} ${formatNumber(
+                    countA
+                  )} مرة وظهر ${pair.term_b} ${formatNumber(
+                    countB
+                  )} مرة. وظهر المصطلحان في ${formatNumber(
+                    sharedSurahs
+                  )} سورة مشتركة؛ وبلغ تداخل السور ${jaccardPercent}٪.`
+                : `In this corpus, ${pair.term_a} appears ${formatNumber(
+                    countA
+                  )} times and ${pair.term_b} ${formatNumber(
+                    countB
+                  )} times. The two terms appear in ${formatNumber(
+                    sharedSurahs
+                  )} of the same surahs, with ${jaccardPercent}% surah overlap.`;
+
+          const observationNote =
+            state.language === "id"
+              ? "Ini adalah observasi deskriptif; hubungan numerik tidak dengan sendirinya membuktikan sebab, makna khusus, atau status mukjizat."
+              : state.language === "ar"
+                ? "هذه ملاحظة وصفية؛ والعلاقة العددية وحدها لا تثبت السببية أو المعنى الخاص أو صفة الإعجاز."
+                : "This is a descriptive observation; a numerical relationship alone does not establish causation, special meaning, or miraculous status.";
+
+          return `
+            <article class="pair-card">
+
+              <div class="pair-header">
+
+                <button
+                  class="pair-select"
+                  type="button"
+                  data-word="${escapeHtml(
                     pair.term_a
-                  )}
+                  )}"
+                >
+                  <span class="pair-word">
+                    ${escapeHtml(
+                      pair.term_a
+                    )}
+                  </span>
+                </button>
+
+                <span class="pair-arrow">
+                  ↔
                 </span>
-              </button>
 
-              <span class="pair-arrow">
-                ↔
-              </span>
-
-              <button
-                class="pair-select"
-                type="button"
-                data-word="${escapeHtml(
-                  pair.term_b
-                )}"
-              >
-                <span class="pair-word">
-                  ${escapeHtml(
+                <button
+                  class="pair-select"
+                  type="button"
+                  data-word="${escapeHtml(
                     pair.term_b
-                  )}
-                </span>
-              </button>
+                  )}"
+                >
+                  <span class="pair-word">
+                    ${escapeHtml(
+                      pair.term_b
+                    )}
+                  </span>
+                </button>
 
-            </div>
+              </div>
 
 
-            <div class="pair-frequency">
+              <div class="pair-frequency">
 
-              <div class="pair-frequency-item">
+                <div class="pair-frequency-item">
 
-                <span class="pair-frequency-value">
-                  ${formatNumber(
-                    pair.counts.a
-                  )}
-                </span>
+                  <span class="pair-frequency-value">
+                    ${formatNumber(
+                      countA
+                    )}
+                  </span>
 
-                <span class="pair-frequency-label">
+                  <span class="pair-frequency-label">
+                    ${escapeHtml(
+                      pair.term_a
+                    )}
+                    · ${t("frequency")}
+                  </span>
+
+                </div>
+
+
+                <div class="pair-frequency-divider">
+                  vs
+                </div>
+
+
+                <div class="pair-frequency-item">
+
+                  <span class="pair-frequency-value">
+                    ${formatNumber(
+                      countB
+                    )}
+                  </span>
+
+                  <span class="pair-frequency-label">
+                    ${escapeHtml(
+                      pair.term_b
+                    )}
+                    · ${t("frequency")}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="pair-metrics">
+
+                <div class="pair-metric">
+
+                  <span class="pair-metric-label">
+                    ${t(
+                      "metricDifference"
+                    )}
+                  </span>
+
+                  <strong class="pair-metric-value">
+                    ${formatNumber(
+                      difference
+                    )}
+                  </strong>
+
+                </div>
+
+
+                <div class="pair-metric">
+
+                  <span class="pair-metric-label">
+                    ${t(
+                      "metricRatio"
+                    )}
+                  </span>
+
+                  <strong class="pair-metric-value">
+                    ${ratio}
+                  </strong>
+
+                </div>
+
+
+                <div class="pair-metric">
+
+                  <span class="pair-metric-label">
+                    ${t(
+                      "metricSharedSurahs"
+                    )}
+                  </span>
+
+                  <strong class="pair-metric-value">
+                    ${formatNumber(
+                      sharedSurahs
+                    )}
+                  </strong>
+
+                </div>
+
+
+                <div class="pair-metric">
+
+                  <span class="pair-metric-label">
+                    ${t(
+                      "metricJaccard"
+                    )}
+                  </span>
+
+                  <strong class="pair-metric-value">
+                    ${jaccard}
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <div class="pair-observation">
+
+                <p>
                   ${escapeHtml(
-                    pair.term_a
+                    observation
                   )}
-                  · ${t("frequency")}
-                </span>
+                </p>
 
-              </div>
-
-
-              <div class="pair-frequency-divider">
-                vs
-              </div>
-
-
-              <div class="pair-frequency-item">
-
-                <span class="pair-frequency-value">
-                  ${formatNumber(
-                    pair.counts.b
-                  )}
-                </span>
-
-                <span class="pair-frequency-label">
+                <small>
                   ${escapeHtml(
-                    pair.term_b
+                    observationNote
                   )}
-                  · ${t("frequency")}
-                </span>
+                </small>
 
               </div>
 
-            </div>
-
-
-            <div class="pair-metrics">
-
-              <div class="pair-metric">
-
-                <span class="pair-metric-label">
-                  ${t(
-                    "metricDifference"
-                  )}
-                </span>
-
-                <strong class="pair-metric-value">
-                  ${formatNumber(
-                    pair.derived
-                      .difference_a_minus_b
-                  )}
-                </strong>
-
-              </div>
-
-
-              <div class="pair-metric">
-
-                <span class="pair-metric-label">
-                  ${t(
-                    "metricRatio"
-                  )}
-                </span>
-
-                <strong class="pair-metric-value">
-                  ${pair.derived.ratio_a_to_b}
-                </strong>
-
-              </div>
-
-
-              <div class="pair-metric">
-
-                <span class="pair-metric-label">
-                  ${t(
-                    "metricSharedSurahs"
-                  )}
-                </span>
-
-                <strong class="pair-metric-value">
-                  ${formatNumber(
-                    pair.distribution
-                      .shared_surahs
-                  )}
-                </strong>
-
-              </div>
-
-
-              <div class="pair-metric">
-
-                <span class="pair-metric-label">
-                  ${t(
-                    "metricJaccard"
-                  )}
-                </span>
-
-                <strong class="pair-metric-value">
-                  ${pair.distribution
-                    .jaccard_overlap}
-                </strong>
-
-              </div>
-
-            </div>
-
-          </article>
-        `
+            </article>
+          `;
+        }
       )
       .join("");
 
