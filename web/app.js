@@ -350,7 +350,7 @@ function getUxText(key) {
 
       exploratoryComparison: "Perbandingan eksploratif",
 
-      auditTrail: "Jejak audit",
+      auditTrail: "Jejak metodologi",
 
       methodScope:
         "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
@@ -400,7 +400,7 @@ function getUxText(key) {
 
       exploratoryComparison: "Exploratory comparison",
 
-      auditTrail: "Audit trail",
+      auditTrail: "Methodology trace",
 
       methodScope:
         "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
@@ -436,7 +436,7 @@ function getUxText(key) {
       surahExplorer: "مستكشف السور",
 
       surahExplorerDescription:
-        "شاهد كيفية توزيع المصطلح عبر 114 سورة. اختر نقطة لفحص الدليل.",
+        "شاهد كيفية توزيع المصطلح عبر ١١٤ سورة. اختر نقطة لفحص الدليل.",
 
       surahExplorerCaption: "كل نقطة تمثل سورة واحدة",
 
@@ -450,7 +450,7 @@ function getUxText(key) {
 
       exploratoryComparison: "مقارنة استكشافية",
 
-      auditTrail: "مسار التدقيق",
+      auditTrail: "مسار المنهجية",
 
       methodScope:
         "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
