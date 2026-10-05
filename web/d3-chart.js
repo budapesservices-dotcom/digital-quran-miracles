@@ -166,7 +166,9 @@ function renderD3Distribution(term) {
     .attr("y1", innerHeight)
     .attr("y2", (d) => (d.count === 0 ? innerHeight - 5 : y(d.count)));
 
-  const selectedSurah = document.getElementById("surah-filter")?.value;
+  const selectedSurah = document.querySelector(
+    "#surah-filter option:checked",
+  )?.value;
 
   const tooltip = d3.select("body").append("div").attr("class", "d3-tooltip");
 

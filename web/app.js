@@ -11,13 +11,10 @@ const state = {
   },
 };
 
-const $ = (id) =>
-  document.getElementById(id);
+const $ = (id) => document.getElementById(id);
 
 function t(key) {
-  return I18N[state.language]?.[key]
-    ?? I18N.en[key]
-    ?? key;
+  return I18N[state.language]?.[key] ?? I18N.en[key] ?? key;
 }
 
 function escapeHtml(value) {
@@ -29,26 +26,18 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-function renderEvidenceText(
-  text,
-  tokenIndex
-) {
-  const tokens =
-    String(text || "")
-      .trim()
-      .split(/\s+/);
+function renderEvidenceText(text, tokenIndex) {
+  const tokens = String(text || "")
+    .trim()
+    .split(/\s+/);
 
-  const targetIndex =
-    Number(tokenIndex) - 1;
+  const targetIndex = Number(tokenIndex) - 1;
 
   return tokens
     .map((token, index) => {
-      const safeToken =
-        escapeHtml(token);
+      const safeToken = escapeHtml(token);
 
-      if (
-        index === targetIndex
-      ) {
+      if (index === targetIndex) {
         return `
           <mark
             class="quran-token-highlight"
@@ -63,22 +52,13 @@ function renderEvidenceText(
     .join(" ");
 }
 
-function renderEvidenceAudit(
-  term,
-  occurrence
-) {
-  const method =
-    term.evidence?.method || {};
+function renderEvidenceAudit(term, occurrence) {
+  const method = term.evidence?.method || {};
 
   const normalized =
-    term.normalized_word
-    || term.numerical
-      ?.normalized_word
-    || "";
+    term.normalized_word || term.numerical?.normalized_word || "";
 
-  const matching =
-    method.matching
-    || "exact_normalized_token";
+  const matching = method.matching || "exact_normalized_token";
 
   const labels =
     state.language === "id"
@@ -108,18 +88,14 @@ function renderEvidenceAudit(
       <div class="evidence-audit-item">
 
         <span class="evidence-audit-label">
-          ${escapeHtml(
-            labels.term
-          )}
+          ${escapeHtml(labels.term)}
         </span>
 
         <strong
           class="evidence-audit-value"
           dir="rtl"
         >
-          ${escapeHtml(
-            term.word
-          )}
+          ${escapeHtml(term.word)}
         </strong>
 
       </div>
@@ -128,18 +104,14 @@ function renderEvidenceAudit(
       <div class="evidence-audit-item">
 
         <span class="evidence-audit-label">
-          ${escapeHtml(
-            labels.normalized
-          )}
+          ${escapeHtml(labels.normalized)}
         </span>
 
         <strong
           class="evidence-audit-value"
           dir="rtl"
         >
-          ${escapeHtml(
-            normalized
-          )}
+          ${escapeHtml(normalized)}
         </strong>
 
       </div>
@@ -148,15 +120,11 @@ function renderEvidenceAudit(
       <div class="evidence-audit-item">
 
         <span class="evidence-audit-label">
-          ${escapeHtml(
-            labels.rule
-          )}
+          ${escapeHtml(labels.rule)}
         </span>
 
         <strong class="evidence-audit-value">
-          ${escapeHtml(
-            matching
-          )}
+          ${escapeHtml(matching)}
         </strong>
 
       </div>
@@ -165,17 +133,11 @@ function renderEvidenceAudit(
       <div class="evidence-audit-item">
 
         <span class="evidence-audit-label">
-          ${escapeHtml(
-            labels.position
-          )}
+          ${escapeHtml(labels.position)}
         </span>
 
         <strong class="evidence-audit-value">
-          ${formatNumber(
-            Number(
-              occurrence.token_index
-            )
-          )}
+          ${formatNumber(Number(occurrence.token_index))}
         </strong>
 
       </div>
@@ -190,14 +152,11 @@ function formatNumber(value) {
       ? "ar-EG"
       : state.language === "id"
         ? "id-ID"
-        : "en-US"
+        : "en-US",
   ).format(value);
 }
 
-function formatDecimal(
-  value,
-  maximumFractionDigits = 2
-) {
+function formatDecimal(value, maximumFractionDigits = 2) {
   return new Intl.NumberFormat(
     state.language === "ar"
       ? "ar-EG"
@@ -206,20 +165,16 @@ function formatDecimal(
         : "en-US",
     {
       maximumFractionDigits,
-    }
+    },
   ).format(value);
 }
 
 function getSelectedTerm() {
-  return state.data.terms.find(
-    (term) =>
-      term.word === state.selectedWord
-  );
+  return state.data.terms.find((term) => term.word === state.selectedWord);
 }
 
 function getMeaning(term) {
-  const metadata =
-    term.metadata || {};
+  const metadata = term.metadata || {};
 
   const value =
     state.language === "ar"
@@ -228,11 +183,13 @@ function getMeaning(term) {
         ? metadata.meaning_en
         : metadata.meaning_id;
 
-  return value
-    || metadata.meaning_id
-    || metadata.meaning_en
-    || metadata.meaning_ar
-    || t("notAvailable");
+  return (
+    value ||
+    metadata.meaning_id ||
+    metadata.meaning_en ||
+    metadata.meaning_ar ||
+    t("notAvailable")
+  );
 }
 
 function buildTranslationMap(data) {
@@ -240,31 +197,20 @@ function buildTranslationMap(data) {
 
   for (const surah of data || []) {
     for (const verse of surah.verses || []) {
-      map.set(
-        `${surah.id}:${verse.id}`,
-        verse.translation || ""
-      );
+      map.set(`${surah.id}:${verse.id}`, verse.translation || "");
     }
   }
 
   return map;
 }
 
-function getVerseTranslations(
-  surah,
-  ayah
-) {
-  const key =
-    `${surah}:${ayah}`;
+function getVerseTranslations(surah, ayah) {
+  const key = `${surah}:${ayah}`;
 
   return {
-    id:
-      state.translationMaps.id.get(key)
-      || "",
+    id: state.translationMaps.id.get(key) || "",
 
-    en:
-      state.translationMaps.en.get(key)
-      || "",
+    en: state.translationMaps.en.get(key) || "",
   };
 }
 
@@ -394,10 +340,7 @@ const SURAH_SLUGS = {
 };
 
 function getClientSurahUrl(surah) {
-  const slug =
-    SURAH_SLUGS[
-      Number(surah)
-    ];
+  const slug = SURAH_SLUGS[Number(surah)];
 
   return slug
     ? `https://www.readquranforpeace.net/quran/${slug}`
@@ -405,25 +348,19 @@ function getClientSurahUrl(surah) {
 }
 
 function getFilteredOccurrences(term) {
-  const occurrences =
-    term.evidence?.occurrences || [];
+  const occurrences = term.evidence?.occurrences || [];
 
-  if (
-    state.evidenceSurah === "all"
-  ) {
+  if (state.evidenceSurah === "all") {
     return occurrences;
   }
 
   return occurrences.filter(
-    (item) =>
-      String(item.surah) ===
-      state.evidenceSurah
+    (item) => String(item.surah) === state.evidenceSurah,
   );
 }
 
 function renderLanguageSelector() {
-  const selector =
-    $("language-select");
+  const selector = $("language-select");
 
   if (!selector) {
     return;
@@ -443,481 +380,281 @@ function renderLanguageSelector() {
     </option>
   `;
 
-  selector.value =
-    state.language;
+  selector.value = state.language;
 }
 
-function setText(
-  id,
-  value
-) {
-  const element =
-    $(id);
+function setText(id, value) {
+  const element = $(id);
 
   if (element) {
-    element.textContent =
-      value;
+    element.textContent = value;
   }
 }
 
 function getUxText(key) {
   const texts = {
     id: {
-      whatObserved:
-        "Apa yang kita amati?",
+      whatObserved: "Apa yang kita amati?",
 
       whatObservedDescription:
         "Ringkasan hasil yang benar-benar terukur dari corpus yang dianalisis.",
 
-      quranNavigation:
-        "Navigasi Quran",
+      quranNavigation: "Navigasi Quran",
 
-      surahExplorer:
-        "Penjelajah Surah",
+      surahExplorer: "Penjelajah Surah",
 
       surahExplorerDescription:
         "Lihat bagaimana term tersebar di 114 surah. Pilih titik untuk membuka evidence.",
 
-      surahExplorerCaption:
-        "Setiap titik mewakili satu Surah",
+      surahExplorerCaption: "Setiap titik mewakili satu Surah",
 
-      behindObservation:
-        "Di balik observasi",
+      behindObservation: "Di balik observasi",
 
-      numbersBehindObservation:
-        "Angka di balik observasi",
+      numbersBehindObservation: "Angka di balik observasi",
 
-      methodGuide:
-        "Panduan metode",
+      methodGuide: "Panduan metode",
 
-      traceResult:
-        "Telusuri hasil",
+      traceResult: "Telusuri hasil",
 
-      exploratoryComparison:
-        "Perbandingan eksploratif",
+      exploratoryComparison: "Perbandingan eksploratif",
 
-      auditTrail:
-        "Jejak audit",
+      auditTrail: "Jejak audit",
 
-        methodScope:
-  "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
+      methodScope:
+        "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
 
-      surahs:
-        "surah",
+      methodScope:
+        "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
 
-      openClient:
-        "Buka di Read Quran for Peace ↗",
+      surahs: "surah",
 
-      exampleVerse:
-        "Ayat contoh",
+      openClient: "Buka di Read Quran for Peace ↗",
 
-      translation:
-        "Arti",
+      exampleVerse: "Ayat contoh",
 
-      translationSource:
-        "Sumber terjemahan: QuranEnc · id-affairs",
+      translation: "Arti",
 
-      noEvidence:
-        "Tidak ada evidence untuk pilihan ini.",
+      translationSource: "Sumber terjemahan: QuranEnc · id-affairs",
 
-      noRecords:
-        "Tidak ada record evidence.",
+      noEvidence: "Tidak ada evidence untuk pilihan ini.",
 
-      allOccurrences:
-        "semua occurrence",
+      noRecords: "Tidak ada record evidence.",
+
+      allOccurrences: "semua occurrence",
     },
 
     en: {
-      whatObserved:
-        "What did we observe?",
+      whatObserved: "What did we observe?",
 
       whatObservedDescription:
         "A summary of the results directly measured from the analyzed corpus.",
 
-      quranNavigation:
-        "Quran navigation",
+      quranNavigation: "Quran navigation",
 
-      surahExplorer:
-        "Surah Explorer",
+      surahExplorer: "Surah Explorer",
 
       surahExplorerDescription:
         "See how the term is distributed across 114 surahs. Select a point to inspect evidence.",
 
-      surahExplorerCaption:
-        "Each point represents one Surah",
+      surahExplorerCaption: "Each point represents one Surah",
 
-      behindObservation:
-        "Behind the observation",
+      behindObservation: "Behind the observation",
 
-      numbersBehindObservation:
-        "Numbers behind the observation",
+      numbersBehindObservation: "Numbers behind the observation",
 
-      methodGuide:
-        "Method guide",
+      methodGuide: "Method guide",
 
-      traceResult:
-        "Trace the result",
+      traceResult: "Trace the result",
 
-      exploratoryComparison:
-        "Exploratory comparison",
+      exploratoryComparison: "Exploratory comparison",
 
-      auditTrail:
-        "Audit trail",
+      auditTrail: "Audit trail",
 
-        methodScope:
-  "The current scope focuses on data-driven mathematical observations. The dataset structure and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
+      methodScope:
+        "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
 
-      surahs:
-        "surahs",
+      methodScope:
+        "The current scope focuses on data-driven mathematical observations. The dataset structure and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
 
-      openClient:
-        "Open in Read Quran for Peace ↗",
+      surahs: "surahs",
 
-      exampleVerse:
-        "Example verse",
+      openClient: "Open in Read Quran for Peace ↗",
 
-      translation:
-        "Translation",
+      exampleVerse: "Example verse",
 
-      translationSource:
-        "Translation source: QuranEnc · en-saheeh",
+      translation: "Translation",
 
-      noEvidence:
-        "No evidence for this selection.",
+      translationSource: "Translation source: QuranEnc · en-saheeh",
 
-      noRecords:
-        "No evidence records available.",
+      noEvidence: "No evidence for this selection.",
 
-      allOccurrences:
-        "all occurrences",
+      noRecords: "No evidence records available.",
+
+      allOccurrences: "all occurrences",
     },
 
     ar: {
-      whatObserved:
-        "ما الذي لاحظناه؟",
+      whatObserved: "ما الذي لاحظناه؟",
 
       whatObservedDescription:
         "ملخص للنتائج المقاسة مباشرة من مجموعة البيانات التي تم تحليلها.",
 
-      quranNavigation:
-        "التنقل في القرآن",
+      quranNavigation: "التنقل في القرآن",
 
-      surahExplorer:
-        "مستكشف السور",
+      surahExplorer: "مستكشف السور",
 
       surahExplorerDescription:
         "شاهد كيفية توزيع المصطلح عبر 114 سورة. اختر نقطة لفحص الدليل.",
 
-      surahExplorerCaption:
-        "كل نقطة تمثل سورة واحدة",
+      surahExplorerCaption: "كل نقطة تمثل سورة واحدة",
 
-      behindObservation:
-        "خلف الملاحظة",
+      behindObservation: "خلف الملاحظة",
 
-      numbersBehindObservation:
-        "الأرقام خلف الملاحظة",
+      numbersBehindObservation: "الأرقام خلف الملاحظة",
 
-      methodGuide:
-        "دليل المنهج",
+      methodGuide: "دليل المنهج",
 
-      traceResult:
-        "تتبع النتيجة",
+      traceResult: "تتبع النتيجة",
 
-      exploratoryComparison:
-        "مقارنة استكشافية",
+      exploratoryComparison: "مقارنة استكشافية",
 
-      auditTrail:
-        "مسار التدقيق",
+      auditTrail: "مسار التدقيق",
 
-        methodScope:
-  "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة موضوعات مستقبلية دون تغيير أساس التنقل في القرآن.",
+      methodScope:
+        "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
 
-      surahs:
-        "سور",
+      methodScope:
+        "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة موضوعات مستقبلية دون تغيير أساس التنقل في القرآن.",
 
-      openClient:
-        "فتح في اقرأ القرآن للسلام ↗",
+      surahs: "سور",
 
-      exampleVerse:
-        "الآية",
+      openClient: "فتح في اقرأ القرآن للسلام ↗",
 
-      translation:
-        "الترجمة",
+      exampleVerse: "الآية",
 
-      translationSource:
-        "مصادر الترجمة: QuranEnc",
+      translation: "الترجمة",
 
-      noEvidence:
-        "لا توجد أدلة لهذا الاختيار.",
+      translationSource: "مصادر الترجمة: QuranEnc",
 
-      noRecords:
-        "لا توجد سجلات.",
+      noEvidence: "لا توجد أدلة لهذا الاختيار.",
 
-      allOccurrences:
-        "جميع مرات الظهور",
+      noRecords: "لا توجد سجلات.",
+
+      allOccurrences: "جميع مرات الظهور",
     },
   };
 
-  return (
-    texts[state.language]?.[key]
-    ?? texts.en[key]
-    ?? key
-  );
+  return texts[state.language]?.[key] ?? texts.en[key] ?? key;
 }
 
 function renderStaticText() {
-  setText(
-    "brand-kicker",
-    t("brandKicker")
-  );
+  setText("brand-kicker", t("brandKicker"));
 
-  setText(
-    "page-title",
-    t("pageTitle")
-  );
+  setText("page-title", t("pageTitle"));
 
-  setText(
-    "page-subtitle",
-    t("subtitle")
-  );
+  setText("page-subtitle", t("subtitle"));
 
-  setText(
-    "language-label",
-    t("language")
-  );
+  setText("language-label", t("language"));
 
   setText(
     "analytical-terms-title",
-    `${t("analyticalTerms")} (${
-      state.data?.terms?.length || 0
-    })`
+    `${t("analyticalTerms")} (${state.data?.terms?.length || 0})`,
   );
 
-  setText(
-    "feature-eyebrow",
-    t("selectedObservation")
-  );
+  setText("feature-eyebrow", t("selectedObservation"));
 
-  setText(
-    "open-quran",
-    t("openQuranIndex")
-  );
+  setText("open-quran", t("openQuranIndex"));
 
-  setText(
-    "explore-evidence",
-    t("exploreEvidence")
-  );
+  setText("explore-evidence", t("exploreEvidence"));
 
-  setText(
-    "observation-kicker",
-    getUxText("whatObserved")
-  );
+  setText("observation-kicker", getUxText("whatObserved"));
 
-  setText(
-    "observation-title",
-    getUxText("whatObserved")
-  );
+  setText("observation-title", getUxText("whatObserved"));
 
-  setText(
-    "observation-description",
-    getUxText(
-      "whatObservedDescription"
-    )
-  );
+  setText("observation-description", getUxText("whatObservedDescription"));
 
-  setText(
-    "explorer-kicker",
-    getUxText("quranNavigation")
-  );
+  setText("explorer-kicker", getUxText("quranNavigation"));
 
-  setText(
-    "distribution-title",
-    getUxText("surahExplorer")
-  );
+  setText("distribution-title", getUxText("surahExplorer"));
 
-  setText(
-    "distribution-description",
-    getUxText(
-      "surahExplorerDescription"
-    )
-  );
+  setText("distribution-description", getUxText("surahExplorerDescription"));
 
-  setText(
-    "chart-caption",
-    getUxText(
-      "surahExplorerCaption"
-    )
-  );
+  setText("chart-caption", getUxText("surahExplorerCaption"));
 
-  setText(
-    "numerical-kicker",
-    getUxText(
-      "behindObservation"
-    )
-  );
+  setText("numerical-kicker", getUxText("behindObservation"));
 
-  setText(
-    "numerical-title",
-    getUxText(
-      "numbersBehindObservation"
-    )
-  );
+  setText("numerical-title", getUxText("numbersBehindObservation"));
 
-  setText(
-    "numerical-description",
-    t("numericalDescription")
-  );
+  setText("numerical-description", t("numericalDescription"));
 
-  setText(
-    "learn-kicker",
-    getUxText(
-      "methodGuide"
-    )
-  );
+  setText("learn-kicker", getUxText("methodGuide"));
 
-  setText(
-    "evidence-kicker",
-    getUxText(
-      "traceResult"
-    )
-  );
+  setText("evidence-kicker", getUxText("traceResult"));
 
-  setText(
-    "evidence-title",
-    t("verseEvidence")
-  );
+  setText("evidence-title", t("verseEvidence"));
 
-  setText(
-    "evidence-description",
-    t("verseEvidenceDescription")
-  );
+  setText("evidence-description", t("verseEvidenceDescription"));
 
-  setText(
-    "surah-label",
-    t("surahDistribution")
-  );
+  setText("surah-label", t("surahDistribution"));
 
-  setText(
-    "jump-label",
-    t("jumpOccurrence")
-  );
+  setText("jump-label", t("jumpOccurrence"));
 
-  setText(
-    "previous-evidence",
-    `← ${t("previous")}`
-  );
+  setText("previous-evidence", `← ${t("previous")}`);
 
-  setText(
-    "next-evidence",
-    `${t("next")} →`
-  );
+  setText("next-evidence", `${t("next")} →`);
 
-  setText(
-    "pairs-kicker",
-    getUxText(
-      "exploratoryComparison"
-    )
-  );
+  setText("pairs-kicker", getUxText("exploratoryComparison"));
 
-  setText(
-    "pairs-title",
-    t("exploratoryPairs")
-  );
+  setText("pairs-title", t("exploratoryPairs"));
 
-  setText(
-    "pairs-description",
-    t("exploratoryPairsDescription")
-  );
+  setText("pairs-description", t("exploratoryPairsDescription"));
 
-  setText(
-    "methodology-kicker",
-    getUxText(
-      "auditTrail"
-    )
-  );
+  setText("methodology-kicker", getUxText("auditTrail"));
 
-  setText(
-    "methodology-title",
-    t("methodology")
-  );
+  setText("methodology-title", t("methodology"));
 
-  setText(
-    "learn-title",
-    t("learnMetrics")
-  );
+  setText("learn-title", t("learnMetrics"));
 
-  setText(
-    "learn-description",
-    t("learnMetricsDescription")
-  );
+  setText("learn-description", t("learnMetricsDescription"));
 
-  const search =
-    $("term-search");
+  const search = $("term-search");
 
   if (search) {
-    search.placeholder =
-      t("searchPlaceholder");
+    search.placeholder = t("searchPlaceholder");
 
-    search.dir =
-      "auto";
+    search.dir = "auto";
   }
 }
 
-function renderTermList(
-  filter = ""
-) {
-  const needle =
-    filter.trim().toLowerCase();
+function renderTermList(filter = "") {
+  const needle = filter.trim().toLowerCase();
 
-  const matched =
-    state.data.terms.filter(
-      (term) => {
-        const metadata =
-          term.metadata || {};
+  const matched = state.data.terms.filter((term) => {
+    const metadata = term.metadata || {};
 
-        const searchable = [
-          term.word,
-          metadata.transliteration || "",
-          metadata.meaning_id || "",
-          metadata.meaning_en || "",
-          metadata.meaning_ar || "",
-        ]
-          .join(" ")
-          .toLowerCase();
+    const searchable = [
+      term.word,
+      metadata.transliteration || "",
+      metadata.meaning_id || "",
+      metadata.meaning_en || "",
+      metadata.meaning_ar || "",
+    ]
+      .join(" ")
+      .toLowerCase();
 
-        return searchable.includes(
-          needle
-        );
-      }
-    );
+    return searchable.includes(needle);
+  });
 
-  const categoryOrder = [
-    "time",
-    "life",
-    "nature",
-    "people",
-    "faith",
-  ];
+  const categoryOrder = ["time", "life", "nature", "people", "faith"];
 
   matched.sort((a, b) => {
-    const ai =
-      categoryOrder.indexOf(
-        a.category
-      );
+    const ai = categoryOrder.indexOf(a.category);
 
-    const bi =
-      categoryOrder.indexOf(
-        b.category
-      );
+    const bi = categoryOrder.indexOf(b.category);
 
-    const categoryCompare =
-      (ai === -1 ? 999 : ai)
-      -
-      (bi === -1 ? 999 : bi);
+    const categoryCompare = (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
 
-    if (
-      categoryCompare !== 0
-    ) {
+    if (categoryCompare !== 0) {
       return categoryCompare;
     }
 
@@ -927,50 +664,37 @@ function renderTermList(
   const groups = {};
 
   for (const term of matched) {
-    const category =
-      term.category
-      || "uncategorized";
+    const category = term.category || "uncategorized";
 
     if (!groups[category]) {
       groups[category] = [];
     }
 
-    groups[category].push(
-      term
-    );
+    groups[category].push(term);
   }
 
   let html = "";
 
-  for (
-    const category
-    of categoryOrder
-  ) {
-    const terms =
-      groups[category];
+  for (const category of categoryOrder) {
+    const terms = groups[category];
 
     if (!terms?.length) {
       continue;
     }
 
-    const labelKey =
-      `category_${category}`;
+    const labelKey = `category_${category}`;
 
     html += `
       <div class="term-category-header">
 
         <span>
-          ${escapeHtml(
-            t(labelKey)
-          )}
+          ${escapeHtml(t(labelKey))}
         </span>
 
         <span
           class="term-category-count"
         >
-          ${formatNumber(
-            terms.length
-          )}
+          ${formatNumber(terms.length)}
         </span>
 
       </div>
@@ -978,20 +702,14 @@ function renderTermList(
 
     html += terms
       .map((term) => {
-        const metadata =
-          term.metadata || {};
+        const metadata = term.metadata || {};
 
         return `
           <button
             class="term-button ${
-              term.word ===
-              state.selectedWord
-                ? "active"
-                : ""
+              term.word === state.selectedWord ? "active" : ""
             }"
-            data-word="${escapeHtml(
-              term.word
-            )}"
+            data-word="${escapeHtml(term.word)}"
             type="button"
           >
 
@@ -1000,34 +718,25 @@ function renderTermList(
               <span
                 class="term-word"
               >
-                ${escapeHtml(
-                  term.word
-                )}
+                ${escapeHtml(term.word)}
               </span>
 
               <span
                 class="term-latin"
               >
-                ${escapeHtml(
-                  metadata.transliteration
-                  || ""
-                )}
+                ${escapeHtml(metadata.transliteration || "")}
               </span>
 
               <span
                 class="term-meaning"
               >
-                ${escapeHtml(
-                  getMeaning(term)
-                )}
+                ${escapeHtml(getMeaning(term))}
               </span>
 
             </span>
 
             <span class="term-count">
-              ${formatNumber(
-                term.count
-              )}
+              ${formatNumber(term.count)}
             </span>
 
           </button>
@@ -1036,174 +745,113 @@ function renderTermList(
       .join("");
   }
 
-  const list =
-    $("term-list");
+  const list = $("term-list");
 
   if (!list) {
     return;
   }
 
-  list.innerHTML =
-    html;
+  list.innerHTML = html;
 
-  list
-    .querySelectorAll(
-      ".term-button"
-    )
-    .forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          state.selectedWord =
-            button.dataset.word;
+  list.querySelectorAll(".term-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.selectedWord = button.dataset.word;
 
-          state.evidenceIndex =
-            0;
+      state.evidenceIndex = 0;
 
-          state.evidenceSurah =
-            "all";
+      state.evidenceSurah = "all";
 
-          render();
+      render();
 
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }
-      );
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     });
+  });
 }
 
-function renderFeatureVerse(
-  term,
-  occurrence = null
-) {
-  const reference =
-    $("feature-reference");
+function renderFeatureVerse(term, occurrence = null) {
+  const reference = $("feature-reference");
 
   if (!reference) {
     return;
   }
 
-  let container =
-    $("feature-verse");
+  let container = $("feature-verse");
 
   if (!container) {
-    container =
-      document.createElement(
-        "div"
-      );
+    container = document.createElement("div");
 
-    container.id =
-      "feature-verse";
+    container.id = "feature-verse";
 
-    container.className =
-      "feature-verse";
+    container.className = "feature-verse";
 
-    reference.insertAdjacentElement(
-      "afterend",
-      container
-    );
+    reference.insertAdjacentElement("afterend", container);
   }
 
   if (!occurrence) {
-    container.innerHTML =
-      "";
+    container.innerHTML = "";
 
     return;
   }
 
-  const translations =
-    getVerseTranslations(
-      occurrence.surah,
-      occurrence.ayah
-    );
+  const translations = getVerseTranslations(occurrence.surah, occurrence.ayah);
 
-  let translationHtml =
-    "";
+  let translationHtml = "";
 
-  if (
-    state.language === "id" &&
-    translations.id
-  ) {
+  if (state.language === "id" && translations.id) {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText(
-          "translation"
-        )}
+        ${getUxText("translation")}
       </div>
 
       <p
         class="feature-verse-translation"
         dir="ltr"
       >
-        ${escapeHtml(
-          translations.id
-        )}
+        ${escapeHtml(translations.id)}
       </p>
 
       <div
         class="feature-verse-source"
       >
-        ${escapeHtml(
-          getUxText(
-            "translationSource"
-          )
-        )}
+        ${escapeHtml(getUxText("translationSource"))}
       </div>
     `;
   }
 
-  if (
-    state.language === "en" &&
-    translations.en
-  ) {
+  if (state.language === "en" && translations.en) {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText(
-          "translation"
-        )}
+        ${getUxText("translation")}
       </div>
 
       <p
         class="feature-verse-translation"
         dir="ltr"
       >
-        ${escapeHtml(
-          translations.en
-        )}
+        ${escapeHtml(translations.en)}
       </p>
 
       <div
         class="feature-verse-source"
       >
-        ${escapeHtml(
-          getUxText(
-            "translationSource"
-          )
-        )}
+        ${escapeHtml(getUxText("translationSource"))}
       </div>
     `;
   }
 
-  if (
-    state.language === "ar" &&
-    (
-      translations.id ||
-      translations.en
-    )
-  ) {
+  if (state.language === "ar" && (translations.id || translations.en)) {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText(
-          "translation"
-        )}
+        ${getUxText("translation")}
       </div>
 
       ${
@@ -1217,9 +865,7 @@ function renderFeatureVerse(
                 Bahasa Indonesia
               </strong>
               <br>
-              ${escapeHtml(
-                translations.id
-              )}
+              ${escapeHtml(translations.id)}
             </p>
           `
           : ""
@@ -1236,9 +882,7 @@ function renderFeatureVerse(
                 English
               </strong>
               <br>
-              ${escapeHtml(
-                translations.en
-              )}
+              ${escapeHtml(translations.en)}
             </p>
           `
           : ""
@@ -1247,46 +891,31 @@ function renderFeatureVerse(
       <div
         class="feature-verse-source"
       >
-        ${escapeHtml(
-          getUxText(
-            "translationSource"
-          )
-        )}
+        ${escapeHtml(getUxText("translationSource"))}
       </div>
     `;
   }
 
   container.innerHTML = `
     <div class="feature-verse-heading">
-      ${escapeHtml(
-        getUxText(
-          "exampleVerse"
-        )
-      )}
+      ${escapeHtml(getUxText("exampleVerse"))}
     </div>
 
     <div class="feature-verse-ref">
-      Surah ${escapeHtml(
-        occurrence.surah
-      )}
+      Surah ${escapeHtml(occurrence.surah)}
 
       ·
 
       ${getVerseLabel()}
 
-      ${escapeHtml(
-        occurrence.ayah
-      )}
+      ${escapeHtml(occurrence.ayah)}
     </div>
 
     <p
   class="feature-verse-arabic"
   dir="rtl"
 >
-  ${renderEvidenceText(
-    occurrence.text,
-    occurrence.token_index
-  )}
+  ${renderEvidenceText(occurrence.text, occurrence.token_index)}
 </p>
 
     ${translationHtml}
@@ -1294,38 +923,23 @@ function renderFeatureVerse(
 }
 
 function renderHero(term) {
-  const metadata =
-    term.metadata || {};
+  const metadata = term.metadata || {};
 
-  const firstOccurrence =
-    term.evidence
-      ?.occurrences
-      ?. [0];
+  const firstOccurrence = term.evidence?.occurrences?.[0];
 
-  const surahCount =
-    term.distribution
-      .summary
-      .surahs_with_occurrences;
+  const surahCount = term.distribution.summary.surahs_with_occurrences;
 
-  const totalSurahs =
-    114;
+  const totalSurahs = 114;
 
-  const count =
-    term.count;
+  const count = term.count;
 
-  $("feature-word")
-    .textContent =
-    term.word;
+  $("feature-word").textContent = term.word;
 
-  $("feature-meta")
-    .innerHTML = `
+  $("feature-meta").innerHTML = `
       <span
         class="feature-latin"
       >
-        ${escapeHtml(
-          metadata.transliteration
-          || ""
-        )}
+        ${escapeHtml(metadata.transliteration || "")}
       </span>
 
       <span
@@ -1337,93 +951,68 @@ function renderHero(term) {
       <span
         class="feature-meaning"
       >
-        ${escapeHtml(
-          getMeaning(term)
-        )}
+        ${escapeHtml(getMeaning(term))}
       </span>
     `;
 
-  $("feature-reference")
-    .textContent =
-    firstOccurrence
-      ? `${t("firstRecorded")}: ` +
-        `Surah ${firstOccurrence.surah}, ` +
-        `${getVerseLabel()} ${firstOccurrence.ayah}`
-      : "";
+  $("feature-reference").textContent = firstOccurrence
+    ? `${t("firstRecorded")}: ` +
+      `Surah ${firstOccurrence.surah}, ` +
+      `${getVerseLabel()} ${firstOccurrence.ayah}`
+    : "";
 
-  renderFeatureVerse(
-    term,
-    firstOccurrence
-  );
+  renderFeatureVerse(term, firstOccurrence);
 
-  const openQuran =
-  $("open-quran");
+  const openQuran = $("open-quran");
 
-if (openQuran) {
-  openQuran.href =
-    getClientSurahUrl(
-      firstOccurrence?.surah
-    );
-}
-
-  const observationTerm =
-    $("observation-term");
-
-  if (
-    observationTerm
-  ) {
-    observationTerm.textContent =
-      getMeaning(term);
+  if (openQuran) {
+    openQuran.href = getClientSurahUrl(firstOccurrence?.surah);
   }
 
-    const observationDescription =
-    $("observation-description");
+  const observationTerm = $("observation-term");
+
+  if (observationTerm) {
+    observationTerm.textContent = getMeaning(term);
+  }
+
+  const observationDescription = $("observation-description");
 
   if (observationDescription) {
-    const digitSum =
-      term.numerical
-        ?.derived_metrics
-        ?.digit_sum;
+    const digitSum = term.numerical?.derived_metrics?.digit_sum;
 
-    const digitExpression =
-      String(count)
-        .split("")
-        .join(" + ");
+    const digitExpression = String(count).split("").join(" + ");
 
     observationDescription.textContent =
       state.language === "id"
         ? `Dalam corpus yang dianalisis, term ini muncul ${formatNumber(
-            count
+            count,
           )} kali dan ditemukan setidaknya sekali di ${formatNumber(
-            surahCount
+            surahCount,
           )} dari ${formatNumber(
-            totalSurahs
+            totalSurahs,
           )} surah. Sifat numeriknya: ${digitExpression} = ${formatNumber(
-            digitSum
+            digitSum,
           )}.`
         : state.language === "ar"
           ? `في مجموعة البيانات التي تم تحليلها، ظهر هذا المصطلح ${formatNumber(
-              count
-            )} مرة وظهر في ${formatNumber(
-              surahCount
-            )} من أصل ${formatNumber(
-              totalSurahs
+              count,
+            )} مرة وظهر في ${formatNumber(surahCount)} من أصل ${formatNumber(
+              totalSurahs,
             )} سورة. الخاصية الرقمية: ${digitExpression} = ${formatNumber(
-              digitSum
+              digitSum,
             )}.`
           : `In the analyzed corpus, this term appears ${formatNumber(
-              count
+              count,
             )} times and occurs in ${formatNumber(
-              surahCount
+              surahCount,
             )} of ${formatNumber(
-              totalSurahs
+              totalSurahs,
             )} surahs. Its numerical property is ${digitExpression} = ${formatNumber(
-              digitSum
+              digitSum,
             )}.`;
   }
 
-  const stats =
-    $("stats");
+  const stats = $("stats");
 
   if (!stats) {
     return;
@@ -1444,23 +1033,15 @@ if (openQuran) {
     </div>
 
     <div class="stat-label">
-      ${t(
-        "statOccurrencesTitle"
-      )}
+      ${t("statOccurrencesTitle")}
     </div>
 
     <div class="stat-unit">
-      ${t(
-        "statOccurrencesUnit"
-      )}
+      ${t("statOccurrencesUnit")}
     </div>
 
     <div class="stat-explanation">
-      ${escapeHtml(
-        t(
-          "statOccurrencesDesc"
-        )
-      )}
+      ${escapeHtml(t("statOccurrencesDesc"))}
     </div>
 
   </article>
@@ -1476,45 +1057,25 @@ if (openQuran) {
         observation-stat-number
       "
     >
-      ${formatNumber(
-        surahCount
-      )}
+      ${formatNumber(surahCount)}
     </div>
 
     <div class="stat-label">
-      ${t(
-        "statSurahTitle"
-      )}
+      ${t("statSurahTitle")}
     </div>
 
     <div class="stat-unit">
       ${
         state.language === "id"
-          ? `dari ${formatNumber(
-              totalSurahs
-            )} ${t(
-              "statSurahUnit"
-            )}`
+          ? `dari ${formatNumber(totalSurahs)} ${t("statSurahUnit")}`
           : state.language === "ar"
-            ? `من ${formatNumber(
-                totalSurahs
-              )} ${t(
-                "statSurahUnit"
-              )}`
-            : `of ${formatNumber(
-                totalSurahs
-              )} ${t(
-                "statSurahUnit"
-              )}`
+            ? `من ${formatNumber(totalSurahs)} ${t("statSurahUnit")}`
+            : `of ${formatNumber(totalSurahs)} ${t("statSurahUnit")}`
       }
     </div>
 
     <div class="stat-explanation">
-      ${escapeHtml(
-        t(
-          "statSurahDesc"
-        )
-      )}
+      ${escapeHtml(t("statSurahDesc"))}
     </div>
 
   </article>
@@ -1533,66 +1094,44 @@ if (openQuran) {
     >
       ${formatNumber(count)}
       <span class="arrow">→</span>
-      ${formatNumber(
-        term.numerical
-          .derived_metrics
-          .digit_sum
-      )}
+      ${formatNumber(term.numerical.derived_metrics.digit_sum)}
     </div>
 
     <div class="stat-label">
-      ${t(
-        "statNumberPropertyTitle"
-      )}
+      ${t("statNumberPropertyTitle")}
     </div>
 
     <div class="stat-unit">
-      ${t(
-        "statNumberPropertyUnit"
-      )}
+      ${t("statNumberPropertyUnit")}
     </div>
 
     <div class="stat-explanation">
-      ${escapeHtml(
-        t(
-          "statNumberPropertyDesc"
-        )
-      )}
+      ${escapeHtml(t("statNumberPropertyDesc"))}
     </div>
 
   </article>
 `;
 }
 
-
 function renderNumerical(term) {
-  const metrics =
-    term.numerical?.derived_metrics || {};
+  const metrics = term.numerical?.derived_metrics || {};
 
   const rows = [
-    [
-      t("frequency"),
-      formatNumber(term.count),
-      t("metricFrequencyDesc"),
-    ],
+    [t("frequency"), formatNumber(term.count), t("metricFrequencyDesc")],
 
     [
       t("metricParity"),
       metrics.parity === "odd"
-        ? (
-          state.language === "ar"
-            ? "فردي"
-            : state.language === "id"
-              ? "ganjil"
-              : "odd"
-        )
-        : (
-          state.language === "ar"
-            ? "زوجي"
-            : state.language === "id"
-              ? "genap"
-              : "even"
-        ),
+        ? state.language === "ar"
+          ? "فردي"
+          : state.language === "id"
+            ? "ganjil"
+            : "odd"
+        : state.language === "ar"
+          ? "زوجي"
+          : state.language === "id"
+            ? "genap"
+            : "even",
       t("metricParityDesc"),
     ],
 
@@ -1604,9 +1143,7 @@ function renderNumerical(term) {
 
     [
       t("per1000"),
-      String(
-        metrics.frequency_per_1000_tokens ?? 0
-      ),
+      String(metrics.frequency_per_1000_tokens ?? 0),
       t("metricPer1000Desc"),
     ],
 
@@ -1617,17 +1154,15 @@ function renderNumerical(term) {
     ],
   ];
 
-  const list =
-    $("numerical-metrics");
+  const list = $("numerical-metrics");
 
   if (!list) {
     return;
   }
 
-  list.innerHTML =
-    rows
-      .map(
-        ([name, value, help]) => `
+  list.innerHTML = rows
+    .map(
+      ([name, value, help]) => `
           <div class="metric-row">
 
             <div class="metric-name-wrap">
@@ -1659,358 +1194,195 @@ function renderNumerical(term) {
             </div>
 
           </div>
-        `
-      )
-      .join("");
+        `,
+    )
+    .join("");
 
-  list
-    .querySelectorAll(".metric-info")
-    .forEach((button) => {
+  list.querySelectorAll(".metric-info").forEach((button) => {
+    button.addEventListener("click", () => {
+      const row = button.closest(".metric-row");
 
-      button.addEventListener(
-        "click",
-        () => {
+      const help = row?.querySelector(".metric-help");
 
-          const row =
-            button.closest(
-              ".metric-row"
-            );
+      if (!help) {
+        return;
+      }
 
-          const help =
-            row?.querySelector(
-              ".metric-help"
-            );
+      const expanded = button.getAttribute("aria-expanded") === "true";
 
-          if (!help) {
-            return;
-          }
+      button.setAttribute("aria-expanded", String(!expanded));
 
-          const expanded =
-            button.getAttribute(
-              "aria-expanded"
-            ) === "true";
+      help.hidden = expanded;
 
-          button.setAttribute(
-            "aria-expanded",
-            String(!expanded)
-          );
-
-          help.hidden =
-            expanded;
-
-          row.classList.toggle(
-            "metric-expanded",
-            !expanded
-          );
-        }
-      );
+      row.classList.toggle("metric-expanded", !expanded);
     });
+  });
 }
 
-
-function renderSurahExplorerSummary(
-  term
-) {
-  const element =
-    $("surah-explorer-summary");
+function renderSurahExplorerSummary(term) {
+  const element = $("surah-explorer-summary");
 
   if (!element) {
     return;
   }
 
-  const summary =
-    term.distribution?.summary
-    || {};
+  const summary = term.distribution?.summary || {};
 
-  const matched =
-    summary.surahs_with_occurrences
-    || 0;
+  const matched = summary.surahs_with_occurrences || 0;
 
-  const frequency =
-    term.count || 0;
+  const frequency = term.count || 0;
 
   element.innerHTML = `
     <strong>
-      ${formatNumber(
-        matched
-      )}
+      ${formatNumber(matched)}
     </strong>
 
     <span>
-      ${escapeHtml(
-        getUxText(
-          "surahs"
-        )
-      )}
+      ${escapeHtml(getUxText("surahs"))}
     </span>
 
     <small>
-      ${formatNumber(
-        frequency
-      )}
-      ${escapeHtml(
-        t("occurrences")
-      )}
+      ${formatNumber(frequency)}
+      ${escapeHtml(t("occurrences"))}
     </small>
   `;
 }
 
 function renderSurahFilter(term) {
-  const counts =
-    term.distribution?.surahs
-    || {};
+  const counts = term.distribution?.surahs || {};
 
-  const names =
-    new Map();
+  const names = new Map();
 
-  for (
-    const occurrence
-    of term.evidence?.occurrences || []
-  ) {
-    if (
-      !names.has(
-        String(
-          occurrence.surah
-        )
-      )
-    ) {
-      names.set(
-        String(
-          occurrence.surah
-        ),
-        occurrence.surah_name
-          || ""
-      );
+  for (const occurrence of term.evidence?.occurrences || []) {
+    if (!names.has(String(occurrence.surah))) {
+      names.set(String(occurrence.surah), occurrence.surah_name || "");
     }
   }
 
   const options = [
     `<option value="all">
-      ${escapeHtml(
-        t("allSurahs")
-      )}
+      ${escapeHtml(t("allSurahs"))}
     </option>`,
   ];
 
-  Object.entries(
-    counts
-  ).forEach(
-    ([surah, count]) => {
-      if (count === 0) {
-        return;
-      }
+  Object.entries(counts).forEach(([surah, count]) => {
+    if (count === 0) {
+      return;
+    }
 
-      const name =
-        names.get(
-          String(surah)
-        ) || "";
+    const name = names.get(String(surah)) || "";
 
-      options.push(`
+    options.push(`
         <option
-          value="${escapeHtml(
-            surah
-          )}"
-          ${
-            state.evidenceSurah ===
-            surah
-              ? "selected"
-              : ""
-          }
+          value="${escapeHtml(surah)}"
+          ${state.evidenceSurah === surah ? "selected" : ""}
         >
-          ${
-            state.language === "ar"
-              ? `السورة ${surah}`
-              : `Surah ${surah}`
-          }
+          ${state.language === "ar" ? `السورة ${surah}` : `Surah ${surah}`}
 
-          ${
-            name
-              ? ` · ${escapeHtml(
-                  name
-                )}`
-              : ""
-          }
+          ${name ? ` · ${escapeHtml(name)}` : ""}
 
-          — ${formatNumber(
-            count
-          )}
+          — ${formatNumber(count)}
         </option>
       `);
-    }
-  );
+  });
 
-  const select =
-    $("surah-filter");
+  const select = $("surah-filter");
 
   if (select) {
-    select.innerHTML =
-      options.join("");
+    select.innerHTML = options.join("");
   }
 }
 
 function renderEvidence(term) {
-  const filtered =
-    getFilteredOccurrences(
-      term
-    );
+  const filtered = getFilteredOccurrences(term);
 
-  const total =
-    filtered.length;
+  const total = filtered.length;
 
   if (!total) {
-    renderFeatureVerse(
-      term,
-      null
-    );
+    renderFeatureVerse(term, null);
 
-    setText(
-      "evidence-counter",
-      `0 ${t(
-        "occurrences"
-      )}`
-    );
+    setText("evidence-counter", `0 ${t("occurrences")}`);
 
-    setText(
-      "evidence-summary",
-      getUxText(
-        "noEvidence"
-      )
-    );
+    setText("evidence-summary", getUxText("noEvidence"));
 
-    const list =
-      $("evidence-list");
+    const list = $("evidence-list");
 
     if (list) {
       list.innerHTML = `
         <div
           class="evidence-item"
         >
-          ${escapeHtml(
-            getUxText(
-              "noRecords"
-            )
-          )}
+          ${escapeHtml(getUxText("noRecords"))}
         </div>
       `;
     }
 
-    const jump =
-      $("evidence-jump");
+    const jump = $("evidence-jump");
 
     if (jump) {
       jump.value = 0;
     }
 
-    const previous =
-      $("previous-evidence");
+    const previous = $("previous-evidence");
 
-    const next =
-      $("next-evidence");
+    const next = $("next-evidence");
 
     if (previous) {
-      previous.disabled =
-        true;
+      previous.disabled = true;
     }
 
     if (next) {
-      next.disabled =
-        true;
+      next.disabled = true;
     }
 
     return;
   }
 
-  if (
-    state.evidenceIndex >=
-    total
-  ) {
-    state.evidenceIndex =
-      total - 1;
+  if (state.evidenceIndex >= total) {
+    state.evidenceIndex = total - 1;
   }
 
-  const current =
-    filtered[
-      state.evidenceIndex
-    ];
+  const current = filtered[state.evidenceIndex];
 
-  const translations =
-    getVerseTranslations(
-      current.surah,
-      current.ayah
-    );
+  const translations = getVerseTranslations(current.surah, current.ayah);
 
   let translation = "";
 
-  if (
-    state.language === "id"
-  ) {
-    translation =
-      translations.id;
+  if (state.language === "id") {
+    translation = translations.id;
   }
 
-  if (
-    state.language === "en"
-  ) {
-    translation =
-      translations.en;
-  } 
+  if (state.language === "en") {
+    translation = translations.en;
+  }
 
-const directUrl =
-  getClientSurahUrl(
-    current.surah
-  ); ``
+  const directUrl = getClientSurahUrl(current.surah);
 
-  setText(
-    "evidence-counter",
-    `${formatNumber(
-      total
-    )} ${t(
-      "occurrences"
-    )}`
-  );
+  setText("evidence-counter", `${formatNumber(total)} ${t("occurrences")}`);
 
   setText(
     "evidence-summary",
-    `${t(
-      "showingOccurrence"
-    )} ${
-      formatNumber(
-        state.evidenceIndex + 1
-      )
-    } ${
-      state.language === "ar"
-        ? "من"
-        : "of"
-    } ${
-      formatNumber(
-        total
-      )
-    }`
+    `${t("showingOccurrence")} ${formatNumber(state.evidenceIndex + 1)} ${
+      state.language === "ar" ? "من" : "of"
+    } ${formatNumber(total)}`,
   );
 
-  const jump =
-    $("evidence-jump");
+  const jump = $("evidence-jump");
 
   if (jump) {
-    jump.value =
-      state.evidenceIndex + 1;
+    jump.value = state.evidenceIndex + 1;
   }
 
-  const previous =
-    $("previous-evidence");
+  const previous = $("previous-evidence");
 
-  const next =
-    $("next-evidence");
+  const next = $("next-evidence");
 
   if (previous) {
-    previous.disabled =
-      state.evidenceIndex === 0;
+    previous.disabled = state.evidenceIndex === 0;
   }
 
   if (next) {
-    next.disabled =
-      state.evidenceIndex ===
-      total - 1;
+    next.disabled = state.evidenceIndex === total - 1;
   }
 
   const reference =
@@ -2020,8 +1392,7 @@ const directUrl =
         ? `Surah ${current.surah} · Ayat ${current.ayah} · Token ${current.token_index}`
         : `Surah ${current.surah} · Verse ${current.ayah} · Token ${current.token_index}`;
 
-  let translationHtml =
-    "";
+  let translationHtml = "";
 
   if (translation) {
     translationHtml = `
@@ -2030,43 +1401,25 @@ const directUrl =
           evidence-translation-label
         "
       >
-        ${escapeHtml(
-          getUxText(
-            "translation"
-          )
-        )}
+        ${escapeHtml(getUxText("translation"))}
       </div>
 
       <p
         class="evidence-translation"
         dir="ltr"
       >
-        ${escapeHtml(
-          translation
-        )}
+        ${escapeHtml(translation)}
       </p>
 
       <div
         class="evidence-source"
       >
-        ${escapeHtml(
-          getUxText(
-            "translationSource"
-          )
-        )}
+        ${escapeHtml(getUxText("translationSource"))}
       </div>
     `;
   }
 
-  
-
-  if (
-    state.language === "ar" &&
-    (
-      translations.id ||
-      translations.en
-    )
-  ) {
+  if (state.language === "ar" && (translations.id || translations.en)) {
     translationHtml = `
       <div
         class="
@@ -2087,9 +1440,7 @@ const directUrl =
                 Bahasa Indonesia
               </strong>
               <br>
-              ${escapeHtml(
-                translations.id
-              )}
+              ${escapeHtml(translations.id)}
             </p>
           `
           : ""
@@ -2106,9 +1457,7 @@ const directUrl =
                 English
               </strong>
               <br>
-              ${escapeHtml(
-                translations.en
-              )}
+              ${escapeHtml(translations.en)}
             </p>
           `
           : ""
@@ -2117,17 +1466,12 @@ const directUrl =
       <div
         class="evidence-source"
       >
-        ${escapeHtml(
-          getUxText(
-            "translationSource"
-          )
-        )}
+        ${escapeHtml(getUxText("translationSource"))}
       </div>
     `;
   }
 
-  const list =
-    $("evidence-list");
+  const list = $("evidence-list");
 
   if (!list) {
     return;
@@ -2142,18 +1486,13 @@ const directUrl =
     >
 
       <div class="evidence-ref">
-  ${escapeHtml(
-    current.surah_name
-      || `Surah ${current.surah}`
-  )}
+  ${escapeHtml(current.surah_name || `Surah ${current.surah}`)}
 
   ·
 
   ${getVerseLabel()}
 
-  ${escapeHtml(
-    current.ayah
-  )}
+  ${escapeHtml(current.ayah)}
 </div>
 
 <div class="evidence-trace">
@@ -2161,19 +1500,13 @@ const directUrl =
 </div>
 
 
-      ${renderEvidenceAudit(
-  term,
-  current
-)}
+      ${renderEvidenceAudit(term, current)}
 
 <p
   class="evidence-text"
   dir="rtl"
 >
-  ${renderEvidenceText(
-    current.text,
-    current.token_index
-  )}
+  ${renderEvidenceText(current.text, current.token_index)}
 </p>
 
 
@@ -2193,11 +1526,7 @@ const directUrl =
           target="_blank"
           rel="noopener noreferrer"
         >
-          ${escapeHtml(
-            getUxText(
-              "openClient"
-            )
-          )}
+          ${escapeHtml(getUxText("openClient"))}
         </a>
 
       </div>
@@ -2208,16 +1537,10 @@ const directUrl =
       >
         ${
           state.language === "ar"
-            ? `سجل الدليل ${
-                state.evidenceIndex + 1
-              } من ${total}`
+            ? `سجل الدليل ${state.evidenceIndex + 1} من ${total}`
             : state.language === "id"
-              ? `Record evidence ${
-                  state.evidenceIndex + 1
-                } dari ${total}`
-              : `Evidence record ${
-                  state.evidenceIndex + 1
-                } of ${total}`
+              ? `Record evidence ${state.evidenceIndex + 1} dari ${total}`
+              : `Evidence record ${state.evidenceIndex + 1} of ${total}`
         }
       </div>
 
@@ -2226,93 +1549,63 @@ const directUrl =
 }
 
 function renderPairs() {
-  const pairs =
-    state.data.pair_analysis?.pairs || [];
+  const pairs = state.data.pair_analysis?.pairs || [];
 
-  const list =
-    $("pair-list");
+  const list = $("pair-list");
 
   if (!list) {
     return;
   }
 
-  list.innerHTML =
-    pairs
-      .map(
-        (pair) => {
-          const countA =
-            Number(
-              pair.counts?.a || 0
-            );
+  list.innerHTML = pairs
+    .map((pair) => {
+      const countA = Number(pair.counts?.a || 0);
 
-          const countB =
-            Number(
-              pair.counts?.b || 0
-            );
+      const countB = Number(pair.counts?.b || 0);
 
-          const difference =
-            Number(
-              pair.derived
-                ?.difference_a_minus_b || 0
-            );
+      const difference = Number(pair.derived?.difference_a_minus_b || 0);
 
-          const ratio =
-            Number(
-              pair.derived
-                ?.ratio_a_to_b || 0
-            );
+      const ratio = Number(pair.derived?.ratio_a_to_b || 0);
 
-          const sharedSurahs =
-            Number(
-              pair.distribution
-                ?.shared_surahs || 0
-            );
+      const sharedSurahs = Number(pair.distribution?.shared_surahs || 0);
 
-          const jaccard =
-            Number(
-              pair.distribution
-                ?.jaccard_overlap || 0
-            );
+      const jaccard = Number(pair.distribution?.jaccard_overlap || 0);
 
-          const jaccardPercent =
-            formatDecimal(
-              jaccard * 100,
-              1
-            );
+      const jaccardPercent = formatDecimal(jaccard * 100, 1);
 
-          const observation =
-            state.language === "id"
-              ? `Dalam corpus ini, ${pair.term_a} muncul ${formatNumber(
-                  countA
-                )} kali dan ${pair.term_b} ${formatNumber(
-                  countB
-                )} kali. Keduanya muncul dalam ${formatNumber(
-                  sharedSurahs
-                )} surah yang sama; overlap surah sebesar ${jaccardPercent}%.`
-              : state.language === "ar"
-                ? `في مجموعة البيانات هذه، ظهر ${pair.term_a} ${formatNumber(
-                    countA
-                  )} مرة وظهر ${pair.term_b} ${formatNumber(
-                    countB
-                  )} مرة. وظهر المصطلحان في ${formatNumber(
-                    sharedSurahs
-                  )} سورة مشتركة؛ وبلغ تداخل السور ${jaccardPercent}٪.`
-                : `In this corpus, ${pair.term_a} appears ${formatNumber(
-                    countA
-                  )} times and ${pair.term_b} ${formatNumber(
-                    countB
-                  )} times. The two terms appear in ${formatNumber(
-                    sharedSurahs
-                  )} of the same surahs, with ${jaccardPercent}% surah overlap.`;
+      const observation =
+        state.language === "id"
+          ? `Dalam corpus ini, ${pair.term_a} muncul ${formatNumber(
+              countA,
+            )} kali dan ${pair.term_b} ${formatNumber(
+              countB,
+            )} kali. Keduanya muncul dalam ${formatNumber(
+              sharedSurahs,
+            )} surah yang sama; overlap surah sebesar ${jaccardPercent}%.`
+          : state.language === "ar"
+            ? `في مجموعة البيانات هذه، ظهر ${pair.term_a} ${formatNumber(
+                countA,
+              )} مرة وظهر ${pair.term_b} ${formatNumber(
+                countB,
+              )} مرة. وظهر المصطلحان في ${formatNumber(
+                sharedSurahs,
+              )} سورة مشتركة؛ وبلغ تداخل السور ${jaccardPercent}٪.`
+            : `In this corpus, ${pair.term_a} appears ${formatNumber(
+                countA,
+              )} times and ${pair.term_b} ${formatNumber(
+                countB,
+              )} times. The two terms appear in ${formatNumber(
+                sharedSurahs,
+              )} of the same surahs, with ${jaccardPercent}% surah overlap.`;
 
-          const observationNote =
-            state.language === "id"
-              ? "Ini adalah observasi deskriptif; hubungan numerik tidak dengan sendirinya membuktikan sebab, makna khusus, atau status mukjizat."
-              : state.language === "ar"
-                ? "هذه ملاحظة وصفية؛ والعلاقة العددية وحدها لا تثبت السببية أو المعنى الخاص أو صفة الإعجاز."
-                : "This is a descriptive observation; a numerical relationship alone does not establish causation, special meaning, or miraculous status.";
+      const observationNote =
+        state.language === "id"
+          ? "Ini adalah observasi deskriptif; hubungan numerik tidak dengan sendirinya membuktikan sebab, makna khusus, atau status mukjizat."
+          : state.language === "ar"
+            ? "هذه ملاحظة وصفية؛ والعلاقة العددية وحدها لا تثبت السببية أو المعنى الخاص أو صفة الإعجاز."
+            : "This is a descriptive observation; a numerical relationship alone does not establish causation, special meaning, or miraculous status.";
 
-          return `
+      return `
             <article class="pair-card">
 
               <div class="pair-header">
@@ -2320,14 +1613,10 @@ function renderPairs() {
                 <button
                   class="pair-select"
                   type="button"
-                  data-word="${escapeHtml(
-                    pair.term_a
-                  )}"
+                  data-word="${escapeHtml(pair.term_a)}"
                 >
                   <span class="pair-word">
-                    ${escapeHtml(
-                      pair.term_a
-                    )}
+                    ${escapeHtml(pair.term_a)}
                   </span>
                 </button>
 
@@ -2338,14 +1627,10 @@ function renderPairs() {
                 <button
                   class="pair-select"
                   type="button"
-                  data-word="${escapeHtml(
-                    pair.term_b
-                  )}"
+                  data-word="${escapeHtml(pair.term_b)}"
                 >
                   <span class="pair-word">
-                    ${escapeHtml(
-                      pair.term_b
-                    )}
+                    ${escapeHtml(pair.term_b)}
                   </span>
                 </button>
 
@@ -2357,15 +1642,11 @@ function renderPairs() {
                 <div class="pair-frequency-item">
 
                   <span class="pair-frequency-value">
-                    ${formatNumber(
-                      countA
-                    )}
+                    ${formatNumber(countA)}
                   </span>
 
                   <span class="pair-frequency-label">
-                    ${escapeHtml(
-                      pair.term_a
-                    )}
+                    ${escapeHtml(pair.term_a)}
                     · ${t("frequency")}
                   </span>
 
@@ -2380,15 +1661,11 @@ function renderPairs() {
                 <div class="pair-frequency-item">
 
                   <span class="pair-frequency-value">
-                    ${formatNumber(
-                      countB
-                    )}
+                    ${formatNumber(countB)}
                   </span>
 
                   <span class="pair-frequency-label">
-                    ${escapeHtml(
-                      pair.term_b
-                    )}
+                    ${escapeHtml(pair.term_b)}
                     · ${t("frequency")}
                   </span>
 
@@ -2402,15 +1679,11 @@ function renderPairs() {
                 <div class="pair-metric">
 
                   <span class="pair-metric-label">
-                    ${t(
-                      "metricDifference"
-                    )}
+                    ${t("metricDifference")}
                   </span>
 
                   <strong class="pair-metric-value">
-                    ${formatNumber(
-                      difference
-                    )}
+                    ${formatNumber(difference)}
                   </strong>
 
                 </div>
@@ -2419,9 +1692,7 @@ function renderPairs() {
                 <div class="pair-metric">
 
                   <span class="pair-metric-label">
-                    ${t(
-                      "metricRatio"
-                    )}
+                    ${t("metricRatio")}
                   </span>
 
                   <strong class="pair-metric-value">
@@ -2434,15 +1705,11 @@ function renderPairs() {
                 <div class="pair-metric">
 
                   <span class="pair-metric-label">
-                    ${t(
-                      "metricSharedSurahs"
-                    )}
+                    ${t("metricSharedSurahs")}
                   </span>
 
                   <strong class="pair-metric-value">
-                    ${formatNumber(
-                      sharedSurahs
-                    )}
+                    ${formatNumber(sharedSurahs)}
                   </strong>
 
                 </div>
@@ -2451,9 +1718,7 @@ function renderPairs() {
                 <div class="pair-metric">
 
                   <span class="pair-metric-label">
-                    ${t(
-                      "metricJaccard"
-                    )}
+                    ${t("metricJaccard")}
                   </span>
 
                   <strong class="pair-metric-value">
@@ -2468,154 +1733,72 @@ function renderPairs() {
               <div class="pair-observation">
 
                 <p>
-                  ${escapeHtml(
-                    observation
-                  )}
+                  ${escapeHtml(observation)}
                 </p>
 
                 <small>
-                  ${escapeHtml(
-                    observationNote
-                  )}
+                  ${escapeHtml(observationNote)}
                 </small>
 
               </div>
 
             </article>
           `;
-        }
-      )
-      .join("");
+    })
+    .join("");
 
+  list.querySelectorAll(".pair-select").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.selectedWord = button.dataset.word;
 
-  list
-    .querySelectorAll(
-      ".pair-select"
-    )
-    .forEach(
-      (button) => {
+      state.evidenceIndex = 0;
 
-        button.addEventListener(
-          "click",
-          () => {
+      state.evidenceSurah = "all";
 
-            state.selectedWord =
-              button.dataset.word;
+      render();
 
-            state.evidenceIndex =
-              0;
-
-            state.evidenceSurah =
-              "all";
-
-            render();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-
-          }
-        );
-
-      }
-    );
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  });
 }
 
 function renderMethodology() {
-  const method =
-    state.data.method;
+  const method = state.data.method;
 
-  const value =
-    (v) =>
-      v
-        ? t("trueValue")
-        : t("falseValue");
+  const value = (v) => (v ? t("trueValue") : t("falseValue"));
 
-  setText(
-    "method-matching-label",
-    `${t("matching")}:`
-  );
+  setText("method-matching-label", `${t("matching")}:`);
 
-  setText(
-    "method-diacritics-label",
-    `${t("diacritics")}:`
-  );
+  setText("method-diacritics-label", `${t("diacritics")}:`);
 
-  setText(
-    "method-tatweel-label",
-    `${t("tatweel")}:`
-  );
+  setText("method-tatweel-label", `${t("tatweel")}:`);
 
-  setText(
-    "method-alif-label",
-    `${t("alif")}:`
-  );
+  setText("method-alif-label", `${t("alif")}:`);
 
-  setText(
-    "method-root-label",
-    `${t("rootAnalysis")}:`
-  );
+  setText("method-root-label", `${t("rootAnalysis")}:`);
 
-  setText(
-    "method-morphology-label",
-    `${t("morphology")}:`
-  );
+  setText("method-morphology-label", `${t("morphology")}:`);
 
-  setText(
-    "method-substring-label",
-    `${t("substring")}:`
-  );
+  setText("method-substring-label", `${t("substring")}:`);
 
-  setText(
-    "method-matching",
-    method.matching
-  );
+  setText("method-matching", method.matching);
 
-  setText(
-    "method-diacritics",
-    value(
-      method.diacritics_removed
-    )
-  );
+  setText("method-diacritics", value(method.diacritics_removed));
 
-  setText(
-    "method-tatweel",
-    value(
-      method.tatweel_removed
-    )
-  );
+  setText("method-tatweel", value(method.tatweel_removed));
 
-  setText(
-    "method-alif",
-    value(
-      method.alif_variants_normalized
-    )
-  );
+  setText("method-alif", value(method.alif_variants_normalized));
 
-  setText(
-    "method-root",
-    value(
-      method.root_analysis
-    )
-  );
+  setText("method-root", value(method.root_analysis));
 
-  setText(
-    "method-morphology",
-    value(
-      method.morphological_analysis
-    )
-  );
+  setText("method-morphology", value(method.morphological_analysis));
 
-  setText(
-    "method-substring",
-    value(
-      method.substring_matching
-    )
-  );
+  setText("method-substring", value(method.substring_matching));
 
-  const scope =
-    $("method-scope");
+  const scope = $("method-scope");
 
   if (scope) {
     const futureThemes =
@@ -2632,130 +1815,78 @@ function renderMethodology() {
             ? "Ruang lingkup"
             : state.language === "ar"
               ? "النطاق"
-              : "Scope"
+              : "Scope",
         )}
       </div>
 
       <p>
-        ${escapeHtml(
-          getUxText(
-            "methodScope"
-          )
-        )}
+        ${escapeHtml(getUxText("methodScope"))}
       </p>
 
       <small>
-        ${escapeHtml(
-          futureThemes
-        )}
+        ${escapeHtml(futureThemes)}
       </small>
     `;
   }
 
-  setText(
-    "footer-text",
-    t("dataStatus")
-  );
+  setText("footer-text", t("dataStatus"));
 }
 
 function renderLearnMetrics() {
   const cards = [
-    [
-      t("metricFrequency"),
-      t("metricFrequencyDesc"),
-    ],
+    [t("metricFrequency"), t("metricFrequencyDesc")],
 
-    [
-      t("metricToken"),
-      t("metricTokenDesc"),
-    ],
+    [t("metricToken"), t("metricTokenDesc")],
 
-    [
-      t("metricExactMatch"),
-      t("metricExactMatchDesc"),
-    ],
+    [t("metricExactMatch"), t("metricExactMatchDesc")],
 
-    [
-      t("metricDigitSum"),
-      t("metricDigitSumDesc"),
-    ],
+    [t("metricDigitSum"), t("metricDigitSumDesc")],
 
-    [
-      t("metricParity"),
-      t("metricParityDesc"),
-    ],
+    [t("metricParity"), t("metricParityDesc")],
 
-    [
-      t("metricPer1000"),
-      t("metricPer1000Desc"),
-    ],
+    [t("metricPer1000"), t("metricPer1000Desc")],
 
-    [
-      t("metricDifference"),
-      t("metricDifferenceDesc"),
-    ],
+    [t("metricDifference"), t("metricDifferenceDesc")],
 
-    [
-      t("metricRatio"),
-      t("metricRatioDesc"),
-    ],
+    [t("metricRatio"), t("metricRatioDesc")],
 
-    [
-      t("metricSharedSurahs"),
-      t("metricSharedSurahsDesc"),
-    ],
+    [t("metricSharedSurahs"), t("metricSharedSurahsDesc")],
 
-    [
-      t("metricJaccard"),
-      t("metricJaccardDesc"),
-    ],
+    [t("metricJaccard"), t("metricJaccardDesc")],
   ];
 
-  const list =
-    $("learn-metrics");
+  const list = $("learn-metrics");
 
   if (!list) {
     return;
   }
 
-  list.innerHTML =
-    cards
-      .map(
-        ([title, description]) => `
+  list.innerHTML = cards
+    .map(
+      ([title, description]) => `
           <article
             class="learn-card"
           >
 
             <h3>
-              ${escapeHtml(
-                title
-              )}
+              ${escapeHtml(title)}
             </h3>
 
             <p>
-              ${escapeHtml(
-                description
-              )}
+              ${escapeHtml(description)}
             </p>
 
           </article>
-        `
-      )
-      .join("");
+        `,
+    )
+    .join("");
 }
 
 function renderD3Safe() {
-  const term =
-    getSelectedTerm();
+  const term = getSelectedTerm();
 
-  if (
-    typeof window
-      .renderD3Distribution ===
-    "function"
-  ) {
-    window.renderD3Distribution(
-      term
-    );
+  if (typeof window.renderD3Distribution === "function") {
+    window.renderD3Distribution(term);
   }
 }
 
@@ -2764,8 +1895,7 @@ function render() {
     return;
   }
 
-  const term =
-    getSelectedTerm();
+  const term = getSelectedTerm();
 
   if (!term) {
     return;
@@ -2775,26 +1905,17 @@ function render() {
 
   renderStaticText();
 
-  renderTermList(
-    $("term-search")
-      ?.value || ""
-  );
+  renderTermList($("term-search")?.value || "");
 
   renderHero(term);
 
   renderNumerical(term);
 
-  renderSurahExplorerSummary(
-    term
-  );
+  renderSurahExplorerSummary(term);
 
-  renderSurahFilter(
-    term
-  );
+  renderSurahFilter(term);
 
-  renderEvidence(
-    term
-  );
+  renderEvidence(term);
 
   renderPairs();
 
@@ -2806,252 +1927,151 @@ function render() {
 }
 
 function setupEvidenceControls() {
-  const surahFilter =
-    $("surah-filter");
+  const surahFilter = $("surah-filter");
 
   if (surahFilter) {
-    surahFilter.addEventListener(
-      "change",
-      (event) => {
-        state.evidenceSurah =
-          event.target.value;
+    surahFilter.addEventListener("change", (event) => {
+      state.evidenceSurah = event.target.value;
 
-        state.evidenceIndex =
-          0;
+      state.evidenceIndex = 0;
 
-        renderEvidence(
-          getSelectedTerm()
-        );
+      renderEvidence(getSelectedTerm());
 
-        renderD3Safe();
-      }
-    );
+      renderD3Safe();
+    });
   }
 
-  const previous =
-    $("previous-evidence");
+  const previous = $("previous-evidence");
 
   if (previous) {
-    previous.addEventListener(
-      "click",
-      () => {
-        if (
-          state.evidenceIndex <=
-          0
-        ) {
-          return;
-        }
-
-        state.evidenceIndex -=
-          1;
-
-        renderEvidence(
-          getSelectedTerm()
-        );
+    previous.addEventListener("click", () => {
+      if (state.evidenceIndex <= 0) {
+        return;
       }
-    );
+
+      state.evidenceIndex -= 1;
+
+      renderEvidence(getSelectedTerm());
+    });
   }
 
-  const next =
-    $("next-evidence");
+  const next = $("next-evidence");
 
   if (next) {
-    next.addEventListener(
-      "click",
-      () => {
-        const filtered =
-          getFilteredOccurrences(
-            getSelectedTerm()
-          );
+    next.addEventListener("click", () => {
+      const filtered = getFilteredOccurrences(getSelectedTerm());
 
-        if (
-          state.evidenceIndex >=
-          filtered.length - 1
-        ) {
-          return;
-        }
-
-        state.evidenceIndex +=
-          1;
-
-        renderEvidence(
-          getSelectedTerm()
-        );
+      if (state.evidenceIndex >= filtered.length - 1) {
+        return;
       }
-    );
+
+      state.evidenceIndex += 1;
+
+      renderEvidence(getSelectedTerm());
+    });
   }
 
-  const jump =
-    $("evidence-jump");
+  const jump = $("evidence-jump");
 
   if (jump) {
-    jump.addEventListener(
-      "change",
-      (event) => {
-        const filtered =
-          getFilteredOccurrences(
-            getSelectedTerm()
-          );
+    jump.addEventListener("change", (event) => {
+      const filtered = getFilteredOccurrences(getSelectedTerm());
 
-        const requested =
-          Number(
-            event.target.value
-          ) - 1;
+      const requested = Number(event.target.value) - 1;
 
-        if (
-          Number.isNaN(
-            requested
-          ) ||
-          requested < 0 ||
-          requested >=
-            filtered.length
-        ) {
-          event.target.value =
-            state.evidenceIndex + 1;
+      if (
+        Number.isNaN(requested) ||
+        requested < 0 ||
+        requested >= filtered.length
+      ) {
+        event.target.value = state.evidenceIndex + 1;
 
-          return;
-        }
-
-        state.evidenceIndex =
-          requested;
-
-        renderEvidence(
-          getSelectedTerm()
-        );
+        return;
       }
-    );
+
+      state.evidenceIndex = requested;
+
+      renderEvidence(getSelectedTerm());
+    });
   }
 }
 
 async function loadAnalytics() {
   try {
-    state.language =
-      setLanguage(
-        state.language
-      )
-        ? state.language
-        : "en";
+    state.language = setLanguage(state.language) ? state.language : "en";
 
-    const response =
-      await fetch(
-        "./data/analytics.json"
-      );
+    const response = await fetch("./data/analytics.json");
 
     if (!response.ok) {
-      throw new Error(
-        `HTTP ${response.status}`
-      );
+      throw new Error(`HTTP ${response.status}`);
     }
 
-    state.data =
-      await response.json();
+    state.data = await response.json();
 
-    const [
-      indonesianResponse,
-      englishResponse,
-    ] = await Promise.all([
-      fetch(
-        "./data/translations/indonesian.json"
-      ),
+    const [indonesianResponse, englishResponse] = await Promise.all([
+      fetch("./data/translations/indonesian.json"),
 
-      fetch(
-        "./data/translations/english.json"
-      ),
+      fetch("./data/translations/english.json"),
     ]);
 
-    if (
-      !indonesianResponse.ok
-    ) {
+    if (!indonesianResponse.ok) {
       throw new Error(
-        `Indonesian translation HTTP ${indonesianResponse.status}`
+        `Indonesian translation HTTP ${indonesianResponse.status}`,
       );
     }
 
-    if (
-      !englishResponse.ok
-    ) {
-      throw new Error(
-        `English translation HTTP ${englishResponse.status}`
-      );
+    if (!englishResponse.ok) {
+      throw new Error(`English translation HTTP ${englishResponse.status}`);
     }
 
-    state.translationMaps.id =
-      buildTranslationMap(
-        await indonesianResponse.json()
-      );
+    state.translationMaps.id = buildTranslationMap(
+      await indonesianResponse.json(),
+    );
 
-    state.translationMaps.en =
-      buildTranslationMap(
-        await englishResponse.json()
-      );
+    state.translationMaps.en = buildTranslationMap(
+      await englishResponse.json(),
+    );
 
-    if (
-      !state.data.terms?.length
-    ) {
-      throw new Error(
-        "Analytics dataset contains no terms."
-      );
+    if (!state.data.terms?.length) {
+      throw new Error("Analytics dataset contains no terms.");
     }
 
-    state.selectedWord =
-      state.data.terms[0].word;
+    state.selectedWord = state.data.terms[0].word;
 
-    const corpus =
-      state.data.corpus;
+    const corpus = state.data.corpus;
 
-    $("corpus-badge")
-      .textContent =
-      `${corpus.chapters} chapters · ` +
-      `${corpus.verses} verses`;
+    $("corpus-badge").textContent =
+      `${corpus.chapters} chapters · ` + `${corpus.verses} verses`;
 
-    const search =
-      $("term-search");
+    const search = $("term-search");
 
     if (search) {
-      search.addEventListener(
-        "input",
-        () => {
-          renderTermList(
-            search.value
-          );
-        }
-      );
+      search.addEventListener("input", () => {
+        renderTermList(search.value);
+      });
     }
 
-    const languageSelect =
-      $("language-select");
+    const languageSelect = $("language-select");
 
     if (languageSelect) {
-      languageSelect.addEventListener(
-        "change",
-        (event) => {
-          state.language =
-            setLanguage(
-              event.target.value
-            );
+      languageSelect.addEventListener("change", (event) => {
+        state.language = setLanguage(event.target.value);
 
-          render();
-        }
-      );
+        render();
+      });
     }
 
     setupEvidenceControls();
 
     render();
-
   } catch (error) {
-    const badge =
-      $("corpus-badge");
+    const badge = $("corpus-badge");
 
     if (badge) {
-      badge.textContent =
-        "Data unavailable";
+      badge.textContent = "Data unavailable";
     }
 
-    const main =
-      document.querySelector(
-        ".main"
-      );
+    const main = document.querySelector(".main");
 
     if (main) {
       main.innerHTML = `
@@ -3064,18 +2084,14 @@ async function loadAnalytics() {
           </h2>
 
           <p>
-            ${escapeHtml(
-              error.message
-            )}
+            ${escapeHtml(error.message)}
           </p>
 
         </section>
       `;
     }
 
-    console.error(
-      error
-    );
+    console.error(error);
   }
 }
 
