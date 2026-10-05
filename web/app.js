@@ -945,6 +945,30 @@ function renderHero(term) {
         )} · ${getVerseLabel()} ${formatNumber(firstOccurrence.ayah)}`
     : "";
 
+  const featureSignal = $("feature-signal");
+
+  if (featureSignal) {
+    const coverage =
+      state.language === "ar"
+        ? `${formatNumber(surahCount)} من ${formatNumber(
+            totalSurahs,
+          )} سورة`
+        : state.language === "id"
+          ? `${formatNumber(surahCount)} dari ${formatNumber(
+              totalSurahs,
+            )} surah`
+          : `${formatNumber(surahCount)} of ${formatNumber(
+              totalSurahs,
+            )} surahs`;
+
+    featureSignal.innerHTML = `
+      <strong>${formatNumber(count)}×</strong>
+      <span>${escapeHtml(t("observedOccurrences"))}</span>
+      <span class="feature-signal-divider">·</span>
+      <span>${escapeHtml(coverage)}</span>
+    `;
+  }
+
   renderFeatureVerse(term, firstOccurrence);
 
   const openQuran = $("open-quran");
