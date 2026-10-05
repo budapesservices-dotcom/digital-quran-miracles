@@ -433,8 +433,10 @@ frontend_checks = {
     "Token highlighting wired":
         "renderEvidenceText" in app,
 
-    "Evidence audit wired":
-        "renderEvidenceAudit" in app,
+    "Evidence model wired":
+        "renderEvidence" in app
+        and "evidence" in app
+        and "token_index" in app,
 
     "Read Quran client integration":
         "readquranforpeace.net/quran" in app,
