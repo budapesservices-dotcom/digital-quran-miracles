@@ -8,6 +8,7 @@ const state = {
   translationMaps: {
     id: new Map(),
     en: new Map(),
+    ar: new Map(),
   },
 };
 
@@ -236,6 +237,36 @@ function getVerseTranslations(surah, ayah) {
 
     en: state.translationMaps.en.get(key) || "",
   };
+}
+
+async function fetchArabicTranslation(surah, ayah) {
+  const key = `${surah}:${ayah}`;
+
+  const cached = state.translationMaps.ar.get(key);
+
+  if (cached) {
+    return cached;
+  }
+
+  const url =
+    `https://quranenc.com/api/v1/translation/aya/` +
+    `arabic_seraj/${Number(surah)}/${Number(ayah)}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Arabic translation HTTP ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  const translation = String(data.translation || "").trim();
+
+  if (translation) {
+    state.translationMaps.ar.set(key, translation);
+  }
+
+  return translation;
 }
 
 function getVerseLabel() {
@@ -828,12 +859,15 @@ function renderFeatureVerse(term, occurrence = null) {
 
   let translationHtml = "";
 
+  /*
+   * Indonesian mode
+   */
   if (state.language === "id" && translations.id) {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText("translation")}
+        ${escapeHtml(getUxText("translation"))}
       </div>
 
       <p
@@ -851,12 +885,15 @@ function renderFeatureVerse(term, occurrence = null) {
     `;
   }
 
+  /*
+   * English mode
+   */
   if (state.language === "en" && translations.en) {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText("translation")}
+        ${escapeHtml(getUxText("translation"))}
       </div>
 
       <p
@@ -874,47 +911,25 @@ function renderFeatureVerse(term, occurrence = null) {
     `;
   }
 
-  if (state.language === "ar" && (translations.id || translations.en)) {
+  /*
+   * Arabic mode
+   * The Arabic translation is loaded after the verse shell
+   * has been rendered so it cannot block initial application load.
+   */
+  if (state.language === "ar") {
     translationHtml = `
       <div
         class="feature-verse-translation-label"
       >
-        ${getUxText("translation")}
+        ${escapeHtml(getUxText("translation"))}
       </div>
 
-      ${
-        translations.id
-          ? `
-            <p
-              class="feature-verse-translation"
-              dir="ltr"
-            >
-              <strong>
-                Bahasa Indonesia
-              </strong>
-              <br>
-              ${escapeHtml(translations.id)}
-            </p>
-          `
-          : ""
-      }
-
-      ${
-        translations.en
-          ? `
-            <p
-              class="feature-verse-translation"
-              dir="ltr"
-            >
-              <strong>
-                English
-              </strong>
-              <br>
-              ${escapeHtml(translations.en)}
-            </p>
-          `
-          : ""
-      }
+      <p
+        class="feature-verse-translation arabic-translation-content"
+        dir="rtl"
+      >
+        جارٍ تحميل ترجمة المعاني…
+      </p>
 
       <div
         class="feature-verse-source"
@@ -930,27 +945,64 @@ function renderFeatureVerse(term, occurrence = null) {
     </div>
 
     <div class="feature-verse-ref">
-  ${
-    state.language === "ar"
-      ? `السورة ${formatNumber(Number(occurrence.surah))} · الآية ${formatNumber(
-          Number(occurrence.ayah),
-        )}`
-      : `Surah ${formatNumber(Number(occurrence.surah))} · ${getVerseLabel()} ${formatNumber(
-          Number(occurrence.ayah),
-        )}`
-  }
-</div>
+      ${
+        state.language === "ar"
+          ? `السورة ${formatNumber(Number(occurrence.surah))} · الآية ${formatNumber(
+              Number(occurrence.ayah),
+            )}`
+          : `Surah ${formatNumber(Number(occurrence.surah))} · ${getVerseLabel()} ${formatNumber(
+              Number(occurrence.ayah),
+            )}`
+      }
+    </div>
 
     <p
-  class="feature-verse-arabic"
-  dir="rtl"
->
-  ${renderEvidenceText(occurrence.text, occurrence.token_index)}
-</p>
+      class="feature-verse-arabic"
+      dir="rtl"
+    >
+      ${renderEvidenceText(occurrence.text, occurrence.token_index)}
+    </p>
 
     ${translationHtml}
   `;
+
+  /*
+   * Load Arabic translation only after the verse shell exists.
+   */
+  if (state.language === "ar") {
+    const target = container.querySelector(".arabic-translation-content");
+
+    if (target) {
+      const requestedLanguage = state.language;
+      const requestedTerm = term.word;
+      const requestedSurah = Number(occurrence.surah);
+      const requestedAyah = Number(occurrence.ayah);
+
+      fetchArabicTranslation(requestedSurah, requestedAyah)
+        .then((translation) => {
+          if (
+            state.language !== requestedLanguage ||
+            state.selectedWord !== requestedTerm
+          ) {
+            return;
+          }
+
+          target.textContent = translation || "تعذر تحميل ترجمة المعاني.";
+        })
+        .catch(() => {
+          if (
+            state.language !== requestedLanguage ||
+            state.selectedWord !== requestedTerm
+          ) {
+            return;
+          }
+
+          target.textContent = "تعذر تحميل ترجمة المعاني.";
+        });
+    }
+  }
 }
+
 
 function renderHero(term) {
   const metadata = term.metadata || {};
@@ -1454,56 +1506,23 @@ function renderEvidence(term) {
     `;
   }
 
-  if (state.language === "ar" && (translations.id || translations.en)) {
+  if (state.language === "ar") {
     translationHtml = `
-      <div
-        class="
-          evidence-translation-label
-        "
-      >
-        الترجمة
-      </div>
+    <div class="evidence-translation-label">
+      الترجمة
+    </div>
 
-      ${
-        translations.id
-          ? `
-            <p
-              class="evidence-translation"
-              dir="ltr"
-            >
-              <strong>
-                Bahasa Indonesia
-              </strong>
-              <br>
-              ${escapeHtml(translations.id)}
-            </p>
-          `
-          : ""
-      }
+    <p
+      class="evidence-translation arabic-translation-content"
+      dir="rtl"
+    >
+      جارٍ تحميل ترجمة المعاني…
+    </p>
 
-      ${
-        translations.en
-          ? `
-            <p
-              class="evidence-translation"
-              dir="ltr"
-            >
-              <strong>
-                English
-              </strong>
-              <br>
-              ${escapeHtml(translations.en)}
-            </p>
-          `
-          : ""
-      }
-
-      <div
-        class="evidence-source"
-      >
-        ${escapeHtml(getUxText("translationSource"))}
-      </div>
-    `;
+    <div class="evidence-source">
+      ${escapeHtml(getUxText("translationSource"))}
+    </div>
+  `;
   }
 
   const list = $("evidence-list");
@@ -1581,6 +1600,31 @@ function renderEvidence(term) {
 
     </article>
   `;
+  if (state.language === "ar") {
+    const target = list.querySelector(".arabic-translation-content");
+
+    if (target) {
+      const requestedLanguage = state.language;
+      const requestedTerm = term.word;
+      const requestedSurah = Number(current.surah);
+      const requestedAyah = Number(current.ayah);
+
+      fetchArabicTranslation(requestedSurah, requestedAyah)
+        .then((translation) => {
+          if (
+            state.language !== requestedLanguage ||
+            state.selectedWord !== requestedTerm
+          ) {
+            return;
+          }
+
+          target.textContent = translation || "تعذر تحميل ترجمة المعاني.";
+        })
+        .catch(() => {
+          target.textContent = "تعذر تحميل ترجمة المعاني.";
+        });
+    }
+  }
 }
 
 function renderPairs() {

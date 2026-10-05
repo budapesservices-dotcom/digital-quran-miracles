@@ -1904,3 +1904,13 @@ html[data-language="ar"] .learn-card p {
 .footer-source a:hover {
   text-decoration: underline;
 }
+
+html[data-language="ar"] .arabic-translation-content {
+  direction: rtl;
+  text-align: right;
+  font-family:
+    "Amiri",
+    "Noto Naskh Arabic",
+    "Times New Roman",
+    serif;
+}
