@@ -530,6 +530,30 @@ a {
   font-weight: 800;
 }
 
+.feature-method {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.feature-method-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
 .reference {
   margin-top: 7px;
   color: var(--muted);
