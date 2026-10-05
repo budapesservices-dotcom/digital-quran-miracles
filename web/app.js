@@ -63,6 +63,127 @@ function renderEvidenceText(
     .join(" ");
 }
 
+function renderEvidenceAudit(
+  term,
+  occurrence
+) {
+  const method =
+    term.evidence?.method || {};
+
+  const normalized =
+    term.normalized_word
+    || term.numerical
+      ?.normalized_word
+    || "";
+
+  const matching =
+    method.matching
+    || "exact_normalized_token";
+
+  const labels =
+    state.language === "id"
+      ? {
+          term: "Term",
+          normalized: "Bentuk ternormalisasi",
+          rule: "Aturan pencocokan",
+          position: "Posisi token",
+        }
+      : state.language === "ar"
+        ? {
+            term: "المصطلح",
+            normalized: "الصيغة المطبّعة",
+            rule: "قاعدة المطابقة",
+            position: "موضع الرمز",
+          }
+        : {
+            term: "Term",
+            normalized: "Normalized form",
+            rule: "Matching rule",
+            position: "Token position",
+          };
+
+  return `
+    <div class="evidence-audit">
+
+      <div class="evidence-audit-item">
+
+        <span class="evidence-audit-label">
+          ${escapeHtml(
+            labels.term
+          )}
+        </span>
+
+        <strong
+          class="evidence-audit-value"
+          dir="rtl"
+        >
+          ${escapeHtml(
+            term.word
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="evidence-audit-item">
+
+        <span class="evidence-audit-label">
+          ${escapeHtml(
+            labels.normalized
+          )}
+        </span>
+
+        <strong
+          class="evidence-audit-value"
+          dir="rtl"
+        >
+          ${escapeHtml(
+            normalized
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="evidence-audit-item">
+
+        <span class="evidence-audit-label">
+          ${escapeHtml(
+            labels.rule
+          )}
+        </span>
+
+        <strong class="evidence-audit-value">
+          ${escapeHtml(
+            matching
+          )}
+        </strong>
+
+      </div>
+
+
+      <div class="evidence-audit-item">
+
+        <span class="evidence-audit-label">
+          ${escapeHtml(
+            labels.position
+          )}
+        </span>
+
+        <strong class="evidence-audit-value">
+          ${formatNumber(
+            Number(
+              occurrence.token_index
+            )
+          )}
+        </strong>
+
+      </div>
+
+    </div>
+  `;
+}
+
 function formatNumber(value) {
   return new Intl.NumberFormat(
     state.language === "ar"
@@ -2031,7 +2152,12 @@ const directUrl =
 </div>
 
 
-      <p
+      ${renderEvidenceAudit(
+  term,
+  current
+)}
+
+<p
   class="evidence-text"
   dir="rtl"
 >
