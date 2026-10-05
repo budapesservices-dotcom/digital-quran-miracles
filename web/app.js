@@ -1353,14 +1353,7 @@ function renderEvidence(term) {
 
     const next = $("next-evidence");
 
-    if (previous) {
-      previous.disabled = true;
-    }
-
-    if (next) {
-      next.disabled = true;
-    }
-
+    updateEvidenceNavigation(0);
     return;
   }
 
@@ -1406,13 +1399,7 @@ function renderEvidence(term) {
 
   const next = $("next-evidence");
 
-  if (previous) {
-    previous.disabled = state.evidenceIndex === 0;
-  }
-
-  if (next) {
-    next.disabled = state.evidenceIndex === total - 1;
-  }
+  state.evidenceIndex === 0 ? "hidden" : "visible";
 
   let translationHtml = "";
 
@@ -2128,18 +2115,32 @@ function render() {
   renderD3Safe();
 }
 
+function updateEvidenceNavigation(total) {
+  const previous = $("previous-evidence");
+  const next = $("next-evidence");
+
+  if (!previous || !next) {
+    return;
+  }
+
+  const atStart = state.evidenceIndex <= 0;
+  const atEnd = state.evidenceIndex >= total - 1;
+  const noNavigation = total <= 1;
+
+  previous.style.visibility = atStart || noNavigation ? "hidden" : "visible";
+
+  next.style.visibility = atEnd || noNavigation ? "hidden" : "visible";
+}
+
 function setupEvidenceControls() {
   const surahFilter = $("surah-filter");
 
   if (surahFilter) {
     surahFilter.addEventListener("change", (event) => {
       state.evidenceSurah = event.target.value;
-
       state.evidenceIndex = 0;
 
-      renderEvidence(getSelectedTerm());
-
-      renderD3Safe();
+      render();
     });
   }
 
