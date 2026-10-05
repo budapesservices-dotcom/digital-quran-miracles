@@ -1,35 +1,545 @@
 {
+  "schema_version": "1.0.0",
+  "title": "Full Corpus Consistency Comparison",
+  "status": "verification",
   "analysis_method": "exact_normalized_token",
-  "corpora": [
-    {
-      "corpus": "simple-clean",
+  "purpose": "Verify that normalized-token frequencies remain consistent across the simple-clean and Uthmani representations of the Quran corpus.",
+  "catalog": "data/term_catalog.json",
+  "corpora": {
+    "simple-clean": {
       "file": "data/raw/simple-clean.json",
       "chapters": 114,
       "verses": 6236,
       "tokens": 78248,
       "terms": {
         "يوم": {
+          "normalized_word": "يوم",
           "count": 217
         },
         "اليوم": {
+          "normalized_word": "اليوم",
           "count": 41
+        },
+        "الليل": {
+          "normalized_word": "الليل",
+          "count": 59
+        },
+        "النهار": {
+          "normalized_word": "النهار",
+          "count": 25
+        },
+        "شهر": {
+          "normalized_word": "شهر",
+          "count": 4
+        },
+        "سنة": {
+          "normalized_word": "سنة",
+          "count": 14
+        },
+        "الحياة": {
+          "normalized_word": "الحياة",
+          "count": 63
+        },
+        "الموت": {
+          "normalized_word": "الموت",
+          "count": 35
+        },
+        "الدنيا": {
+          "normalized_word": "الدنيا",
+          "count": 115
+        },
+        "الآخرة": {
+          "normalized_word": "الاخرة",
+          "count": 71
+        },
+        "القيامة": {
+          "normalized_word": "القيامة",
+          "count": 70
+        },
+        "الجنة": {
+          "normalized_word": "الجنة",
+          "count": 56
+        },
+        "النار": {
+          "normalized_word": "النار",
+          "count": 102
+        },
+        "الأرض": {
+          "normalized_word": "الارض",
+          "count": 287
+        },
+        "السماء": {
+          "normalized_word": "السماء",
+          "count": 109
+        },
+        "الشمس": {
+          "normalized_word": "الشمس",
+          "count": 20
+        },
+        "القمر": {
+          "normalized_word": "القمر",
+          "count": 5
+        },
+        "البحر": {
+          "normalized_word": "البحر",
+          "count": 23
+        },
+        "الماء": {
+          "normalized_word": "الماء",
+          "count": 17
+        },
+        "المطر": {
+          "normalized_word": "المطر",
+          "count": 0
+        },
+        "الريح": {
+          "normalized_word": "الريح",
+          "count": 8
+        },
+        "الجبل": {
+          "normalized_word": "الجبل",
+          "count": 2
+        },
+        "النجوم": {
+          "normalized_word": "النجوم",
+          "count": 6
+        },
+        "الإنسان": {
+          "normalized_word": "الانسان",
+          "count": 58
+        },
+        "الناس": {
+          "normalized_word": "الناس",
+          "count": 182
+        },
+        "الرجل": {
+          "normalized_word": "الرجل",
+          "count": 0
+        },
+        "المرأة": {
+          "normalized_word": "المراة",
+          "count": 0
+        },
+        "الصلاة": {
+          "normalized_word": "الصلاة",
+          "count": 58
+        },
+        "الزكاة": {
+          "normalized_word": "الزكاة",
+          "count": 26
+        },
+        "الحج": {
+          "normalized_word": "الحج",
+          "count": 7
+        },
+        "الإيمان": {
+          "normalized_word": "الايمان",
+          "count": 9
+        },
+        "الكفر": {
+          "normalized_word": "الكفر",
+          "count": 11
         }
       }
     },
-    {
-      "corpus": "uthmani",
+    "uthmani": {
       "file": "data/raw/uthmani.json",
       "chapters": 114,
       "verses": 6236,
       "tokens": 77911,
       "terms": {
         "يوم": {
+          "normalized_word": "يوم",
           "count": 217
         },
         "اليوم": {
+          "normalized_word": "اليوم",
           "count": 41
+        },
+        "الليل": {
+          "normalized_word": "الليل",
+          "count": 59
+        },
+        "النهار": {
+          "normalized_word": "النهار",
+          "count": 25
+        },
+        "شهر": {
+          "normalized_word": "شهر",
+          "count": 4
+        },
+        "سنة": {
+          "normalized_word": "سنة",
+          "count": 14
+        },
+        "الحياة": {
+          "normalized_word": "الحياة",
+          "count": 63
+        },
+        "الموت": {
+          "normalized_word": "الموت",
+          "count": 35
+        },
+        "الدنيا": {
+          "normalized_word": "الدنيا",
+          "count": 115
+        },
+        "الآخرة": {
+          "normalized_word": "الاخرة",
+          "count": 71
+        },
+        "القيامة": {
+          "normalized_word": "القيامة",
+          "count": 70
+        },
+        "الجنة": {
+          "normalized_word": "الجنة",
+          "count": 56
+        },
+        "النار": {
+          "normalized_word": "النار",
+          "count": 102
+        },
+        "الأرض": {
+          "normalized_word": "الارض",
+          "count": 287
+        },
+        "السماء": {
+          "normalized_word": "السماء",
+          "count": 109
+        },
+        "الشمس": {
+          "normalized_word": "الشمس",
+          "count": 20
+        },
+        "القمر": {
+          "normalized_word": "القمر",
+          "count": 5
+        },
+        "البحر": {
+          "normalized_word": "البحر",
+          "count": 23
+        },
+        "الماء": {
+          "normalized_word": "الماء",
+          "count": 17
+        },
+        "المطر": {
+          "normalized_word": "المطر",
+          "count": 0
+        },
+        "الريح": {
+          "normalized_word": "الريح",
+          "count": 8
+        },
+        "الجبل": {
+          "normalized_word": "الجبل",
+          "count": 2
+        },
+        "النجوم": {
+          "normalized_word": "النجوم",
+          "count": 6
+        },
+        "الإنسان": {
+          "normalized_word": "الانسان",
+          "count": 58
+        },
+        "الناس": {
+          "normalized_word": "الناس",
+          "count": 182
+        },
+        "الرجل": {
+          "normalized_word": "الرجل",
+          "count": 0
+        },
+        "المرأة": {
+          "normalized_word": "المراة",
+          "count": 0
+        },
+        "الصلاة": {
+          "normalized_word": "الصلاة",
+          "count": 58
+        },
+        "الزكاة": {
+          "normalized_word": "الزكاة",
+          "count": 26
+        },
+        "الحج": {
+          "normalized_word": "الحج",
+          "count": 7
+        },
+        "الإيمان": {
+          "normalized_word": "الايمان",
+          "count": 9
+        },
+        "الكفر": {
+          "normalized_word": "الكفر",
+          "count": 11
         }
       }
     }
-  ]
+  },
+  "comparison": {
+    "all_structure_counts_match": true,
+    "all_term_counts_match": true,
+    "terms": [
+      {
+        "word": "يوم",
+        "normalized_word": "يوم",
+        "simple_clean": 217,
+        "uthmani": 217,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "اليوم",
+        "normalized_word": "اليوم",
+        "simple_clean": 41,
+        "uthmani": 41,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الليل",
+        "normalized_word": "الليل",
+        "simple_clean": 59,
+        "uthmani": 59,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "النهار",
+        "normalized_word": "النهار",
+        "simple_clean": 25,
+        "uthmani": 25,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "شهر",
+        "normalized_word": "شهر",
+        "simple_clean": 4,
+        "uthmani": 4,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "سنة",
+        "normalized_word": "سنة",
+        "simple_clean": 14,
+        "uthmani": 14,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الحياة",
+        "normalized_word": "الحياة",
+        "simple_clean": 63,
+        "uthmani": 63,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الموت",
+        "normalized_word": "الموت",
+        "simple_clean": 35,
+        "uthmani": 35,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الدنيا",
+        "normalized_word": "الدنيا",
+        "simple_clean": 115,
+        "uthmani": 115,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الآخرة",
+        "normalized_word": "الاخرة",
+        "simple_clean": 71,
+        "uthmani": 71,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "القيامة",
+        "normalized_word": "القيامة",
+        "simple_clean": 70,
+        "uthmani": 70,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الجنة",
+        "normalized_word": "الجنة",
+        "simple_clean": 56,
+        "uthmani": 56,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "النار",
+        "normalized_word": "النار",
+        "simple_clean": 102,
+        "uthmani": 102,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الأرض",
+        "normalized_word": "الارض",
+        "simple_clean": 287,
+        "uthmani": 287,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "السماء",
+        "normalized_word": "السماء",
+        "simple_clean": 109,
+        "uthmani": 109,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الشمس",
+        "normalized_word": "الشمس",
+        "simple_clean": 20,
+        "uthmani": 20,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "القمر",
+        "normalized_word": "القمر",
+        "simple_clean": 5,
+        "uthmani": 5,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "البحر",
+        "normalized_word": "البحر",
+        "simple_clean": 23,
+        "uthmani": 23,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الماء",
+        "normalized_word": "الماء",
+        "simple_clean": 17,
+        "uthmani": 17,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "المطر",
+        "normalized_word": "المطر",
+        "simple_clean": 0,
+        "uthmani": 0,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الريح",
+        "normalized_word": "الريح",
+        "simple_clean": 8,
+        "uthmani": 8,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الجبل",
+        "normalized_word": "الجبل",
+        "simple_clean": 2,
+        "uthmani": 2,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "النجوم",
+        "normalized_word": "النجوم",
+        "simple_clean": 6,
+        "uthmani": 6,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الإنسان",
+        "normalized_word": "الانسان",
+        "simple_clean": 58,
+        "uthmani": 58,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الناس",
+        "normalized_word": "الناس",
+        "simple_clean": 182,
+        "uthmani": 182,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الرجل",
+        "normalized_word": "الرجل",
+        "simple_clean": 0,
+        "uthmani": 0,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "المرأة",
+        "normalized_word": "المراة",
+        "simple_clean": 0,
+        "uthmani": 0,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الصلاة",
+        "normalized_word": "الصلاة",
+        "simple_clean": 58,
+        "uthmani": 58,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الزكاة",
+        "normalized_word": "الزكاة",
+        "simple_clean": 26,
+        "uthmani": 26,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الحج",
+        "normalized_word": "الحج",
+        "simple_clean": 7,
+        "uthmani": 7,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الإيمان",
+        "normalized_word": "الايمان",
+        "simple_clean": 9,
+        "uthmani": 9,
+        "difference": 0,
+        "match": true
+      },
+      {
+        "word": "الكفر",
+        "normalized_word": "الكفر",
+        "simple_clean": 11,
+        "uthmani": 11,
+        "difference": 0,
+        "match": true
+      }
+    ],
+    "discrepancies": []
+  }
 }

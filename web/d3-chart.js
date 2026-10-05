@@ -261,7 +261,7 @@ function renderD3Distribution(term) {
   const xAxis = d3
     .axisBottom(x)
     .tickValues([1, 30, 60, 90, 114])
-    .tickFormat(d3.format("d"));
+    .tickFormat((value) => formatNumber(value));
 
   chart
     .append("g")
@@ -269,7 +269,7 @@ function renderD3Distribution(term) {
     .attr("transform", `translate(0,${innerHeight})`)
     .call(xAxis);
 
-  const yAxis = d3.axisLeft(y).ticks(4).tickFormat(d3.format("d"));
+  const yAxis = d3.axisLeft(y).ticks(4).tickFormat((value) => formatNumber(value));
 
   chart.append("g").attr("class", "d3-axis d3-axis-y").call(yAxis);
 

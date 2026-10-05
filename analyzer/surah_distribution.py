@@ -1,3 +1,4 @@
+from importlib.metadata import distributions
 import json
 from pathlib import Path
 
@@ -57,44 +58,72 @@ def build_distribution(index: dict) -> dict:
             if count > 0
         ]
 
-        max_count = max(counts.values())
-        max_surahs = [
-            int(surah)
-            for surah, count in counts.items()
-            if count == max_count
-        ]
+        max_count = max(
+            counts.values()
+        )
+
+        max_surahs = (
+            []
+            if max_count == 0
+            else [
+                int(surah)
+                for surah, count
+                in counts.items()
+                if count == max_count
+            ]
+        )
 
         distribution = {
             "word": word,
-            "normalized_word": term["normalized_word"],
-            "total_frequency": term["count"],
-            "surahs": counts,
+            "normalized_word":
+                term["normalized_word"],
+            "total_frequency":
+                term["count"],
+            "surahs":
+                counts,
             "summary": {
-                "surahs_with_occurrences": len(occupied),
+                "surahs_with_occurrences":
+                    len(occupied),
+
                 "surahs_without_occurrences":
                     TOTAL_SURAHS - len(occupied),
+
                 "maximum_occurrences_in_one_surah":
                     max_count,
+
                 "surahs_with_maximum":
                     max_surahs,
-                "minimum_nonzero_occurrences":
+
+                "minimum_nonzero_occurrences": (
                     min(nonzero_counts)
                     if nonzero_counts
-                    else 0,
+                    else 0
+                ),
             },
-            "evidence_file": term["evidence_file"],
+            "evidence_file":
+                term["evidence_file"],
         }
 
-        distributions.append(distribution)
+        distributions.append(
+            distribution
+        )
 
     return {
-        "title": "Per-Surah Frequency Distribution",
-        "status": "observed_data_only",
-        "method": "aggregate existing occurrence evidence by surah",
-        "total_surahs": TOTAL_SURAHS,
-        "terms": distributions,
-    }
+        "title":
+            "Per-Surah Frequency Distribution",
 
+        "status":
+            "observed_data_only",
+
+        "method":
+            "aggregate existing occurrence evidence by surah",
+
+        "total_surahs":
+            TOTAL_SURAHS,
+
+        "terms":
+            distributions,
+    }
 
 def main():
     print("Loading frequency index...")

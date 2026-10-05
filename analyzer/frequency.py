@@ -25,31 +25,118 @@ def normalize_arabic(text: str) -> str:
     """
     Normalize Arabic text for exact-token analysis.
 
+    The normalization supports both the simple-clean and
+    Uthmani Quran representations.
+
     Rules:
-    - Remove Arabic diacritics / tashkeel
+    - Unicode normalization
     - Remove tatweel
-    - Normalize common alif variants -> ا
-    - Normalize alif maqsura -> ي
+    - Normalize Uthmani dagger-alif constructions
+    - Normalize common alif variants
+    - Normalize alif maqsura
+    - Remove Arabic diacritics / combining marks
     """
 
-    # Unicode normalization
-    text = unicodedata.normalize("NFKC", text)
+    text = unicodedata.normalize(
+        "NFKC",
+        text
+    )
 
-    # Remove tatweel
-    text = text.replace("ـ", "")
+    # Remove tatweel.
+    text = text.replace(
+        "ـ",
+        ""
+    )
 
-    # Normalize common alif variants
-    text = text.replace("أ", "ا")
-    text = text.replace("إ", "ا")
-    text = text.replace("آ", "ا")
-    text = text.replace("ٱ", "ا")
+    # --------------------------------------------------------
+    # Uthmani orthographic compatibility
+    # --------------------------------------------------------
+    #
+    # In Uthmani text, a dagger alif may be carried by
+    # waw or ya. The simple-clean representation uses
+    # an ordinary alif instead.
+    #
+    # Examples:
+    #   وٰ -> ا
+    #   يٰ -> يا
+    #
+    # Combining marks may appear between the carrier and
+    # the dagger alif, so the patterns account for them.
+    #
 
-    # Normalize alif maqsura
-    text = text.replace("ى", "ي")
+    text = re.sub(
+        r"و[\u064B-\u065F\u0670]*\u0670",
+        "ا",
+        text
+    )
 
-    # Remove Arabic diacritics / combining marks
+    text = re.sub(
+        r"ي[\u064B-\u065F\u0670]*\u0670",
+        "يا",
+        text
+    )
+
+    # Standalone Uthmani dagger alif.
+    text = text.replace(
+        "ٰ",
+        "ا"
+    )
+
+    # --------------------------------------------------------
+    # Uthmani definite-article compatibility
+    # --------------------------------------------------------
+    #
+    # Uthmani can encode the doubled lam of words such as
+    # "الليل" using shadda:
+    #
+    #   ٱلَّيْلِ
+    #
+    # After diacritic removal this would otherwise become
+    # "اليل". Restore the corresponding simple-clean form.
+    #
+
+    text = re.sub(
+        r"ٱل[\u064B-\u065F\u0670]*\u0651[\u064B-\u065F\u0670]*ي",
+        "اللي",
+        text
+    )
+
+    # --------------------------------------------------------
+    # Common Arabic letter normalization
+    # --------------------------------------------------------
+
+    text = text.replace(
+        "أ",
+        "ا"
+    )
+
+    text = text.replace(
+        "إ",
+        "ا"
+    )
+
+    text = text.replace(
+        "آ",
+        "ا"
+    )
+
+    text = text.replace(
+        "ٱ",
+        "ا"
+    )
+
+    text = text.replace(
+        "ى",
+        "ي"
+    )
+
+    # --------------------------------------------------------
+    # Remove Arabic diacritics / combining marks.
+    # --------------------------------------------------------
+
     text = "".join(
-        char for char in text
+        char
+        for char in text
         if unicodedata.category(char) != "Mn"
     )
 

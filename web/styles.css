@@ -1398,6 +1398,104 @@ a {
   line-height: 1.55;
 }
 
+.method-provenance {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(13, 95, 70, 0.12);
+}
+
+.method-provenance-title {
+  margin-bottom: 8px;
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.method-provenance-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.method-provenance-grid div {
+  min-width: 0;
+}
+
+.method-provenance-grid span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.method-provenance-grid strong {
+  display: block;
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  font-weight: 650;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.method-verification {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(13, 95, 70, 0.12);
+}
+
+.method-verification-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.method-verification-heading span {
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.method-verification-heading strong {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.method-verification-heading strong.verified {
+  color: var(--green-deep);
+}
+
+.method-verification-heading strong.failed {
+  color: #8b3f32;
+}
+
+.method-verification p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .method-provenance-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .method-provenance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Kept for compatibility if the panel exists in the DOM. */
 .learn-panel {
   margin-top: 20px;
@@ -1519,13 +1617,49 @@ html[data-language="ar"] {
   direction: ltr;
 }
 
+/* =========================
+   RTL
+   ========================= */
+
+html[data-language="ar"] {
+  direction: ltr;
+}
+
+/* Arabic content that should remain visually centered */
 html[data-language="ar"] .arabic-feature,
-html[data-language="ar"] .evidence-text,
+html[data-language="ar"] .feature-verse-arabic,
+html[data-language="ar"] .evidence-text {
+  direction: rtl;
+  text-align: center;
+}
+
+/* Arabic term list / compact labels remain RTL */
 html[data-language="ar"] .term-word,
-html[data-language="ar"] .pair-word,
-html[data-language="ar"] .feature-verse-arabic {
+html[data-language="ar"] .pair-word {
   direction: rtl;
   text-align: right;
+}
+
+html[data-language="ar"] .term-copy,
+html[data-language="ar"] .feature-meta,
+html[data-language="ar"] .metric-row,
+html[data-language="ar"] .section-heading,
+html[data-language="ar"] .evidence-toolbar,
+html[data-language="ar"] .pair-data,
+html[data-language="ar"] .method-box {
+  direction: ltr;
+}
+
+html[data-language="ar"] .feature-meta {
+  justify-content: center;
+}
+
+html[data-language="ar"] .reference,
+html[data-language="ar"] .panel p,
+html[data-language="ar"] .subtitle,
+html[data-language="ar"] .method-box,
+html[data-language="ar"] .learn-card p {
+  text-align: left;
 }
 
 html[data-language="ar"] .term-copy,
@@ -1746,4 +1880,27 @@ html[data-language="ar"] .learn-card p {
   .observation-stat {
     transition: none;
   }
+}
+
+.footer-source {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.footer-source a {
+  color: var(--green-deep);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.footer-source a:hover {
+  text-decoration: underline;
 }

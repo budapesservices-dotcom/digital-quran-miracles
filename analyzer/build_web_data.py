@@ -14,6 +14,7 @@ FILES = {
     "numerical_findings": "numerical_findings.json",
     "surah_distribution": "surah_distribution.json",
     "pair_analysis": "pair_analysis.json",
+    "corpus_comparison": "corpus_comparison.json",
 }
 
 
@@ -107,6 +108,10 @@ def build_contract() -> dict:
 
     pair_analysis = load_json(
         PROCESSED_DIR / FILES["pair_analysis"]
+    )
+
+    corpus_comparison = load_json(
+        PROCESSED_DIR / FILES["corpus_comparison"]
     )
 
     frequency_words = {
@@ -223,6 +228,47 @@ def build_contract() -> dict:
         key=lambda item: item["rank"]
     )
 
+    comparison = corpus_comparison.get(
+        "comparison",
+        {}
+    )
+
+    comparison_terms = comparison.get(
+        "terms",
+        []
+    )
+
+    comparison_discrepancies = comparison.get(
+        "discrepancies",
+        []
+    )
+
+    if not comparison.get(
+        "all_structure_counts_match",
+        False
+    ):
+        raise ValueError(
+            "Cross-corpus structure verification failed."
+        )
+
+    if not comparison.get(
+        "all_term_counts_match",
+        False
+    ):
+        raise ValueError(
+            "Cross-corpus term verification failed."
+        )
+
+    if comparison_discrepancies:
+        raise ValueError(
+            "Cross-corpus verification contains discrepancies."
+        )
+
+    if len(comparison_terms) != len(frequency_words):
+        raise ValueError(
+            "Cross-corpus verification does not cover all frequency terms."
+        )
+
     return {
         "schema_version": "1.0.0",
 
@@ -241,6 +287,8 @@ def build_contract() -> dict:
         ),
 
         "method": {
+            "uthmani_compatibility":
+    True,
             "matching":
                 "exact_normalized_token",
 
@@ -260,13 +308,25 @@ def build_contract() -> dict:
         },
 
         "corpus": {
-            "source":
-                "data/raw/simple-clean.json",
+    "source":
+        "data/raw/simple-clean.json",
 
-            "chapters": 114,
+    "provider":
+        "Tanzil Project",
 
-            "verses": 6236,
-        },
+    "text_type":
+        "Simple Clean",
+
+    "license":
+        "Creative Commons Attribution 3.0",
+
+    "attribution_url":
+        "https://tanzil.net/",
+
+    "chapters": 114,
+
+    "verses": 6236,
+},
 
         "terms": terms,
 
@@ -284,6 +344,40 @@ def build_contract() -> dict:
 
             "pair_analysis":
                 FILES["pair_analysis"],
+                        "corpus_comparison":
+                FILES["corpus_comparison"],
+        },
+
+                "verification": {
+            "status":
+                "verified",
+
+            "cross_corpus": {
+                "method":
+                    "exact_normalized_token",
+
+                "simple_clean":
+                    "data/raw/simple-clean.json",
+
+                "uthmani":
+                    "data/raw/uthmani.json",
+
+                "chapters_match":
+                    comparison[
+                        "all_structure_counts_match"
+                    ],
+
+                "term_counts_match":
+                    comparison[
+                        "all_term_counts_match"
+                    ],
+
+                "terms_verified":
+                    len(comparison_terms),
+
+                "discrepancies":
+                    len(comparison_discrepancies),
+            },
         },
     }
 

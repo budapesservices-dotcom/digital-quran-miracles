@@ -147,13 +147,37 @@ function renderEvidenceAudit(term, occurrence) {
 }
 
 function formatNumber(value) {
-  return new Intl.NumberFormat(
-    state.language === "ar"
-      ? "ar-EG"
-      : state.language === "id"
-        ? "id-ID"
-        : "en-US",
-  ).format(value);
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return "0";
+  }
+
+  const formatted = new Intl.NumberFormat("en-US").format(number);
+
+  if (state.language !== "ar") {
+    return formatted;
+  }
+
+  return formatted.replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
+}
+
+function formatDecimal(value, maximumFractionDigits = 2) {
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return "0";
+  }
+
+  const formatted = new Intl.NumberFormat("en-US", {
+    maximumFractionDigits,
+  }).format(number);
+
+  if (state.language !== "ar") {
+    return formatted;
+  }
+
+  return formatted.replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
 }
 
 function formatDecimal(value, maximumFractionDigits = 2) {
@@ -721,11 +745,15 @@ function renderTermList(filter = "") {
                 ${escapeHtml(term.word)}
               </span>
 
-              <span
-                class="term-latin"
-              >
-                ${escapeHtml(metadata.transliteration || "")}
-              </span>
+              ${
+                state.language === "ar"
+                  ? ""
+                  : `
+      <span class="term-latin">
+        ${escapeHtml(metadata.transliteration || "")}
+      </span>
+    `
+              }
 
               <span
                 class="term-meaning"
@@ -902,14 +930,16 @@ function renderFeatureVerse(term, occurrence = null) {
     </div>
 
     <div class="feature-verse-ref">
-      Surah ${escapeHtml(occurrence.surah)}
-
-      ·
-
-      ${getVerseLabel()}
-
-      ${escapeHtml(occurrence.ayah)}
-    </div>
+  ${
+    state.language === "ar"
+      ? `السورة ${formatNumber(Number(occurrence.surah))} · الآية ${formatNumber(
+          Number(occurrence.ayah),
+        )}`
+      : `Surah ${formatNumber(Number(occurrence.surah))} · ${getVerseLabel()} ${formatNumber(
+          Number(occurrence.ayah),
+        )}`
+  }
+</div>
 
     <p
   class="feature-verse-arabic"
@@ -935,30 +965,35 @@ function renderHero(term) {
 
   $("feature-word").textContent = term.word;
 
-  $("feature-meta").innerHTML = `
-      <span
-        class="feature-latin"
-      >
+  $("feature-meta").innerHTML =
+    state.language === "ar"
+      ? `
+      <span class="feature-meaning">
+        المعنى · ${escapeHtml(getMeaning(term))}
+      </span>
+    `
+      : `
+      <span class="feature-latin">
         ${escapeHtml(metadata.transliteration || "")}
       </span>
 
-      <span
-        class="feature-separator"
-      >
+      <span class="feature-separator">
         ·
       </span>
 
-      <span
-        class="feature-meaning"
-      >
+      <span class="feature-meaning">
         ${escapeHtml(getMeaning(term))}
       </span>
     `;
 
   $("feature-reference").textContent = firstOccurrence
-    ? `${t("firstRecorded")}: ` +
-      `Surah ${firstOccurrence.surah}, ` +
-      `${getVerseLabel()} ${firstOccurrence.ayah}`
+    ? state.language === "ar"
+      ? `${t("firstRecorded")}: السورة ${formatNumber(
+          firstOccurrence.surah,
+        )} · الآية ${formatNumber(firstOccurrence.ayah)}`
+      : `${t("firstRecorded")}: Surah ${formatNumber(
+          firstOccurrence.surah,
+        )} · ${getVerseLabel()} ${formatNumber(firstOccurrence.ayah)}`
     : "";
 
   renderFeatureVerse(term, firstOccurrence);
@@ -1809,7 +1844,10 @@ function renderMethodology() {
 
   setText("method-substring-label", `${t("substring")}:`);
 
-  setText("method-matching", method.matching);
+  setText(
+    "method-matching",
+    state.language === "ar" ? "مطابقة رمز مطبّع تمامًا" : method.matching,
+  );
 
   setText("method-diacritics", value(method.diacritics_removed));
 
@@ -2080,6 +2118,24 @@ function render() {
   renderLanguageSelector();
 
   renderStaticText();
+  const corpus = state.data?.corpus;
+
+  if (corpus) {
+    const badge = $("corpus-badge");
+
+    if (badge) {
+      badge.textContent =
+        state.language === "ar"
+          ? `${formatNumber(corpus.chapters)} سورة · ${formatNumber(
+              corpus.verses,
+            )} آية`
+          : `${formatNumber(corpus.chapters)} ${
+              state.language === "id" ? "surah" : "chapters"
+            } · ${formatNumber(corpus.verses)} ${
+              state.language === "id" ? "ayat" : "verses"
+            }`;
+    }
+  }
 
   renderTermList($("term-search")?.value || "");
 
