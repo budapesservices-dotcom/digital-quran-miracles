@@ -154,6 +154,16 @@ function formatNumber(value) {
     return "0";
   }
 
+  function parseLocalizedInteger(value) {
+    return Number(
+      String(value)
+        .replace(/[٠-٩]/g, (digit) => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+        .replace(/٫/g, ".")
+        .replace(/٬/g, ",")
+        .replace(/[^\d-]/g, ""),
+    );
+  }
+
   const formatted = new Intl.NumberFormat("en-US").format(number);
 
   if (state.language !== "ar") {
@@ -167,7 +177,7 @@ function formatDecimal(value, maximumFractionDigits = 2) {
   const number = Number(value);
 
   if (!Number.isFinite(number)) {
-    return "0";
+    return "٠";
   }
 
   const formatted = new Intl.NumberFormat("en-US", {
@@ -178,7 +188,10 @@ function formatDecimal(value, maximumFractionDigits = 2) {
     return formatted;
   }
 
-  return formatted.replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
+  return formatted
+    .replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)])
+    .replace(/\./g, "٫")
+    .replace(/,/g, "٬");
 }
 
 function formatDecimal(value, maximumFractionDigits = 2) {
@@ -1003,7 +1016,6 @@ function renderFeatureVerse(term, occurrence = null) {
   }
 }
 
-
 function renderHero(term) {
   const metadata = term.metadata || {};
 
@@ -1230,8 +1242,14 @@ function renderNumerical(term) {
 
     [
       t("per1000"),
-      String(metrics.frequency_per_1000_tokens ?? 0),
+      formatDecimal(metrics.frequency_per_1000_tokens ?? 0, 4),
       t("metricPer1000Desc"),
+    ],
+
+    [
+      t("metricVerseShare"),
+      `${formatDecimal(metrics.count_as_percentage_of_verse_total ?? 0, 4)}٪`,
+      t("metricVerseShareDesc"),
     ],
 
     [
@@ -1457,7 +1475,10 @@ function renderEvidence(term) {
   const jump = $("evidence-jump");
 
   if (jump) {
-    jump.value = state.evidenceIndex + 1;
+    jump.value =
+      state.language === "ar"
+        ? formatNumber(state.evidenceIndex + 1)
+        : state.evidenceIndex + 1;
   }
 
   const previous = $("previous-evidence");
@@ -1724,10 +1745,9 @@ function renderPairs() {
                     ${formatNumber(countA)}
                   </span>
 
-                  <span class="pair-frequency-label">
-                    ${escapeHtml(pair.term_a)}
-                    · ${t("frequency")}
-                  </span>
+                  <span class="pair-frequency-divider">
+  ${state.language === "ar" ? "مقابل" : "vs"}
+</span>
 
                 </div>
 
@@ -1775,9 +1795,8 @@ function renderPairs() {
                   </span>
 
                   <strong class="pair-metric-value">
-                    ${ratio}
-                  </strong>
-
+  ${formatDecimal(ratio, 6)}
+</strong>
                 </div>
 
 
@@ -1801,9 +1820,8 @@ function renderPairs() {
                   </span>
 
                   <strong class="pair-metric-value">
-                    ${jaccard}
-                  </strong>
-
+  ${formatDecimal(jaccard, 6)}
+</strong>
                 </div>
 
               </div>
@@ -2253,7 +2271,7 @@ function setupEvidenceControls() {
     jump.addEventListener("change", (event) => {
       const filtered = getFilteredOccurrences(getSelectedTerm());
 
-      const requested = Number(event.target.value) - 1;
+      const requested = parseLocalizedInteger(event.target.value) - 1;
 
       if (
         Number.isNaN(requested) ||

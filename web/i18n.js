@@ -46,8 +46,7 @@ const I18N = {
     metricDigitSumDesc:
       "Jumlahkan digit desimal dari frequency. Contoh: 217 → 2 + 1 + 7 = 10.",
     metricParity: "Parity",
-    metricParityDesc:
-      "Menunjukkan apakah frequency genap atau ganjil.",
+    metricParityDesc: "Menunjukkan apakah frequency genap atau ganjil.",
     metricPer1000: "Frequency per 1.000 token",
     metricPer1000Desc:
       "Frequency dibagi jumlah seluruh token, lalu dikali 1.000.",
@@ -55,14 +54,11 @@ const I18N = {
     metricVerseShareDesc:
       "Frequency dinyatakan sebagai persentase dari jumlah seluruh ayat.",
     metricDifference: "Difference",
-    metricDifferenceDesc:
-      "Untuk pasangan term: jumlah A dikurangi jumlah B.",
+    metricDifferenceDesc: "Untuk pasangan term: jumlah A dikurangi jumlah B.",
     metricSum: "Sum",
-    metricSumDesc:
-      "Untuk pasangan term: jumlah A ditambah jumlah B.",
+    metricSumDesc: "Untuk pasangan term: jumlah A ditambah jumlah B.",
     metricRatio: "Ratio",
-    metricRatioDesc:
-      "Untuk pasangan term: jumlah A dibagi jumlah B.",
+    metricRatioDesc: "Untuk pasangan term: jumlah A dibagi jumlah B.",
     metricSharedSurahs: "Shared surahs",
     metricSharedSurahsDesc:
       "Berapa surah yang memuat kedua term setidaknya satu kali.",
@@ -80,7 +76,7 @@ const I18N = {
     falseValue: "Tidak",
     notAvailable: "Tidak tersedia",
     dataStatus:
-      "Status data: presentasi observed-data. Frequency dan observasi numerik terikat pada corpus project dan aturan analisis yang terdokumentasi."
+      "Status data: presentasi observed-data. Frequency dan observasi numerik terikat pada corpus project dan aturan analisis yang terdokumentasi.",
   },
 
   en: {
@@ -130,8 +126,7 @@ const I18N = {
     metricDigitSumDesc:
       "Add the decimal digits of the frequency. Example: 217 → 2 + 1 + 7 = 10.",
     metricParity: "Parity",
-    metricParityDesc:
-      "Whether the frequency is even or odd.",
+    metricParityDesc: "Whether the frequency is even or odd.",
     metricPer1000: "Frequency per 1,000 tokens",
     metricPer1000Desc:
       "Frequency divided by total tokens, then multiplied by 1,000.",
@@ -139,17 +134,13 @@ const I18N = {
     metricVerseShareDesc:
       "The frequency expressed as a percentage of the total verse count.",
     metricDifference: "Difference",
-    metricDifferenceDesc:
-      "For a pair: count A minus count B.",
+    metricDifferenceDesc: "For a pair: count A minus count B.",
     metricSum: "Sum",
-    metricSumDesc:
-      "For a pair: count A plus count B.",
+    metricSumDesc: "For a pair: count A plus count B.",
     metricRatio: "Ratio",
-    metricRatioDesc:
-      "For a pair: count A divided by count B.",
+    metricRatioDesc: "For a pair: count A divided by count B.",
     metricSharedSurahs: "Shared surahs",
-    metricSharedSurahsDesc:
-      "How many surahs contain both terms at least once.",
+    metricSharedSurahsDesc: "How many surahs contain both terms at least once.",
     metricJaccard: "Jaccard overlap",
     metricJaccardDesc:
       "Shared surahs divided by all surahs containing either term.",
@@ -164,7 +155,7 @@ const I18N = {
     falseValue: "No",
     notAvailable: "Not available",
     dataStatus:
-      "Data status: observed-data presentation. Frequency and numerical observations are tied to the project corpus and documented analysis rules."
+      "Data status: observed-data presentation. Frequency and numerical observations are tied to the project corpus and documented analysis rules.",
   },
 
   ar: {
@@ -182,13 +173,13 @@ const I18N = {
     frequency: "التكرار",
     surahsWithTerm: "السور التي يظهر فيها المصطلح",
     digitSum: "مجموع الأرقام",
-    per1000: "لكل 1000 رمز",
+    per1000: "لكل ١٠٠٠ رمز",
     numericalObservation: "الملاحظة الرقمية",
     numericalDescription:
       "هذه المقاييس تصف البيانات المرصودة، ولا تثبت وحدها الدلالة الإحصائية أو أي ادعاء بالمعجزة.",
     surahDistribution: "توزيع السور",
     surahDistributionDescription:
-      "تجميع مرات الظهور عبر السور الـ114. اختر عمودًا لفحص الدليل في تلك السورة.",
+      "تجميع مرات الظهور عبر السور الـ١١٤. اختر عمودًا لفحص الدليل في تلك السورة.",
     interactiveD3: "تصور تفاعلي باستخدام D3",
     verseEvidence: "الأدلة على مستوى الآية",
     verseEvidenceDescription:
@@ -205,32 +196,25 @@ const I18N = {
       "تُعرض العلاقات المرشحة كملاحظات رقمية، وليست إثباتًا محددًا مسبقًا.",
     methodology: "المنهجية",
     learnMetrics: "تعلّم قراءة المقاييس",
-    learnMetricsDescription:
-      "هذه المصطلحات تشرح كيفية قياس مجموعة البيانات.",
+    learnMetricsDescription: "هذه المصطلحات تشرح كيفية قياس مجموعة البيانات.",
     metricFrequency: "التكرار",
     metricFrequencyDesc:
       "عدد مرات ظهور الرمز المطبع المطابق تمامًا في corpus الذي تم تحليله.",
     metricDigitSum: "مجموع الأرقام",
     metricDigitSumDesc:
-      "اجمع أرقام التكرار العشرية. مثال: 217 ← 2 + 1 + 7 = 10.",
+      "اجمع أرقام التكرار العشرية. مثال: ٢١٧ ← ٢ + ١ + ٧ = ١٠.",
     metricParity: "زوجي / فردي",
-    metricParityDesc:
-      "يوضح ما إذا كان التكرار زوجيًا أم فرديًا.",
+    metricParityDesc: "يوضح ما إذا كان التكرار زوجيًا أم فرديًا.",
     metricPer1000: "التكرار لكل 1000 رمز",
-    metricPer1000Desc:
-      "التكرار مقسومًا على إجمالي الرموز ثم مضروبًا في 1000.",
+    metricPer1000Desc: "التكرار مقسومًا على إجمالي الرموز ثم مضروبًا في ١٠٠٠.",
     metricVerseShare: "النسبة من إجمالي الآيات",
-    metricVerseShareDesc:
-      "التكرار كنسبة مئوية من إجمالي عدد الآيات.",
+    metricVerseShareDesc: "التكرار كنسبة مئوية من إجمالي عدد الآيات.",
     metricDifference: "الفرق",
-    metricDifferenceDesc:
-      "في الزوج: عدد A ناقص عدد B.",
+    metricDifferenceDesc: "في الزوج: عدد A ناقص عدد B.",
     metricSum: "المجموع",
-    metricSumDesc:
-      "في الزوج: عدد A زائد عدد B.",
+    metricSumDesc: "في الزوج: عدد A زائد عدد B.",
     metricRatio: "النسبة",
-    metricRatioDesc:
-      "في الزوج: عدد A مقسومًا على عدد B.",
+    metricRatioDesc: "في الزوج: عدد A مقسومًا على عدد B.",
     metricSharedSurahs: "السور المشتركة",
     metricSharedSurahsDesc:
       "عدد السور التي يظهر فيها المصطلحان مرة واحدة على الأقل.",
@@ -248,20 +232,18 @@ const I18N = {
     falseValue: "لا",
     notAvailable: "غير متاح",
     dataStatus:
-      "حالة البيانات: عرض للبيانات المرصودة. التكرارات والملاحظات الرقمية مرتبطة بمجموعة البيانات وقواعد التحليل الموثقة."
-  }
+      "حالة البيانات: عرض للبيانات المرصودة. التكرارات والملاحظات الرقمية مرتبطة بمجموعة البيانات وقواعد التحليل الموثقة.",
+  },
 };
 
 function detectInitialLanguage() {
-  const saved =
-    localStorage.getItem("dqm-language");
+  const saved = localStorage.getItem("dqm-language");
 
   if (saved && I18N[saved]) {
     return saved;
   }
 
-  const browser =
-    navigator.language?.toLowerCase() || "en";
+  const browser = navigator.language?.toLowerCase() || "en";
 
   if (browser.startsWith("id")) {
     return "id";
@@ -279,13 +261,9 @@ function setLanguage(language) {
     language = "en";
   }
 
-  localStorage.setItem(
-    "dqm-language",
-    language
-  );
+  localStorage.setItem("dqm-language", language);
 
-  document.documentElement.lang =
-    language;
+  document.documentElement.lang = language;
 
   /*
    * IMPORTANT:
@@ -295,8 +273,7 @@ function setLanguage(language) {
    */
   document.documentElement.dir = "ltr";
 
-  document.documentElement.dataset.language =
-    language;
+  document.documentElement.dataset.language = language;
 
   return language;
 }
@@ -324,23 +301,21 @@ Object.assign(I18N.id, {
   metricExactMatch: "Exact match",
   metricExactMatchDesc:
     "Komputer hanya menghitung token yang sama persis setelah normalisasi; bagian dari kata lain tidak otomatis ikut dihitung.",
-    whatObserved: "Apa yang kita amati?",
+  whatObserved: "Apa yang kita amati?",
   whatObservedDescription:
     "Ringkasan hasil yang benar-benar terukur dari corpus yang dianalisis.",
   quranNavigation: "Navigasi Quran",
   surahExplorer: "Penjelajah Surah",
   surahExplorerDescription:
     "Lihat bagaimana term tersebar di 114 surah. Pilih titik untuk membuka evidence.",
-  surahExplorerCaption:
-    "Setiap titik mewakili satu Surah",
+  surahExplorerCaption: "Setiap titik mewakili satu Surah",
   behindObservation: "Di balik observasi",
-  numbersBehindObservation:
-    "Angka di balik observasi",
+  numbersBehindObservation: "Angka di balik observasi",
   methodGuide: "Panduan metode",
   traceResult: "Telusuri hasil",
   exploratoryComparison: "Perbandingan eksploratif",
   auditTrail: "Jejak audit",
-  surahs: "surah"
+  surahs: "surah",
 });
 
 Object.assign(I18N.en, {
@@ -366,23 +341,21 @@ Object.assign(I18N.en, {
   metricExactMatch: "Exact match",
   metricExactMatchDesc:
     "The computer counts only an exact normalized token; a token containing the same letters is not automatically included.",
-    whatObserved: "What did we observe?",
+  whatObserved: "What did we observe?",
   whatObservedDescription:
     "A summary of the results directly measured from the analyzed corpus.",
   quranNavigation: "Quran navigation",
   surahExplorer: "Surah Explorer",
   surahExplorerDescription:
     "See how the term is distributed across 114 surahs. Select a point to inspect evidence.",
-  surahExplorerCaption:
-    "Each point represents one Surah",
+  surahExplorerCaption: "Each point represents one Surah",
   behindObservation: "Behind the observation",
-  numbersBehindObservation:
-    "Numbers behind the observation",
+  numbersBehindObservation: "Numbers behind the observation",
   methodGuide: "Method guide",
   traceResult: "Trace the result",
   exploratoryComparison: "Exploratory comparison",
   auditTrail: "Audit trail",
-  surahs: "surahs"
+  surahs: "surahs",
 });
 
 Object.assign(I18N.ar, {
@@ -393,38 +366,35 @@ Object.assign(I18N.ar, {
   statSurahTitle: "ظهر في",
   statSurahUnit: "سورة",
   statSurahDesc:
-    "ظهر المصطلح مرة واحدة على الأقل في هذا العدد من أصل 114 سورة.",
+    "ظهر المصطلح مرة واحدة على الأقل في هذا العدد من أصل ١١٤ سورة.",
   statRateTitle: "معدل الظهور",
-  statRateUnit: "لكل 1000 وحدة نصية",
+  statRateUnit: "لكل ١٠٠٠ وحدة نصية",
   statRateDesc:
     "طريقة موحدة لمعرفة مدى تكرار المصطلح بالنسبة إلى النص الذي تم عده.",
   statNumberPropertyTitle: "مجموع الأرقام",
   statNumberPropertyUnit: "النتيجة المحسوبة",
   statNumberPropertyDesc:
-    "217 ← 2 + 1 + 7 = 10. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.",
+    "٢١٧ ← ٢ + ١ + ٧ = ١٠. هذه خاصية رياضية إضافية فقط وليست إثباتًا لمعجزة.",
   metricToken: "الرمز",
-  metricTokenDesc:
-    "جزء من النص يقوم الكمبيوتر بعدّه بعد تطبيق قواعد المعالجة.",
+  metricTokenDesc: "جزء من النص يقوم الكمبيوتر بعدّه بعد تطبيق قواعد المعالجة.",
   metricExactMatch: "مطابقة تامة",
   metricExactMatchDesc:
     "يقوم الكمبيوتر بعدّ الرمز المطبع المطابق تمامًا؛ ولا يتم احتساب كلمة أخرى لمجرد احتوائها على الحروف نفسها.",
-    whatObserved: "ما الذي لاحظناه؟",
+  whatObserved: "ما الذي لاحظناه؟",
   whatObservedDescription:
     "ملخص للنتائج المقاسة مباشرة من مجموعة البيانات التي تم تحليلها.",
   quranNavigation: "التنقل في القرآن",
   surahExplorer: "مستكشف السور",
   surahExplorerDescription:
     "شاهد كيفية توزيع المصطلح عبر 114 سورة. اختر نقطة لفحص الدليل.",
-  surahExplorerCaption:
-    "كل نقطة تمثل سورة واحدة",
+  surahExplorerCaption: "كل نقطة تمثل سورة واحدة",
   behindObservation: "خلف الملاحظة",
-  numbersBehindObservation:
-    "الأرقام خلف الملاحظة",
+  numbersBehindObservation: "الأرقام خلف الملاحظة",
   methodGuide: "دليل المنهج",
   traceResult: "تتبع النتيجة",
   exploratoryComparison: "مقارنة استكشافية",
   auditTrail: "مسار التدقيق",
-  surahs: "سور"
+  surahs: "سور",
 });
 
 Object.assign(I18N.id, {
@@ -432,7 +402,7 @@ Object.assign(I18N.id, {
   category_life: "Kehidupan & Akhirat",
   category_nature: "Alam",
   category_people: "Manusia & Masyarakat",
-  category_faith: "Iman & Ibadah"
+  category_faith: "Iman & Ibadah",
 });
 
 Object.assign(I18N.en, {
@@ -440,7 +410,7 @@ Object.assign(I18N.en, {
   category_life: "Life & Hereafter",
   category_nature: "Nature",
   category_people: "People & Society",
-  category_faith: "Faith & Practice"
+  category_faith: "Faith & Practice",
 });
 
 Object.assign(I18N.ar, {
@@ -448,5 +418,5 @@ Object.assign(I18N.ar, {
   category_life: "الحياة والآخرة",
   category_nature: "الطبيعة",
   category_people: "الإنسان والمجتمع",
-  category_faith: "الإيمان والعبادة"
+  category_faith: "الإيمان والعبادة",
 });
