@@ -499,8 +499,39 @@ a {
   color: var(--gold);
 }
 
+.feature-signal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--green-border);
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.feature-signal strong {
+  color: var(--green);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.feature-signal-divider {
+  color: var(--gold);
+  font-weight: 800;
+}
+
 .reference {
-  margin-top: 5px;
+  margin-top: 7px;
   color: var(--muted);
   font-size: 0.76rem;
 }
@@ -1791,6 +1822,11 @@ html[data-language="ar"] .learn-card p {
   .arabic-feature {
     margin-top: 18px;
     font-size: clamp(3.3rem, 18vw, 5.5rem);
+  }
+
+  .feature-signal {
+    width: min(100%, 360px);
+    border-radius: 18px;
   }
 
   .feature-verse {
