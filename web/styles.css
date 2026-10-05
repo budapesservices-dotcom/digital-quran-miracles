@@ -204,8 +204,7 @@ a {
 }
 
 .select:focus,
-.number-input:focus,
-.language-select:focus {
+.number-input:focus {
   border-color: var(--gold);
 }
 
