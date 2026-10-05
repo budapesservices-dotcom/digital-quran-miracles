@@ -61,22 +61,44 @@ function renderD3Distribution(term) {
   const maxCount = d3.max(data, (d) => d.count) || 0;
 
   if (!data.length || maxCount === 0) {
+    const emptyState =
+      state.language === "id"
+        ? {
+            title: "Tidak ada kecocokan tepat",
+            description:
+              "Term ini muncul 0 kali menggunakan metode exact normalized-token saat ini.",
+            note:
+              "Pencocokan berbasis akar kata atau morfologi tidak diterapkan.",
+          }
+        : state.language === "ar"
+          ? {
+              title: "لم يتم العثور على مطابقات تامة",
+              description:
+                "ظهر هذا المصطلح ٠ مرة باستخدام منهج الرمز المطبع المطابق تمامًا.",
+              note:
+                "لا يتم تطبيق تحليل الجذر أو التحليل الصرفي.",
+            }
+          : {
+              title: "No exact matches found",
+              description:
+                "This term has 0 occurrences using the current exact normalized-token method.",
+              note:
+                "No root or morphological matching is applied.",
+            };
+
     container.innerHTML = `
       <div class="d3-empty-state">
 
         <strong>
-          No exact matches found
+          ${escapeHtml(emptyState.title)}
         </strong>
 
         <span>
-          This term has 0 occurrences
-          using the current exact
-          normalized-token method.
+          ${escapeHtml(emptyState.description)}
         </span>
 
         <small>
-          No root or morphological
-          matching is applied.
+          ${escapeHtml(emptyState.note)}
         </small>
 
       </div>
@@ -120,12 +142,19 @@ function renderD3Distribution(term) {
 
   container.appendChild(insight);
 
+  const chartAriaLabel =
+    state.language === "id"
+      ? `Distribusi surah untuk ${term.word}`
+      : state.language === "ar"
+        ? `توزيع المصطلح ${term.word} حسب السور`
+        : `Surah distribution of ${term.word}`;
+
   const svg = d3
     .select(container)
     .append("svg")
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("role", "img")
-    .attr("aria-label", `Surah distribution of ${term.word}`);
+    .attr("aria-label", chartAriaLabel);
 
   const chart = svg
     .append("g")
@@ -203,11 +232,14 @@ function renderD3Distribution(term) {
 
       d3.select(this).attr("r", radius(d.count) + 2);
 
-      const label = names.get(String(d.surah)) || "";
+      const label =
+        state.language === "ar"
+          ? `السورة ${formatNumber(d.surah)}`
+          : names.get(String(d.surah)) || `Surah ${formatNumber(d.surah)}`;
 
       tooltip.style("opacity", 1).html(`
             <strong>
-              ${label ? escapeHtml(label) : `Surah ${d.surah}`}
+              ${escapeHtml(label)}
             </strong>
 
             <br>
