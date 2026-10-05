@@ -972,16 +972,9 @@ function renderHero(term) {
   const featureMethod = $("feature-method");
 
   if (featureMethod) {
-    const methodLabel =
-      state.language === "ar"
-        ? "مطابقة رمز مطبّع تمامًا"
-        : state.language === "id"
-          ? "Pencocokan token exact setelah normalisasi"
-          : "Exact normalized-token matching";
-
     featureMethod.innerHTML = `
       <span class="feature-method-mark">✓</span>
-      <span>${escapeHtml(methodLabel)}</span>
+      <span>${escapeHtml(t("methodBadge"))}</span>
     `;
   }
 
