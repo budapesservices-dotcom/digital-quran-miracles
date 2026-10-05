@@ -1926,6 +1926,9 @@ html[data-language="ar"] .learn-card p {
     margin: 0;
     padding: 20px 16px 24px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
     border-radius: 0 22px 22px 0;
     background: rgba(245, 248, 244, 0.98);
     box-shadow: 18px 0 50px rgba(13, 95, 70, 0.16);
@@ -1958,17 +1961,6 @@ html[data-language="ar"] .learn-card p {
   .term-list {
     grid-template-columns: 1fr;
     max-height: none;
-  }
-
-  html[data-language="ar"] .sidebar {
-    inset-inline-start: auto;
-    inset-inline-end: 0;
-    border-radius: 22px 0 0 22px;
-    transform: translateX(105%);
-  }
-
-  html[data-language="ar"] .sidebar.mobile-open {
-    transform: translateX(0);
   }
 
   .hero {
