@@ -1920,6 +1920,8 @@ html[data-language="ar"] .learn-card p {
   }
 
   .sidebar {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     inset-block: 0;
     inset-inline-start: 0;
