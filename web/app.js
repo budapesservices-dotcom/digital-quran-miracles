@@ -29,6 +29,40 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function renderEvidenceText(
+  text,
+  tokenIndex
+) {
+  const tokens =
+    String(text || "")
+      .trim()
+      .split(/\s+/);
+
+  const targetIndex =
+    Number(tokenIndex) - 1;
+
+  return tokens
+    .map((token, index) => {
+      const safeToken =
+        escapeHtml(token);
+
+      if (
+        index === targetIndex
+      ) {
+        return `
+          <mark
+            class="quran-token-highlight"
+          >
+            ${safeToken}
+          </mark>
+        `;
+      }
+
+      return safeToken;
+    })
+    .join(" ");
+}
+
 function formatNumber(value) {
   return new Intl.NumberFormat(
     state.language === "ar"
@@ -1116,13 +1150,14 @@ function renderFeatureVerse(
     </div>
 
     <p
-      class="feature-verse-arabic"
-      dir="rtl"
-    >
-      ${escapeHtml(
-        occurrence.text
-      )}
-    </p>
+  class="feature-verse-arabic"
+  dir="rtl"
+>
+  ${renderEvidenceText(
+    occurrence.text,
+    occurrence.token_index
+  )}
+</p>
 
     ${translationHtml}
   `;
@@ -1893,6 +1928,8 @@ const directUrl =
     `;
   }
 
+  
+
   if (
     state.language === "ar" &&
     (
@@ -1995,13 +2032,14 @@ const directUrl =
 
 
       <p
-        class="evidence-text"
-        dir="rtl"
-      >
-        ${escapeHtml(
-          current.text
-        )}
-      </p>
+  class="evidence-text"
+  dir="rtl"
+>
+  ${renderEvidenceText(
+    current.text,
+    current.token_index
+  )}
+</p>
 
 
       ${translationHtml}

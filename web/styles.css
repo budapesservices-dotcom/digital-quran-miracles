@@ -1012,6 +1012,17 @@ a {
   text-align: center;
 }
 
+.quran-token-highlight {
+  display: inline;
+  padding: 0.08em 0.24em;
+  margin: 0 0.03em;
+  border-radius: 0.3em;
+  background: var(--green-soft);
+  color: var(--green-deep);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* =========================
    Exploratory Term Pairs
    ========================= */
