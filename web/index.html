@@ -52,6 +52,30 @@
 
           <div class="header-actions">
             <div class="language-control">
+              <button
+                id="mobile-terms-toggle"
+                class="mobile-terms-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="terms-sidebar"
+                aria-label="Open analytical terms"
+              >
+                <span
+                  class="mobile-terms-icon"
+                  aria-hidden="true"
+                >
+                  ☰
+                </span>
+
+                <span
+                  id="mobile-terms-count"
+                  class="mobile-terms-count"
+                  aria-hidden="true"
+                >
+                  32
+                </span>
+              </button>
+
               <span id="language-label">Bahasa</span>
 
               <div
@@ -96,29 +120,28 @@
 
       <div class="workspace">
         <aside class="sidebar" id="terms-sidebar">
-          <button
-            id="analytical-terms-title"
-            class="terms-toggle"
-            type="button"
-            aria-expanded="false"
-          >
-            Istilah Analisis
-          </button>
+          <h2 id="analytical-terms-title">Istilah Analisis</h2>
 
-          <div class="terms-content">
-            <input
-              id="term-search"
-              class="search"
-              type="search"
-              placeholder="Cari Arab, Latin, atau makna…"
-              aria-label="Search analytical terms"
-              dir="auto"
-              autocomplete="off"
-            />
+          <input
+            id="term-search"
+            class="search"
+            type="search"
+            placeholder="Cari Arab, Latin, atau makna…"
+            aria-label="Search analytical terms"
+            dir="auto"
+            autocomplete="off"
+          />
 
-            <div id="term-list" class="term-list"></div>
-          </div>
+          <div id="term-list" class="term-list"></div>
         </aside>
+
+        <button
+          id="terms-backdrop"
+          class="terms-backdrop"
+          type="button"
+          aria-label="Close analytical terms"
+          aria-hidden="true"
+        ></button>
 
         <main class="main">
           <section class="hero">

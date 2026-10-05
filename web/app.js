@@ -2133,11 +2133,12 @@ function updateEvidenceNavigation(total) {
   next.style.visibility = atEnd || noNavigation ? "hidden" : "visible";
 }
 
-function setupTermsDrawer() {
+function setupMobileTermsDrawer() {
   const sidebar = $("terms-sidebar");
-  const toggle = $("analytical-terms-title");
+  const toggle = $("mobile-terms-toggle");
+  const backdrop = $("terms-backdrop");
 
-  if (!sidebar || !toggle) {
+  if (!sidebar || !toggle || !backdrop) {
     return;
   }
 
@@ -2145,24 +2146,63 @@ function setupTermsDrawer() {
     window.matchMedia("(max-width: 760px)").matches;
 
   const sync = () => {
+    if (!isMobile()) {
+      document.body.classList.remove("terms-drawer-open");
+      sidebar.classList.remove("mobile-open");
+    }
+
     const open =
-      !isMobile() ||
-      sidebar.classList.contains("mobile-open");
+      isMobile() && sidebar.classList.contains("mobile-open");
 
     toggle.setAttribute("aria-expanded", String(open));
+
+    sidebar.setAttribute(
+      "aria-hidden",
+      String(isMobile() ? !open : false),
+    );
+
+    backdrop.setAttribute("aria-hidden", String(!open));
   };
 
-  toggle.addEventListener("click", () => {
+  const close = () => {
+    sidebar.classList.remove("mobile-open");
+    document.body.classList.remove("terms-drawer-open");
+    sync();
+  };
+
+  const open = () => {
     if (!isMobile()) {
       return;
     }
 
-    sidebar.classList.toggle("mobile-open");
+    sidebar.classList.add("mobile-open");
+    document.body.classList.add("terms-drawer-open");
     sync();
+  };
+
+  toggle.addEventListener("click", () => {
+    if (sidebar.classList.contains("mobile-open")) {
+      close();
+    } else {
+      open();
+    }
+  });
+
+  backdrop.addEventListener("click", close);
+
+  sidebar.addEventListener("click", (event) => {
+    if (event.target.closest(".term-button")) {
+      close();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sidebar.classList.contains("mobile-open")) {
+      close();
+    }
   });
 
   sync();
-
   window.addEventListener("resize", sync);
 }
 
@@ -2265,6 +2305,12 @@ async function loadAnalytics() {
 
     state.selectedWord = state.data.terms[0].word;
 
+    const mobileTermsCount = $("mobile-terms-count");
+
+    if (mobileTermsCount) {
+      mobileTermsCount.textContent = formatNumber(state.data.terms.length);
+    }
+
     const search = $("term-search");
 
     if (search) {
@@ -2285,7 +2331,7 @@ async function loadAnalytics() {
       });
     }
 
-    setupTermsDrawer();
+    setupMobileTermsDrawer();
 
     setupEvidenceControls();
 
