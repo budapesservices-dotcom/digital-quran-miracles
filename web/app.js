@@ -624,6 +624,27 @@ function renderStaticText() {
 
   setText("language-label", t("language"));
 
+  const corpus = state.data?.corpus;
+
+  if (corpus) {
+    const corpusBadge = $("corpus-badge");
+
+    if (corpusBadge) {
+      corpusBadge.textContent =
+        state.language === "ar"
+          ? `${formatNumber(corpus.chapters)} سورة · ${formatNumber(
+              corpus.verses,
+            )} آية`
+          : state.language === "id"
+            ? `${formatNumber(corpus.chapters)} surah · ${formatNumber(
+                corpus.verses,
+              )} ayat`
+            : `${formatNumber(corpus.chapters)} chapters · ${formatNumber(
+                corpus.verses,
+              )} verses`;
+    }
+  }
+
   setText(
     "analytical-terms-title",
     `${t("analyticalTerms")} (${state.data?.terms?.length || 0})`,
@@ -1251,12 +1272,6 @@ function renderNumerical(term) {
       `${formatDecimal(metrics.count_as_percentage_of_verse_total ?? 0, 4)}٪`,
       t("metricVerseShareDesc"),
     ],
-
-    [
-      t("metricVerseShare"),
-      `${metrics.count_as_percentage_of_verse_total ?? 0}%`,
-      t("metricVerseShareDesc"),
-    ],
   ];
 
   const list = $("numerical-metrics");
@@ -1495,10 +1510,10 @@ function renderEvidence(term) {
 
   const reference =
     state.language === "ar"
-      ? `السورة ${current.surah} · الآية ${current.ayah} · الرمز ${current.token_index}`
+      ? `السورة ${formatNumber(current.surah)} · الآية ${formatNumber(current.ayah)} · الرمز ${formatNumber(current.token_index)}`
       : state.language === "id"
-        ? `Surah ${current.surah} · Ayat ${current.ayah} · Token ${current.token_index}`
-        : `Surah ${current.surah} · Verse ${current.ayah} · Token ${current.token_index}`;
+        ? `Surah ${formatNumber(current.surah)} · Ayat ${formatNumber(current.ayah)} · Token ${formatNumber(current.token_index)}`
+        : `Surah ${formatNumber(current.surah)} · Verse ${formatNumber(current.ayah)} · Token ${formatNumber(current.token_index)}`;
 
   let translationHtml = "";
 
@@ -1561,13 +1576,11 @@ function renderEvidence(term) {
     >
 
       <div class="evidence-ref">
-  ${escapeHtml(current.surah_name || `Surah ${current.surah}`)}
-
-  ·
-
-  ${getVerseLabel()}
-
-  ${escapeHtml(current.ayah)}
+  ${
+    state.language === "ar"
+      ? `السورة ${formatNumber(current.surah)} · الآية ${formatNumber(current.ayah)}`
+      : `${escapeHtml(current.surah_name || `Surah ${formatNumber(current.surah)}`)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
+  }
 </div>
 
 <div class="evidence-trace">
@@ -2183,19 +2196,21 @@ function render() {
   const corpus = state.data?.corpus;
 
   if (corpus) {
-    const badge = $("corpus-badge");
+    const corpusBadge = $("corpus-badge");
 
-    if (badge) {
-      badge.textContent =
+    if (corpusBadge) {
+      corpusBadge.textContent =
         state.language === "ar"
           ? `${formatNumber(corpus.chapters)} سورة · ${formatNumber(
               corpus.verses,
             )} آية`
-          : `${formatNumber(corpus.chapters)} ${
-              state.language === "id" ? "surah" : "chapters"
-            } · ${formatNumber(corpus.verses)} ${
-              state.language === "id" ? "ayat" : "verses"
-            }`;
+          : state.language === "id"
+            ? `${formatNumber(corpus.chapters)} surah · ${formatNumber(
+                corpus.verses,
+              )} ayat`
+            : `${formatNumber(corpus.chapters)} chapters · ${formatNumber(
+                corpus.verses,
+              )} verses`;
     }
   }
 
@@ -2331,11 +2346,6 @@ async function loadAnalytics() {
     }
 
     state.selectedWord = state.data.terms[0].word;
-
-    const corpus = state.data.corpus;
-
-    $("corpus-badge").textContent =
-      `${corpus.chapters} chapters · ` + `${corpus.verses} verses`;
 
     const search = $("term-search");
 
