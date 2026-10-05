@@ -95,20 +95,29 @@
       </header>
 
       <div class="workspace">
-        <aside class="sidebar">
-          <h2 id="analytical-terms-title">Istilah Analisis</h2>
+        <aside class="sidebar" id="terms-sidebar">
+          <button
+            id="analytical-terms-title"
+            class="terms-toggle"
+            type="button"
+            aria-expanded="false"
+          >
+            Istilah Analisis
+          </button>
 
-          <input
-            id="term-search"
-            class="search"
-            type="search"
-            placeholder="Cari Arab, Latin, atau makna…"
-            aria-label="Search analytical terms"
-            dir="auto"
-            autocomplete="off"
-          />
+          <div class="terms-content">
+            <input
+              id="term-search"
+              class="search"
+              type="search"
+              placeholder="Cari Arab, Latin, atau makna…"
+              aria-label="Search analytical terms"
+              dir="auto"
+              autocomplete="off"
+            />
 
-          <div id="term-list" class="term-list"></div>
+            <div id="term-list" class="term-list"></div>
+          </div>
         </aside>
 
         <main class="main">

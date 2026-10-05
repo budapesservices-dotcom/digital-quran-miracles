@@ -2133,6 +2133,39 @@ function updateEvidenceNavigation(total) {
   next.style.visibility = atEnd || noNavigation ? "hidden" : "visible";
 }
 
+function setupTermsDrawer() {
+  const sidebar = $("terms-sidebar");
+  const toggle = $("analytical-terms-title");
+
+  if (!sidebar || !toggle) {
+    return;
+  }
+
+  const isMobile = () =>
+    window.matchMedia("(max-width: 760px)").matches;
+
+  const sync = () => {
+    const open =
+      !isMobile() ||
+      sidebar.classList.contains("mobile-open");
+
+    toggle.setAttribute("aria-expanded", String(open));
+  };
+
+  toggle.addEventListener("click", () => {
+    if (!isMobile()) {
+      return;
+    }
+
+    sidebar.classList.toggle("mobile-open");
+    sync();
+  });
+
+  sync();
+
+  window.addEventListener("resize", sync);
+}
+
 function setupEvidenceControls() {
   const surahFilter = $("surah-filter");
 
@@ -2251,6 +2284,8 @@ async function loadAnalytics() {
         });
       });
     }
+
+    setupTermsDrawer();
 
     setupEvidenceControls();
 

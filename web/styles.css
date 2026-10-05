@@ -240,12 +240,35 @@ a {
   box-shadow: 0 12px 32px rgba(13, 95, 70, 0.05);
 }
 
-.sidebar h2 {
-  margin: 0 0 12px;
+.terms-toggle {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--green);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.05rem;
   font-weight: 500;
+  text-align: left;
+}
+
+.terms-toggle::after {
+  content: "＋";
+  float: right;
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.terms-toggle[aria-expanded="true"]::after {
+  content: "−";
+}
+
+.terms-content {
+  margin-top: 12px;
 }
 
 .search {
@@ -1862,8 +1885,30 @@ html[data-language="ar"] .learn-card p {
     padding-top: 18px;
   }
 
+  .terms-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 42px;
+    padding: 8px 2px;
+    font-size: 1.02rem;
+  }
+
+  .sidebar {
+    padding: 12px 14px;
+  }
+
+  .sidebar:not(.mobile-open) .terms-content {
+    display: none;
+  }
+
+  .sidebar.mobile-open .terms-content {
+    display: block;
+  }
+
   .term-list {
     grid-template-columns: 1fr;
+    max-height: 52vh;
   }
 
   .hero {
