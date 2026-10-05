@@ -1399,7 +1399,7 @@ function renderEvidence(term) {
 
   const next = $("next-evidence");
 
-  state.evidenceIndex === 0 ? "hidden" : "visible";
+  updateEvidenceNavigation(total);
 
   let translationHtml = "";
 
