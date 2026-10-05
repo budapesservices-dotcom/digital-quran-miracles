@@ -126,24 +126,77 @@ a {
   gap: 8px;
 }
 
-.language-control span {
+.language-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-control > span {
   color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.language-select,
-.select,
-.number-input {
-  min-height: 38px;
-  padding: 7px 11px;
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  outline: none;
-  background: var(--panel);
-  color: var(--ink);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 6px 18px rgba(13, 95, 70, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.language-option {
+  min-width: 42px;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.language-option:hover {
+  color: var(--green);
+}
+
+.language-option.active {
+  background: var(--green);
+  color: #ffffff;
+  box-shadow:
+    0 5px 12px rgba(13, 95, 70, 0.16);
+}
+
+.language-option[data-language="ar"] {
+  font-family:
+    "Amiri",
+    "Noto Naskh Arabic",
+    serif;
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+
+.language-option:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 560px) {
+  .language-control > span {
+    display: none;
+  }
 }
 
 .number-input {

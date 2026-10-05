@@ -322,39 +322,22 @@ function getClientSurahUrl(surah) {
 }
 
 function getFilteredOccurrences(term) {
-  const occurrences = term.evidence?.occurrences || [];
-
-  if (state.evidenceSurah === "all") {
-    return occurrences;
-  }
-
-  return occurrences.filter(
-    (item) => String(item.surah) === state.evidenceSurah,
-  );
+  return term.evidence?.occurrences || [];
 }
 
 function renderLanguageSelector() {
-  const selector = $("language-select");
+  const switcher = $("language-switch");
 
-  if (!selector) {
+  if (!switcher) {
     return;
   }
 
-  selector.innerHTML = `
-    <option value="id">
-      Bahasa Indonesia
-    </option>
+  switcher.querySelectorAll(".language-option").forEach((button) => {
+    const active = button.dataset.language === state.language;
 
-    <option value="en">
-      English
-    </option>
-
-    <option value="ar">
-      العربية
-    </option>
-  `;
-
-  selector.value = state.language;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
 }
 
 function setText(id, value) {
@@ -2137,8 +2120,22 @@ function setupEvidenceControls() {
 
   if (surahFilter) {
     surahFilter.addEventListener("change", (event) => {
-      state.evidenceSurah = event.target.value;
-      state.evidenceIndex = 0;
+      const selectedSurah = String(event.target.value);
+      const occurrences = getSelectedTerm()?.evidence?.occurrences || [];
+
+      state.evidenceSurah = selectedSurah;
+
+      if (selectedSurah === "all") {
+        state.evidenceIndex = 0;
+      } else {
+        const targetIndex = occurrences.findIndex(
+          (occurrence) => String(occurrence.surah) === selectedSurah,
+        );
+
+        if (targetIndex >= 0) {
+          state.evidenceIndex = targetIndex;
+        }
+      }
 
       render();
     });
@@ -2169,30 +2166,6 @@ function setupEvidenceControls() {
       }
 
       state.evidenceIndex += 1;
-
-      renderEvidence(getSelectedTerm());
-    });
-  }
-
-  const jump = $("evidence-jump");
-
-  if (jump) {
-    jump.addEventListener("change", (event) => {
-      const filtered = getFilteredOccurrences(getSelectedTerm());
-
-      const requested = parseLocalizedInteger(event.target.value) - 1;
-
-      if (
-        Number.isNaN(requested) ||
-        requested < 0 ||
-        requested >= filtered.length
-      ) {
-        event.target.value = state.evidenceIndex + 1;
-
-        return;
-      }
-
-      state.evidenceIndex = requested;
 
       renderEvidence(getSelectedTerm());
     });
@@ -2249,13 +2222,15 @@ async function loadAnalytics() {
       });
     }
 
-    const languageSelect = $("language-select");
+    const languageSwitch = $("language-switch");
 
-    if (languageSelect) {
-      languageSelect.addEventListener("change", (event) => {
-        state.language = setLanguage(event.target.value);
+    if (languageSwitch) {
+      languageSwitch.querySelectorAll(".language-option").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.language = setLanguage(button.dataset.language);
 
-        render();
+          render();
+        });
       });
     }
 

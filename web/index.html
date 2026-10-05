@@ -51,21 +51,43 @@
           </div>
 
           <div class="header-actions">
-            <label class="language-control">
-              <span id="language-label"> Bahasa </span>
+            <div class="language-control">
+              <span id="language-label">Bahasa</span>
 
-              <select
-                id="language-select"
-                class="language-select"
+              <div
+                id="language-switch"
+                class="language-switch"
+                role="group"
                 aria-label="Language"
               >
-                <option value="id">Bahasa Indonesia</option>
+                <button
+                  type="button"
+                  class="language-option"
+                  data-language="id"
+                  aria-label="Bahasa Indonesia"
+                >
+                  ID
+                </button>
 
-                <option value="en">English</option>
+                <button
+                  type="button"
+                  class="language-option"
+                  data-language="en"
+                  aria-label="English"
+                >
+                  EN
+                </button>
 
-                <option value="ar">العربية</option>
-              </select>
-            </label>
+                <button
+                  type="button"
+                  class="language-option"
+                  data-language="ar"
+                  aria-label="العربية"
+                >
+                  عَرَ
+                </button>
+              </div>
+            </div>
 
             <div id="corpus-badge" class="corpus-badge">Loading corpus…</div>
           </div>
