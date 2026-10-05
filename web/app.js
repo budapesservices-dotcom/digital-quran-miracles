@@ -1644,38 +1644,39 @@ function renderPairs() {
 
               <div class="pair-frequency">
 
-                <div class="pair-frequency-item">
+  <div class="pair-frequency-item">
 
-                  <span class="pair-frequency-value">
-                    ${formatNumber(countA)}
-                  </span>
+    <span class="pair-frequency-value">
+      ${formatNumber(countA)}
+    </span>
 
-                  <span class="pair-frequency-divider">
-  ${state.language === "ar" ? "مقابل" : "vs"}
-</span>
+    <span class="pair-frequency-label">
+      ${escapeHtml(pair.term_a)}
+      · ${t("frequency")}
+    </span>
 
-                </div>
-
-
-                <div class="pair-frequency-divider">
-                  vs
-                </div>
+  </div>
 
 
-                <div class="pair-frequency-item">
+  <div class="pair-frequency-divider">
+    ${state.language === "ar" ? "مقابل" : "vs"}
+  </div>
 
-                  <span class="pair-frequency-value">
-                    ${formatNumber(countB)}
-                  </span>
 
-                  <span class="pair-frequency-label">
-                    ${escapeHtml(pair.term_b)}
-                    · ${t("frequency")}
-                  </span>
+  <div class="pair-frequency-item">
 
-                </div>
+    <span class="pair-frequency-value">
+      ${formatNumber(countB)}
+    </span>
 
-              </div>
+    <span class="pair-frequency-label">
+      ${escapeHtml(pair.term_b)}
+      · ${t("frequency")}
+    </span>
+
+  </div>
+
+</div>
 
 
               <div class="pair-metrics">
