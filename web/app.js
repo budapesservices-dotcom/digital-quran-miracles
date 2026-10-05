@@ -53,100 +53,6 @@ function renderEvidenceText(text, tokenIndex) {
     .join(" ");
 }
 
-function renderEvidenceAudit(term, occurrence) {
-  const method = term.evidence?.method || {};
-
-  const normalized =
-    term.normalized_word || term.numerical?.normalized_word || "";
-
-  const matching = method.matching || "exact_normalized_token";
-
-  const labels =
-    state.language === "id"
-      ? {
-          term: "Term",
-          normalized: "Bentuk ternormalisasi",
-          rule: "Aturan pencocokan",
-          position: "Posisi token",
-        }
-      : state.language === "ar"
-        ? {
-            term: "المصطلح",
-            normalized: "الصيغة المطبّعة",
-            rule: "قاعدة المطابقة",
-            position: "موضع الرمز",
-          }
-        : {
-            term: "Term",
-            normalized: "Normalized form",
-            rule: "Matching rule",
-            position: "Token position",
-          };
-
-  return `
-    <div class="evidence-audit">
-
-      <div class="evidence-audit-item">
-
-        <span class="evidence-audit-label">
-          ${escapeHtml(labels.term)}
-        </span>
-
-        <strong
-          class="evidence-audit-value"
-          dir="rtl"
-        >
-          ${escapeHtml(term.word)}
-        </strong>
-
-      </div>
-
-
-      <div class="evidence-audit-item">
-
-        <span class="evidence-audit-label">
-          ${escapeHtml(labels.normalized)}
-        </span>
-
-        <strong
-          class="evidence-audit-value"
-          dir="rtl"
-        >
-          ${escapeHtml(normalized)}
-        </strong>
-
-      </div>
-
-
-      <div class="evidence-audit-item">
-
-        <span class="evidence-audit-label">
-          ${escapeHtml(labels.rule)}
-        </span>
-
-        <strong class="evidence-audit-value">
-          ${escapeHtml(matching)}
-        </strong>
-
-      </div>
-
-
-      <div class="evidence-audit-item">
-
-        <span class="evidence-audit-label">
-          ${escapeHtml(labels.position)}
-        </span>
-
-        <strong class="evidence-audit-value">
-          ${formatNumber(Number(occurrence.token_index))}
-        </strong>
-
-      </div>
-
-    </div>
-  `;
-}
-
 function formatNumber(value) {
   const number = Number(value);
 
@@ -1508,13 +1414,6 @@ function renderEvidence(term) {
     next.disabled = state.evidenceIndex === total - 1;
   }
 
-  const reference =
-    state.language === "ar"
-      ? `السورة ${formatNumber(current.surah)} · الآية ${formatNumber(current.ayah)} · الرمز ${formatNumber(current.token_index)}`
-      : state.language === "id"
-        ? `Surah ${formatNumber(current.surah)} · Ayat ${formatNumber(current.ayah)} · Token ${formatNumber(current.token_index)}`
-        : `Surah ${formatNumber(current.surah)} · Verse ${formatNumber(current.ayah)} · Token ${formatNumber(current.token_index)}`;
-
   let translationHtml = "";
 
   if (translation) {
@@ -1582,13 +1481,6 @@ function renderEvidence(term) {
       : `${escapeHtml(current.surah_name || `Surah ${formatNumber(current.surah)}`)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
   }
 </div>
-
-<div class="evidence-trace">
-  ${escapeHtml(reference)}
-</div>
-
-
-      ${renderEvidenceAudit(term, current)}
 
 <p
   class="evidence-text"
