@@ -554,6 +554,23 @@ a {
   font-weight: 900;
 }
 
+.feature-verification {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.66rem;
+  line-height: 1.4;
+}
+
+.feature-verification-mark {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
 .reference {
   margin-top: 7px;
   color: var(--muted);
