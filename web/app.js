@@ -1017,11 +1017,6 @@ function renderHero(term) {
   const totalSurahs =
     114;
 
-  const rate =
-  term.numerical
-    .derived_metrics
-    .frequency_per_1000_tokens;
-
   const count =
     term.count;
 
@@ -1086,147 +1081,138 @@ function renderHero(term) {
   }
 
   stats.innerHTML = `
-        <article
-      class="stat observation-stat"
+  <article
+    class="stat observation-stat"
+  >
+
+    <div
+      class="
+        stat-value
+        observation-stat-number
+      "
     >
+      ${formatNumber(count)}×
+    </div>
 
-      <div
-        class="
-          stat-value
-          observation-stat-number
-          stat-property-value
-        "
-      >
-        ${formatNumber(count)}
-        <span class="arrow">→</span>
-        ${formatNumber(
-          term.numerical
-            .derived_metrics
-            .digit_sum
-        )}
-      </div>
+    <div class="stat-label">
+      ${t(
+        "statOccurrencesTitle"
+      )}
+    </div>
 
-      <div class="stat-label">
-        ${t(
-          "statNumberPropertyTitle"
-        )}
-      </div>
+    <div class="stat-unit">
+      ${t(
+        "statOccurrencesUnit"
+      )}
+    </div>
 
-      <div class="stat-unit">
-        ${t(
-          "statNumberPropertyUnit"
-        )}
-      </div>
+    <div class="stat-explanation">
+      ${escapeHtml(
+        t(
+          "statOccurrencesDesc"
+        )
+      )}
+    </div>
 
-      <div
-        class="stat-explanation"
-      >
-        ${escapeHtml(
-          t(
-            "statNumberPropertyDesc"
-          )
-        )}
-      </div>
-
-    </article>
+  </article>
 
 
-    <article
-      class="stat observation-stat"
+  <article
+    class="stat observation-stat"
+  >
+
+    <div
+      class="
+        stat-value
+        observation-stat-number
+      "
     >
+      ${formatNumber(
+        surahCount
+      )}
+    </div>
 
-      <div
-        class="
-          stat-value
-          observation-stat-number
-        "
-      >
-        ${formatNumber(
-          surahCount
-        )}
-      </div>
+    <div class="stat-label">
+      ${t(
+        "statSurahTitle"
+      )}
+    </div>
 
-      <div class="stat-label">
-        ${t(
-          "statSurahTitle"
-        )}
-      </div>
-
-      <div class="stat-unit">
-        ${
-          state.language === "id"
-            ? `dari ${formatNumber(
+    <div class="stat-unit">
+      ${
+        state.language === "id"
+          ? `dari ${formatNumber(
+              totalSurahs
+            )} ${t(
+              "statSurahUnit"
+            )}`
+          : state.language === "ar"
+            ? `من ${formatNumber(
                 totalSurahs
               )} ${t(
                 "statSurahUnit"
               )}`
-            : state.language === "ar"
-              ? `من ${formatNumber(
-                  totalSurahs
-                )} ${t(
-                  "statSurahUnit"
-                )}`
-              : `of ${formatNumber(
-                  totalSurahs
-                )} ${t(
-                  "statSurahUnit"
-                )}`
-        }
-      </div>
+            : `of ${formatNumber(
+                totalSurahs
+              )} ${t(
+                "statSurahUnit"
+              )}`
+      }
+    </div>
 
-      <div
-        class="stat-explanation"
-      >
-        ${escapeHtml(
-          t(
-            "statSurahDesc"
-          )
-        )}
-      </div>
+    <div class="stat-explanation">
+      ${escapeHtml(
+        t(
+          "statSurahDesc"
+        )
+      )}
+    </div>
 
-    </article>
+  </article>
 
 
-    <article
-      class="stat observation-stat"
+  <article
+    class="stat observation-stat"
+  >
+
+    <div
+      class="
+        stat-value
+        observation-stat-number
+        stat-property-value
+      "
     >
+      ${formatNumber(count)}
+      <span class="arrow">→</span>
+      ${formatNumber(
+        term.numerical
+          .derived_metrics
+          .digit_sum
+      )}
+    </div>
 
-      <div
-        class="
-          stat-value
-          observation-stat-number
-        "
-      >
-        ${formatDecimal(
-          rate,
-          2
-        )}
-      </div>
+    <div class="stat-label">
+      ${t(
+        "statNumberPropertyTitle"
+      )}
+    </div>
 
-      <div class="stat-label">
-        ${t(
-          "statRateTitle"
-        )}
-      </div>
+    <div class="stat-unit">
+      ${t(
+        "statNumberPropertyUnit"
+      )}
+    </div>
 
-      <div class="stat-unit">
-        ${t(
-          "statRateUnit"
-        )}
-      </div>
+    <div class="stat-explanation">
+      ${escapeHtml(
+        t(
+          "statNumberPropertyDesc"
+        )
+      )}
+    </div>
 
-      <div
-        class="stat-explanation"
-      >
-        ${escapeHtml(
-          t(
-            "statRateDesc"
-          )
-        )}
-      </div>
-
-    </article>
-  `;
+  </article>
+`;
 }
 
 
