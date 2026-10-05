@@ -1203,20 +1203,72 @@ a {
   }
 }
 
+/* =========================
+   Methodology / Audit Trail
+   ========================= */
+
 .methodology {
   margin-top: 20px;
 }
 
 .method-box {
   display: grid;
-  gap: 7px;
-  margin-top: 14px;
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.method-box > div {
+  min-height: 76px;
+  padding: 14px 15px;
+
+  border:
+    1px solid
+    var(--green-border);
+
+  border-radius: 14px;
+
+  background:
+    var(--green-soft);
+
   color: var(--muted);
-  font-size: 0.84rem;
+
+  font-size: 0.76rem;
+  line-height: 1.55;
 }
 
 .method-box strong {
-  color: var(--text-sub);
+  display: block;
+  margin-bottom: 5px;
+
+  color: var(--green);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .method-box {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+}
+
+@media (max-width: 600px) {
+  .method-box {
+    grid-template-columns: 1fr;
+  }
 }
 
 .evidence-panel + .panel {
@@ -1261,6 +1313,67 @@ a {
   margin-top: 4px;
   padding-top: 22px;
   border-top: 1px solid var(--line);
+}
+
+.d3-insight {
+  display: grid;
+  grid-template-columns:
+    auto
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+  gap: 22px;
+
+  margin-bottom: 4px;
+}
+
+.d3-insight-primary,
+.d3-insight-secondary {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.d3-insight-primary strong,
+.d3-insight-secondary strong {
+  color: var(--green);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.d3-insight-primary span,
+.d3-insight-secondary span {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.d3-insight-hint {
+  justify-self: end;
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .d3-insight {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .d3-insight-hint {
+    grid-column: 1 / -1;
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
 }
 
 /* =========================
