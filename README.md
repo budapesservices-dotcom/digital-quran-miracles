@@ -360,6 +360,20 @@ Read Quran for Peace Surah linking
 The architecture is prepared for future analytical themes while keeping
 the current mathematical layer independently understandable.
 
+## Public Deployment
+
+The frontend is a static site served from the `web/` directory.
+
+A GitHub Actions workflow at
+`.github/workflows/deploy-pages.yml` publishes the current `web/`
+directory to GitHub Pages whenever `main` changes.
+
+To enable the public contest demo, open **Settings → Pages** and set
+**Build and deployment → Source** to **GitHub Actions**.
+
+The resulting GitHub Pages URL is intended as the stable public demo for
+contest review.
+
 ## Quran Text Attribution
 
 The Quran text used by this project is sourced from the
