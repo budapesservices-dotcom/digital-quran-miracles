@@ -969,6 +969,24 @@ function renderHero(term) {
     `;
   }
 
+  const featureVerification = $("feature-verification");
+
+  if (featureVerification) {
+    const verification = state.data?.verification?.cross_corpus || {};
+    const verified = Number(verification.terms_verified || 0);
+    const discrepancies = Number(verification.discrepancies || 0);
+
+    featureVerification.innerHTML = `
+      <span class="feature-verification-mark">✓</span>
+      <span>${escapeHtml(
+        t("verificationBadge")
+          .replace("{verified}", formatNumber(verified))
+          .replace("{total}", formatNumber(32))
+          .replace("{discrepancies}", formatNumber(discrepancies)),
+      )}</span>
+    `;
+  }
+
   renderFeatureVerse(term, firstOccurrence);
 
   const openQuran = $("open-quran");
