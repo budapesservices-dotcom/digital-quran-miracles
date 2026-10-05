@@ -1018,9 +1018,9 @@ function renderHero(term) {
     114;
 
   const rate =
-    term.numerical
-      .derived_metrics
-      .frequency_per_1000_tokens;
+  term.numerical
+    .derived_metrics
+    .frequency_per_1000_tokens;
 
   const count =
     term.count;
@@ -1086,7 +1086,7 @@ function renderHero(term) {
   }
 
   stats.innerHTML = `
-    <article
+        <article
       class="stat observation-stat"
     >
 
@@ -1094,20 +1094,27 @@ function renderHero(term) {
         class="
           stat-value
           observation-stat-number
+          stat-property-value
         "
       >
-        ${formatNumber(count)}×
+        ${formatNumber(count)}
+        <span class="arrow">→</span>
+        ${formatNumber(
+          term.numerical
+            .derived_metrics
+            .digit_sum
+        )}
       </div>
 
       <div class="stat-label">
         ${t(
-          "statOccurrencesTitle"
+          "statNumberPropertyTitle"
         )}
       </div>
 
       <div class="stat-unit">
         ${t(
-          "statOccurrencesUnit"
+          "statNumberPropertyUnit"
         )}
       </div>
 
@@ -1116,7 +1123,7 @@ function renderHero(term) {
       >
         ${escapeHtml(
           t(
-            "statOccurrencesDesc"
+            "statNumberPropertyDesc"
           )
         )}
       </div>
