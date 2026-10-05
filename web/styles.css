@@ -546,11 +546,14 @@ a {
   line-height: 1.4;
 }
 
-.feature-method-mark {
+.feature-method-mark,
+.feature-verification-mark {
   display: inline-grid;
   place-items: center;
+  flex: 0 0 16px;
   width: 16px;
   height: 16px;
+  margin-top: 1px;
   border: 1px solid var(--green-border);
   border-radius: 50%;
   background: var(--green-soft);
@@ -559,21 +562,21 @@ a {
   font-weight: 900;
 }
 
+.feature-method {
+  align-items: flex-start;
+}
+
 .feature-verification {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 7px;
+  width: min(100%, 620px);
   margin-top: 6px;
   color: var(--muted);
   font-size: 0.66rem;
-  line-height: 1.4;
-}
-
-.feature-verification-mark {
-  color: var(--green);
-  font-size: 0.72rem;
-  font-weight: 900;
+  line-height: 1.45;
+  text-align: left;
 }
 
 .reference {
@@ -1922,13 +1925,11 @@ html[data-language="ar"] .learn-card p {
     inset-inline-start: 0;
     z-index: 1100;
     width: min(88vw, 330px);
-    max-height: none;
+    height: 100vh;
+    max-height: 100vh;
     margin: 0;
     padding: 20px 16px 24px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    touch-action: pan-y;
+    overflow: hidden;
     border-radius: 0 22px 22px 0;
     background: rgba(245, 248, 244, 0.98);
     box-shadow: 18px 0 50px rgba(13, 95, 70, 0.16);
@@ -1941,7 +1942,12 @@ html[data-language="ar"] .learn-card p {
   }
 
   .sidebar h2 {
+    flex: 0 0 auto;
     margin-bottom: 14px;
+  }
+
+  .sidebar .search {
+    flex: 0 0 auto;
   }
 
   .terms-backdrop {
@@ -1960,7 +1966,15 @@ html[data-language="ar"] .learn-card p {
 
   .term-list {
     grid-template-columns: 1fr;
+    min-height: 0;
     max-height: none;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    padding-right: 4px;
+    padding-bottom: 8px;
   }
 
   .hero {
