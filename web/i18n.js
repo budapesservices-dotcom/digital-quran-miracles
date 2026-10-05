@@ -26,7 +26,7 @@ const I18N = {
     verseEvidenceDescription:
       "Setiap kemunculan berasal dari corpus yang dianalisis dan menyimpan surah, ayat, posisi token, serta teks ayat sumber.",
     allSurahs: "Semua surah",
-    jumpOccurrence: "Loncat ke occurrence",
+    jumpOccurrence: "Occurrence saat ini",
     previous: "Sebelumnya",
     next: "Berikutnya",
     showingOccurrence: "Menampilkan occurrence",
@@ -106,7 +106,7 @@ const I18N = {
     verseEvidenceDescription:
       "Every occurrence comes from the analyzed corpus and retains its surah, ayah, token position, and source verse text.",
     allSurahs: "All surahs",
-    jumpOccurrence: "Jump to occurrence",
+    jumpOccurrence: "Current occurrence",
     previous: "Previous",
     next: "Next",
     showingOccurrence: "Showing occurrence",
@@ -185,7 +185,7 @@ const I18N = {
     verseEvidenceDescription:
       "كل ظهور مأخوذ من corpus التحليل ويحتفظ بالسورة والآية وموضع الرمز ونص الآية المصدر.",
     allSurahs: "جميع السور",
-    jumpOccurrence: "الانتقال إلى الظهور",
+    jumpOccurrence: "الظهور الحالي",
     previous: "السابق",
     next: "التالي",
     showingOccurrence: "عرض الظهور",
