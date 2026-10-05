@@ -60,16 +60,6 @@ function formatNumber(value) {
     return "0";
   }
 
-  function parseLocalizedInteger(value) {
-    return Number(
-      String(value)
-        .replace(/[٠-٩]/g, (digit) => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
-        .replace(/٫/g, ".")
-        .replace(/٬/g, ",")
-        .replace(/[^\d-]/g, ""),
-    );
-  }
-
   const formatted = new Intl.NumberFormat("en-US").format(number);
 
   if (state.language !== "ar") {
@@ -83,24 +73,9 @@ function formatDecimal(value, maximumFractionDigits = 2) {
   const number = Number(value);
 
   if (!Number.isFinite(number)) {
-    return "٠";
+    return state.language === "ar" ? "٠" : "0";
   }
 
-  const formatted = new Intl.NumberFormat("en-US", {
-    maximumFractionDigits,
-  }).format(number);
-
-  if (state.language !== "ar") {
-    return formatted;
-  }
-
-  return formatted
-    .replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)])
-    .replace(/\./g, "٫")
-    .replace(/,/g, "٬");
-}
-
-function formatDecimal(value, maximumFractionDigits = 2) {
   return new Intl.NumberFormat(
     state.language === "ar"
       ? "ar-EG"
@@ -110,7 +85,7 @@ function formatDecimal(value, maximumFractionDigits = 2) {
     {
       maximumFractionDigits,
     },
-  ).format(value);
+  ).format(number);
 }
 
 function getSelectedTerm() {
@@ -989,7 +964,10 @@ function renderHero(term) {
   if (observationDescription) {
     const digitSum = term.numerical?.derived_metrics?.digit_sum;
 
-    const digitExpression = String(count).split("").join(" + ");
+    const digitExpression = String(count)
+    .split("")
+    .map((digit) => formatNumber(digit))
+    .join(" + ");
 
     observationDescription.textContent =
       state.language === "id"
@@ -1280,15 +1258,16 @@ function renderSurahFilter(term) {
     }
 
     const name = names.get(String(surah)) || "";
+    const formattedSurah = formatNumber(surah);
 
     options.push(`
         <option
           value="${escapeHtml(surah)}"
           ${state.evidenceSurah === surah ? "selected" : ""}
         >
-          ${state.language === "ar" ? `السورة ${surah}` : `Surah ${surah}`}
+          ${state.language === "ar" ? `السورة ${formattedSurah}` : `Surah ${formattedSurah}`}
 
-          ${name ? ` · ${escapeHtml(name)}` : ""}
+          ${state.language === "ar" ? "" : name ? ` · ${escapeHtml(name)}` : ""}
 
           — ${formatNumber(count)}
         </option>
@@ -1332,10 +1311,6 @@ function renderEvidence(term) {
       jump.value = 0;
     }
 
-    const previous = $("previous-evidence");
-
-    const next = $("next-evidence");
-
     updateEvidenceNavigation(0);
     return;
   }
@@ -1372,15 +1347,8 @@ function renderEvidence(term) {
   const jump = $("evidence-jump");
 
   if (jump) {
-    jump.value =
-      state.language === "ar"
-        ? formatNumber(state.evidenceIndex + 1)
-        : state.evidenceIndex + 1;
+    jump.value = formatNumber(state.evidenceIndex + 1);
   }
-
-  const previous = $("previous-evidence");
-
-  const next = $("next-evidence");
 
   updateEvidenceNavigation(total);
 
@@ -1487,10 +1455,10 @@ function renderEvidence(term) {
       >
         ${
           state.language === "ar"
-            ? `سجل الدليل ${state.evidenceIndex + 1} من ${total}`
+            ? `سجل الدليل ${formatNumber(state.evidenceIndex + 1)} من ${formatNumber(total)}`
             : state.language === "id"
-              ? `Record evidence ${state.evidenceIndex + 1} dari ${total}`
-              : `Evidence record ${state.evidenceIndex + 1} of ${total}`
+              ? `Record evidence ${formatNumber(state.evidenceIndex + 1)} dari ${formatNumber(total)}`
+              : `Evidence record ${formatNumber(state.evidenceIndex + 1)} of ${formatNumber(total)}`
         }
       </div>
 
@@ -1818,7 +1786,7 @@ function renderMethodology() {
       : state.language === "ar"
         ? `${formatNumber(
             verification.terms_verified || 0,
-          )}/32 مصطلحًا متطابقًا بين النصين بعد التطبيع.`
+          )}/${formatNumber(32)} مصطلحًا متطابقًا بين النصين بعد التطبيع.`
         : `${formatNumber(
             verification.terms_verified || 0,
           )}/32 terms match between simple-clean and Uthmani after normalization.`;
