@@ -1075,6 +1075,10 @@ a {
   color: var(--text-sub);
 }
 
+.evidence-panel + .panel {
+  margin-top: 20px;
+}
+
 /* Kept for compatibility if the panel exists in the DOM. */
 .learn-panel {
   margin-top: 20px;
