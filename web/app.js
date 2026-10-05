@@ -355,9 +355,6 @@ function getUxText(key) {
       methodScope:
         "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
 
-      methodScope:
-        "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
-
       surahs: "surah",
 
       openClient: "Buka di Read Quran for Peace ↗",
@@ -405,9 +402,6 @@ function getUxText(key) {
       methodScope:
         "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
 
-      methodScope:
-        "The current scope focuses on data-driven mathematical observations. The dataset structure and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
-
       surahs: "surahs",
 
       openClient: "Open in Read Quran for Peace ↗",
@@ -454,9 +448,6 @@ function getUxText(key) {
 
       methodScope:
         "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
-
-      methodScope:
-        "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة موضوعات مستقبلية دون تغيير أساس التنقل في القرآن.",
 
       surahs: "سور",
 
