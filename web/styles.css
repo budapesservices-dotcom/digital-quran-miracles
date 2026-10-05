@@ -1076,39 +1076,6 @@ a {
   -webkit-box-decoration-break: clone;
 }
 
-/* Arabic audit layout */
-html[data-language="ar"] .evidence-audit {
-  direction: rtl;
-}
-
-html[data-language="ar"] .evidence-audit-item {
-  direction: rtl;
-  text-align: right;
-}
-
-html[data-language="ar"] .evidence-audit-label,
-html[data-language="ar"] .evidence-audit-value {
-  direction: rtl;
-  text-align: right;
-}
-
-@media (max-width: 900px) {
-  .evidence-audit {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 560px) {
-  .evidence-audit {
-    grid-template-columns: 1fr;
-  }
-}
-
-.evidence-panel + .panel {
-  margin-top: 20px;
-}
-
 /* =========================
    Exploratory Term Pairs
    ========================= */
@@ -1795,10 +1762,6 @@ html[data-language="ar"] .learn-card p {
 
   .language-control {
     width: 100%;
-  }
-
-  .language-select {
-    flex: 1;
   }
 
   .corpus-badge {
