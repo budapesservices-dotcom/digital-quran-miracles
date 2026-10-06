@@ -301,6 +301,25 @@ function getSurahName(surah) {
   return state.language === "ar" ? info.ar : info.latin;
 }
 
+const MADINAH_SURAHS = new Set([
+  2, 3, 4, 5, 8, 9, 13, 22, 24, 33, 47, 48, 49, 55,
+  57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 76, 98, 99, 110,
+]);
+
+function getRevelationLabel(surah) {
+  const madinah = MADINAH_SURAHS.has(Number(surah));
+
+  if (state.language === "id") {
+    return madinah ? "Madaniyah" : "Makkiyah";
+  }
+
+  if (state.language === "ar") {
+    return madinah ? "مدنية" : "مكية";
+  }
+
+  return madinah ? "Medinan" : "Meccan";
+}
+
 const SURAH_SLUGS = {
   1: "al-fateha",
   2: "al-baqarah",
@@ -1019,7 +1038,8 @@ function renderFeatureVerse(term, occurrence = null) {
     </div>
 
     <div class="feature-verse-surah-name">
-      ${escapeHtml(getSurahName(occurrence.surah))}
+      <span>${escapeHtml(getSurahName(occurrence.surah))}</span>
+      <span class="surah-revelation">${escapeHtml(getRevelationLabel(occurrence.surah))}</span>
     </div>
 
     <p
@@ -1486,7 +1506,13 @@ function renderSurahFilter(term) {
         >
           ${state.language === "ar" ? `السورة ${formattedSurah}` : `Surah ${formattedSurah}`}
 
-          ${state.language === "ar" ? "" : name ? ` · ${escapeHtml(name)}` : ""}
+          ${
+            state.language === "ar"
+              ? ""
+              : name
+                ? ` · ${escapeHtml(name)} · ${escapeHtml(getRevelationLabel(surah))}`
+                : ` · ${escapeHtml(getRevelationLabel(surah))}`
+          }
 
           — ${formatNumber(count)}
         </option>
@@ -1699,7 +1725,8 @@ function renderEvidence(term) {
 </div>
 
 <div class="evidence-surah-name">
-  ${escapeHtml(getSurahName(current.surah))}
+  <span>${escapeHtml(getSurahName(current.surah))}</span>
+  <span class="surah-revelation">${escapeHtml(getRevelationLabel(current.surah))}</span>
 </div>
 
 <p
