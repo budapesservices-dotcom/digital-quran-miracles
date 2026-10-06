@@ -1375,7 +1375,35 @@ a {
 
 .evidence-item.featured-evidence {
   padding: clamp(30px, 5vw, 46px);
-  animation: evidenceReveal 0.4s ease both;
+}
+
+.evidence-content {
+  width: 100%;
+}
+
+.evidence-content > * {
+  animation: evidenceInitialContentReveal 0.34s ease both;
+}
+
+.evidence-content > .evidence-ref { animation-delay: 0.02s; }
+.evidence-content > .evidence-surah-name { animation-delay: 0.06s; }
+.evidence-content > .evidence-text { animation-delay: 0.10s; }
+.evidence-content > .evidence-translation-label { animation-delay: 0.14s; }
+.evidence-content > .evidence-translation { animation-delay: 0.18s; }
+.evidence-content > .evidence-source { animation-delay: 0.22s; }
+.evidence-content > .evidence-actions { animation-delay: 0.26s; }
+.evidence-content > .evidence-index { animation-delay: 0.30s; }
+
+@keyframes evidenceInitialContentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .evidence-ref {
