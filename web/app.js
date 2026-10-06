@@ -515,6 +515,7 @@ function getUxText(key) {
       evidenceAuditNormalization: "Normalisasi",
       evidenceAuditRule: "Aturan hitung",
       evidenceAuditVerification: "Verifikasi",
+      evidenceHowCounted: "Bagaimana angka ini dihitung?",
 
       openClient: "Buka di Read Quran for Peace ↗",
 
@@ -572,6 +573,7 @@ function getUxText(key) {
       evidenceAuditNormalization: "Normalization",
       evidenceAuditRule: "Counting rule",
       evidenceAuditVerification: "Verification",
+      evidenceHowCounted: "How is this number counted?",
 
       openClient: "Open in Read Quran for Peace ↗",
 
@@ -629,6 +631,7 @@ function getUxText(key) {
       evidenceAuditNormalization: "التطبيع",
       evidenceAuditRule: "قاعدة العد",
       evidenceAuditVerification: "التحقق",
+      evidenceHowCounted: "كيف تم حساب هذا الرقم؟",
 
       openClient: "فتح في اقرأ القرآن للسلام ↗",
 
