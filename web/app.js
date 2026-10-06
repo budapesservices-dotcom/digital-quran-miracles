@@ -2542,6 +2542,7 @@ function setupEvidenceControls() {
         { duration: 260, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "both" },
       );
       await exit.finished.catch(() => {});
+      exit.cancel();
 
       await new Promise((resolve) => window.setTimeout(resolve, 55));
 
