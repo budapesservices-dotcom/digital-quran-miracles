@@ -2223,22 +2223,21 @@ function renderPairs() {
   });
 }
 
-function renderMethodology() {
-  const method = state.data.method;
-
-  const value = (v) => (v ? t("trueValue") : t("falseValue"));
-
+function renderFooterSource() {
   const footerSource = $("footer-source");
 
-  if (footerSource) {
-    const sourceText =
-      state.language === "id"
-        ? "Teks Quran: Tanzil Project · Simple Clean · CC BY 3.0"
-        : state.language === "ar"
-          ? "نص القرآن: مشروع تنزيل · Simple Clean · CC BY 3.0"
-          : "Quran text: Tanzil Project · Simple Clean · CC BY 3.0";
+  if (!footerSource) {
+    return;
+  }
 
-    footerSource.innerHTML = `
+  const sourceText =
+    state.language === "id"
+      ? "Teks Quran: Tanzil Project · Simple Clean · CC BY 3.0"
+      : state.language === "ar"
+        ? "نص القرآن: مشروع تنزيل · Simple Clean · CC BY 3.0"
+        : "Quran text: Tanzil Project · Simple Clean · CC BY 3.0";
+
+  footerSource.innerHTML = `
     <span>
       ${escapeHtml(sourceText)}
     </span>
@@ -2251,222 +2250,6 @@ function renderMethodology() {
       tanzil.net ↗
     </a>
   `;
-  }
-
-  setText("method-matching-label", `${t("matching")}:`);
-
-  setText("method-diacritics-label", `${t("diacritics")}:`);
-
-  setText("method-tatweel-label", `${t("tatweel")}:`);
-
-  setText("method-alif-label", `${t("alif")}:`);
-
-  setText("method-root-label", `${t("rootAnalysis")}:`);
-
-  setText("method-morphology-label", `${t("morphology")}:`);
-
-  setText("method-substring-label", `${t("substring")}:`);
-
-  setText(
-    "method-matching",
-    state.language === "ar" ? "مطابقة رمز مطبّع تمامًا" : method.matching,
-  );
-
-  setText("method-diacritics", value(method.diacritics_removed));
-
-  setText("method-tatweel", value(method.tatweel_removed));
-
-  setText("method-alif", value(method.alif_variants_normalized));
-
-  setText("method-root", value(method.root_analysis));
-
-  setText("method-morphology", value(method.morphological_analysis));
-
-  setText("method-substring", value(method.substring_matching));
-
-  const scope = $("method-scope");
-
-  const verification = state.data?.verification?.cross_corpus || {};
-
-  const verificationLabel =
-    state.language === "id"
-      ? "Verifikasi silang corpus"
-      : state.language === "ar"
-        ? "التحقق المتقاطع من corpus"
-        : "Cross-corpus verification";
-
-  const verificationText =
-    state.language === "id"
-      ? `${formatNumber(
-          verification.terms_verified || 0,
-        )}/32 term cocok antara simple-clean dan Uthmani setelah normalisasi.`
-      : state.language === "ar"
-        ? `${formatNumber(
-            verification.terms_verified || 0,
-          )}/${formatNumber(32)} مصطلحًا متطابقًا بين النصين بعد التطبيع.`
-        : `${formatNumber(
-            verification.terms_verified || 0,
-          )}/32 terms match between simple-clean and Uthmani after normalization.`;
-
-  const verificationStatus =
-    verification.term_counts_match &&
-    verification.chapters_match &&
-    Number(verification.discrepancies || 0) === 0;
-
-  if (scope) {
-    const corpusSource =
-      state.data?.corpus?.source || "data/raw/simple-clean.json";
-
-    const translationSource =
-      state.language === "id"
-        ? "QuranEnc · id-affairs"
-        : state.language === "ar"
-          ? "QuranEnc"
-          : "QuranEnc · en-saheeh";
-
-    const evidenceSource =
-      state.data?.sources?.frequency_index || "frequency_index.json";
-
-    const distributionSource =
-      state.data?.sources?.surah_distribution || "surah_distribution.json";
-
-    const futureThemes =
-      state.language === "id"
-        ? "Tema lanjutan: komposisi cincin, sains terpilih, linguistik, peristiwa masa lalu, dan prediksi tekstual."
-        : state.language === "ar"
-          ? "الموضوعات المستقبلية: التركيب الحلقي، وموضوعات علمية مختارة، والبلاغة واللغة، والأحداث الماضية، والتنبؤات النصية."
-          : "Future themes: ring composition, selected scientific topics, linguistic brilliance, verified past events, and textual predictions.";
-
-    const labels =
-      state.language === "id"
-        ? {
-            scope: "Ruang lingkup",
-            source: "Provenance data",
-            corpus: "Corpus",
-            analytics: "Index frekuensi",
-            distribution: "Distribusi Surah",
-            translation: "Terjemahan",
-            current:
-              "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
-          }
-        : state.language === "ar"
-          ? {
-              scope: "النطاق",
-              source: "مصدر البيانات",
-              corpus: "مجموعة البيانات",
-              analytics: "فهرس التكرار",
-              distribution: "توزيع السور",
-              translation: "الترجمة",
-              current:
-                "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
-            }
-          : {
-              scope: "Scope",
-              source: "Data provenance",
-              corpus: "Corpus",
-              analytics: "Frequency index",
-              distribution: "Surah distribution",
-              translation: "Translation",
-              current:
-                "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
-            };
-
-    scope.innerHTML = `
-    <div class="method-scope-label">
-      ${escapeHtml(labels.scope)}
-    </div>
-
-    <p>
-      ${escapeHtml(labels.current)}
-    </p>
-
-    <small>
-      ${escapeHtml(futureThemes)}
-    </small>
-
-          <div class="method-verification">
-
-        <div class="method-verification-heading">
-
-          <span>
-            ${escapeHtml(verificationLabel)}
-          </span>
-
-          <strong
-            class="${verificationStatus ? "verified" : "failed"}"
-          >
-            ${
-              verificationStatus
-                ? state.language === "id"
-                  ? "TERVERIFIKASI"
-                  : state.language === "ar"
-                    ? "موثّق"
-                    : "VERIFIED"
-                : state.language === "id"
-                  ? "PERIKSA"
-                  : state.language === "ar"
-                    ? "تحقق"
-                    : "CHECK"
-            }
-          </strong>
-
-        </div>
-
-        <p>
-          ${escapeHtml(verificationText)}
-        </p>
-
-      </div>
-
-    <div class="method-provenance">
-
-      <div class="method-provenance-title">
-        ${escapeHtml(labels.source)}
-      </div>
-
-      <div class="method-provenance-grid">
-
-        <div>
-          <span>
-            ${escapeHtml(labels.corpus)}
-          </span>
-          <strong>
-            ${escapeHtml(corpusSource)}
-          </strong>
-        </div>
-
-        <div>
-          <span>
-            ${escapeHtml(labels.analytics)}
-          </span>
-          <strong>
-            ${escapeHtml(evidenceSource)}
-          </strong>
-        </div>
-
-        <div>
-          <span>
-            ${escapeHtml(labels.distribution)}
-          </span>
-          <strong>
-            ${escapeHtml(distributionSource)}
-          </strong>
-        </div>
-
-        <div>
-          <span>
-            ${escapeHtml(labels.translation)}
-          </span>
-          <strong>
-            ${escapeHtml(translationSource)}
-          </strong>
-        </div>
-
-      </div>
-
-    </div>
-  `;
-  }
 }
 
 function renderLearnMetrics() {
@@ -2576,7 +2359,7 @@ function render() {
 
   renderPairs();
 
-  renderMethodology();
+  renderFooterSource();
 
   renderLearnMetrics();
 
