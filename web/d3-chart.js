@@ -170,12 +170,6 @@ function renderD3Distribution(term) {
 
   const radius = d3.scaleSqrt().domain([0, maxCount]).range([2.5, 9]);
 
-  const names = new Map(
-    (term.evidence?.occurrences || []).map((item) => [
-      String(item.surah),
-      item.surah_name || "",
-    ]),
-  );
 
   chart
     .append("line")
@@ -235,7 +229,7 @@ function renderD3Distribution(term) {
       const label =
         state.language === "ar"
           ? `السورة ${formatNumber(d.surah)}`
-          : names.get(String(d.surah)) || `Surah ${formatNumber(d.surah)}`;
+          : getSurahName(d.surah);
 
       tooltip.style("opacity", 1).html(`
             <strong>
