@@ -28,7 +28,7 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-function renderEvidenceText(text, tokenIndex) {
+function renderEvidenceText(text, tokenIndex, spotlight = false) {
   const tokens = String(text || "")
     .trim()
     .split(/\s+/);
@@ -42,7 +42,7 @@ function renderEvidenceText(text, tokenIndex) {
       if (index === targetIndex) {
         return `
           <mark
-            class="quran-token-highlight"
+            class="quran-token-highlight${spotlight ? " quran-token-spotlight" : ""}"
           >
             ${safeToken}
           </mark>
@@ -1935,7 +1935,7 @@ function renderEvidence(term) {
   class="evidence-text"
   dir="rtl"
 >
-  ${renderEvidenceText(current.text, current.token_index)}
+  ${renderEvidenceText(current.text, current.token_index, true)}
 </p>
 
 
