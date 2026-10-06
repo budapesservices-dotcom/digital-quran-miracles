@@ -1489,6 +1489,10 @@ a {
   -webkit-box-decoration-break: clone;
 }
 
+.quran-token-spotlight {
+  animation: evidenceTokenSpotlight 0.95s ease both;
+}
+
 
 .evidence-signature {
   padding: 2px 0 0;
@@ -1505,6 +1509,23 @@ a {
   min-width: 0;
   padding: 7px 8px;
   text-align: center;
+  animation: evidenceSignatureStep 0.42s ease both;
+}
+
+.evidence-signature-step:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.evidence-signature-step:nth-child(3) {
+  animation-delay: 0.06s;
+}
+
+.evidence-signature-step:nth-child(5) {
+  animation-delay: 0.12s;
+}
+
+.evidence-signature-step:nth-child(7) {
+  animation-delay: 0.18s;
 }
 
 .evidence-signature-step > span {
@@ -2332,6 +2353,37 @@ html[data-language="ar"] .learn-card p {
   }
 }
 
+@keyframes evidenceSignatureStep {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes evidenceTokenSpotlight {
+  0% {
+    background: rgba(176, 138, 69, 0.05);
+    box-shadow: inset 0 -0.1em 0 rgba(176, 138, 69, 0.08);
+  }
+
+  35% {
+    background: rgba(176, 138, 69, 0.2);
+    box-shadow:
+      0 0 0 5px rgba(176, 138, 69, 0.07),
+      inset 0 -0.12em 0 rgba(176, 138, 69, 0.24);
+  }
+
+  100% {
+    background: rgba(176, 138, 69, 0.12);
+    box-shadow: inset 0 -0.1em 0 rgba(176, 138, 69, 0.2);
+  }
+}
+
 @keyframes sectionReveal {
   from {
     opacity: 0;
@@ -2713,7 +2765,9 @@ html[data-language="ar"] .learn-card p {
   .observation-panel,
   .explorer-panel,
   .evidence-panel,
-  .evidence-item.featured-evidence {
+  .evidence-item.featured-evidence,
+  .evidence-signature-step,
+  .quran-token-spotlight {
     animation: none;
   }
 
