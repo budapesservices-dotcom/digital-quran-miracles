@@ -1568,7 +1568,7 @@ function renderSurahFilter(term) {
   updateSurahFilterDisplay();
 }
 
-function renderEvidence(term, transitionClass = "") {
+function renderEvidence(term) {
   const filtered = getFilteredOccurrences(term);
 
   const total = filtered.length;
@@ -1915,7 +1915,7 @@ function renderEvidence(term, transitionClass = "") {
     <article
       class="
         evidence-item
-        featured-evidence${transitionClass ? ` ${transitionClass}` : ""}
+        featured-evidence
       "
     >
 
@@ -2524,6 +2524,44 @@ function setupEvidenceControls() {
     });
   }
 
+  function waitForAnimation(element, animationName, fallbackMs) {
+    return new Promise((resolve) => {
+      if (!element) {
+        resolve();
+        return;
+      }
+
+      let settled = false;
+
+      const finish = () => {
+        if (settled) {
+          return;
+        }
+
+        settled = true;
+        element.removeEventListener("animationend", onAnimationEnd);
+        window.clearTimeout(fallback);
+        resolve();
+      };
+
+      const onAnimationEnd = (event) => {
+        if (event.target === element && event.animationName === animationName) {
+          finish();
+        }
+      };
+
+      const fallback = window.setTimeout(finish, fallbackMs);
+
+      element.addEventListener("animationend", onAnimationEnd);
+    });
+  }
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => {
+      window.setTimeout(resolve, milliseconds);
+    });
+  }
+
   async function navigateEvidence(direction) {
     const term = getSelectedTerm();
     const filtered = getFilteredOccurrences(term);
@@ -2561,43 +2599,26 @@ function setupEvidenceControls() {
       const heldHeight = Math.ceil(currentCard.getBoundingClientRect().height);
 
       list.style.minHeight = `${heldHeight}px`;
+      currentCard.classList.add("evidence-exit");
 
-      const exitClass =
-        direction === "next"
-          ? "evidence-exit-next"
-          : "evidence-exit-prev";
+      await waitForAnimation(currentCard, "evidenceDepart", 360);
 
-      const exitAnimation =
-        direction === "next"
-          ? "evidenceExitNext"
-          : "evidenceExitPrev";
+      list.innerHTML = "";
 
-      currentCard.classList.add(exitClass);
-
-      await waitForAnimation(currentCard, exitAnimation, 280);
       await wait(45);
 
       state.evidenceIndex = nextIndex;
 
-      const enterClass =
-        direction === "next"
-          ? "evidence-enter-next"
-          : "evidence-enter-prev";
-
-      const enterAnimation =
-        direction === "next"
-          ? "evidenceEnterNext"
-          : "evidenceEnterPrev";
-
-      renderEvidence(term, enterClass);
+      renderEvidence(term);
 
       const nextCard = list.querySelector(".featured-evidence");
 
       if (nextCard) {
         const nextHeight = Math.ceil(nextCard.getBoundingClientRect().height);
+
         list.style.minHeight = `${Math.max(heldHeight, nextHeight)}px`;
 
-        await waitForAnimation(nextCard, enterAnimation, 420);
+        await waitForAnimation(nextCard, "evidenceReveal", 520);
       }
     } finally {
       const list = $("evidence-list");
