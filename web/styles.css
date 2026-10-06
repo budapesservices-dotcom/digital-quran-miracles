@@ -732,6 +732,11 @@ a {
 }
 
 .feature-verse-surah-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
   margin-bottom: 17px;
   color: var(--green);
   font-family:
@@ -1235,6 +1240,11 @@ a {
 }
 
 .evidence-surah-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
   margin-bottom: 18px;
   color: var(--green);
   font-family:
@@ -1245,6 +1255,24 @@ a {
   font-weight: 700;
   letter-spacing: 0.01em;
   text-align: center;
+}
+
+.surah-revelation {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 9px;
+  border: 1px solid rgba(176, 138, 69, 0.22);
+  border-radius: 999px;
+  background: rgba(176, 138, 69, 0.07);
+  color: var(--gold);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .evidence-text {
