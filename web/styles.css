@@ -2042,14 +2042,16 @@ html[data-language="ar"] .learn-card p {
     display: flex;
     flex-direction: column;
     position: fixed;
-    inset-block: 0;
+    inset-block-start: 16px;
+    inset-block-end: auto;
     inset-inline-start: 0;
     z-index: 1100;
     width: min(88vw, 330px);
-    height: 100vh;
-    max-height: 100vh;
+    height: auto;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
     margin: 0;
-    padding: 20px 16px 24px;
+    padding: 18px 16px 20px;
     overflow: hidden;
     border-radius: 0 22px 22px 0;
     background: rgba(245, 248, 244, 0.98);
@@ -2114,8 +2116,9 @@ html[data-language="ar"] .learn-card p {
   .term-list {
     grid-template-columns: 1fr;
     min-height: 0;
-    max-height: none;
-    flex: 1 1 auto;
+    max-height: calc(100vh - 150px);
+    max-height: calc(100dvh - 150px);
+    flex: 0 1 auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
