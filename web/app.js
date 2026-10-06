@@ -516,6 +516,11 @@ function getUxText(key) {
       evidenceAuditRule: "Aturan hitung",
       evidenceAuditVerification: "Verifikasi",
       evidenceHowCounted: "Bagaimana angka ini dihitung?",
+      evidenceMethodScope: "Ruang lingkup",
+      evidenceMethodProvenance: "Provenance data",
+      evidenceMethodCurrent: "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
+      evidenceMethodFuture: "Tema lanjutan: komposisi cincin, sains terpilih, linguistik, peristiwa masa lalu, dan prediksi tekstual.",
+      evidenceMethodStatus: "Status",
 
       openClient: "Buka di Read Quran for Peace ↗",
 
@@ -574,6 +579,11 @@ function getUxText(key) {
       evidenceAuditRule: "Counting rule",
       evidenceAuditVerification: "Verification",
       evidenceHowCounted: "How is this number counted?",
+      evidenceMethodScope: "Scope",
+      evidenceMethodProvenance: "Data provenance",
+      evidenceMethodCurrent: "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
+      evidenceMethodFuture: "Future themes: ring composition, selected scientific topics, linguistic brilliance, verified past events, and textual predictions.",
+      evidenceMethodStatus: "Status",
 
       openClient: "Open in Read Quran for Peace ↗",
 
@@ -632,6 +642,11 @@ function getUxText(key) {
       evidenceAuditRule: "قاعدة العد",
       evidenceAuditVerification: "التحقق",
       evidenceHowCounted: "كيف تم حساب هذا الرقم؟",
+      evidenceMethodScope: "النطاق",
+      evidenceMethodProvenance: "مصدر البيانات",
+      evidenceMethodCurrent: "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
+      evidenceMethodFuture: "الموضوعات المستقبلية: التركيب الحلقي، وموضوعات علمية مختارة، والبلاغة واللغة، والأحداث الماضية، والتنبؤات النصية.",
+      evidenceMethodStatus: "الحالة",
 
       openClient: "فتح في اقرأ القرآن للسلام ↗",
 
@@ -1597,6 +1612,11 @@ function renderEvidence(term) {
 
   const directUrl = getClientSurahUrl(current.surah);
 
+  const value = (v) => (
+    v
+      ? t("trueValue")
+      : t("falseValue")
+  );
   if (trace) {
     const verseReference =
       state.language === "ar"
@@ -1712,26 +1732,91 @@ function renderEvidence(term) {
         <details class="evidence-method-details">
           <summary>${escapeHtml(getUxText("evidenceHowCounted"))}</summary>
 
-          <div class="evidence-method-grid">
-            <div>
-              <span>${escapeHtml(getUxText("evidenceAuditDataset"))}</span>
-              <strong>${escapeHtml(datasetText)}</strong>
+          <div class="evidence-method-section">
+            <div class="evidence-method-heading">
+              <span>${escapeHtml(getUxText("evidenceMethodScope"))}</span>
             </div>
 
-            <div>
-              <span>${escapeHtml(getUxText("evidenceAuditNormalization"))}</span>
-              <strong>${escapeHtml(normalizationText)}</strong>
+            <div class="evidence-method-grid">
+              <div>
+                <span>${escapeHtml(t("matching"))}</span>
+                <strong>${escapeHtml(method.matching === "exact_normalized_token" ? "Exact normalized-token" : method.matching || "—")}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("diacritics"))}</span>
+                <strong>${escapeHtml(value(method.diacritics_removed))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("tatweel"))}</span>
+                <strong>${escapeHtml(value(method.tatweel_removed))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("alif"))}</span>
+                <strong>${escapeHtml(value(method.alif_variants_normalized))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("rootAnalysis"))}</span>
+                <strong>${escapeHtml(value(method.root_analysis))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("morphology"))}</span>
+                <strong>${escapeHtml(value(method.morphological_analysis))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(t("substring"))}</span>
+                <strong>${escapeHtml(value(method.substring_matching))}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(getUxText("evidenceMethodStatus"))}</span>
+                <strong>${escapeHtml(verificationText)}</strong>
+              </div>
             </div>
 
-            <div>
-              <span>${escapeHtml(getUxText("evidenceAuditRule"))}</span>
-              <strong>${escapeHtml(countingRule)}</strong>
+            <p class="evidence-method-note">
+              ${escapeHtml(getUxText("evidenceMethodCurrent"))}
+            </p>
+            <small class="evidence-method-note-secondary">
+              ${escapeHtml(getUxText("evidenceMethodFuture"))}
+            </small>
+          </div>
+
+          <div class="evidence-method-section evidence-provenance-section">
+            <div class="evidence-method-heading">
+              <span>${escapeHtml(getUxText("evidenceMethodProvenance"))}</span>
             </div>
 
-            <div>
-              <span>${escapeHtml(getUxText("evidenceAuditVerification"))}</span>
-              <strong>${escapeHtml(verificationText)}</strong>
+            <div class="evidence-provenance-grid">
+              <div>
+                <span>${escapeHtml(state.language === "id" ? "Corpus Quran" : state.language === "ar" ? "نص القرآن" : "Quran corpus")}</span>
+                <strong>${escapeHtml(state.data?.corpus?.source || "data/raw/simple-clean.json")}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(state.language === "id" ? "Index frekuensi" : state.language === "ar" ? "فهرس التكرار" : "Frequency index")}</span>
+                <strong>${escapeHtml(state.data?.sources?.frequency_index || "frequency_index.json")}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(state.language === "id" ? "Distribusi Surah" : state.language === "ar" ? "توزيع السور" : "Surah distribution")}</span>
+                <strong>${escapeHtml(state.data?.sources?.surah_distribution || "surah_distribution.json")}</strong>
+              </div>
+
+              <div>
+                <span>${escapeHtml(state.language === "id" ? "Terjemahan" : state.language === "ar" ? "الترجمة" : "Translation")}</span>
+                <strong>${escapeHtml(state.language === "id" ? "QuranEnc · id-affairs" : state.language === "ar" ? "QuranEnc" : "QuranEnc · en-saheeh")}</strong>
+              </div>
             </div>
+
+            <a class="evidence-provenance-link" href="https://tanzil.net/" target="_blank" rel="noopener noreferrer">
+              ${escapeHtml(state.language === "id" ? "Tanzil Project ↗" : state.language === "ar" ? "مشروع تنزيل ↗" : "Tanzil Project ↗")}
+            </a>
           </div>
         </details>
       </div>
