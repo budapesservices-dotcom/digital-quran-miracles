@@ -248,6 +248,17 @@ a {
   font-weight: 500;
 }
 
+.sidebar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.terms-close {
+  display: none;
+}
+
 .mobile-terms-toggle,
 .terms-backdrop {
   display: none;
@@ -1945,7 +1956,33 @@ html[data-language="ar"] .learn-card p {
 
   .sidebar h2 {
     flex: 0 0 auto;
-    margin-bottom: 14px;
+    margin: 0;
+  }
+
+  .terms-close {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--green-border);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--green);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1;
+    transition:
+      background 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .terms-close:active {
+    transform: scale(0.94);
+  }
+
+  .terms-close:hover {
+    background: var(--green-soft);
   }
 
   .sidebar .search {
@@ -2042,9 +2079,20 @@ html[data-language="ar"] .learn-card p {
     margin-top: 10px;
   }
 
+  .evidence-toolbar {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(96px, 0.38fr);
+    align-items: end;
+    gap: 10px;
+  }
+
   .evidence-controls {
+    display: flex;
     width: 100%;
     margin-left: 0;
+    grid-column: 1 / -1;
   }
 
   .evidence-controls .action {

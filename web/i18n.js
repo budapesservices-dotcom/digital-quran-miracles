@@ -81,6 +81,7 @@ const I18N = {
     notAvailable: "Tidak tersedia",
     dataStatus:
       "Status data: presentasi observed-data. Frequency dan observasi numerik terikat pada corpus project dan aturan analisis yang terdokumentasi.",
+    closeTerms: "Tutup istilah analisis",
   },
 
   en: {
@@ -99,9 +100,9 @@ const I18N = {
     verificationBadge: "{verified}/{total} terms verified across two corpora · {discrepancies} discrepancies",
     exploreEvidence: "Explore Evidence",
     firstRecorded: "First recorded occurrence",
-    frequency: "Frekuensi",
+    frequency: "Frequency",
     surahsWithTerm: "Surahs with term",
-    digitSum: "Jumlah digit",
+    digitSum: "Digit sum",
     per1000: "Per 1,000 tokens",
     numericalObservation: "Numerical Observation",
     numericalDescription:
@@ -127,10 +128,10 @@ const I18N = {
     learnMetrics: "Learn the Metrics",
     learnMetricsDescription:
       "These terms describe how the dataset is being measured.",
-    metricFrequency: "Frekuensi",
+    metricFrequency: "Frequency",
     metricFrequencyDesc:
       "How many times the exact normalized token appears in the analyzed corpus.",
-    metricDigitSum: "Jumlah digit",
+    metricDigitSum: "Digit sum",
     metricDigitSumDesc:
       "Add the decimal digits of the frequency. Example: 217 → 2 + 1 + 7 = 10.",
     metricParity: "Parity",
@@ -141,18 +142,18 @@ const I18N = {
     metricVerseShare: "Share of verse total",
     metricVerseShareDesc:
       "The frequency expressed as a percentage of the total verse count.",
-    metricDifference: "Selisih",
+    metricDifference: "Difference",
     metricDifferenceDesc: "For a pair: count A minus count B.",
-    metricSum: "Jumlah",
+    metricSum: "Sum",
     metricSumDesc: "For a pair: count A plus count B.",
-    metricRatio: "Rasio",
+    metricRatio: "Ratio",
     metricRatioDesc: "For a pair: count A divided by count B.",
-    metricSharedSurahs: "Surah bersama",
+    metricSharedSurahs: "Shared surahs",
     metricSharedSurahsDesc: "How many surahs contain both terms at least once.",
-    metricJaccard: "Tumpang tindih Jaccard",
+    metricJaccard: "Jaccard overlap",
     metricJaccardDesc:
       "Shared surahs divided by all surahs containing either term.",
-    matching: "Pencocokan",
+    matching: "Matching",
     diacritics: "Diacritics removed",
     tatweel: "Tatweel removed",
     alif: "Alif variants normalized",
@@ -164,6 +165,7 @@ const I18N = {
     notAvailable: "Not available",
     dataStatus:
       "Data status: observed-data presentation. Frequency and numerical observations are tied to the project corpus and documented analysis rules.",
+    closeTerms: "Close analytical terms",
   },
 
   ar: {
@@ -245,6 +247,7 @@ const I18N = {
     notAvailable: "غير متاح",
     dataStatus:
       "حالة البيانات: عرض للبيانات المرصودة. التكرارات والملاحظات الرقمية مرتبطة بمجموعة البيانات وقواعد التحليل الموثقة.",
+    closeTerms: "إغلاق المصطلحات التحليلية",
   },
 };
 

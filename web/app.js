@@ -505,6 +505,12 @@ function renderStaticText() {
     `${t("analyticalTerms")} (${state.data?.terms?.length || 0})`,
   );
 
+  const termsClose = $("terms-close");
+
+  if (termsClose) {
+    termsClose.setAttribute("aria-label", t("closeTerms"));
+  }
+
   setText("feature-eyebrow", t("selectedObservation"));
 
   setText("open-quran", t("openQuranIndex"));
@@ -2136,9 +2142,10 @@ function updateEvidenceNavigation(total) {
 function setupMobileTermsDrawer() {
   const sidebar = $("terms-sidebar");
   const toggle = $("mobile-terms-toggle");
+  const closeButton = $("terms-close");
   const backdrop = $("terms-backdrop");
 
-  if (!sidebar || !toggle || !backdrop) {
+  if (!sidebar || !toggle || !closeButton || !backdrop) {
     return;
   }
 
@@ -2187,6 +2194,8 @@ function setupMobileTermsDrawer() {
       open();
     }
   });
+
+  closeButton.addEventListener("click", close);
 
   backdrop.addEventListener("click", close);
 
