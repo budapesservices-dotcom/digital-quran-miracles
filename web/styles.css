@@ -1209,7 +1209,8 @@ a {
 }
 
 .evidence-item.featured-evidence {
-  padding: clamp(28px, 5vw, 44px);
+  padding: clamp(30px, 5vw, 46px);
+  animation: evidenceReveal 0.4s ease both;
 }
 
 .evidence-ref {
@@ -1905,6 +1906,18 @@ html[data-language="ar"] .learn-card p {
    Motion
    ========================= */
 
+@keyframes evidenceReveal {
+  from {
+    opacity: 0.55;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes sectionReveal {
   from {
     opacity: 0;
@@ -2233,7 +2246,8 @@ html[data-language="ar"] .learn-card p {
   .hero,
   .observation-panel,
   .explorer-panel,
-  .evidence-panel {
+  .evidence-panel,
+  .evidence-item.featured-evidence {
     animation: none;
   }
 

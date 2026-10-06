@@ -358,6 +358,12 @@ function getUxText(key) {
 
       surahs: "surah",
 
+      evidencePathFinding: "Temuan",
+      evidencePathVerse: "Ayat",
+      evidencePathMatch: "Token cocok",
+      evidencePathSource: "Sumber",
+      evidenceJourney: "Alur evidence",
+
       openClient: "Buka di Read Quran for Peace ↗",
 
       exampleVerse: "Ayat contoh",
@@ -405,6 +411,12 @@ function getUxText(key) {
 
       surahs: "surahs",
 
+      evidencePathFinding: "Finding",
+      evidencePathVerse: "Verse",
+      evidencePathMatch: "Matched token",
+      evidencePathSource: "Source",
+      evidenceJourney: "Evidence journey",
+
       openClient: "Open in Read Quran for Peace ↗",
 
       exampleVerse: "Example verse",
@@ -451,6 +463,12 @@ function getUxText(key) {
         "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
 
       surahs: "سور",
+
+      evidencePathFinding: "النتيجة",
+      evidencePathVerse: "الآية",
+      evidencePathMatch: "الرمز المطابق",
+      evidencePathSource: "المصدر",
+      evidenceJourney: "مسار الدليل",
 
       openClient: "فتح في اقرأ القرآن للسلام ↗",
 
@@ -1357,9 +1375,15 @@ function renderEvidence(term) {
   const trace = $("evidence-trace");
 
   if (trace) {
-    trace.textContent = t("evidenceTrace")
-      .replace("{term}", term.word)
-      .replace("{count}", formatNumber(term.count || 0));
+    trace.innerHTML = `
+      <span class="evidence-trace-text">
+        ${escapeHtml(
+          t("evidenceTrace")
+            .replace("{term}", term.word)
+            .replace("{count}", formatNumber(term.count || 0)),
+        )}
+      </span>
+    `;
   }
 
   if (!total) {
@@ -1396,6 +1420,51 @@ function renderEvidence(term) {
   }
 
   const current = filtered[state.evidenceIndex];
+
+  if (trace) {
+    const verseReference =
+      state.language === "ar"
+        ? `السورة ${formatNumber(current.surah)} · ${formatNumber(current.ayah)}`
+        : `${current.surah_name || `Surah ${formatNumber(current.surah)}`} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
+
+    trace.innerHTML = `
+      <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
+        <span class="evidence-path-step">
+          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathFinding"))}</span>
+          <strong>${formatNumber(term.count || 0)}×</strong>
+        </span>
+
+        <span class="evidence-path-arrow" aria-hidden="true">→</span>
+
+        <span class="evidence-path-step evidence-path-verse">
+          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathVerse"))}</span>
+          <strong>${escapeHtml(verseReference)}</strong>
+        </span>
+
+        <span class="evidence-path-arrow" aria-hidden="true">→</span>
+
+        <span class="evidence-path-step evidence-path-match">
+          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathMatch"))}</span>
+          <strong dir="rtl">${escapeHtml(term.word)}</strong>
+        </span>
+
+        <span class="evidence-path-arrow" aria-hidden="true">→</span>
+
+        <span class="evidence-path-step evidence-path-source">
+          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathSource"))}</span>
+          <strong>Read Quran for Peace ↗</strong>
+        </span>
+      </div>
+
+      <span class="evidence-trace-text">
+        ${escapeHtml(
+          t("evidenceTrace")
+            .replace("{term}", term.word)
+            .replace("{count}", formatNumber(term.count || 0)),
+        )}
+      </span>
+    `;
+  }
 
   const translations = getVerseTranslations(current.surah, current.ayah);
 
