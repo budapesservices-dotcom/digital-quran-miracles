@@ -2520,6 +2520,9 @@ function setupEvidenceControls() {
         return;
       }
 
+      const heldHeight = currentCard.getBoundingClientRect().height;
+
+      list.style.minHeight = `${Math.ceil(heldHeight)}px`;
       currentCard.classList.add(
         direction === "next"
           ? "evidence-exit-next"
@@ -2527,7 +2530,7 @@ function setupEvidenceControls() {
       );
 
       await new Promise((resolve) => {
-        window.setTimeout(resolve, 180);
+        window.setTimeout(resolve, 220);
       });
 
       state.evidenceIndex = nextIndex;
@@ -2537,15 +2540,20 @@ function setupEvidenceControls() {
           ? "evidence-enter-next"
           : "evidence-enter-prev";
 
-      list.classList.add("evidence-transition-gap");
       renderEvidence(term, enterClass);
 
       await new Promise((resolve) => {
-        window.setTimeout(resolve, 72);
+        window.setTimeout(resolve, 55);
       });
 
-      list.classList.remove("evidence-transition-gap");
+      list.style.minHeight = "";
     } finally {
+      const list = $("evidence-list");
+
+      if (list) {
+        list.style.minHeight = "";
+      }
+
       state.evidenceTransitioning = false;
     }
   }
