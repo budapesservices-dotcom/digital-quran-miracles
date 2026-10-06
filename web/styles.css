@@ -1375,8 +1375,8 @@ a {
 
 .evidence-item.featured-evidence {
   padding: clamp(30px, 5vw, 46px);
-}
   animation: evidenceReveal 0.4s ease both;
+}
 
 .evidence-content {
   width: 100%;
