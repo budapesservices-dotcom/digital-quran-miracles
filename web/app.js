@@ -1558,7 +1558,7 @@ function renderEvidence(term) {
     const verseReference =
       state.language === "ar"
         ? `السورة ${formatNumber(current.surah)} · ${formatNumber(current.ayah)}`
-        : `${getSurahName(current.surah)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
+        : `Surah ${formatNumber(current.surah)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
 
     trace.innerHTML = `
       <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
@@ -1694,7 +1694,7 @@ function renderEvidence(term) {
   ${
     state.language === "ar"
       ? `السورة ${formatNumber(current.surah)} · الآية ${formatNumber(current.ayah)}`
-      : `${escapeHtml(getSurahName(current.surah))} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
+      : `Surah ${formatNumber(current.surah)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
   }
 </div>
 
