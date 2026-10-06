@@ -517,6 +517,7 @@ function getUxText(key) {
       evidenceAuditVerification: "Verifikasi",
       evidenceHowCounted: "Bagaimana angka ini dihitung?",
       evidenceMethodScope: "Ruang lingkup",
+      evidenceMethodAnalysis: "Metodologi analisis",
       evidenceMethodProvenance: "Provenance data",
       evidenceMethodCurrent: "Ruang lingkup saat ini berfokus pada observasi matematis berbasis data. Struktur dataset dan alur evidence dirancang agar tema berikutnya dapat ditambahkan tanpa mengubah fondasi navigasi Quran.",
       evidenceMethodFuture: "Tema lanjutan: komposisi cincin, sains terpilih, linguistik, peristiwa masa lalu, dan prediksi tekstual.",
@@ -580,6 +581,7 @@ function getUxText(key) {
       evidenceAuditVerification: "Verification",
       evidenceHowCounted: "How is this number counted?",
       evidenceMethodScope: "Scope",
+      evidenceMethodAnalysis: "Analysis methodology",
       evidenceMethodProvenance: "Data provenance",
       evidenceMethodCurrent: "The current scope focuses on data-driven mathematical observations. The dataset and evidence flow are designed so future themes can be added without changing the Quran navigation foundation.",
       evidenceMethodFuture: "Future themes: ring composition, selected scientific topics, linguistic brilliance, verified past events, and textual predictions.",
@@ -643,6 +645,7 @@ function getUxText(key) {
       evidenceAuditVerification: "التحقق",
       evidenceHowCounted: "كيف تم حساب هذا الرقم؟",
       evidenceMethodScope: "النطاق",
+      evidenceMethodAnalysis: "منهج التحليل",
       evidenceMethodProvenance: "مصدر البيانات",
       evidenceMethodCurrent: "يركز النطاق الحالي على الملاحظات الرياضية المستندة إلى البيانات. وقد صُمم هيكل البيانات ومسار الدليل بحيث يمكن إضافة الموضوعات المستقبلية دون تغيير أساس التنقل في القرآن.",
       evidenceMethodFuture: "الموضوعات المستقبلية: التركيب الحلقي، وموضوعات علمية مختارة، والبلاغة واللغة، والأحداث الماضية، والتنبؤات النصية.",
@@ -1734,7 +1737,7 @@ function renderEvidence(term) {
 
           <div class="evidence-method-section">
             <div class="evidence-method-heading">
-              <span>${escapeHtml(getUxText("evidenceMethodScope"))}</span>
+              <span>${escapeHtml(getUxText("evidenceMethodAnalysis"))}</span>
             </div>
 
             <div class="evidence-method-grid">
@@ -1779,15 +1782,14 @@ function renderEvidence(term) {
               </div>
             </div>
 
-            <p class="evidence-method-note">
-              ${escapeHtml(getUxText("evidenceMethodCurrent"))}
-            </p>
-            <small class="evidence-method-note-secondary">
-              ${escapeHtml(getUxText("evidenceMethodFuture"))}
-            </small>
+            <div class="evidence-method-scope">
+              <span>${escapeHtml(getUxText("evidenceMethodScope"))}</span>
+              <p>${escapeHtml(getUxText("evidenceMethodCurrent"))}</p>
+              <small>${escapeHtml(getUxText("evidenceMethodFuture"))}</small>
+            </div>
           </div>
 
-          <div class="evidence-method-section evidence-provenance-section">
+                    <div class="evidence-method-section evidence-provenance-section">
             <div class="evidence-method-heading">
               <span>${escapeHtml(getUxText("evidenceMethodProvenance"))}</span>
             </div>
