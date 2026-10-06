@@ -1489,6 +1489,134 @@ a {
   -webkit-box-decoration-break: clone;
 }
 
+
+.evidence-signature {
+  padding: 2px 0 0;
+}
+
+.evidence-signature-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.evidence-signature-step {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 7px 8px;
+  text-align: center;
+}
+
+.evidence-signature-step > span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.evidence-signature-step > strong {
+  display: block;
+  color: var(--text-data);
+  font-size: 0.79rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.evidence-signature-step b,
+.evidence-signature-match strong {
+  color: var(--green-deep);
+  font-family:
+    "Amiri",
+    "Noto Naskh Arabic",
+    "Times New Roman",
+    serif;
+  font-size: 1rem;
+}
+
+.evidence-signature-arrow {
+  flex: 0 0 auto;
+  align-self: center;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.evidence-signature-source a {
+  color: var(--green-deep);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.evidence-signature-source a:hover {
+  text-decoration: underline;
+}
+
+.evidence-method-details {
+  margin-top: 8px;
+  border-top: 1px solid rgba(13, 95, 70, 0.1);
+}
+
+.evidence-method-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0 2px;
+  cursor: pointer;
+  color: var(--green-deep);
+  font-size: 0.64rem;
+  font-weight: 750;
+  list-style: none;
+}
+
+.evidence-method-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.evidence-method-details summary::after {
+  content: "＋";
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.evidence-method-details[open] summary::after {
+  content: "−";
+}
+
+.evidence-method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 5px 0 2px;
+}
+
+.evidence-method-grid > div {
+  min-width: 0;
+}
+
+.evidence-method-grid span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.evidence-method-grid strong {
+  display: block;
+  color: var(--text-sub);
+  font-size: 0.61rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
 /* =========================
    Exploratory Term Pairs
    ========================= */
@@ -2429,6 +2557,33 @@ html[data-language="ar"] .learn-card p {
   .evidence-path-step {
     min-height: 70px;
     padding: 10px 11px;
+  }
+
+  .evidence-signature-flow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 10px;
+  }
+
+  .evidence-signature-step {
+    padding: 7px 4px;
+  }
+
+  .evidence-signature-arrow {
+    display: none;
+  }
+
+  .evidence-signature-source a {
+    font-size: 0.7rem;
+  }
+
+  .evidence-method-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 10px;
+  }
+
+  .evidence-method-details summary {
+    font-size: 0.62rem;
   }
 
   .evidence-toolbar {
