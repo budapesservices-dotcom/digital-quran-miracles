@@ -172,6 +172,135 @@ function getVerseLabel() {
       : "Verse";
 }
 
+const SURAH_NAMES = {
+  1: { latin: "Al-Fatihah", ar: "الفاتحة" },
+  2: { latin: "Al-Baqarah", ar: "البقرة" },
+  3: { latin: "Ali 'Imran", ar: "آل عمران" },
+  4: { latin: "An-Nisa", ar: "النساء" },
+  5: { latin: "Al-Ma'idah", ar: "المائدة" },
+  6: { latin: "Al-An'am", ar: "الأنعام" },
+  7: { latin: "Al-A'raf", ar: "الأعراف" },
+  8: { latin: "Al-Anfal", ar: "الأنفال" },
+  9: { latin: "At-Tawbah", ar: "التوبة" },
+  10: { latin: "Yunus", ar: "يونس" },
+  11: { latin: "Hud", ar: "هود" },
+  12: { latin: "Yusuf", ar: "يوسف" },
+  13: { latin: "Ar-Ra'd", ar: "الرعد" },
+  14: { latin: "Ibrahim", ar: "إبراهيم" },
+  15: { latin: "Al-Hijr", ar: "الحجر" },
+  16: { latin: "An-Nahl", ar: "النحل" },
+  17: { latin: "Al-Isra", ar: "الإسراء" },
+  18: { latin: "Al-Kahf", ar: "الكهف" },
+  19: { latin: "Maryam", ar: "مريم" },
+  20: { latin: "Ta-Ha", ar: "طه" },
+  21: { latin: "Al-Anbiya", ar: "الأنبياء" },
+  22: { latin: "Al-Hajj", ar: "الحج" },
+  23: { latin: "Al-Mu'minun", ar: "المؤمنون" },
+  24: { latin: "An-Nur", ar: "النور" },
+  25: { latin: "Al-Furqan", ar: "الفرقان" },
+  26: { latin: "Ash-Shu'ara", ar: "الشعراء" },
+  27: { latin: "An-Naml", ar: "النمل" },
+  28: { latin: "Al-Qasas", ar: "القصص" },
+  29: { latin: "Al-Ankabut", ar: "العنكبوت" },
+  30: { latin: "Ar-Rum", ar: "الروم" },
+  31: { latin: "Luqman", ar: "لقمان" },
+  32: { latin: "As-Sajdah", ar: "السجدة" },
+  33: { latin: "Al-Ahzab", ar: "الأحزاب" },
+  34: { latin: "Saba", ar: "سبأ" },
+  35: { latin: "Fatir", ar: "فاطر" },
+  36: { latin: "Ya-Sin", ar: "يس" },
+  37: { latin: "As-Saffat", ar: "الصافات" },
+  38: { latin: "Sad", ar: "ص" },
+  39: { latin: "Az-Zumar", ar: "الزمر" },
+  40: { latin: "Ghafir", ar: "غافر" },
+  41: { latin: "Fussilat", ar: "فصلت" },
+  42: { latin: "Ash-Shura", ar: "الشورى" },
+  43: { latin: "Az-Zukhruf", ar: "الزخرف" },
+  44: { latin: "Ad-Dukhan", ar: "الدخان" },
+  45: { latin: "Al-Jathiyah", ar: "الجاثية" },
+  46: { latin: "Al-Ahqaf", ar: "الأحقاف" },
+  47: { latin: "Muhammad", ar: "محمد" },
+  48: { latin: "Al-Fath", ar: "الفتح" },
+  49: { latin: "Al-Hujurat", ar: "الحجرات" },
+  50: { latin: "Qaf", ar: "ق" },
+  51: { latin: "Adh-Dhariyat", ar: "الذاريات" },
+  52: { latin: "At-Tur", ar: "الطور" },
+  53: { latin: "An-Najm", ar: "النجم" },
+  54: { latin: "Al-Qamar", ar: "القمر" },
+  55: { latin: "Ar-Rahman", ar: "الرحمن" },
+  56: { latin: "Al-Waqi'ah", ar: "الواقعة" },
+  57: { latin: "Al-Hadid", ar: "الحديد" },
+  58: { latin: "Al-Mujadila", ar: "المجادلة" },
+  59: { latin: "Al-Hashr", ar: "الحشر" },
+  60: { latin: "Al-Mumtahanah", ar: "الممتحنة" },
+  61: { latin: "As-Saff", ar: "الصف" },
+  62: { latin: "Al-Jumu'ah", ar: "الجمعة" },
+  63: { latin: "Al-Munafiqun", ar: "المنافقون" },
+  64: { latin: "At-Taghabun", ar: "التغابن" },
+  65: { latin: "At-Talaq", ar: "الطلاق" },
+  66: { latin: "At-Tahrim", ar: "التحريم" },
+  67: { latin: "Al-Mulk", ar: "الملك" },
+  68: { latin: "Al-Qalam", ar: "القلم" },
+  69: { latin: "Al-Haqqah", ar: "الحاقة" },
+  70: { latin: "Al-Ma'arij", ar: "المعارج" },
+  71: { latin: "Nuh", ar: "نوح" },
+  72: { latin: "Al-Jinn", ar: "الجن" },
+  73: { latin: "Al-Muzzammil", ar: "المزمل" },
+  74: { latin: "Al-Muddaththir", ar: "المدثر" },
+  75: { latin: "Al-Qiyamah", ar: "القيامة" },
+  76: { latin: "Al-Insan", ar: "الإنسان" },
+  77: { latin: "Al-Mursalat", ar: "المرسلات" },
+  78: { latin: "An-Naba", ar: "النبأ" },
+  79: { latin: "An-Nazi'at", ar: "النازعات" },
+  80: { latin: "Abasa", ar: "عبس" },
+  81: { latin: "At-Takwir", ar: "التكوير" },
+  82: { latin: "Al-Infitar", ar: "الانفطار" },
+  83: { latin: "Al-Mutaffifin", ar: "المطففين" },
+  84: { latin: "Al-Inshiqaq", ar: "الانشقاق" },
+  85: { latin: "Al-Buruj", ar: "البروج" },
+  86: { latin: "At-Tariq", ar: "الطارق" },
+  87: { latin: "Al-A'la", ar: "الأعلى" },
+  88: { latin: "Al-Ghashiyah", ar: "الغاشية" },
+  89: { latin: "Al-Fajr", ar: "الفجر" },
+  90: { latin: "Al-Balad", ar: "البلد" },
+  91: { latin: "Ash-Shams", ar: "الشمس" },
+  92: { latin: "Al-Lail", ar: "الليل" },
+  93: { latin: "Ad-Duha", ar: "الضحى" },
+  94: { latin: "Ash-Sharh", ar: "الشرح" },
+  95: { latin: "At-Tin", ar: "التين" },
+  96: { latin: "Al-Alaq", ar: "العلق" },
+  97: { latin: "Al-Qadr", ar: "القدر" },
+  98: { latin: "Al-Bayyinah", ar: "البينة" },
+  99: { latin: "Az-Zalzalah", ar: "الزلزلة" },
+  100: { latin: "Al-Adiyat", ar: "العاديات" },
+  101: { latin: "Al-Qari'ah", ar: "القارعة" },
+  102: { latin: "At-Takathur", ar: "التكاثر" },
+  103: { latin: "Al-Asr", ar: "العصر" },
+  104: { latin: "Al-Humazah", ar: "الهمزة" },
+  105: { latin: "Al-Fil", ar: "الفيل" },
+  106: { latin: "Quraysh", ar: "قريش" },
+  107: { latin: "Al-Ma'un", ar: "الماعون" },
+  108: { latin: "Al-Kawthar", ar: "الكوثر" },
+  109: { latin: "Al-Kafirun", ar: "الكافرون" },
+  110: { latin: "An-Nasr", ar: "النصر" },
+  111: { latin: "Al-Masad", ar: "المسد" },
+  112: { latin: "Al-Ikhlas", ar: "الإخلاص" },
+  113: { latin: "Al-Falaq", ar: "الفلق" },
+  114: { latin: "An-Nas", ar: "الناس" },
+};
+
+function getSurahName(surah) {
+  const info = SURAH_NAMES[Number(surah)];
+
+  if (!info) {
+    return state.language === "ar"
+      ? "سورة " + formatNumber(Number(surah))
+      : "Surah " + formatNumber(Number(surah));
+  }
+
+  return state.language === "ar" ? info.ar : info.latin;
+}
+
 const SURAH_SLUGS = {
   1: "al-fateha",
   2: "al-baqarah",
@@ -889,6 +1018,10 @@ function renderFeatureVerse(term, occurrence = null) {
       }
     </div>
 
+    <div class="feature-verse-surah-name">
+      ${escapeHtml(getSurahName(occurrence.surah))}
+    </div>
+
     <p
       class="feature-verse-arabic"
       dir="rtl"
@@ -1343,7 +1476,7 @@ function renderSurahFilter(term) {
       return;
     }
 
-    const name = names.get(String(surah)) || "";
+    const name = getSurahName(surah);
     const formattedSurah = formatNumber(surah);
 
     options.push(`
@@ -1425,7 +1558,7 @@ function renderEvidence(term) {
     const verseReference =
       state.language === "ar"
         ? `السورة ${formatNumber(current.surah)} · ${formatNumber(current.ayah)}`
-        : `${current.surah_name || `Surah ${formatNumber(current.surah)}`} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
+        : `${getSurahName(current.surah)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
 
     trace.innerHTML = `
       <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
@@ -1561,8 +1694,12 @@ function renderEvidence(term) {
   ${
     state.language === "ar"
       ? `السورة ${formatNumber(current.surah)} · الآية ${formatNumber(current.ayah)}`
-      : `${escapeHtml(current.surah_name || `Surah ${formatNumber(current.surah)}`)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
+      : `${escapeHtml(getSurahName(current.surah))} · ${getVerseLabel()} ${formatNumber(current.ayah)}`
   }
+</div>
+
+<div class="evidence-surah-name">
+  ${escapeHtml(getSurahName(current.surah))}
 </div>
 
 <p
