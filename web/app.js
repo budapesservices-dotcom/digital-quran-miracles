@@ -1554,15 +1554,7 @@ function renderEvidence(term) {
   const trace = $("evidence-trace");
 
   if (trace) {
-    trace.innerHTML = `
-      <span class="evidence-trace-text">
-        ${escapeHtml(
-          t("evidenceTrace")
-            .replace("{term}", term.word)
-            .replace("{count}", formatNumber(term.count || 0)),
-        )}
-      </span>
-    `;
+    trace.innerHTML = "";
   }
 
   if (!total) {
@@ -1680,66 +1672,65 @@ function renderEvidence(term) {
           : `${formatNumber(auditVerification.terms_verified || 0)}/32 terms · ${formatNumber(auditVerification.discrepancies || 0)} discrepancies`;
 
     trace.innerHTML = `
-      <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
-        <div class="evidence-path-step evidence-path-finding">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathFinding"))}</span>
-          <strong><b dir="rtl">${escapeHtml(term.word)}</b> · ${formatNumber(term.count || 0)}×</strong>
-          <small>${escapeHtml(t("observedOccurrences"))}</small>
+      <div
+        class="evidence-signature"
+        aria-label="${escapeHtml(getUxText("evidenceJourney"))}"
+      >
+        <div class="evidence-signature-flow">
+          <div class="evidence-signature-step evidence-signature-finding">
+            <span>${escapeHtml(getUxText("evidencePathFinding"))}</span>
+            <strong>${formatNumber(term.count || 0)}× <b dir="rtl">${escapeHtml(term.word)}</b></strong>
+          </div>
+
+          <span class="evidence-signature-arrow" aria-hidden="true">→</span>
+
+          <div class="evidence-signature-step">
+            <span>${escapeHtml(getUxText("evidencePathVerse"))}</span>
+            <strong>${escapeHtml(verseReference)}</strong>
+          </div>
+
+          <span class="evidence-signature-arrow" aria-hidden="true">→</span>
+
+          <div class="evidence-signature-step evidence-signature-match">
+            <span>${escapeHtml(getUxText("evidencePathMatch"))}</span>
+            <strong dir="rtl">${escapeHtml(term.word)}</strong>
+          </div>
+
+          <span class="evidence-signature-arrow" aria-hidden="true">→</span>
+
+          <div class="evidence-signature-step evidence-signature-source">
+            <span>${escapeHtml(getUxText("evidencePathSource"))}</span>
+            <a href="${directUrl}" target="_blank" rel="noopener noreferrer">
+              Read Quran for Peace ↗
+            </a>
+          </div>
         </div>
 
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
+        <details class="evidence-method-details">
+          <summary>${escapeHtml(getUxText("evidenceHowCounted"))}</summary>
 
-        <div class="evidence-path-step evidence-path-verse">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathVerse"))}</span>
-          <strong>${escapeHtml(verseReference)}</strong>
-          <small>${escapeHtml(getSurahName(current.surah))} · ${escapeHtml(getRevelationLabel(current.surah))}</small>
-        </div>
+          <div class="evidence-method-grid">
+            <div>
+              <span>${escapeHtml(getUxText("evidenceAuditDataset"))}</span>
+              <strong>${escapeHtml(datasetText)}</strong>
+            </div>
 
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
+            <div>
+              <span>${escapeHtml(getUxText("evidenceAuditNormalization"))}</span>
+              <strong>${escapeHtml(normalizationText)}</strong>
+            </div>
 
-        <div class="evidence-path-step evidence-path-match">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathMatch"))}</span>
-          <strong dir="rtl">${escapeHtml(term.word)}</strong>
-          <small>${escapeHtml(t("methodBadge"))}</small>
-        </div>
+            <div>
+              <span>${escapeHtml(getUxText("evidenceAuditRule"))}</span>
+              <strong>${escapeHtml(countingRule)}</strong>
+            </div>
 
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
-
-        <div class="evidence-path-step evidence-path-source">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathSource"))}</span>
-          <a href="${directUrl}" target="_blank" rel="noopener noreferrer">
-            Read Quran for Peace ↗
-          </a>
-          <small>${escapeHtml(
-            state.language === "id"
-              ? "Buka sumber ayat"
-              : state.language === "ar"
-                ? "فتح مصدر الآية"
-                : "Open verse source",
-          )}</small>
-        </div>
-      </div>
-
-      <div class="evidence-audit" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditDataset"))}</span>
-          <strong>${escapeHtml(datasetText)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditNormalization"))}</span>
-          <strong>${escapeHtml(normalizationText)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditRule"))}</span>
-          <strong>${escapeHtml(countingRule)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditVerification"))}</span>
-          <strong>${escapeHtml(verificationText)}</strong>
-        </div>
+            <div>
+              <span>${escapeHtml(getUxText("evidenceAuditVerification"))}</span>
+              <strong>${escapeHtml(verificationText)}</strong>
+            </div>
+          </div>
+        </details>
       </div>
 
       <span class="evidence-trace-text">
@@ -1751,6 +1742,7 @@ function renderEvidence(term) {
       </span>
     `;
   }
+
 
 
   const translations = getVerseTranslations(current.surah, current.ayah);
