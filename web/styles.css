@@ -2387,20 +2387,74 @@ html[data-language="ar"] .learn-card p {
 @keyframes evidenceDepart {
   from {
     opacity: 1;
-    transform: translateY(0);
   }
 
   to {
-    opacity: 0.55;
-    transform: translateY(5px);
+    opacity: 0.08;
+  }
+}
+
+@keyframes evidenceContentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .evidence-item.featured-evidence.evidence-exit {
-  animation: evidenceDepart 0.28s ease both !important;
+  animation: evidenceDepart 0.32s ease-in both !important;
   pointer-events: none;
 }
 
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-ref,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-surah-name,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-text,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-translation-label,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-translation,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-source,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-actions,
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-index {
+  animation: evidenceContentReveal 0.34s ease both;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-ref {
+  animation-delay: 0.03s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-surah-name {
+  animation-delay: 0.07s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-text {
+  animation-delay: 0.12s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-translation-label {
+  animation-delay: 0.17s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-translation {
+  animation-delay: 0.21s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-source {
+  animation-delay: 0.25s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-actions {
+  animation-delay: 0.29s;
+}
+
+.evidence-item.featured-evidence:not(.evidence-exit) .evidence-index {
+  animation-delay: 0.33s;
+}
+
+@media (prefers-reduced-motion: reduce) {
 @keyframes sectionReveal {
   from {
     opacity: 0;
