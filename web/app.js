@@ -2486,6 +2486,44 @@ function setupEvidenceControls() {
     });
   }
 
+  function waitForAnimation(element, animationName, fallbackMs) {
+    return new Promise((resolve) => {
+      if (!element) {
+        resolve();
+        return;
+      }
+
+      let settled = false;
+
+      const finish = () => {
+        if (settled) {
+          return;
+        }
+
+        settled = true;
+        element.removeEventListener("animationend", onAnimationEnd);
+        window.clearTimeout(fallback);
+        resolve();
+      };
+
+      const onAnimationEnd = (event) => {
+        if (event.target === element && event.animationName === animationName) {
+          finish();
+        }
+      };
+
+      const fallback = window.setTimeout(finish, fallbackMs);
+
+      element.addEventListener("animationend", onAnimationEnd);
+    });
+  }
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => {
+      window.setTimeout(resolve, milliseconds);
+    });
+  }
+
   async function navigateEvidence(direction) {
     const term = getSelectedTerm();
     const filtered = getFilteredOccurrences(term);
@@ -2520,18 +2558,24 @@ function setupEvidenceControls() {
         return;
       }
 
-      const heldHeight = currentCard.getBoundingClientRect().height;
+      const heldHeight = Math.ceil(currentCard.getBoundingClientRect().height);
 
-      list.style.minHeight = `${Math.ceil(heldHeight)}px`;
-      currentCard.classList.add(
+      list.style.minHeight = `${heldHeight}px`;
+
+      const exitClass =
         direction === "next"
           ? "evidence-exit-next"
-          : "evidence-exit-prev",
-      );
+          : "evidence-exit-prev";
 
-      await new Promise((resolve) => {
-        window.setTimeout(resolve, 220);
-      });
+      const exitAnimation =
+        direction === "next"
+          ? "evidenceExitNext"
+          : "evidenceExitPrev";
+
+      currentCard.classList.add(exitClass);
+
+      await waitForAnimation(currentCard, exitAnimation, 280);
+      await wait(45);
 
       state.evidenceIndex = nextIndex;
 
@@ -2540,13 +2584,21 @@ function setupEvidenceControls() {
           ? "evidence-enter-next"
           : "evidence-enter-prev";
 
+      const enterAnimation =
+        direction === "next"
+          ? "evidenceEnterNext"
+          : "evidenceEnterPrev";
+
       renderEvidence(term, enterClass);
 
-      await new Promise((resolve) => {
-        window.setTimeout(resolve, 55);
-      });
+      const nextCard = list.querySelector(".featured-evidence");
 
-      list.style.minHeight = "";
+      if (nextCard) {
+        const nextHeight = Math.ceil(nextCard.getBoundingClientRect().height);
+        list.style.minHeight = `${Math.max(heldHeight, nextHeight)}px`;
+
+        await waitForAnimation(nextCard, enterAnimation, 420);
+      }
     } finally {
       const list = $("evidence-list");
 
