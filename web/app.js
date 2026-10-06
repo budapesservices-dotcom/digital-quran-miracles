@@ -623,14 +623,6 @@ function renderTermList(filter = "") {
     groups[category].push(term);
   }
 
-  if (!state.expandedCategory && state.selectedWord) {
-    const selected = state.data.terms.find(
-      (term) => term.word === state.selectedWord,
-    );
-
-    state.expandedCategory = selected?.category || categoryOrder[0];
-  }
-
   let html = "";
 
   for (const category of categoryOrder) {
@@ -1776,6 +1768,12 @@ function renderPairs() {
     button.addEventListener("click", () => {
       state.selectedWord = button.dataset.word;
 
+      const selectedTerm = state.data.terms.find(
+        (term) => term.word === state.selectedWord,
+      );
+
+      state.expandedCategory = selectedTerm?.category || null;
+
       state.evidenceIndex = 0;
 
       state.evidenceSurah = "all";
@@ -2341,6 +2339,7 @@ async function loadAnalytics() {
     }
 
     state.selectedWord = state.data.terms[0].word;
+    state.expandedCategory = state.data.terms[0].category || "time";
 
     const mobileTermsCount = $("mobile-terms-count");
 
