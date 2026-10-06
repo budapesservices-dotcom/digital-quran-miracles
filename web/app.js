@@ -581,7 +581,7 @@ function renderTermList(filter = "") {
   const needle = filter.trim().toLowerCase();
 
   const matched = state.data.terms.filter((term) => {
-    const metadata = term.metadata || "";
+    const metadata = term.metadata || {};
 
     const searchable = [
       term.word,
@@ -674,7 +674,7 @@ function renderTermList(filter = "") {
         >
           ${terms
             .map((term) => {
-              const metadata = term.metadata || "";
+              const metadata = term.metadata || {};
 
               return `
                 <button
