@@ -3,6 +3,7 @@ const state = {
   selectedWord: null,
   evidenceIndex: 0,
   evidenceSurah: "all",
+  evidenceTransitioning: false,
   language: detectInitialLanguage(),
   expandedCategory: null,
 
@@ -1567,7 +1568,7 @@ function renderSurahFilter(term) {
   updateSurahFilterDisplay();
 }
 
-function renderEvidence(term) {
+function renderEvidence(term, transitionClass = "") {
   const filtered = getFilteredOccurrences(term);
 
   const total = filtered.length;
@@ -1914,7 +1915,7 @@ function renderEvidence(term) {
     <article
       class="
         evidence-item
-        featured-evidence
+        featured-evidence${transitionClass ? ` ${transitionClass}` : ""}
       "
     >
 
@@ -2485,6 +2486,70 @@ function setupEvidenceControls() {
     });
   }
 
+  async function navigateEvidence(direction) {
+    const term = getSelectedTerm();
+    const filtered = getFilteredOccurrences(term);
+
+    if (
+      !term ||
+      state.evidenceTransitioning ||
+      filtered.length <= 1
+    ) {
+      return;
+    }
+
+    const delta = direction === "next" ? 1 : -1;
+    const nextIndex = state.evidenceIndex + delta;
+
+    if (nextIndex < 0 || nextIndex >= filtered.length) {
+      return;
+    }
+
+    const list = $("evidence-list");
+    const currentCard = list?.querySelector(".featured-evidence");
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    state.evidenceTransitioning = true;
+
+    try {
+      if (!list || !currentCard || reducedMotion) {
+        state.evidenceIndex = nextIndex;
+        renderEvidence(term);
+        return;
+      }
+
+      currentCard.classList.add(
+        direction === "next"
+          ? "evidence-exit-next"
+          : "evidence-exit-prev",
+      );
+
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, 180);
+      });
+
+      state.evidenceIndex = nextIndex;
+
+      const enterClass =
+        direction === "next"
+          ? "evidence-enter-next"
+          : "evidence-enter-prev";
+
+      list.classList.add("evidence-transition-gap");
+      renderEvidence(term, enterClass);
+
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, 72);
+      });
+
+      list.classList.remove("evidence-transition-gap");
+    } finally {
+      state.evidenceTransitioning = false;
+    }
+  }
+
   const previous = $("previous-evidence");
 
   if (previous) {
@@ -2493,9 +2558,7 @@ function setupEvidenceControls() {
         return;
       }
 
-      state.evidenceIndex -= 1;
-
-      renderEvidence(getSelectedTerm());
+      void navigateEvidence("previous");
     });
   }
 
@@ -2509,9 +2572,7 @@ function setupEvidenceControls() {
         return;
       }
 
-      state.evidenceIndex += 1;
-
-      renderEvidence(getSelectedTerm());
+      void navigateEvidence("next");
     });
   }
 }
