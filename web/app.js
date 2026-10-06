@@ -1474,16 +1474,33 @@ function renderSurahExplorerSummary(term) {
   `;
 }
 
+function getEvidenceLocationLabel(occurrence) {
+  if (!occurrence) {
+    return "—";
+  }
+
+  if (state.language === "ar") {
+    return `السورة ${formatNumber(occurrence.surah)} · الآية ${formatNumber(occurrence.ayah)}`;
+  }
+
+  if (state.language === "id") {
+    return `Surah ${formatNumber(occurrence.surah)} · Ayat ${formatNumber(occurrence.ayah)}`;
+  }
+
+  return `Surah ${formatNumber(occurrence.surah)} · Verse ${formatNumber(occurrence.ayah)}`;
+}
+
+function updateSurahFilterDisplay(occurrence = null) {
+  const display = $("surah-filter-display");
+  const target = occurrence || getFilteredOccurrences(getSelectedTerm())[state.evidenceIndex];
+
+  if (display) {
+    display.textContent = getEvidenceLocationLabel(target);
+  }
+}
+
 function renderSurahFilter(term) {
   const counts = term.distribution?.surahs || {};
-
-  const names = new Map();
-
-  for (const occurrence of term.evidence?.occurrences || []) {
-    if (!names.has(String(occurrence.surah))) {
-      names.set(String(occurrence.surah), occurrence.surah_name || "");
-    }
-  }
 
   const options = [
     `<option value="all">
@@ -1497,24 +1514,13 @@ function renderSurahFilter(term) {
     }
 
     const name = getSurahName(surah);
-    const formattedSurah = formatNumber(surah);
 
     options.push(`
         <option
           value="${escapeHtml(surah)}"
           ${state.evidenceSurah === surah ? "selected" : ""}
         >
-          ${state.language === "ar" ? `السورة ${formattedSurah}` : `Surah ${formattedSurah}`}
-
-          ${
-            state.language === "ar"
-              ? ""
-              : name
-                ? ` · ${escapeHtml(name)} · ${escapeHtml(getRevelationLabel(surah))}`
-                : ` · ${escapeHtml(getRevelationLabel(surah))}`
-          }
-
-          — ${formatNumber(count)}
+          ${escapeHtml(name)} · ${formatNumber(count)}
         </option>
       `);
   });
@@ -1524,6 +1530,8 @@ function renderSurahFilter(term) {
   if (select) {
     select.innerHTML = options.join("");
   }
+
+  updateSurahFilterDisplay();
 }
 
 function renderEvidence(term) {
@@ -1655,6 +1663,7 @@ function renderEvidence(term) {
   }
 
   updateEvidenceNavigation(total);
+  updateSurahFilterDisplay(current);
 
   let translationHtml = "";
 
