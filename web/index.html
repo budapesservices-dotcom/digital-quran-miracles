@@ -30,7 +30,7 @@
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 
-    <link rel="stylesheet" href="./styles.css?v=9" />
+    <link rel="stylesheet" href="./styles.css?v=10" />
 
     <link rel="stylesheet" href="./d3-chart.css" />
   </head>
@@ -277,7 +277,14 @@
               <label class="toolbar-field">
                 <span id="surah-label"> Surah </span>
 
-                <select id="surah-filter" class="select"></select>
+                <div class="select-shell">
+                  <span
+                    id="surah-filter-display"
+                    class="select-display"
+                    aria-hidden="true"
+                  ></span>
+                  <select id="surah-filter" class="select select-native"></select>
+                </div>
               </label>
 
               <label class="toolbar-field">
