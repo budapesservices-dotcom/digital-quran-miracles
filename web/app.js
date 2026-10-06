@@ -4,6 +4,7 @@ const state = {
   evidenceIndex: 0,
   evidenceSurah: "all",
   language: detectInitialLanguage(),
+  expandedCategory: null,
 
   translationMaps: {
     id: new Map(),
@@ -580,7 +581,7 @@ function renderTermList(filter = "") {
   const needle = filter.trim().toLowerCase();
 
   const matched = state.data.terms.filter((term) => {
-    const metadata = term.metadata || {};
+    const metadata = term.metadata || "";
 
     const searchable = [
       term.word,
@@ -599,7 +600,6 @@ function renderTermList(filter = "") {
 
   matched.sort((a, b) => {
     const ai = categoryOrder.indexOf(a.category);
-
     const bi = categoryOrder.indexOf(b.category);
 
     const categoryCompare = (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
@@ -623,6 +623,14 @@ function renderTermList(filter = "") {
     groups[category].push(term);
   }
 
+  if (!state.expandedCategory && state.selectedWord) {
+    const selected = state.data.terms.find(
+      (term) => term.word === state.selectedWord,
+    );
+
+    state.expandedCategory = selected?.category || categoryOrder[0];
+  }
+
   let html = "";
 
   for (const category of categoryOrder) {
@@ -633,70 +641,80 @@ function renderTermList(filter = "") {
     }
 
     const labelKey = `category_${category}`;
+    const panelId = `term-category-${category}`;
+    const searchOpen = Boolean(needle);
+    const expanded = searchOpen || state.expandedCategory === category;
 
     html += `
-      <div class="term-category-header">
-
-        <span>
-          ${escapeHtml(t(labelKey))}
-        </span>
-
-        <span
-          class="term-category-count"
+      <section class="term-category">
+        <button
+          class="term-category-header"
+          type="button"
+          aria-expanded="${expanded}"
+          aria-controls="${panelId}"
+          data-category="${escapeHtml(category)}"
         >
-          ${formatNumber(terms.length)}
-        </span>
+          <span class="term-category-title">
+            ${escapeHtml(t(labelKey))}
+          </span>
 
-      </div>
+          <span class="term-category-meta">
+            <span class="term-category-count">
+              ${formatNumber(terms.length)}
+            </span>
+
+            <span class="term-category-chevron" aria-hidden="true">⌄</span>
+          </span>
+        </button>
+
+        <div
+          id="${panelId}"
+          class="term-category-items"
+          ${expanded ? "" : "hidden"}
+        >
+          ${terms
+            .map((term) => {
+              const metadata = term.metadata || "";
+
+              return `
+                <button
+                  class="term-button ${
+                    term.word === state.selectedWord ? "active" : ""
+                  }"
+                  data-word="${escapeHtml(term.word)}"
+                  data-category="${escapeHtml(category)}"
+                  type="button"
+                >
+                  <span class="term-copy">
+                    <span class="term-word">
+                      ${escapeHtml(term.word)}
+                    </span>
+
+                    ${
+                      state.language === "ar"
+                        ? ""
+                        : `
+                    <span class="term-latin">
+                      ${escapeHtml(metadata.transliteration || "")}
+                    </span>
+                  `
+                    }
+
+                    <span class="term-meaning">
+                      ${escapeHtml(getMeaning(term))}
+                    </span>
+                  </span>
+
+                  <span class="term-count">
+                    ${formatNumber(term.count)}
+                  </span>
+                </button>
+              `;
+            })
+            .join("")}
+        </div>
+      </section>
     `;
-
-    html += terms
-      .map((term) => {
-        const metadata = term.metadata || {};
-
-        return `
-          <button
-            class="term-button ${
-              term.word === state.selectedWord ? "active" : ""
-            }"
-            data-word="${escapeHtml(term.word)}"
-            type="button"
-          >
-
-            <span class="term-copy">
-
-              <span
-                class="term-word"
-              >
-                ${escapeHtml(term.word)}
-              </span>
-
-              ${
-                state.language === "ar"
-                  ? ""
-                  : `
-      <span class="term-latin">
-        ${escapeHtml(metadata.transliteration || "")}
-      </span>
-    `
-              }
-
-              <span
-                class="term-meaning"
-              >
-                ${escapeHtml(getMeaning(term))}
-              </span>
-
-            </span>
-
-            <span class="term-count">
-              ${formatNumber(term.count)}
-            </span>
-
-          </button>
-        `;
-      })
-      .join("");
   }
 
   const list = $("term-list");
@@ -707,12 +725,22 @@ function renderTermList(filter = "") {
 
   list.innerHTML = html;
 
+  list.querySelectorAll(".term-category-header").forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.category;
+
+      state.expandedCategory =
+        state.expandedCategory === category ? null : category;
+
+      renderTermList($("term-search")?.value || "");
+    });
+  });
+
   list.querySelectorAll(".term-button").forEach((button) => {
     button.addEventListener("click", () => {
       state.selectedWord = button.dataset.word;
-
+      state.expandedCategory = button.dataset.category;
       state.evidenceIndex = 0;
-
       state.evidenceSurah = "all";
 
       render();
