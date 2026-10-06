@@ -1919,6 +1919,8 @@ function renderEvidence(term) {
       "
     >
 
+      <div class="evidence-content">
+
       <div class="evidence-ref">
   ${
     state.language === "ar"
@@ -1974,6 +1976,8 @@ function renderEvidence(term) {
         }
       </div>
 
+
+      </div>
     </article>
   `;
   if (state.language === "ar") {
@@ -2486,6 +2490,19 @@ function setupEvidenceControls() {
     });
   }
 
+  async function animateEvidenceElement(element, keyframes, options) {
+    if (!element) {
+      return;
+    }
+
+    const animation = element.animate(keyframes, {
+      fill: "both",
+      ...options,
+    });
+
+    await animation.finished.catch(() => {});
+  }
+
   async function navigateEvidence(direction) {
     const term = getSelectedTerm();
     const filtered = getFilteredOccurrences(term);
@@ -2507,9 +2524,8 @@ function setupEvidenceControls() {
 
     const list = $("evidence-list");
     const currentCard = list?.querySelector(".featured-evidence");
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const currentContent = currentCard?.querySelector(".evidence-content");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     state.evidenceTransitioning = true;
 
@@ -2521,93 +2537,61 @@ function setupEvidenceControls() {
       }
 
       const heldHeight = Math.ceil(currentCard.getBoundingClientRect().height);
+      list.style.minHeight = heldHeight + "px";
 
-      list.style.minHeight = `${heldHeight}px`;
-
-      const exitAnimation = currentCard.animate(
-        [
-          {
-            opacity: 1,
-          },
-          {
-            opacity: 0,
-          },
-        ],
+      await animateEvidenceElement(
+        currentContent || currentCard,
+        [{ opacity: 1 }, { opacity: 0 }],
         {
-          duration: 360,
+          duration: 280,
           easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-          fill: "forwards",
         },
       );
-
-      await exitAnimation.finished.catch(() => {});
 
       currentCard.remove();
 
       await new Promise((resolve) => {
-        window.setTimeout(resolve, 60);
+        window.setTimeout(resolve, 55);
       });
 
       state.evidenceIndex = nextIndex;
       renderEvidence(term);
 
       const nextCard = list.querySelector(".featured-evidence");
+      const nextContent = nextCard?.querySelector(".evidence-content");
 
-      if (nextCard) {
-        const nextHeight = Math.ceil(nextCard.getBoundingClientRect().height);
+      if (nextContent) {
+        nextCard?.getAnimations().forEach((animation) => animation.cancel());
 
-        list.style.minHeight = `${Math.max(heldHeight, nextHeight)}px`;
-
-        nextCard.getAnimations().forEach((animation) => animation.cancel());
-
-        const revealAnimation = nextCard.animate(
-          [
-            {
-              opacity: 0.55,
-              transform: "translateY(5px)",
-            },
-            {
-              opacity: 1,
-              transform: "translateY(0)",
-            },
-          ],
+        await animateEvidenceElement(
+          nextContent,
+          [{ opacity: 0 }, { opacity: 1 }],
           {
-            duration: 400,
+            duration: 360,
             easing: "ease",
-            fill: "both",
           },
         );
 
-        const textParts = nextCard.querySelectorAll(
-          ".evidence-ref, .evidence-surah-name, .evidence-text, .evidence-translation-label, .evidence-translation",
+        const parts = nextContent.querySelectorAll(
+          ".evidence-ref, .evidence-surah-name, .evidence-text, .evidence-translation-label, .evidence-translation, .evidence-source, .evidence-actions, .evidence-index",
         );
 
-        textParts.forEach((element, index) => {
+        parts.forEach((element, index) => {
           element.animate(
             [
-              {
-                opacity: 0.8,
-                transform: "translateY(2px)",
-              },
-              {
-                opacity: 1,
-                transform: "translateY(0)",
-              },
+              { opacity: 0, transform: "translateY(3px)" },
+              { opacity: 1, transform: "translateY(0)" },
             ],
             {
-              duration: 300,
-              delay: 40 + index * 40,
+              duration: 280,
+              delay: index * 42,
               easing: "ease",
               fill: "both",
             },
           );
         });
-
-        await revealAnimation.finished.catch(() => {});
       }
     } finally {
-      const list = $("evidence-list");
-
       if (list) {
         list.style.minHeight = "";
       }
@@ -2615,7 +2599,6 @@ function setupEvidenceControls() {
       state.evidenceTransitioning = false;
     }
   }
-
   const previous = $("previous-evidence");
 
   if (previous) {
