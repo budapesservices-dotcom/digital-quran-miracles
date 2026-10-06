@@ -1911,15 +1911,10 @@ function renderEvidence(term) {
     return;
   }
 
-  list.innerHTML = `
-    <article
-      class="
-        evidence-item
-        featured-evidence
-      "
-    >
+  const existingCard = list.querySelector(".featured-evidence");
+  const existingContent = existingCard?.querySelector(".evidence-content");
 
-      <div class="evidence-content">
+  const evidenceContentHtml = `
 
       <div class="evidence-ref">
   ${
@@ -1977,9 +1972,21 @@ function renderEvidence(term) {
       </div>
 
 
-      </div>
-    </article>
-  `;
+      `;
+
+  if (existingContent) {
+    existingContent.innerHTML = evidenceContentHtml;
+  } else {
+    list.innerHTML = `
+      <article class="
+        evidence-item
+        featured-evidence
+      ">
+        <div class="evidence-content">${evidenceContentHtml}</div>
+      </article>
+    `;
+  }
+
   if (state.language === "ar") {
     const target = list.querySelector(".arabic-translation-content");
 
@@ -2507,70 +2514,44 @@ function setupEvidenceControls() {
     const term = getSelectedTerm();
     const filtered = getFilteredOccurrences(term);
 
-    if (
-      !term ||
-      state.evidenceTransitioning ||
-      filtered.length <= 1
-    ) {
-      return;
-    }
+    if (!term || state.evidenceTransitioning || filtered.length <= 1) return;
 
     const delta = direction === "next" ? 1 : -1;
     const nextIndex = state.evidenceIndex + delta;
-
-    if (nextIndex < 0 || nextIndex >= filtered.length) {
-      return;
-    }
+    if (nextIndex < 0 || nextIndex >= filtered.length) return;
 
     const list = $("evidence-list");
-    const currentCard = list?.querySelector(".featured-evidence");
-    const currentContent = currentCard?.querySelector(".evidence-content");
+    const card = list?.querySelector(".featured-evidence");
+    const content = card?.querySelector(".evidence-content");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     state.evidenceTransitioning = true;
 
     try {
-      if (!list || !currentCard || reducedMotion) {
+      if (!list || !card || !content || reducedMotion) {
         state.evidenceIndex = nextIndex;
         renderEvidence(term);
         return;
       }
 
-      const heldHeight = Math.ceil(currentCard.getBoundingClientRect().height);
-      list.style.minHeight = heldHeight + "px";
+      const oldHeight = Math.ceil(card.getBoundingClientRect().height);
+      list.style.minHeight = oldHeight + "px";
 
-      await animateEvidenceElement(
-        currentContent || currentCard,
+      const exit = content.animate(
         [{ opacity: 1 }, { opacity: 0 }],
-        {
-          duration: 280,
-          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-        },
+        { duration: 260, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "both" },
       );
+      await exit.finished.catch(() => {});
 
-      currentCard.remove();
-
-      await new Promise((resolve) => {
-        window.setTimeout(resolve, 55);
-      });
+      await new Promise((resolve) => window.setTimeout(resolve, 55));
 
       state.evidenceIndex = nextIndex;
       renderEvidence(term);
 
-      const nextCard = list.querySelector(".featured-evidence");
-      const nextContent = nextCard?.querySelector(".evidence-content");
-
+      const nextContent = card.querySelector(".evidence-content");
       if (nextContent) {
-        nextCard?.getAnimations().forEach((animation) => animation.cancel());
-
-        await animateEvidenceElement(
-          nextContent,
-          [{ opacity: 0 }, { opacity: 1 }],
-          {
-            duration: 360,
-            easing: "ease",
-          },
-        );
+        const newHeight = Math.ceil(card.getBoundingClientRect().height);
+        list.style.minHeight = Math.max(oldHeight, newHeight) + "px";
 
         const parts = nextContent.querySelectorAll(
           ".evidence-ref, .evidence-surah-name, .evidence-text, .evidence-translation-label, .evidence-translation, .evidence-source, .evidence-actions, .evidence-index",
@@ -2579,23 +2560,15 @@ function setupEvidenceControls() {
         parts.forEach((element, index) => {
           element.animate(
             [
-              { opacity: 0, transform: "translateY(3px)" },
+              { opacity: 0, transform: "translateY(4px)" },
               { opacity: 1, transform: "translateY(0)" },
             ],
-            {
-              duration: 280,
-              delay: index * 42,
-              easing: "ease",
-              fill: "both",
-            },
+            { duration: 320, delay: 30 + index * 45, easing: "ease", fill: "both" },
           );
         });
       }
     } finally {
-      if (list) {
-        list.style.minHeight = "";
-      }
-
+      if (list) list.style.minHeight = "";
       state.evidenceTransitioning = false;
     }
   }
