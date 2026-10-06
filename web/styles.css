@@ -1490,7 +1490,7 @@ a {
 }
 
 .quran-token-spotlight {
-  animation: evidenceTokenSpotlight 0.95s ease both;
+  animation: evidenceTokenSpotlight 0.62s ease both;
 }
 
 
@@ -1509,7 +1509,7 @@ a {
   min-width: 0;
   padding: 7px 8px;
   text-align: center;
-  animation: evidenceSignatureStep 0.42s ease both;
+  animation: evidenceSignatureStep 0.34s ease both;
 }
 
 .evidence-signature-step:nth-child(1) {
@@ -1517,15 +1517,15 @@ a {
 }
 
 .evidence-signature-step:nth-child(3) {
-  animation-delay: 0.06s;
+  animation-delay: 0.04s;
 }
 
 .evidence-signature-step:nth-child(5) {
-  animation-delay: 0.12s;
+  animation-delay: 0.08s;
 }
 
 .evidence-signature-step:nth-child(7) {
-  animation-delay: 0.18s;
+  animation-delay: 0.12s;
 }
 
 .evidence-signature-step > span {
@@ -2367,21 +2367,95 @@ html[data-language="ar"] .learn-card p {
 
 @keyframes evidenceTokenSpotlight {
   0% {
-    background: rgba(176, 138, 69, 0.05);
-    box-shadow: inset 0 -0.1em 0 rgba(176, 138, 69, 0.08);
+    background: rgba(176, 138, 69, 0.06);
+    box-shadow: inset 0 -0.1em 0 rgba(176, 138, 69, 0.1);
   }
 
   35% {
-    background: rgba(176, 138, 69, 0.2);
+    background: rgba(176, 138, 69, 0.16);
     box-shadow:
-      0 0 0 5px rgba(176, 138, 69, 0.07),
-      inset 0 -0.12em 0 rgba(176, 138, 69, 0.24);
+      0 0 0 3px rgba(176, 138, 69, 0.055),
+      inset 0 -0.12em 0 rgba(176, 138, 69, 0.2);
   }
 
   100% {
     background: rgba(176, 138, 69, 0.12);
     box-shadow: inset 0 -0.1em 0 rgba(176, 138, 69, 0.2);
   }
+}
+
+@keyframes evidenceExitNext {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+@keyframes evidenceExitPrev {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+
+@keyframes evidenceEnterNext {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes evidenceEnterPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.evidence-item.featured-evidence.evidence-exit-next {
+  animation: evidenceExitNext 0.18s cubic-bezier(0.4, 0, 1, 1) both !important;
+  pointer-events: none;
+}
+
+.evidence-item.featured-evidence.evidence-exit-prev {
+  animation: evidenceExitPrev 0.18s cubic-bezier(0.4, 0, 1, 1) both !important;
+  pointer-events: none;
+}
+
+.evidence-item.featured-evidence.evidence-enter-next {
+  animation: evidenceEnterNext 0.34s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+.evidence-item.featured-evidence.evidence-enter-prev {
+  animation: evidenceEnterPrev 0.34s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+.evidence-list.evidence-transition-gap {
+  opacity: 0;
+}
+
+.evidence-list.evidence-transition-gap .featured-evidence {
+  animation-play-state: paused;
 }
 
 @keyframes sectionReveal {
@@ -2767,8 +2841,16 @@ html[data-language="ar"] .learn-card p {
   .evidence-panel,
   .evidence-item.featured-evidence,
   .evidence-signature-step,
-  .quran-token-spotlight {
+  .quran-token-spotlight,
+  .evidence-exit-next,
+  .evidence-exit-prev,
+  .evidence-enter-next,
+  .evidence-enter-prev {
     animation: none;
+  }
+
+  .evidence-list.evidence-transition-gap {
+    opacity: 1;
   }
 
   .term-button,
