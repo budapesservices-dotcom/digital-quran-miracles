@@ -513,7 +513,7 @@ function renderStaticText() {
             ? `${formatNumber(corpus.chapters)} surah · ${formatNumber(
                 corpus.verses,
               )} ayat`
-            : `${formatNumber(corpus.chapters)} chapters · ${formatNumber(
+            : `${formatNumber(corpus.chapters)} surahs · ${formatNumber(
                 corpus.verses,
               )} verses`;
     }
@@ -2190,7 +2190,7 @@ function render() {
             ? `${formatNumber(corpus.chapters)} surah · ${formatNumber(
                 corpus.verses,
               )} ayat`
-            : `${formatNumber(corpus.chapters)} chapters · ${formatNumber(
+            : `${formatNumber(corpus.chapters)} surahs · ${formatNumber(
                 corpus.verses,
               )} verses`;
     }
