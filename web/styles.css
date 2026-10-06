@@ -199,6 +199,42 @@ a {
   }
 }
 
+.select-shell {
+  position: relative;
+  width: 100%;
+}
+
+.select-display {
+  position: absolute;
+  inset: 1px 38px 1px 1px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 13px;
+  overflow: hidden;
+  border-radius: 13px 0 0 13px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text-sub);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.select-native {
+  position: relative;
+  z-index: 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.select-native option {
+  color: var(--text-sub);
+  -webkit-text-fill-color: var(--text-sub);
+}
 .select,
 .number-input {
   width: 100%;
