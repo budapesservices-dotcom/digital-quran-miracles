@@ -2486,82 +2486,6 @@ function setupEvidenceControls() {
     });
   }
 
-  function waitForAnimation(element, animationName, fallbackMs) {
-    return new Promise((resolve) => {
-      if (!element) {
-        resolve();
-        return;
-      }
-
-      let settled = false;
-
-      const finish = () => {
-        if (settled) {
-          return;
-        }
-
-        settled = true;
-        element.removeEventListener("animationend", onAnimationEnd);
-        window.clearTimeout(fallback);
-        resolve();
-      };
-
-      const onAnimationEnd = (event) => {
-        if (event.target === element && event.animationName === animationName) {
-          finish();
-        }
-      };
-
-      const fallback = window.setTimeout(finish, fallbackMs);
-
-      element.addEventListener("animationend", onAnimationEnd);
-    });
-  }
-
-  function wait(milliseconds) {
-    return new Promise((resolve) => {
-      window.setTimeout(resolve, milliseconds);
-    });
-  }
-
-  function waitForAnimation(element, animationName, fallbackMs) {
-    return new Promise((resolve) => {
-      if (!element) {
-        resolve();
-        return;
-      }
-
-      let settled = false;
-
-      const finish = () => {
-        if (settled) {
-          return;
-        }
-
-        settled = true;
-        element.removeEventListener("animationend", onAnimationEnd);
-        window.clearTimeout(fallback);
-        resolve();
-      };
-
-      const onAnimationEnd = (event) => {
-        if (event.target === element && event.animationName === animationName) {
-          finish();
-        }
-      };
-
-      const fallback = window.setTimeout(finish, fallbackMs);
-
-      element.addEventListener("animationend", onAnimationEnd);
-    });
-  }
-
-  function wait(milliseconds) {
-    return new Promise((resolve) => {
-      window.setTimeout(resolve, milliseconds);
-    });
-  }
-
   async function navigateEvidence(direction) {
     const term = getSelectedTerm();
     const filtered = getFilteredOccurrences(term);
@@ -2599,16 +2523,32 @@ function setupEvidenceControls() {
       const heldHeight = Math.ceil(currentCard.getBoundingClientRect().height);
 
       list.style.minHeight = `${heldHeight}px`;
-      currentCard.classList.add("evidence-exit");
 
-      await waitForAnimation(currentCard, "evidenceDepart", 360);
+      const exitAnimation = currentCard.animate(
+        [
+          {
+            opacity: 1,
+          },
+          {
+            opacity: 0,
+          },
+        ],
+        {
+          duration: 360,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          fill: "forwards",
+        },
+      );
 
-      list.innerHTML = "";
+      await exitAnimation.finished.catch(() => {});
 
-      await wait(45);
+      currentCard.remove();
+
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, 60);
+      });
 
       state.evidenceIndex = nextIndex;
-
       renderEvidence(term);
 
       const nextCard = list.querySelector(".featured-evidence");
@@ -2618,7 +2558,52 @@ function setupEvidenceControls() {
 
         list.style.minHeight = `${Math.max(heldHeight, nextHeight)}px`;
 
-        await waitForAnimation(nextCard, "evidenceReveal", 520);
+        nextCard.getAnimations().forEach((animation) => animation.cancel());
+
+        const revealAnimation = nextCard.animate(
+          [
+            {
+              opacity: 0.55,
+              transform: "translateY(5px)",
+            },
+            {
+              opacity: 1,
+              transform: "translateY(0)",
+            },
+          ],
+          {
+            duration: 400,
+            easing: "ease",
+            fill: "both",
+          },
+        );
+
+        const textParts = nextCard.querySelectorAll(
+          ".evidence-ref, .evidence-surah-name, .evidence-text, .evidence-translation-label, .evidence-translation",
+        );
+
+        textParts.forEach((element, index) => {
+          element.animate(
+            [
+              {
+                opacity: 0.8,
+                transform: "translateY(2px)",
+              },
+              {
+                opacity: 1,
+                transform: "translateY(0)",
+              },
+            ],
+            {
+              duration: 300,
+              delay: 40 + index * 40,
+              easing: "ease",
+              fill: "both",
+            },
+          );
+        });
+
+        await revealAnimation.finished.catch(() => {});
       }
     } finally {
       const list = $("evidence-list");
