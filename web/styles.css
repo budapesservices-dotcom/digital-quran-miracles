@@ -2392,7 +2392,7 @@ html[data-language="ar"] .learn-card p {
 
   to {
     opacity: 0;
-    transform: translateX(-8px);
+    transform: translateX(-4px);
   }
 }
 
@@ -2404,14 +2404,14 @@ html[data-language="ar"] .learn-card p {
 
   to {
     opacity: 0;
-    transform: translateX(8px);
+    transform: translateX(4px);
   }
 }
 
 @keyframes evidenceEnterNext {
   from {
     opacity: 0;
-    transform: translateX(8px);
+    transform: translateX(4px);
   }
 
   to {
@@ -2423,7 +2423,7 @@ html[data-language="ar"] .learn-card p {
 @keyframes evidenceEnterPrev {
   from {
     opacity: 0;
-    transform: translateX(-8px);
+    transform: translateX(-4px);
   }
 
   to {
@@ -2433,29 +2433,21 @@ html[data-language="ar"] .learn-card p {
 }
 
 .evidence-item.featured-evidence.evidence-exit-next {
-  animation: evidenceExitNext 0.18s cubic-bezier(0.4, 0, 1, 1) both !important;
+  animation: evidenceExitNext 0.22s cubic-bezier(0.55, 0, 1, 0.45) both !important;
   pointer-events: none;
 }
 
 .evidence-item.featured-evidence.evidence-exit-prev {
-  animation: evidenceExitPrev 0.18s cubic-bezier(0.4, 0, 1, 1) both !important;
+  animation: evidenceExitPrev 0.22s cubic-bezier(0.55, 0, 1, 0.45) both !important;
   pointer-events: none;
 }
 
 .evidence-item.featured-evidence.evidence-enter-next {
-  animation: evidenceEnterNext 0.34s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  animation: evidenceEnterNext 0.36s cubic-bezier(0.22, 1, 0.36, 1) both !important;
 }
 
 .evidence-item.featured-evidence.evidence-enter-prev {
-  animation: evidenceEnterPrev 0.34s cubic-bezier(0.22, 1, 0.36, 1) both !important;
-}
-
-.evidence-list.evidence-transition-gap {
-  opacity: 0;
-}
-
-.evidence-list.evidence-transition-gap .featured-evidence {
-  animation-play-state: paused;
+  animation: evidenceEnterPrev 0.36s cubic-bezier(0.22, 1, 0.36, 1) both !important;
 }
 
 @keyframes sectionReveal {
@@ -2849,9 +2841,7 @@ html[data-language="ar"] .learn-card p {
     animation: none;
   }
 
-  .evidence-list.evidence-transition-gap {
-    opacity: 1;
-  }
+
 
   .term-button,
   .hero .action,
