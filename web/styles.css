@@ -2384,70 +2384,21 @@ html[data-language="ar"] .learn-card p {
   }
 }
 
-@keyframes evidenceExitNext {
+@keyframes evidenceDepart {
   from {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   to {
-    opacity: 0;
-    transform: translateX(-4px);
+    opacity: 0.55;
+    transform: translateY(5px);
   }
 }
 
-@keyframes evidenceExitPrev {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateX(4px);
-  }
-}
-
-@keyframes evidenceEnterNext {
-  from {
-    opacity: 0;
-    transform: translateX(4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes evidenceEnterPrev {
-  from {
-    opacity: 0;
-    transform: translateX(-4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.evidence-item.featured-evidence.evidence-exit-next {
-  animation: evidenceExitNext 0.22s cubic-bezier(0.55, 0, 1, 0.45) both !important;
+.evidence-item.featured-evidence.evidence-exit {
+  animation: evidenceDepart 0.28s ease both !important;
   pointer-events: none;
-}
-
-.evidence-item.featured-evidence.evidence-exit-prev {
-  animation: evidenceExitPrev 0.22s cubic-bezier(0.55, 0, 1, 0.45) both !important;
-  pointer-events: none;
-}
-
-.evidence-item.featured-evidence.evidence-enter-next {
-  animation: evidenceEnterNext 0.36s cubic-bezier(0.22, 1, 0.36, 1) both !important;
-}
-
-.evidence-item.featured-evidence.evidence-enter-prev {
-  animation: evidenceEnterPrev 0.36s cubic-bezier(0.22, 1, 0.36, 1) both !important;
 }
 
 @keyframes sectionReveal {
