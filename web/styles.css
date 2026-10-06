@@ -367,9 +367,20 @@ a {
     border-color 0.18s ease;
 }
 
-.term-category-header:hover {
-  color: var(--green);
-  border-color: rgba(13, 95, 70, 0.20);
+@media (hover: hover) and (pointer: fine) {
+  .term-category-header:hover {
+    color: var(--green);
+    border-color: rgba(13, 95, 70, 0.20);
+  }
+
+  .term-button:hover {
+    transform: translateX(2px);
+    background: var(--green-soft);
+  }
+
+  .terms-close:hover {
+    background: var(--green-soft);
+  }
 }
 
 .term-category-header:focus-visible {
@@ -434,11 +445,6 @@ a {
     background 0.18s ease,
     transform 0.18s ease,
     border-color 0.18s ease;
-}
-
-.term-button:hover {
-  transform: translateX(2px);
-  background: var(--green-soft);
 }
 
 .term-button.active {
@@ -2089,10 +2095,6 @@ html[data-language="ar"] .learn-card p {
 
   .terms-close:active {
     transform: scale(0.94);
-  }
-
-  .terms-close:hover {
-    background: var(--green-soft);
   }
 
   .sidebar-heading {
