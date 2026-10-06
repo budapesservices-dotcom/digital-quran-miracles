@@ -1736,13 +1736,6 @@ function renderEvidence(term) {
         </details>
       </div>
 
-      <span class="evidence-trace-text">
-        ${escapeHtml(
-          t("evidenceTrace")
-            .replace("{term}", term.word)
-            .replace("{count}", formatNumber(term.count || 0)),
-        )}
-      </span>
     `;
   }
 
