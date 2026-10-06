@@ -2095,6 +2095,10 @@ html[data-language="ar"] .learn-card p {
     background: var(--green-soft);
   }
 
+  .sidebar-heading {
+    margin-bottom: 9px;
+  }
+
   .sidebar .search {
     flex: 0 0 auto;
   }
