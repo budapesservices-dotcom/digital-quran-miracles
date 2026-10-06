@@ -1554,94 +1554,7 @@ function renderEvidence(term) {
   const trace = $("evidence-trace");
 
   if (trace) {
-    const auditVerification = state.data?.verification?.cross_corpus || {};
-    const method = term.method || state.data?.method || {};
-    const totalTokens = Number(term.total_tokens_analyzed || state.data?.corpus?.total_tokens || 0);
-
-    const normalizationItems = [];
-
-    if (method.diacritics_removed) normalizationItems.push(state.language === "id" ? "tashkeel" : state.language === "ar" ? "التشكيل" : "diacritics");
-    if (method.tatweel_removed) normalizationItems.push(state.language === "id" ? "tatweel" : "التطويل");
-    if (method.alif_variants_normalized) normalizationItems.push(state.language === "id" ? "varian alif" : state.language === "ar" ? "أشكال الألف" : "alif variants");
-    if (method.alif_maqsura_normalized) normalizationItems.push(state.language === "id" ? "alif maqsura" : state.language === "ar" ? "الألف المقصورة" : "alif maqsura");
-
-    const normalizationText = normalizationItems.join(" · ") || (state.language === "id" ? "Aturan normalisasi terdokumentasi" : state.language === "ar" ? "قواعد التطبيع موثقة" : "Documented normalization rules");
-
-    const countingRule = state.language === "id"
-      ? "Exact normalized-token · tanpa substring"
-      : state.language === "ar"
-        ? "مطابقة الرمز المطبع تمامًا · دون مطابقة جزئية"
-        : "Exact normalized-token · no substring matching";
-
-    const datasetText = state.language === "id"
-      ? `Simple Clean · ${formatNumber(totalTokens)} token`
-      : state.language === "ar"
-        ? `Simple Clean · ${formatNumber(totalTokens)} رمز`
-        : `Simple Clean · ${formatNumber(totalTokens)} tokens`;
-
-    const verificationText = state.language === "id"
-      ? `${formatNumber(auditVerification.terms_verified || 0)}/32 term · ${formatNumber(auditVerification.discrepancies || 0)} discrepancy`
-      : state.language === "ar"
-        ? `${formatNumber(auditVerification.terms_verified || 0)}/32 · ${formatNumber(auditVerification.discrepancies || 0)} فروق`
-        : `${formatNumber(auditVerification.terms_verified || 0)}/32 terms · ${formatNumber(auditVerification.discrepancies || 0)} discrepancies`;
-
     trace.innerHTML = `
-      <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
-        <div class="evidence-path-step evidence-path-finding">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathFinding"))}</span>
-          <strong><b dir="rtl">${escapeHtml(term.word)}</b> · ${formatNumber(term.count || 0)}×</strong>
-          <small>${escapeHtml(t("observedOccurrences"))}</small>
-        </div>
-
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
-
-        <div class="evidence-path-step evidence-path-verse">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathVerse"))}</span>
-          <strong>${escapeHtml(verseReference)}</strong>
-          <small>${escapeHtml(getSurahName(current.surah))} · ${escapeHtml(getRevelationLabel(current.surah))}</small>
-        </div>
-
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
-
-        <div class="evidence-path-step evidence-path-match">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathMatch"))}</span>
-          <strong dir="rtl">${escapeHtml(term.word)}</strong>
-          <small>${escapeHtml(t("methodBadge"))}</small>
-        </div>
-
-        <span class="evidence-path-arrow" aria-hidden="true">→</span>
-
-        <div class="evidence-path-step evidence-path-source">
-          <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathSource"))}</span>
-          <a href="${directUrl}" target="_blank" rel="noopener noreferrer">
-            Read Quran for Peace ↗
-          </a>
-          <small>${escapeHtml(state.language === "id" ? "Buka sumber ayat" : state.language === "ar" ? "فتح مصدر الآية" : "Open verse source")}</small>
-        </div>
-      </div>
-
-      <div class="evidence-audit" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditDataset"))}</span>
-          <strong>${escapeHtml(datasetText)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditNormalization"))}</span>
-          <strong>${escapeHtml(normalizationText)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditRule"))}</span>
-          <strong>${escapeHtml(countingRule)}</strong>
-        </div>
-
-        <div class="evidence-audit-item">
-          <span>${escapeHtml(getUxText("evidenceAuditVerification"))}</span>
-          <strong>${escapeHtml(verificationText)}</strong>
-        </div>
-      </div>
-
       <span class="evidence-trace-text">
         ${escapeHtml(
           t("evidenceTrace")
@@ -1649,7 +1562,7 @@ function renderEvidence(term) {
             .replace("{count}", formatNumber(term.count || 0)),
         )}
       </span>
-    `
+    `;
   }
 
   if (!total) {
@@ -1695,33 +1608,138 @@ function renderEvidence(term) {
         ? `السورة ${formatNumber(current.surah)} · ${formatNumber(current.ayah)}`
         : `Surah ${formatNumber(current.surah)} · ${getVerseLabel()} ${formatNumber(current.ayah)}`;
 
+    const auditVerification = state.data?.verification?.cross_corpus || {};
+    const method = term.method || state.data?.method || {};
+    const totalTokens = Number(term.total_tokens_analyzed || 0);
+
+    const normalizationItems = [];
+
+    if (method.diacritics_removed) {
+      normalizationItems.push(
+        state.language === "id"
+          ? "tashkeel"
+          : state.language === "ar"
+            ? "التشكيل"
+            : "diacritics",
+      );
+    }
+
+    if (method.tatweel_removed) {
+      normalizationItems.push(
+        state.language === "ar" ? "التطويل" : "tatweel",
+      );
+    }
+
+    if (method.alif_variants_normalized) {
+      normalizationItems.push(
+        state.language === "id"
+          ? "varian alif"
+          : state.language === "ar"
+            ? "أشكال الألف"
+            : "alif variants",
+      );
+    }
+
+    if (method.alif_maqsura_normalized) {
+      normalizationItems.push(
+        state.language === "id"
+          ? "alif maqsura"
+          : state.language === "ar"
+            ? "الألف المقصورة"
+            : "alif maqsura",
+      );
+    }
+
+    const normalizationText =
+      normalizationItems.join(" · ") ||
+      (state.language === "id"
+        ? "Aturan normalisasi terdokumentasi"
+        : state.language === "ar"
+          ? "قواعد التطبيع موثقة"
+          : "Documented normalization rules");
+
+    const countingRule =
+      state.language === "id"
+        ? "Exact normalized-token · tanpa substring"
+        : state.language === "ar"
+          ? "مطابقة الرمز المطبع تمامًا · دون مطابقة جزئية"
+          : "Exact normalized-token · no substring matching";
+
+    const datasetText =
+      state.language === "id"
+        ? `Simple Clean · ${formatNumber(totalTokens)} token`
+        : state.language === "ar"
+          ? `Simple Clean · ${formatNumber(totalTokens)} رمز`
+          : `Simple Clean · ${formatNumber(totalTokens)} tokens`;
+
+    const verificationText =
+      state.language === "id"
+        ? `${formatNumber(auditVerification.terms_verified || 0)}/32 term · ${formatNumber(auditVerification.discrepancies || 0)} discrepancy`
+        : state.language === "ar"
+          ? `${formatNumber(auditVerification.terms_verified || 0)}/32 · ${formatNumber(auditVerification.discrepancies || 0)} فروق`
+          : `${formatNumber(auditVerification.terms_verified || 0)}/32 terms · ${formatNumber(auditVerification.discrepancies || 0)} discrepancies`;
+
     trace.innerHTML = `
       <div class="evidence-path" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
-        <span class="evidence-path-step">
+        <div class="evidence-path-step evidence-path-finding">
           <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathFinding"))}</span>
-          <strong>${formatNumber(term.count || 0)}×</strong>
-        </span>
+          <strong><b dir="rtl">${escapeHtml(term.word)}</b> · ${formatNumber(term.count || 0)}×</strong>
+          <small>${escapeHtml(t("observedOccurrences"))}</small>
+        </div>
 
         <span class="evidence-path-arrow" aria-hidden="true">→</span>
 
-        <span class="evidence-path-step evidence-path-verse">
+        <div class="evidence-path-step evidence-path-verse">
           <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathVerse"))}</span>
           <strong>${escapeHtml(verseReference)}</strong>
-        </span>
+          <small>${escapeHtml(getSurahName(current.surah))} · ${escapeHtml(getRevelationLabel(current.surah))}</small>
+        </div>
 
         <span class="evidence-path-arrow" aria-hidden="true">→</span>
 
-        <span class="evidence-path-step evidence-path-match">
+        <div class="evidence-path-step evidence-path-match">
           <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathMatch"))}</span>
           <strong dir="rtl">${escapeHtml(term.word)}</strong>
-        </span>
+          <small>${escapeHtml(t("methodBadge"))}</small>
+        </div>
 
         <span class="evidence-path-arrow" aria-hidden="true">→</span>
 
-        <span class="evidence-path-step evidence-path-source">
+        <div class="evidence-path-step evidence-path-source">
           <span class="evidence-path-label">${escapeHtml(getUxText("evidencePathSource"))}</span>
-          <strong>Read Quran for Peace ↗</strong>
-        </span>
+          <a href="${directUrl}" target="_blank" rel="noopener noreferrer">
+            Read Quran for Peace ↗
+          </a>
+          <small>${escapeHtml(
+            state.language === "id"
+              ? "Buka sumber ayat"
+              : state.language === "ar"
+                ? "فتح مصدر الآية"
+                : "Open verse source",
+          )}</small>
+        </div>
+      </div>
+
+      <div class="evidence-audit" aria-label="${escapeHtml(getUxText("evidenceJourney"))}">
+        <div class="evidence-audit-item">
+          <span>${escapeHtml(getUxText("evidenceAuditDataset"))}</span>
+          <strong>${escapeHtml(datasetText)}</strong>
+        </div>
+
+        <div class="evidence-audit-item">
+          <span>${escapeHtml(getUxText("evidenceAuditNormalization"))}</span>
+          <strong>${escapeHtml(normalizationText)}</strong>
+        </div>
+
+        <div class="evidence-audit-item">
+          <span>${escapeHtml(getUxText("evidenceAuditRule"))}</span>
+          <strong>${escapeHtml(countingRule)}</strong>
+        </div>
+
+        <div class="evidence-audit-item">
+          <span>${escapeHtml(getUxText("evidenceAuditVerification"))}</span>
+          <strong>${escapeHtml(verificationText)}</strong>
+        </div>
       </div>
 
       <span class="evidence-trace-text">
@@ -1733,6 +1751,7 @@ function renderEvidence(term) {
       </span>
     `;
   }
+
 
   const translations = getVerseTranslations(current.surah, current.ayah);
 
